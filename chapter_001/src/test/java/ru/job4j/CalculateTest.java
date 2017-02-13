@@ -6,14 +6,14 @@ import java.io.PrintStream;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Test
+/**.
+ * Test.
  *
  * @author Anton Vasilyuk
  * @version $Id$
  * @since 0.1
  */
-public class CalculateTest{
+public class CalculateTest {
 	/**
 	 * Test add.
 	 */
