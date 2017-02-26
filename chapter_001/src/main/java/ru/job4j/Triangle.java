@@ -36,8 +36,8 @@ public class Triangle {
 
 		Point point = new Point(0, 0);
 
-		double p = (point.distanceTo(a, b) + point.distanceTo(b, c) + point.distanceTo(c, a)) / 2;
-		return Math.sqrt(p * point.distanceTo(a, b) * point.distanceTo(b, c) * (p - point.distanceTo(c, a)));
+		double p = (c.distanceTo(a) + a.distanceTo(b) + b.distanceTo(c)) / 2;
+		return Math.sqrt(p * (p - c.distanceTo(a)) * (p - a.distanceTo(b)) * (p - b.distanceTo(c)));
 
 	}
 
