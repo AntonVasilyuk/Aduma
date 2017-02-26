@@ -34,17 +34,14 @@ public class Point {
 	/**.
 	* Высчитываем расстояние между двух точек
 	* @param t1 object
-	* @param t2 object
 	* @return result
 	*/
-	public double distanceTo(Point t1, Point t2) {
+	public double distanceTo(Point t1) {
 
-		double x1, y1, x2, y2, rast;
+		double x1, y1, rast;
 		x1 = t1.x;
-		x2 = t2.x;
 		y1 = t1.y;
-		y2 = t2.y;
-		rast = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
+		rast = Math.sqrt(Math.pow((x - x1), 2) + Math.pow((y - y1), 2));
 
 		return rast;
 
