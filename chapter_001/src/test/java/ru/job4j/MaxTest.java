@@ -20,8 +20,7 @@ public class MaxTest {
 	@Test
 	public void testWhenFirstMoreSecondThenFirst() {
 		Max maxNumber = new Max();
-		maxNumber.max(2, 1);
-		final int result = maxNumber.getResult();
+		final int result = maxNumber.max(2, 1);
 		assertThat(result, is(2));
 
 	}
