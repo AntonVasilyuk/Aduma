@@ -10,11 +10,6 @@ package ru.job4j;
 public class Max {
 
 	/**.
-	* @result для приема результата
-	*/
-	private int result;
-
-	/**.
 	* сравнение
 	* @param first первый аргумент
 	* @param second второй аргумент
