@@ -18,10 +18,10 @@ public class MaxTest {
 	* Тест кто больше
 	*/
 	@Test
-	public void testWhenFirstMoreSecondThenFirst() {
+	public void testWhenHaveFirstSecondThirdThenMore() {
 		Max maxNumber = new Max();
-		final int result = maxNumber.max(2, 1);
-		assertThat(result, is(2));
+		final int result = maxNumber.max(2, 1, 3);
+		assertThat(result, is(3));
 
 	}
 
