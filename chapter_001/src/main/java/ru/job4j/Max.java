@@ -13,12 +13,13 @@ public class Max {
 	* сравнение
 	* @param first первый аргумент
 	* @param second второй аргумент
+	* @param third третий аргумент
 	* @return возвращает наибольшее значение
 	*/
-	public int max(int first, int second) {
+	public int max(int first, int second, int third) {
 
-		return first > second ? first : second;
-
+		int result = first > second ? first : second;
+		return result > third ? result : third;
 
 	}
 
