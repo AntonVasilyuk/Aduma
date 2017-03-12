@@ -16,17 +16,11 @@ public class Paint {
 	public String piramid(int h) {
 
 		StringBuilder pir = new StringBuilder();
-		/**.
-		* @floor body line
-		*/
+
 		String floor = "^ ";
-		/**.
-		* @res next line
-		*/
+
 		String res = "\n";
-		/**.
-		* @i index
-		*/
+
 		int i = 0;
 		for (i = 0; i < h; i++) {
             String spica = "";
