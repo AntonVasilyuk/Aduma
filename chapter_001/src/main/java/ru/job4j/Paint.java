@@ -21,11 +21,9 @@ public class Paint {
 
 		String res = "\n";
 
-		int i = 0;
-		for (i = 0; i < h; i++) {
+		for (int i = 0; i < h; i++) {
             String spica = "";
-            int x;
-            for (x = 0; x < h - 1 - i; x++) {
+            for (int x = 0; x < h - 1 - i; x++) {
                 spica = spica + " ";
             }
 
