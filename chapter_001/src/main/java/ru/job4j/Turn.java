@@ -1,7 +1,5 @@
 package ru.job4j;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 /**.
 *
 * @author Anton Vasilyuk
@@ -16,8 +14,15 @@ public class Turn {
 	* @return result
 	*/
 	public int[] back(int[] array) {
+		int x = array.length;
+		int z = array.length / 2;
 
-		ArrayUtils.reverse(array);
+		for (int i = 0; i < z; i++) {
+			int valueOne = array[i];
+			int valueTwo = array[x - i - 1];
+			array[i] = valueTwo;
+			array[x - i - 1] = valueOne;
+		}
 		return array;
 
 	}
