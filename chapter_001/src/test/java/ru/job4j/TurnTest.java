@@ -16,12 +16,24 @@ public class TurnTest {
 	* Test method back
 	*/
 	@Test
-	public void whenIsArrayThenIsBackArray() {
+	public void whenIsArrayEvenNumberThenIsBackArray() {
 		Turn turn = new Turn();
 		int[] firstArray = {1, 2, 3, 4};
 		int[] expecting = {4, 3, 2, 1};
 		int[] twoArray = turn.back(firstArray);
 		assertThat(twoArray, is(expecting));
 
+	}
+
+	/**.
+	* Test method back
+	*/
+	@Test
+	public void whenIsArrayOddNumberThenIsBackArray() {
+		Turn turn = new Turn();
+		int[] firstArray = {1, 2, 3, 4, 5};
+		int[] expecting = {5, 4, 3, 2, 1};
+		int[] twoArray = turn.back(firstArray);
+		assertThat(twoArray, is(expecting));
 	}
 }
