@@ -23,20 +23,13 @@ public class ArrayDublicate {
 			for (int y = 0; y < array.length; y++) {
 				String wordTwo = array[y];
 				if (wordOne == wordTwo & i != y) {
-					array[i] = null;
 					summdublicate++;
+					String b = array[y];
+					array[y] = array[array.length - 1];
+					array[array.length - 1] = b;
 				}
 			}
 		}
-		for (int z = 0; z < array.length; z++) {
-			for (int a = array.length - 2; a >= 0; a--) {
-				if (array[a] == null) {
-					String b = array[a];
-					array[a] = array[a + 1];
-					array[a + 1] = b;
-				}
-			}
-		}
-		return Arrays.copyOf(array, array.length - summdublicate);
+		return Arrays.copyOf(array, array.length - summdublicate + 1);
 	}
 }
