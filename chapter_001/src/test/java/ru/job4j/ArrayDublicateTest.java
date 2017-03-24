@@ -18,8 +18,8 @@ public class ArrayDublicateTest {
 	@Test
 	public void whenRemoveDuplicatesThenArrayWithoutDuplicate() {
 		ArrayDublicate nemo = new ArrayDublicate();
-		String[] wordDubl = {"Мир", "Свет", "Свет", "Газ", "Вода", "Мир"};
-		String[] wordExpect = {"Свет", "Газ", "Вода", "Мир"};
+		String[] wordDubl = {"world", "light", "water", "light"};
+		String[] wordExpect = {"world", "light", "water"};
 		String[] word = nemo.remove(wordDubl);
 		assertThat(word, is(wordExpect));
 	}
