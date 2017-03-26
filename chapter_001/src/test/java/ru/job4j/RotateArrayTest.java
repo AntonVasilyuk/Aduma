@@ -31,9 +31,9 @@ public class RotateArrayTest {
 	*/
 	@Test
 	public void whenArrayThirdOnThirdThenRotateArray() {
-		RotateArray rotater = new RotateArray();
+		RotateArray rotaterR = new RotateArray();
 		int[][] firstArray = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-		int[][] secondArray = rotater.rotate(firstArray);
+		int[][] secondArray = rotaterR.rotate(firstArray);
 		int[][] expectArray = {{7, 4, 1}, {8, 5, 2}, {9, 6, 3}};
 		assertThat(secondArray, is(expectArray));
 
