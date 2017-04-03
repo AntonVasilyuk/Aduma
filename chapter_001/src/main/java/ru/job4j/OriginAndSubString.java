@@ -21,12 +21,12 @@ public class OriginAndSubString {
 		boolean result = false;
 		for (int i = 0; i < originChar.length; i++) {
 			if (originChar[i] == subChar[0]) {
-				for (int j = 0; j < subChar.length; j++, i++) {
-					if (originChar[i] == subChar[j]) {
+				for (int j = 0; j < subChar.length; j++) {
+					if (originChar[i + j] == subChar[j]) {
 						n = n + 1;
 					}
 				}
-				i = originChar.length;
+				break;
 			}
 		}
 		if (n == subChar.length) {
