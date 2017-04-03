@@ -24,9 +24,11 @@ public class OriginAndSubString {
 				for (int j = 0; j < subChar.length; j++) {
 					if (originChar[i + j] == subChar[j]) {
 						n = n + 1;
+					} else {
+						n = 0;
+						break;
 					}
 				}
-				break;
 			}
 		}
 		if (n == subChar.length) {
