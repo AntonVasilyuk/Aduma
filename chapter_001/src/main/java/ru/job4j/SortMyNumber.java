@@ -15,44 +15,18 @@ public class SortMyNumber {
 	* @return result sorting
 	*/
 	public int[] sortMyArrays(int[] first, int[] second) {
-		int val;
-		int[] a;
-		int[] b;
+		int i = 0;
+		int j = 0;
 		int[] readyArray = new int[first.length + second.length];
-		if (first.length >= second.length) {
-			a = first;
-			b = second;
-		} else {
-			a = second;
-			b = first;
+		while (i < first.length || j < second.length) {
+			if (i < first.length && j < second.length) {
+				readyArray[i + j] = first[i] < second[j] ? first[i++] : second[j++];
+			} else if (i == first.length) {
+				readyArray[i + j] = second[j++];
+			} else {
+				readyArray[i + j] = first[i++];
+			}
 		}
-        for (int j = readyArray.length - 1, i = 0; j >= 0; j--, i++) {
-            if (i < b.length) {
-                readyArray[j] = a[i];
-                readyArray[j - 1] = b[i];
-                for (int x = 0; x < readyArray.length; x++) {
-                    for (int y = readyArray.length - 1; y > x; y--) {
-                        if (readyArray[y] < readyArray[y - 1]) {
-                            val = readyArray[y];
-                            readyArray[y] = readyArray[y - 1];
-                            readyArray[y - 1] = val;
-                        }
-                    }
-                }
-                j--;
-            } else {
-                readyArray[j] = a[i];
-                for (int x = 0; x < readyArray.length; x++) {
-                    for (int y = readyArray.length - 1; y > x; y--) {
-                        if (readyArray[y] < readyArray[y - 1]) {
-                            val = readyArray[y];
-                            readyArray[y] = readyArray[y - 1];
-                            readyArray[y - 1] = val;
-                        }
-                    }
-                }
-            }
-        }
         return readyArray;
     }
 }
