@@ -15,6 +15,7 @@
 	
 	<modules>
 		<module>chapter_001</module>
+		<module>chapter_002</module>
 	</modules>
 	
 	<dependencies>
@@ -29,6 +30,11 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
 		</dependency>
 	</dependencies>
 	
@@ -57,4 +63,12 @@
 			</plugin>
 		</plugins>
 	</build>
+	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-compiler-plugin</artifactId>
+		<version>3.3</version>
+		<configuration>
+			<compilerVersion>1.8</compilerVersion>
+		</configuration>
+	</plugin>
 </project>

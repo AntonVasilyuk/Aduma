@@ -17,8 +17,8 @@ public class OriginAndSubStringTest {
 	@Test
 	public void whenSubIsOriginThenTrue() {
 		OriginAndSubString ob = new OriginAndSubString();
-		String origin = "population";
-		String sub = "ion";
+		String origin = "Hello";
+		String sub = "lo";
 		boolean expect = true;
 		boolean fact = ob.contains(origin, sub);
 		assertThat(fact, is(expect));
