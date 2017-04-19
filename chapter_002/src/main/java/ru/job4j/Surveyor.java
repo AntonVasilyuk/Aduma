@@ -16,7 +16,7 @@ public class Surveyor extends Profession {
 	* @param e experiens
 	* @param pay paymant working
 	*/
-	Surveyor(String n, boolean h, double e, int pay) {
+	public Surveyor(String n, boolean h, double e, int pay) {
 		super(n, h, e, pay);
 	}
 
@@ -26,7 +26,7 @@ public class Surveyor extends Profession {
 	* @return description working
 	*/
 	public String topograficSurvey(Client client) {
-		String val = "Геодезист " + getName() + " выполняет съемку для клиента " + client.getName() + " за " + getPayment() + " долларов.";
+		String val = String.format("Геодезист " + getName() + " выполняет съемку для клиента " + client.getName() + " за " + getPayment() + " долларов.");
 		return val;
 	}
 }

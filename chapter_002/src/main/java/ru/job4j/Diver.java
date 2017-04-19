@@ -21,7 +21,7 @@ public class Diver extends Profession {
 	* @param e experiens
 	* @param hour number hour under water
 	*/
-	Diver(String n, boolean h, double e, int hour) {
+	public Diver(String n, boolean h, double e, int hour) {
 		super(n, h, e, hour);
 		this.hour = hour;
 	}
@@ -31,7 +31,7 @@ public class Diver extends Profession {
 	* @return description
 	*/
 	public String doDriving() {
-		String val = "У водолаза " + getName() + " уже " + hour + " часов погружений.";
+		String val = String.format("У водолаза " + getName() + " уже " + hour + " часов погружений.");
 		return val;
 	}
 }

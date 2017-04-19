@@ -33,7 +33,7 @@ public class Profession {
 	* @param e experiens
 	* @param pay paymant working
 	*/
-	Profession(String n, boolean h, double e, int pay) {
+	public Profession(String n, boolean h, double e, int pay) {
 		this.name = n;
 		this.higherEducation = h;
 		this.experience = e;
@@ -45,7 +45,7 @@ public class Profession {
 	* @param h it's be education
 	* @param e experiens
 	*/
-	Profession(String n, boolean h, double e) {
+	public Profession(String n, boolean h, double e) {
 		this.name = n;
 		this.higherEducation = h;
 		this.experience = e;
@@ -54,7 +54,7 @@ public class Profession {
 	* Constructor for class Plumber
 	* @param n name
 	*/
-	Profession(String n) {
+	public Profession(String n) {
 		this.name = n;
 	}
 
@@ -93,9 +93,9 @@ public class Profession {
 	public String qualificationSpec() {
 		String result;
 		if (higherEducation) {
-			result = "Описание специалиста: " + name + ", есть высшее образование, стоимость вызова составляет " + payment + " долларов, его стаж составляет " + experience + " лет.";
+			result = String.format("Описание специалиста: " + name + ", есть высшее образование, стоимость вызова составляет " + payment + " долларов, его стаж составляет " + experience + " лет.");
 		} else {
-			result = "Описание специалиста: " + name + ", нет высшего образования, имеет среднеспециальное, его стаж составляет " + experience + " лет.";
+			result = String.format("Описание специалиста: " + name + ", нет высшего образования, имеет среднеспециальное, его стаж составляет " + experience + " лет.");
 		}
 		return result;
 

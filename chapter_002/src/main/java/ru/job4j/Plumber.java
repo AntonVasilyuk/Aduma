@@ -16,7 +16,7 @@ public class Plumber extends Profession {
 	* @param e experiens
 	* @param pay paymant working
 	*/
-	Plumber(String n, boolean h, double e, int pay) {
+	public Plumber(String n, boolean h, double e, int pay) {
 		super(n, h, e, pay);
 	}
 
@@ -26,7 +26,7 @@ public class Plumber extends Profession {
 	* @return description
 	*/
 	public String repairPlump(Client client) {
-		String val = "Сантехник " + getName() + " ремонтирует клиенту " + client.getName() + " сантехнику дома за " + getPayment() + " долларов.";
+		String val = String.format("Сантехник " + getName() + " ремонтирует клиенту " + client.getName() + " сантехнику дома за " + getPayment() + " долларов.");
 		return val;
 	}
 }
