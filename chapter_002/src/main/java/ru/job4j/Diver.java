@@ -31,7 +31,7 @@ public class Diver extends Profession {
 	* @return description
 	*/
 	public String doDriving() {
-		String val = String.format("У водолаза " + getName() + " уже " + hour + " часов погружений.");
+		String val = String.format("У водолаза %s уже %d часов погружений.", getName(), hour);
 		return val;
 	}
 }

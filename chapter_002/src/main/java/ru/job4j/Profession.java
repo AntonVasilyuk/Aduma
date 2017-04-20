@@ -93,9 +93,9 @@ public class Profession {
 	public String qualificationSpec() {
 		String result;
 		if (higherEducation) {
-			result = String.format("Описание специалиста: " + name + ", есть высшее образование, стоимость вызова составляет " + payment + " долларов, его стаж составляет " + experience + " лет.");
+			result = String.format("Описание специалиста: %s, есть высшее образование, стоимость вызова составляет %d долларов, его стаж составляет %d лет.", this.name, this.payment, this.experience);
 		} else {
-			result = String.format("Описание специалиста: " + name + ", нет высшего образования, имеет среднеспециальное, его стаж составляет " + experience + " лет.");
+			result = String.format("Описание специалиста: %s, нет высшего образования, имеет среднеспециальное, его стаж составляет %d лет.", this.name, this.experience);
 		}
 		return result;
 

@@ -26,7 +26,7 @@ public class Surveyor extends Profession {
 	* @return description working
 	*/
 	public String topograficSurvey(Client client) {
-		String val = String.format("Геодезист " + getName() + " выполняет съемку для клиента " + client.getName() + " за " + getPayment() + " долларов.");
+		String val = String.format("Геодезист %s выполняет съемку для клиента %s за %d долларов.", getName(), client.getName(), getPayment());
 		return val;
 	}
 }

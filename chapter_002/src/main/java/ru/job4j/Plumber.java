@@ -26,7 +26,7 @@ public class Plumber extends Profession {
 	* @return description
 	*/
 	public String repairPlump(Client client) {
-		String val = String.format("Сантехник " + getName() + " ремонтирует клиенту " + client.getName() + " сантехнику дома за " + getPayment() + " долларов.");
+		String val = String.format("Сантехник %s ремонтирует клиенту %s сантехнику дома за %d долларов.", getName(), client.getName(), getPayment());
 		return val;
 	}
 }
