@@ -17,7 +17,7 @@ public class ProfessionTest {
 	@Test
 	public void whenIsSpecThenWhatIsHe() {
 		Surveyor surv = new Surveyor("Андрей", true, 5.5, 50);
-		String expect = "Описание специалиста: Андрей, есть высшее образование, стоимость вызова составляет 50 долларов, его стаж составляет 5.5 лет.";
+		String expect = "Описание специалиста: Андрей, есть высшее образование, стоимость вызова составляет 50 долларов, его стаж составляет 5,5 лет.";
 		String fact = surv.qualificationSpec();
 		assertThat(fact, is(expect));
 	}
