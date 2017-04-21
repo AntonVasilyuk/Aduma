@@ -9,29 +9,41 @@ package ru.job4j;
 
 public class Item {
 	/**.
-	* @id String
+	* @id id item
 	*/
 	private String id;
 
 	/**.
-	* @name String
+	* @name name item
 	*/
 	private String name;
 
 	/**.
-	* @desc String
+	* @desc desc item
 	*/
 	private String desc;
 
 	/**.
-	* @created long
+	* @created created item
 	*/
 	private long created;
 
 	/**.
-	* @comments int[];
+	* @comments String[] ;
 	*/
 	private String[] comments;
+
+	/**.
+	* Constructor for class Item
+	* @param name name new item
+	* @param desc desc new item
+	* @param created created new item
+	*/
+	public Item(String name, String desc, long created) {
+		this.name = name;
+		this.desc = desc;
+		this.created = created;
+	}
 
 	/**.
 	* getter for id
@@ -43,7 +55,7 @@ public class Item {
 
 	/**.
 	* setter for id
-	* @param id
+	* @param id id item
 	*/
 	public void setId(String id) {
 		this.id = id;
@@ -51,7 +63,7 @@ public class Item {
 
 	/**.
 	* getter for name
-	* @return name
+	* @return name item
 	*/
 	public String getName() {
 		return this.name;
@@ -59,7 +71,7 @@ public class Item {
 
 	/**.
 	* setter for name
-	* @param name
+	* @param name item
 	*/
 	public void setName(String name) {
 		this.name = name;
@@ -67,7 +79,7 @@ public class Item {
 
 	/**.
 	* getter for desc
-	* @return desc
+	* @return desc item
 	*/
 	public String getDesc() {
 		return this.desc;
@@ -75,7 +87,7 @@ public class Item {
 
 	/**.
 	* setter for desc
-	* @param desc
+	* @param desc item
 	*/
 	public void setDesc(String desc) {
 		this.desc = desc;
@@ -83,7 +95,7 @@ public class Item {
 
 	/**.
 	* getter for created
-	* @return created
+	* @return created item
 	*/
 	public long getCreated() {
 		return this.created;
@@ -91,7 +103,7 @@ public class Item {
 
 	/**.
 	* setter for created
-	* @param created
+	* @param created item
 	*/
 	public void setCreated(long created) {
 		this.created = created;
@@ -99,7 +111,7 @@ public class Item {
 
 	/**.
 	* getter for comments
-	* @return comments
+	* @return comments item
 	*/
 	public String[] getComments() {
 		return this.comments;
@@ -107,7 +119,7 @@ public class Item {
 
 	/**.
 	* setter for comments
-	* @param comments
+	* @param comments item
 	*/
 	public void setComments(String[] comments) {
 		this.comments = comments;
