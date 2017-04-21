@@ -56,11 +56,9 @@ public class Tracker {
 	public void delete(Item item) {
 		Item[] result = new Item[this.position];
 		for (int index = 0, i = 0; index != this.position; index++, i++) {
-			if (items[index].equals(item)) {
-				index++;
+			if (items[index].getId().equals(item.getId())) {
+				items[index] = null;
 			}
-			result[i] = items[index];
-			this.items = result;
 		}
 	}
 
