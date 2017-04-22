@@ -3,6 +3,7 @@ package ru.job4j;
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertNull;
 
 /**.
 *
@@ -55,9 +56,8 @@ public class TrackerTest {
 		Item itemTemp = new Item("Valera", "Small man", 1975);
 		tracker.add(itemTemp);
 		tracker.delete(itemTemp);
-		Item expect = null;
 		Item fact = tracker.findById(itemTemp.getId());
-		assertThat(fact, is(expect));
+		assertNull(fact);
 	}
 
 	/**.
