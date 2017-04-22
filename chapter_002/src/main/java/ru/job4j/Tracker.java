@@ -69,15 +69,13 @@ public class Tracker {
 	*/
 	public Item[] findAll() {
 		int num = 0;
+		int j = 0;
 		Item[] result = new Item[this.position];
-		for (int index = 0, j = 0; index != this.position; index++, j++) {
+		for (int index = 0; index != this.position; index++) {
 			if (this.items[index] != null) {
 				result[j] = this.items[index];
 				num++;
-			} else if (this.items[index] == null && index != this.position - 2) {
-				result[j] = this.items[++index];
-			} else {
-				break;
+				j++;
 			}
 		}
 		return Arrays.copyOf(result, num);
