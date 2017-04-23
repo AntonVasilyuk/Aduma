@@ -1,4 +1,4 @@
 # git_test
-Git test:
-chapter_001 - базовый синтекс;
-chapter_002 - ООП;
+Прохождение курса по java:/n
+chapter_001 - базовый синтекс;/n
+chapter_002 - ООП;/n
