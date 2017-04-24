@@ -3,7 +3,7 @@
 	<groupId>chapter_002</groupId>
 	<artifactId>chapter_002</artifactId>
 	<version>2.0</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 	<name>chapter_002</name>
 	
 	<parent>
@@ -11,5 +11,9 @@
 		<artifactId>git_test</artifactId>
 		<version>2.0</version>
 	</parent>
-
+	
+	<modules>
+		<module>profession</module>
+		<module>tracker</module>
+	</modules>
 </project>
