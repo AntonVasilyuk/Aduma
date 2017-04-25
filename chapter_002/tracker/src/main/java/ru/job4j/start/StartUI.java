@@ -23,15 +23,11 @@ public class StartUI {
 	* It's constructor for this class
 	* @param input input parametr object
 	*/
-	public StartUI(Input input) {
+	public StartUI(Input input, Tracker tracker) {
 		this.input = input;
+		tracker = new Tracker();
+		this.tracker = tracker;
 	}
-
-	/**.
-	* @date date for get time
-	*/
-	private Date date = new Date();
-
 	/**.
 	* method for intaraction with apps tracker
 	*/
@@ -61,7 +57,8 @@ public class StartUI {
 				selection = Integer.valueOf(input.ask("Enter the action number:"));
 			} while (selection < 0 && selection > 6);
 
-			if (selection == 0) {
+			if (selection == ADD) {
+				Date date = new Date();
 				name = input.ask("Enter the name for item:");
 				desc = input.ask("Enter the desc for item:");
 				Item item = new Item(name, desc, date.getTime());
@@ -69,7 +66,7 @@ public class StartUI {
 				System.out.println("Thanks you! Your wish fulfilled");
 			}
 
-			if (selection == 1) {
+			if (selection == SHOWALL) {
 				Item[] array = tracker.findAll();
 				for (int index = 0; index < array.length; index++) {
 					System.out.println(array[index].getName() + ", " + array[index].getDesc());
@@ -77,7 +74,8 @@ public class StartUI {
 				System.out.println("Thanks you! Your wish fulfilled");
 			}
 
-			if (selection == 2) {
+			if (selection == EDIT) {
+				Date date = new Date();
 				id = input.ask("Enter the id for item:");
 				name = input.ask("Enter the name for item:");
 				desc = input.ask("Enter the desk for item:");
@@ -87,20 +85,20 @@ public class StartUI {
 				System.out.println("Thanks you! Your wish fulfilled");
 			}
 
-			if (selection == 3) {
+			if (selection == DELETE) {
 				id = input.ask("Enter the id for item:");
 				tracker.delete(tracker.findById(id));
 				System.out.println("Thanks you! Your wish fulfilled");
 			}
 
-			if (selection == 4) {
+			if (selection == FINDBYID) {
 				id = input.ask("Enter the id for item:");
 				Item item = tracker.findById(id);
 				System.out.println(item.getName() + ", " + item.getDesc());
 				System.out.println("Thanks you! Your wish fulfilled");
 			}
 
-			if (selection == 5) {
+			if (selection == FINDBYNAME) {
 				name = input.ask("Enter the name for item:");
 				Item[] items = tracker.findByName(name);
 				for (int index = 0; index < items.length; index++) {
@@ -108,7 +106,7 @@ public class StartUI {
 				}
 				System.out.println("Thanks you! Your wish fulfilled");
 			}
-		} while (selection != 6);
+		} while (selection != EXIT);
 	}
 
 	/**.
