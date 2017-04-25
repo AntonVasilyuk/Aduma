@@ -20,6 +20,11 @@ public class StartUI {
 	private Input input;
 
 	/**.
+	* @tracker tracker its object for interaction
+	*/
+	private Tracker tracker;
+
+	/**.
 	* It's constructor for this class
 	* @param input input parametr object
 	*/
@@ -37,13 +42,13 @@ public class StartUI {
 		String desc;
 		String id;
 		int selection;
-		public final int ADD = 0;
-		public final int SHOWALL = 1;
-		public final int EDIT = 2;
-		public final int DELETE = 3;
-		public final int FINDBYID = 4;
-		public final int FINDBYNAME = 5;
-		public final int EXIT = 6;
+		final int ADD = 0;
+		final int SHOWALL = 1;
+		final int EDIT = 2;
+		final int DELETE = 3;
+		final int FINDBYID = 4;
+		final int FINDBYNAME = 5;
+		final int EXIT = 6;
 		do {
 			do {
 				System.out.println("Menu tracker:");
@@ -115,6 +120,6 @@ public class StartUI {
 	*/
 	public static void main(String[] args) {
 		Input input = new ConsolInput();
-		new StartUI(input).init();
+		new StartUI(input, tracker).init();
 	}
 }
