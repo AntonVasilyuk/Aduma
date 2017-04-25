@@ -41,6 +41,13 @@ public class StartUI {
 		String desc;
 		String id;
 		int selection;
+		public final int ADD = 0;
+		public final int SHOWALL = 1;
+		public final int EDIT = 2;
+		public final int DELETE = 3;
+		public final int FINDBYID = 4;
+		public final int FINDBYNAME = 5;
+		public final int EXIT = 6;
 		do {
 			do {
 				System.out.println("Menu tracker:");
