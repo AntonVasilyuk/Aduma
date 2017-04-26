@@ -34,7 +34,7 @@ public class StubInputTest {
 		Tracker tracker = new Tracker();
 		Input input = new StubInput(new String[] {"0", "Testing name", "desc", "6"});
 		new StartUI(input, tracker).init();
-		assertThat(tracker.findAll()[0].getName(), is("test name"));
+		assertThat(tracker.findAll()[0].getName(), is("Testing name"));
 	}
 
 	/**.
@@ -72,10 +72,10 @@ public class StubInputTest {
 		Tracker tracker = new Tracker();
 		Item item = new Item("Ivan","desc", date.getTime());
 		tracker.add(item);
-		item.setId("1");
-		Input input = new StubInput(new String[] {"3", "1", "6"});
+		String itemId = item.getId();
+		Input input = new StubInput(new String[] {"3", itemId, "6"});
 		new StartUI(input, tracker).init();
-		assertNull(tracker.findAll()[0]);
+		assertNull(tracker.findById(itemId));
 	}
 
 	/**.
