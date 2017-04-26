@@ -11,9 +11,9 @@
 		<artifactId>git_test</artifactId>
 		<version>2.0</version>
 	</parent>
-	
+
 	<modules>
-		<module>profession</module>
 		<module>tracker</module>
+		<module>profession</module>
 	</modules>
 </project>
