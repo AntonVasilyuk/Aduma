@@ -37,7 +37,7 @@ public class StartUI {
 	* method for intaraction with apps tracker
 	*/
 	public void init() {
-		Tracker tracker = new Tracker();
+		//Tracker tracker = new Tracker();
 
 		String name;
 		String desc;
