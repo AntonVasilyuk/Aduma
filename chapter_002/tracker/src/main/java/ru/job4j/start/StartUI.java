@@ -15,6 +15,40 @@ import java.util.Date;
 public class StartUI {
 
 	/**.
+	* @ADD for method add
+	*/
+	private final static int ADD = 0;
+	/**.
+	* @SHOWALL for method show all
+	*/
+	private final static int SHOWALL = 1;
+
+	/**.
+	* @EDIT for method edit
+	*/
+	private final static int EDIT = 2;
+
+	/**.
+	* @DELETE for method delete
+	*/
+	private final static int DELETE = 3;
+
+	/**.
+	* @FINDBYID for method find by id
+	*/
+	private final static int FINDBYID = 4;
+
+	/**.
+	* @FINDBYNAME for method find by name
+	*/
+	private final static int FINDBYNAME = 5;
+
+	/**.
+	* @EXIT for exit
+	*/
+	private final static int EXIT = 6;
+
+	/**.
 	* @input input its object for interaction
 	*/
 	private Input input;
@@ -44,14 +78,6 @@ public class StartUI {
 		String id;
 
 		int selection;
-
-		final int ADD = 0;
-		final int SHOWALL = 1;
-		final int EDIT = 2;
-		final int DELETE = 3;
-		final int FINDBYID = 4;
-		final int FINDBYNAME = 5;
-		final int EXIT = 6;
 
 		do {
 			do {
