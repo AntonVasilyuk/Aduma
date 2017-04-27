@@ -15,5 +15,6 @@
 	<modules>
 		<module>tracker</module>
 		<module>profession</module>
+		<module>shape</module>
 	</modules>
 </project>
