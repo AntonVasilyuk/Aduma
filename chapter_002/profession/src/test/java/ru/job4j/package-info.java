@@ -1,5 +1,5 @@
 /**
- * CalculateTest.
+ * Profession.
  *
  * @author Anton Vasilyuk (wrajina99@gmail.com)
  * @version $Id$
