@@ -5,10 +5,17 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import java.util.Date;
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
+
 import ru.job4j.models.Item;
 import ru.job4j.start.*;
+
 
 /**.
 * chapter_002
@@ -25,6 +32,18 @@ public class StubInputTest {
 	* @date date for getTime
 	*/
 	private Date date = new Date();
+
+	/**.
+	* method for write print
+	* @param fileName name file
+	* @return string from file
+	*/
+	private static String readUsingScanner(String fileName) throws IOException {
+        Scanner scanner = new Scanner(Paths.get(fileName), StandardCharsets.UTF_8.name());
+        String data = scanner.useDelimiter("\\A").next();
+        scanner.close();
+        return data;
+	}
 
 	/**.
 	* Test for method ADD
@@ -82,14 +101,16 @@ public class StubInputTest {
 	* Test for method FIND BY ID
 	*/
 	@Test
-	public void whenUserFindByIdItemThenTrackerHasFindItemById() {
+	public void whenUserFindByIdItemThenTrackerHasFindItemById() throws Exception {
 		Tracker tracker = new Tracker();
-		Item item = new Item("Ivan","desc", date.getTime());
+		Item item = new Item("Ivan","bingo", date.getTime());
 		tracker.add(item);
-		item.setId("1");
-		Input input = new StubInput(new String[] {"4", "1", "6"});
+		Input input = new StubInput(new String[] {"4", item.getId(), "6"});
+		FileOutputStream f = new FileOutputStream("file.txt");
+		System.setOut(new PrintStream(f));
 		new StartUI(input, tracker).init();
-		assertThat(tracker.findAll()[0].getName(), is("Ivan"));
+		String fact = readUsingScanner("file.txt");
+		assertTrue(fact.contains("bingo"));
 	}
 
 	/**.
