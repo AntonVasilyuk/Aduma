@@ -27,4 +27,26 @@ public class ConsolInput implements Input {
 		System.out.print(question);
 		return scanner.nextLine();
 	}
+
+	/**.
+	* Method for check method ask
+	* @param question from user
+	* @param ranges array for correct number
+	* @return enter user
+	*/
+	public int ask(String question, int[] ranges) {
+		int key = Integer.valueOf(this.ask(question));
+		boolean check = false;
+		for (int value : ranges) {
+			if (value == key) {
+				check = true;
+				break;
+			}
+		}
+		if (check) {
+			return key;
+		} else {
+			throw new MenuOutException("Bingo! Out of menu range.");
+		}
+	}
 }
