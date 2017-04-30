@@ -1,7 +1,7 @@
 package ru.job4j.start;
 
 /**.
-* This class need for interaction for user
+* This class need for creating MenuOutException
 * 
 * @author Anton Vasilyuk
 * @version 1.0
