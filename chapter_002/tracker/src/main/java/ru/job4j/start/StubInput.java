@@ -14,11 +14,6 @@ import ru.job4j.models.*;
 public class StubInput implements Input {
 
 	/**.
-	* @tracker tracker is object for inspection
-	*/
-	private Tracker tracker = new Tracker();
-
-	/**.
 	* @answers answers is array for parametr testing
 	*/
 	private String[] answers;
@@ -52,6 +47,18 @@ public class StubInput implements Input {
 	* @return -1
 	*/
 	public int ask(String question, int[] ranges) {
-		return -1;
+		int key = Integer.valueOf(this.ask(question));
+		boolean check = false;
+		for (int value : ranges) {
+			if (value == key) {
+				check = true;
+				break;
+			}
+		}
+		if (check) {
+			return key;
+		} else {
+			throw new MenuOutException("Out of menu range");
+		}
 	}
 }
