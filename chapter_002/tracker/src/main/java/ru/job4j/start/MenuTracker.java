@@ -27,7 +27,7 @@ public class MenuTracker {
 	/**.
 	* @actions Array for actions
 	*/
-	public UserAction[] actions = new UserAction[6];
+	private UserAction[] actions = new UserAction[6];
 
 	/**.
 	* Constructor
@@ -70,6 +70,17 @@ public class MenuTracker {
 		}
 	}
 
+	/**.
+	* method for array corect number
+	* @return array
+	*/
+	public int[] getArrayNumber() {
+		int[] ranges = new int[actions.length];
+         for (int i = 0; i < actions.length; i++) {
+                 ranges[i] = i;
+         }
+		 return ranges;
+	}
 	/**.
 	* Class for action ADD
 	*/
