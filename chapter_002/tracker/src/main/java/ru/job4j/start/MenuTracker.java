@@ -76,7 +76,7 @@ public class MenuTracker {
 	*/
 	public int[] getArrayNumber() {
 		int[] ranges = new int[actions.length];
-         for (int i = 0; i < actions.length; i++) {
+        for (int i = 0; i < actions.length; i++) {
                  ranges[i] = i;
          }
 		 return ranges;
