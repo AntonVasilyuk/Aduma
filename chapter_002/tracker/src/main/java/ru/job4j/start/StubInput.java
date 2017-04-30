@@ -36,8 +36,22 @@ public class StubInput implements Input {
 		this.answers = answers;
 	}
 
+	/**.
+	* method for write answer in the array answers
+	* @param question
+	* @return answer
+	*/
 	public String ask(String question) {
 		return answers[position++];
 	}
-	
+
+	/**.
+	* method for output
+	* @param question
+	* @param ranges
+	* @return -1
+	*/
+	public int ask(String question, int[] ranges) {
+		return -1;
+	}
 }
