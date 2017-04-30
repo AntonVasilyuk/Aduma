@@ -44,7 +44,7 @@ public class StartUI {
 
 		do {
 			menu.show();
-			int key = Integer.valueOf(input.ask("Select:"));
+			int key = Integer.valueOf(input.ask("Select:", ranges));
 			menu.select(key);
 			
 		} while(!"y".equals(this.input.ask("Exit?(y):")));
