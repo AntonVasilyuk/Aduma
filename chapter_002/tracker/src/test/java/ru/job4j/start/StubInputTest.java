@@ -125,4 +125,11 @@ public class StubInputTest {
 		new StartUI(input, tracker).init();
 		assertThat(tracker.findAll()[0].getDesc(), is("Bingo"));
 	}
+
+	@Test(expected = MenuOutException.class)
+	public void whenEnterNumberInlegalThenCallMOE() throws MenuOutException {
+		Tracker tracker = new Tracker();
+		Input input = new StubInput(new String[] {"10", "y"});
+		new StartUI(input, tracker).init();
+	}
 }
