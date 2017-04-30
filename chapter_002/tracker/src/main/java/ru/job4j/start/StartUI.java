@@ -38,11 +38,10 @@ public class StartUI {
 	*/
 	public void init() {
 		MenuTracker menu = new MenuTracker(this.input, this.tracker);
-		int[] ranges = new int[menu.actions.length];
-         for (int i = 0; i < menu.actions.length; i++) {
-                 ranges[i] = i;
-         }
-		menu.fillActions();
+
+		int[] ranges = menu.getArrayNumber();
+ 		menu.fillActions();
+
 		do {
 			menu.show();
 			int key = Integer.valueOf(input.ask("Select:"));
