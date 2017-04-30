@@ -38,6 +38,10 @@ public class StartUI {
 	*/
 	public void init() {
 		MenuTracker menu = new MenuTracker(this.input, this.tracker);
+		int[] ranges = new int[menu.actions.length];
+         for (int i = 0; i < menu.actions.length; i++) {
+                 ranges[i] = i;
+         }
 		menu.fillActions();
 		do {
 			menu.show();
@@ -52,7 +56,7 @@ public class StartUI {
 	* @param args args
 	*/
 	public static void main(String[] args) {
-		Input input = new ConsolInput();
+		Input input = new ValidateInput();
 		Tracker tracker = new Tracker();
 		new StartUI(input, tracker).init();
 	}
