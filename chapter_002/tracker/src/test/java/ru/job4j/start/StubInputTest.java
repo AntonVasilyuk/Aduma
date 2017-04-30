@@ -51,7 +51,7 @@ public class StubInputTest {
 	@Test
 	public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
 		Tracker tracker = new Tracker();
-		Input input = new StubInput(new String[] {"0", "Testing name", "desc", "6"});
+		Input input = new StubInput(new String[] {"0", "Testing name", "desc", "y"});
 		new StartUI(input, tracker).init();
 		assertThat(tracker.findAll()[0].getName(), is("Testing name"));
 	}
@@ -64,7 +64,7 @@ public class StubInputTest {
 		Tracker tracker = new Tracker();
 		Item item = new Item("Ivan","desc", date.getTime());
 		tracker.add(item);
-		Input input = new StubInput(new String[] {"1", "6"});
+		Input input = new StubInput(new String[] {"1", "y"});
 		new StartUI(input, tracker).init();
 		assertThat(tracker.findAll()[0].getName(), is("Ivan"));
 	}
@@ -78,7 +78,7 @@ public class StubInputTest {
 		Item item = new Item("Ivan","desc", date.getTime());
 		tracker.add(item);
 		item.setId("1");
-		Input input = new StubInput(new String[] {"2", "1", "Egor", "desc", "6"});
+		Input input = new StubInput(new String[] {"2", "1", "Egor", "desc", "y"});
 		new StartUI(input, tracker).init();
 		assertThat(tracker.findAll()[0].getName(), is("Egor"));
 	}
@@ -92,7 +92,7 @@ public class StubInputTest {
 		Item item = new Item("Ivan","desc", date.getTime());
 		tracker.add(item);
 		String itemId = item.getId();
-		Input input = new StubInput(new String[] {"3", itemId, "6"});
+		Input input = new StubInput(new String[] {"3", itemId, "y"});
 		new StartUI(input, tracker).init();
 		assertNull(tracker.findById(itemId));
 	}
@@ -105,7 +105,7 @@ public class StubInputTest {
 		Tracker tracker = new Tracker();
 		Item item = new Item("Ivan","bingo", date.getTime());
 		tracker.add(item);
-		Input input = new StubInput(new String[] {"4", item.getId(), "6"});
+		Input input = new StubInput(new String[] {"4", item.getId(), "y"});
 		FileOutputStream f = new FileOutputStream("file.txt");
 		System.setOut(new PrintStream(f));
 		new StartUI(input, tracker).init();
@@ -121,7 +121,7 @@ public class StubInputTest {
 		Tracker tracker = new Tracker();
 		Item item = new Item("Zoiberg","Bingo", date.getTime());
 		tracker.add(item);
-		Input input = new StubInput(new String[] {"5", "Zoiberg", "6"});
+		Input input = new StubInput(new String[] {"5", "Zoiberg", "y"});
 		new StartUI(input, tracker).init();
 		assertThat(tracker.findAll()[0].getDesc(), is("Bingo"));
 	}
