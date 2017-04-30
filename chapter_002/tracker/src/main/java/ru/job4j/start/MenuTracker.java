@@ -3,18 +3,45 @@ package ru.job4j.start;
 import java.util.*;
 import ru.job4j.models.Item;
 
+/**.
+* chapter_002
+* task 2.6.1
+*
+* @author Anton Vasilyuk
+* @version 1.0
+* @since 0.1
+*/
+
 public class MenuTracker {
 
+	/**.
+	* @input value for parametr
+	*/
 	private Input input;
+
+	/**.
+	* @tracker value for parametr
+	*/
 	private Tracker tracker;
 
-	private UserAction[] actions = new UserAction[6];
+	/**.
+	* @actions Array for actions
+	*/
+	public UserAction[] actions = new UserAction[6];
 
+	/**.
+	* Constructor
+	* @param input
+	* @param tracker
+	*/
 	public MenuTracker(Input input, Tracker tracker) {
 		this.input = input;
 		this.tracker = tracker;
 	}
 
+	/**.
+	* method for write in array action
+	*/
 	public void fillActions() {
 		this.actions[0] = this.new AddItem();
 		this.actions[1] = this.new FindAll();
@@ -23,17 +50,29 @@ public class MenuTracker {
 		this.actions[4] = this.new FindById();
 		this.actions[5] = this.new FindByName();
 	}
+
+	/**.
+	* method for select action
+	* @param key number action
+	*/
 	public void select(int key) {
 		this.actions[key].execute(this.input, this.tracker);
 	}
+
+	/**.
+	* method for show all menu
+	*/
 	public void show() {
 		for (UserAction action : this.actions) {
 			if(action != null) {
 			System.out.println(action.info());
 			}
-			
 		}
 	}
+
+	/**.
+	* Class for action ADD
+	*/
 	private class AddItem implements UserAction {
 		public int key() {
 			return 0;
@@ -51,6 +90,9 @@ public class MenuTracker {
 		}
 	}
 
+	/**.
+	* Class for action FindAll
+	*/
 	private class FindAll implements UserAction {
 		public int key() {
 			return 1;
@@ -66,7 +108,9 @@ public class MenuTracker {
 			return String.format("%s. %s", this.key(), "show all item");
 		}
 	}
-
+	/**.
+	* Class for action EDIT
+	*/
 	private class EditItem implements UserAction {
 		public int key() {
 			return 2;
@@ -86,6 +130,9 @@ public class MenuTracker {
 		}
 	}
 
+	/**.
+	* Class for action DELETE
+	*/
 	private class DeleteItem implements UserAction {
 		public int key() {
 			return 3;
@@ -100,6 +147,9 @@ public class MenuTracker {
 		}
 	}
 
+	/**.
+	* Class for action FINDBYID
+	*/
 	private class FindById implements UserAction {
 		public int key() {
 			return 4;
@@ -115,6 +165,9 @@ public class MenuTracker {
 		}
 	}
 
+	/**.
+	* Class for action FINDBYNAME
+	*/
 	private class FindByName implements UserAction {
 		public int key() {
 			return 5;
