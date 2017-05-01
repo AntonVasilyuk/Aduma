@@ -5,6 +5,7 @@ import java.util.Date;
 
 
 /**.
+* Chapter_002
 * It programm for ready apps tracker
 *
 * @author Anton Vasilyuk
@@ -41,6 +42,18 @@ public class StartUI {
 
 		int[] ranges = menu.getArrayNumber();
  		menu.fillActions();
+		// UserAction deleteAction = new UserAction() {
+			// public int key() {
+				// return 3;
+			// }
+			// public void execute(Input input, Tracker tracker) {
+			//	tam tam
+			// }
+			// public String info() {
+				// return "3. Delete";
+			// }
+		//}
+		//menu.addAction(deleteAction);
 
 		do {
 			menu.show();
