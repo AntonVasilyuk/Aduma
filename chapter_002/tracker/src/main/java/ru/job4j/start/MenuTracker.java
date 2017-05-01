@@ -2,9 +2,11 @@ package ru.job4j.start;
 
 import java.util.*;
 import ru.job4j.models.Item;
+import ru.job4j.templates.BaseAction;
 
 /**.
-* chapter_002
+* Chapter_002
+* Main action
 * task 2.6.1
 *
 * @author Anton Vasilyuk
@@ -29,6 +31,9 @@ public class MenuTracker {
 	*/
 	private UserAction[] actions = new UserAction[6];
 
+	private int position = 0;
+
+	private String nameAction;
 	/**.
 	* Constructor
 	* @param input
@@ -43,14 +48,17 @@ public class MenuTracker {
 	* method for write in array action
 	*/
 	public void fillActions() {
-		this.actions[0] = this.new AddItem();
-		this.actions[1] = this.new FindAll();
-		this.actions[2] = this.new EditItem();
-		this.actions[3] = this.new DeleteItem();
-		this.actions[4] = this.new FindById();
-		this.actions[5] = this.new FindByName();
+		this.actions[0] = this.new AddItem("Add new item");
+		this.actions[1] = this.new FindAll("Show info about all item");
+		this.actions[2] = this.new EditItem("Edit item by id");
+		this.actions[3] = this.new DeleteItem("Delete item");
+		this.actions[4] = this.new FindById("Find item by id");
+		this.actions[5] = this.new FindByName("Find item by name");
 	}
 
+/* 	public void addActions(UserAction action) {
+		this.actions[position++] = action;
+	} */
 	/**.
 	* method for select action
 	* @param key number action
@@ -65,7 +73,7 @@ public class MenuTracker {
 	public void show() {
 		for (UserAction action : this.actions) {
 			if(action != null) {
-			System.out.println(action.info());
+			System.out.println(action.info(nameAction));
 			}
 		}
 	}
@@ -84,10 +92,16 @@ public class MenuTracker {
 	/**.
 	* Class for action ADD
 	*/
-	private class AddItem implements UserAction {
+	private class AddItem extends BaseAction {
+		private AddItem(String nameAction) {
+			super(nameAction);
+		}
+
 		public int key() {
 			return 0;
 		}
+
+		@Override
 		public void execute(Input input, Tracker tracker) {
 			Date date = new Date();
 			String name = input.ask("Enter the name for item:");
@@ -96,18 +110,21 @@ public class MenuTracker {
 			tracker.add(item);
 			System.out.println("Thanks you! Your wish fulfilled");
 		}
-		public String info() {
-			return String.format("%s. %s", this.key(), "add the new item");
-		}
 	}
 
 	/**.
 	* Class for action FindAll
 	*/
-	private class FindAll implements UserAction {
+	private class FindAll extends BaseAction {
+		private FindAll(String nameAction) {
+			super(nameAction);
+		}
+
 		public int key() {
 			return 1;
 		}
+
+		@Override
 		public void execute(Input input, Tracker tracker) {
 			Item[] array = tracker.findAll();
 			for (int index = 0; index < array.length; index++) {
@@ -115,17 +132,21 @@ public class MenuTracker {
 			}
 			System.out.println("Thanks you! Your wish fulfilled");
 		}
-		public String info() {
-			return String.format("%s. %s", this.key(), "show all item");
-		}
 	}
+
 	/**.
 	* Class for action EDIT
 	*/
-	private class EditItem implements UserAction {
+	private class EditItem extends BaseAction {
+		private EditItem(String nameAction) {
+			super(nameAction);
+		}
+
 		public int key() {
 			return 2;
 		}
+
+		@Override
 		public void execute(Input input, Tracker tracker) {
 			Date date = new Date();
 			String id = input.ask("Enter the id for item:");
@@ -136,53 +157,65 @@ public class MenuTracker {
 			tracker.update(item);
 			System.out.println("Thanks you! Your wish fulfilled");
 		}
-		public String info() {
-			return String.format("%s. %s", this.key(), "edit the new item");
-		}
 	}
 
 	/**.
 	* Class for action DELETE
 	*/
-	private class DeleteItem implements UserAction {
+	private class DeleteItem extends BaseAction {
+
+		private DeleteItem(String nameAction) {
+			super(nameAction);
+		}
+
 		public int key() {
 			return 3;
 		}
+
+		@Override
 		public void execute(Input input, Tracker tracker) {
 			String id = input.ask("Enter the id for item:");
 			tracker.delete(tracker.findById(id));
 			System.out.println("Thanks you! Your wish fulfilled");
-		}
-		public String info() {
-			return String.format("%s. %s", this.key(), "delete the new item");
 		}
 	}
 
 	/**.
 	* Class for action FINDBYID
 	*/
-	private class FindById implements UserAction {
+	private class FindById extends BaseAction {
+
+		private FindById(String nameAction) {
+			super(nameAction);
+		}
+
 		public int key() {
 			return 4;
 		}
+
+		@Override
 		public void execute(Input input, Tracker tracker) {
 			String id = input.ask("Enter the id for item:");
 			Item item = tracker.findById(id);
 			System.out.println(item.getName() + ", " + item.getDesc());
 			System.out.println("Thanks you! Your wish fulfilled");
 		}
-		public String info() {
-			return String.format("%s. %s", this.key(), "Find item by id");
-		}
 	}
 
 	/**.
 	* Class for action FINDBYNAME
 	*/
-	private class FindByName implements UserAction {
+	private class FindByName extends BaseAction {
+
+		private FindByName(String nameAction) {
+			super(nameAction);
+		}
+
 		public int key() {
 			return 5;
 		}
+
+		@Override
 		public void execute(Input input, Tracker tracker) {
 			String name = input.ask("Enter the name for item:");
 			Item[] items = tracker.findByName(name);
