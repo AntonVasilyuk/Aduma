@@ -3,8 +3,9 @@ package ru.job4j.start;
 import ru.job4j.models.*;
 
 /**.
-* chapter_002
-* It's class for testing behavior users
+* Chapter_002
+* Task 2.6.1
+* It's class need for imitation interaction for user
 * 
 * @author Anton Vasilyuk
 * @version 1.0
