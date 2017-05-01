@@ -1,6 +1,8 @@
 package ru.job4j.start;
 
 /**.
+* Chapter_002
+* Task 2.7.1
 * This class need for creating MenuOutException
 * 
 * @author Anton Vasilyuk
