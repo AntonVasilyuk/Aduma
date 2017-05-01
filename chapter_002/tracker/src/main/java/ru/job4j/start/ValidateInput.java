@@ -3,6 +3,8 @@ package ru.job4j.start;
 import java.util.*;
 
 /**.
+* Chapter_002
+* Task 2.7.1
 * This class need for interaction for user
 * 
 * @author Anton Vasilyuk
