@@ -5,6 +5,8 @@ import java.util.Arrays;
 import ru.job4j.models.*;
 
 /**.
+* Chapter_002
+* Create action
 *
 * @author Anton Vasilyuk
 * @version 1.0
