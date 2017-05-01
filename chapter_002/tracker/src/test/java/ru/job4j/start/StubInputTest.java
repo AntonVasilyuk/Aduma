@@ -18,7 +18,7 @@ import ru.job4j.start.*;
 
 
 /**.
-* chapter_002
+* Chapter_002
 * It's class for testing behavior users
 * 
 * @author Anton Vasilyuk
