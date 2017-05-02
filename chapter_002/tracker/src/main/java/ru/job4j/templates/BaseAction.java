@@ -16,6 +16,11 @@ import ru.job4j.models.Item;
 public abstract class BaseAction implements UserAction {
 
 	/**.
+	* @key number action
+	*/
+	private int keyAction;
+
+	/**.
 	* @nameAction it's value for information about action
 	*/
 	private String nameAction;
@@ -24,14 +29,18 @@ public abstract class BaseAction implements UserAction {
 	* Constructor for class BaseAction
 	* @param name it's value for information about action
 	*/
-	public BaseAction(String name) {
+	public BaseAction(int key, String name) {
+		this.key = keyAction;
 		this.nameAction = name;
 	}
 
 	/**.
 	* Abstract method for key action
+	* @return keyAction
 	*/
-	public abstract int key();
+	public int key() {
+		return this.keyAction;
+	}
 
 	/**.
 	* Abstract method for implemetion main action
