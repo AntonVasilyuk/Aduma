@@ -113,7 +113,7 @@ public class MenuTracker {
 	*/
 	private class FindAll extends BaseAction {
 		private FindAll(int key, String nameAction) {
-			super(nameAction);
+			super(key, nameAction);
 		}
 
 		@Override
