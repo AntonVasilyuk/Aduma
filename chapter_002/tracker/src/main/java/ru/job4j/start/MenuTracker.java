@@ -48,12 +48,12 @@ public class MenuTracker {
 	* method for write in array action
 	*/
 	public void fillActions() {
-		this.actions[0] = this.new AddItem("Add new item");
-		this.actions[1] = this.new FindAll("Show info about all item");
-		this.actions[2] = this.new EditItem("Edit item by id");
-		this.actions[3] = this.new DeleteItem("Delete item");
-		this.actions[4] = this.new FindById("Find item by id");
-		this.actions[5] = this.new FindByName("Find item by name");
+		this.actions[0] = this.new AddItem(0, "Add new item");
+		this.actions[1] = this.new FindAll(1, "Show info about all item");
+		this.actions[2] = this.new EditItem(2, "Edit item by id");
+		this.actions[3] = this.new DeleteItem(3, "Delete item");
+		this.actions[4] = this.new FindById(4, "Find item by id");
+		this.actions[5] = this.new FindByName(5, "Find item by name");
 	}
 
 /* 	public void addActions(UserAction action) {
@@ -93,12 +93,8 @@ public class MenuTracker {
 	* Class for action ADD
 	*/
 	private class AddItem extends BaseAction {
-		private AddItem(String nameAction) {
-			super(nameAction);
-		}
-
-		public int key() {
-			return 0;
+		private AddItem(int key, String nameAction) {
+			super(key, nameAction);
 		}
 
 		@Override
@@ -116,12 +112,8 @@ public class MenuTracker {
 	* Class for action FindAll
 	*/
 	private class FindAll extends BaseAction {
-		private FindAll(String nameAction) {
+		private FindAll(int key, String nameAction) {
 			super(nameAction);
-		}
-
-		public int key() {
-			return 1;
 		}
 
 		@Override
@@ -138,12 +130,8 @@ public class MenuTracker {
 	* Class for action EDIT
 	*/
 	private class EditItem extends BaseAction {
-		private EditItem(String nameAction) {
-			super(nameAction);
-		}
-
-		public int key() {
-			return 2;
+		private EditItem(int key, String nameAction) {
+			super(key, nameAction);
 		}
 
 		@Override
@@ -164,12 +152,8 @@ public class MenuTracker {
 	*/
 	private class DeleteItem extends BaseAction {
 
-		private DeleteItem(String nameAction) {
-			super(nameAction);
-		}
-
-		public int key() {
-			return 3;
+		private DeleteItem(int key, String nameAction) {
+			super(key, nameAction);
 		}
 
 		@Override
@@ -185,12 +169,8 @@ public class MenuTracker {
 	*/
 	private class FindById extends BaseAction {
 
-		private FindById(String nameAction) {
-			super(nameAction);
-		}
-
-		public int key() {
-			return 4;
+		private FindById(int key, String nameAction) {
+			super(key, nameAction);
 		}
 
 		@Override
@@ -207,12 +187,8 @@ public class MenuTracker {
 	*/
 	private class FindByName extends BaseAction {
 
-		private FindByName(String nameAction) {
-			super(nameAction);
-		}
-
-		public int key() {
-			return 5;
+		private FindByName(int key, String nameAction) {
+			super(key, nameAction);
 		}
 
 		@Override
@@ -223,9 +199,6 @@ public class MenuTracker {
 				System.out.println(items[index].getName() + ", " + items[index].getDesc());
 			}
 			System.out.println("Thanks you! Your wish fulfilled");
-		}
-		public String info() {
-			return String.format("%s. %s", this.key(), "Find item by name");
 		}
 	}
 }
