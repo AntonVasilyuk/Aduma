@@ -30,7 +30,7 @@ public abstract class BaseAction implements UserAction {
 	* @param name it's value for information about action
 	*/
 	public BaseAction(int key, String name) {
-		this.key = keyAction;
+		this.keyAction = key;
 		this.nameAction = name;
 	}
 
