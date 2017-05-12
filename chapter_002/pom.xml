@@ -16,5 +16,7 @@
 		<module>tracker</module>
 		<module>profession</module>
 		<module>shape</module>
+		<module>chess</module>
+		<module>brackets</module>
 	</modules>
 </project>
