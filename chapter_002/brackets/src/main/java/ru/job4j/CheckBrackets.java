@@ -24,24 +24,20 @@ public class CheckBrackets {
 		char b = ')';
 
 		int aNum = 0;
-		int bNum = 0;
 	
 		for (int index = 0; index < brackets.length; index++) {
 			if (brackets[index] == a) {
 				aNum++;
 			}
-			if (aNum < bNum) {
-			result = false;
-			break;
-			}
 			if (brackets[index] == b) {
-				bNum++;
+				aNum--;
 			}
-			if (aNum < bNum) {
+			if (aNum < 0) {
 			result = false;
 			break;
 			}
 		}
+		if (aNum != 0) {result = false;}
 		return result;
 	}
 }
