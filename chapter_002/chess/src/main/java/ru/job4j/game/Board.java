@@ -14,6 +14,11 @@ import ru.job4j.figure.*;
 
 public class Board {
 
+	/**.
+	* @numFigure is index
+	*/
+	private int numFigure = 0;
+
     /**.
      * Array figures
      */
@@ -23,8 +28,9 @@ public class Board {
      * Method for fill array figures
      */
     public void fillFigure() {
-        this.figures[0] = new Bishop(new Cell(0, 0));
-        this.figures[1] = new Bishop(new Cell(0, 7));
+		int numFigure = 0;
+        this.figures[numFigure++] = new Bishop(new Cell(0, 0));
+        this.figures[numFigure++] = new Bishop(new Cell(0, 7));
     }
 
     /**.
@@ -43,8 +49,7 @@ public class Board {
         int disCol = dist.getCol();
 
         for (int i = 0; i < figures.length; i++) {
-            Bishop bishop = (Bishop) figures[i];
-            if (srcRow == bishop.getCell().getRow() && srcCol == bishop.getCell().getCol()) {
+            if (srcRow == figures[i].getCell().getRow() && srcCol == figures[i].getCell().getCol()) {
                 index = i;
             }
         }
@@ -64,8 +69,8 @@ public class Board {
         for (int x = 0; x < cell.length; x++) {
             for (int y = 0; y < figures.length; y++) {
                 Bishop bishop = (Bishop) figures[y];
-                if (cell[x].getRow() == bishop.getCell().getRow() &&
-                        cell[x].getCol() == bishop.getCell().getCol()) {
+                if (cell[x].getRow() == figures[y].getCell().getRow() &&
+                        cell[x].getCol() == figures[y].getCell().getCol()) {
                     result = false;
                     throw new OccupedWayException("way is not empty");
                 }
