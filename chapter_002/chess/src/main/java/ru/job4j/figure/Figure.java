@@ -16,22 +16,24 @@ public abstract class Figure {
 
 
     /**.
-     * @cellPosition position the sell
+     * @cellPosition cellPosition the sell
      */
-    private final Cell cellPosition;
+    protected final Cell cellPosition;
 
     /**.
      * Constructor
-     * @param position is cell for new figure
+     * @param cellPosition is cell for new figure
      */
-    public Figure(Cell position){
-        this.cellPosition = position;
+    public Figure(Cell cellPosition){
+        this.cellPosition = cellPosition;
     }
 
-	/**.
-	* Getter for this position
-	*/
-	public abstract Cell getCell();
+    /**.
+     * Getter for this cellPosition
+     */
+    public Cell getCell() {
+        return this.cellPosition;
+    }
 
     /**.
      * Abstract method building way for the figure
