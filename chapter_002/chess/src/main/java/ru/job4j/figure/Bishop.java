@@ -30,6 +30,7 @@ public class Bishop extends Figure {
     /**.
      * Method is getter cell
      */
+	@Override
     public Cell getCell() {
         return this.position;
     }
@@ -51,9 +52,8 @@ public class Bishop extends Figure {
         int disCol = cell.getCol();
 
         for (int index = 0; index < board.getFigures().length; index++) {
-            Bishop bishop = (Bishop) board.getFigures()[index];
-            if (bishop.getCell().getRow() == cell.getRow() &&
-                    bishop.getCell().getCol() == cell.getCol()) {
+            if (board.getFigures()[index].getCell().getRow() == cell.getRow() &&
+                    board.getFigures()[index].getCell().getCol() == cell.getCol()) {
                 throw new ImposibleMoveException("It cell is busy, make outher choice");
             }
         }
