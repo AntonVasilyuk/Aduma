@@ -14,25 +14,12 @@ import ru.job4j.game.*;
 
 public class Bishop extends Figure {
 
-	/**.
-	* @cellPosition position figure
-	*/
-	private Cell position;
-
     /**.
      * Constructor for class Bishop
-     * @param position is position figure
+     * @param cellPosition is position figure
      */
-    public Bishop(Cell position) {
-        super(position);
-    }
-
-    /**.
-     * Method is getter cell
-     */
-	@Override
-    public Cell getCell() {
-        return this.position;
+    public Bishop(Cell cellPosition) {
+        super(cellPosition);
     }
 
     /**.
@@ -45,33 +32,31 @@ public class Bishop extends Figure {
 
         Board board = new Board();
         Cell[] cells;
+		Figure[] figure = board.getFigures();
+        board.fillFigure();
 
-        int srcRow = this.position.getRow();
-        int srcCol = this.position.getCol();
+        int srcRow = this.cellPosition.getRow();
+        int srcCol = this.cellPosition.getCol();
         int disRow = cell.getRow();
         int disCol = cell.getCol();
+        int line = figure.length;
 
-        for (int index = 0; index < board.getFigures().length; index++) {
-            if (board.getFigures()[index].getCell().getRow() == cell.getRow() &&
-                    board.getFigures()[index].getCell().getCol() == cell.getCol()) {
-                throw new ImposibleMoveException("It cell is busy, make outher choice");
-            }
+        if (srcRow == disRow && srcCol == disCol) {
+			throw new ImposibleMoveException("It cell is busy, make outher choice");
         }
-        if (disRow > 7 && disRow < 0 && disCol > 7 && disCol < 0) {
+        if (disRow > 7 || disRow < 0 || disCol > 7 || disCol < 0) {
             throw new ImposibleMoveException("incorrect choice, change outher cell");
         } else if (srcRow == disRow && srcCol == disCol) {
             throw new ImposibleMoveException("this figure nowhere walk, change correct choice");
-        } else if (srcRow == disRow || srcCol == disCol) {
-            throw new ImposibleMoveException("this figure can not so walk, change correct choice");
         } else if (srcRow == disRow && srcCol != disCol) {
             cells = new Cell[Math.abs(disCol - srcCol)];
             if (srcCol < disCol) {
                 for (int i = 0; i < Math.abs(disCol - srcCol); i++) {
-                    cells[i] = new Cell(srcRow, srcCol + i);
+                    cells[i] = new Cell(srcRow, srcCol + i + 1);
                 }
             } else {
                 for (int i = 0; i < Math.abs(disCol - srcCol); i++) {
-                    cells[i] = new Cell(srcRow, srcCol - i);
+                    cells[i] = new Cell(srcRow, srcCol - i - 1);
                 }
             }
             return cells;
@@ -79,11 +64,11 @@ public class Bishop extends Figure {
             cells = new Cell[Math.abs(disRow - srcRow)];
             if (srcRow < disRow) {
                 for (int i = 0; i < Math.abs(disRow - srcRow); i++) {
-                    cells[i] = new Cell(srcRow + i, srcCol);
+                    cells[i] = new Cell(srcRow + i + 1, srcCol);
                 }
             } else {
                 for (int i = 0; i < Math.abs(disCol - srcCol); i++) {
-                    cells[i] = new Cell(srcRow - i, srcCol);
+                    cells[i] = new Cell(srcRow - i - 1, srcCol);
                 }
             }
             return cells;
