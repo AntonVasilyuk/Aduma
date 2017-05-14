@@ -28,11 +28,16 @@ public abstract class Figure {
         this.cellPosition = position;
     }
 
+	/**.
+	* Getter for this position
+	*/
+	public abstract Cell getCell();
+
     /**.
      * Abstract method building way for the figure
      * @param dist finish point
      * @return way array cells
      */
-    abstract Cell[] way(Cell dist) throws ImposibleMoveException;
+    public abstract Cell[] way(Cell dist) throws ImposibleMoveException;
 
 }
