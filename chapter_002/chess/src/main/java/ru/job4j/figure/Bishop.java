@@ -22,52 +22,39 @@ public class Bishop extends Figure {
         super(cellPosition);
     }
 
-    /**.
-     * Method for check validate way this figure
-     * @param cell point
-     * @return array from cell
-     */
-    @Override
-    public Cell[] way(Cell cell) throws ImposibleMoveException {
+	/**.
+	* Method for check may be way figure
+	* @dist finish cell way
+	* @return array cell is way figure
+	*/
+	@Override
+	public Cell[] way(Cell dist) throws ImposibleMoveException {
 
-        Board board = new Board();
-        Cell[] cells;
-		Figure[] figure = board.getFigures();
-        board.fillFigure();
+		Board board = new Board();
+		Cell[] cell;
+		board.fillFigure();
 
         int srcRow = this.cellPosition.getRow();
         int srcCol = this.cellPosition.getCol();
-        int disRow = cell.getRow();
-        int disCol = cell.getCol();
-		int positionRow = 0;
-		int positionCol = 0;
-        int line = 0;
+        int disRow = dist.getRow();
+        int disCol = dist.getCol();
 
-        if (srcRow == disRow && srcCol == disCol) {
+		if (srcRow == disRow && srcCol == disCol) {
 			throw new ImposibleMoveException("It cell is busy, make outher choice");
         }
-        if (disRow > 7 || disRow < 0 || disCol > 7 || disCol < 0) {
+
+		if (disRow > 7 || disRow < 0 || disCol > 7 || disCol < 0) {
             throw new ImposibleMoveException("incorrect choice, change outher cell");
         }
 
-		if (srcRow == disRow && srcCol == disCol) {
-            throw new ImposibleMoveException("this figure nowhere walk, change correct choice");
-        }
-
-		if (srcRow == disRow || srcCol == disCol) {
-			if (srcRow == disRow) {line = Math.abs(disCol - srcCol);}
-			if (srcCol == disCol) {line = Math.abs(disRow - srcRow);}
-            cells = new Cell[line];
-			int rMove = disRow > srcRow ? 1 : disRow < srcRow ? -1 : 0;
-			int cMove = disCol > srcCol ? 1 : disCol < srcCol ? -1 : 0;
-			for (int i = 0; i < line; i++) {
-				positionRow = positionRow + rMove;
-				positionCol = positionCol + cMove;
-				cells[i] = new Cell(positionRow, positionCol);
-			}
+		if (Math.abs(disRow - srcRow) != Math.abs(disCol - srcCol)) {
+			throw new ImposibleMoveException("this figure don't can go to the cell");
+		}
+		if (Math.abs(disRow - srcRow) == Math.abs(disCol - srcCol)) {
+			cell = routing(srcRow, srcCol, disRow, disCol);
 		} else {
 			throw new ImposibleMoveException("don't right choise");
 		}
-		return cells;
+		return cell;
 	}
 }
