@@ -39,42 +39,35 @@ public class Bishop extends Figure {
         int srcCol = this.cellPosition.getCol();
         int disRow = cell.getRow();
         int disCol = cell.getCol();
-        int line = figure.length;
+		int positionRow = 0;
+		int positionCol = 0;
+        int line = 0;
 
         if (srcRow == disRow && srcCol == disCol) {
 			throw new ImposibleMoveException("It cell is busy, make outher choice");
         }
         if (disRow > 7 || disRow < 0 || disCol > 7 || disCol < 0) {
             throw new ImposibleMoveException("incorrect choice, change outher cell");
-        } else if (srcRow == disRow && srcCol == disCol) {
-            throw new ImposibleMoveException("this figure nowhere walk, change correct choice");
-        } else if (srcRow == disRow && srcCol != disCol) {
-            cells = new Cell[Math.abs(disCol - srcCol)];
-            if (srcCol < disCol) {
-                for (int i = 0; i < Math.abs(disCol - srcCol); i++) {
-                    cells[i] = new Cell(srcRow, srcCol + i + 1);
-                }
-            } else {
-                for (int i = 0; i < Math.abs(disCol - srcCol); i++) {
-                    cells[i] = new Cell(srcRow, srcCol - i - 1);
-                }
-            }
-            return cells;
-        } else if (srcRow != disRow && srcCol == disCol) {
-            cells = new Cell[Math.abs(disRow - srcRow)];
-            if (srcRow < disRow) {
-                for (int i = 0; i < Math.abs(disRow - srcRow); i++) {
-                    cells[i] = new Cell(srcRow + i + 1, srcCol);
-                }
-            } else {
-                for (int i = 0; i < Math.abs(disCol - srcCol); i++) {
-                    cells[i] = new Cell(srcRow - i - 1, srcCol);
-                }
-            }
-            return cells;
-        } else {
-            System.out.println("You destroy my programm");
-            return cells = null;
         }
-    }
+
+		if (srcRow == disRow && srcCol == disCol) {
+            throw new ImposibleMoveException("this figure nowhere walk, change correct choice");
+        }
+
+		if (srcRow == disRow || srcCol == disCol) {
+			if (srcRow == disRow) {line = Math.abs(disCol - srcCol);}
+			if (srcCol == disCol) {line = Math.abs(disRow - srcRow);}
+            cells = new Cell[line];
+			int rMove = disRow > srcRow ? 1 : disRow < srcRow ? -1 : 0;
+			int cMove = disCol > srcCol ? 1 : disCol < srcCol ? -1 : 0;
+			for (int i = 0; i < line; i++) {
+				positionRow = positionRow + rMove;
+				positionCol = positionCol + cMove;
+				cells[i] = new Cell(positionRow, positionCol);
+			}
+		} else {
+			throw new ImposibleMoveException("don't right choise");
+		}
+		return cells;
+	}
 }
