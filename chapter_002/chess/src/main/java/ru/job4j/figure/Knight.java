@@ -30,22 +30,12 @@ public class Knight extends Figure {
 	@Override
 	public Cell[] way(Cell dist) throws ImposibleMoveException {
 
-		Board board = new Board();
 		Cell[] cell = new Cell[1];
-		board.fillFigure();
 
         int srcRow = this.cellPosition.getRow();
         int srcCol = this.cellPosition.getCol();
         int disRow = dist.getRow();
         int disCol = dist.getCol();
-
-		if (srcRow == disRow && srcCol == disCol) {
-			throw new ImposibleMoveException("It cell is busy, make outher choice");
-        }
-
-		if (disRow > 7 || disRow < 0 || disCol > 7 || disCol < 0) {
-            throw new ImposibleMoveException("incorrect choice, change outher cell");
-        }
 
 		if (disRow == srcRow + 2 && disCol == srcCol - 1) {
 			cell[0] = new Cell(disRow, disCol);
