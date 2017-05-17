@@ -22,14 +22,20 @@ public class Board {
     /**.
      * Array figures
      */
-    private Figure[] figures = new Figure[2];
+    private Figure[] figures = new Figure[8];
 
     /**.
      * Method for fill array figures
      */
     public void fillFigure() {
-        this.figures[0] = new Bishop(new Cell(0, 0));
-        this.figures[1] = new Bishop(new Cell(0, 7));
+		this.figures[0] = new Castl(new Cell(0, 0));
+		this.figures[1] = new Knight(new Cell(0, 1));
+        this.figures[2] = new Bishop(new Cell(0, 2));
+		this.figures[3] = new Queen(new Cell(0, 3));
+		this.figures[4] = new King(new Cell(0, 4));
+        this.figures[5] = new Bishop(new Cell(0, 5));
+		this.figures[6] = new Knight(new Cell(0, 6));
+		this.figures[7] = new Castl(new Cell(0, 7));
     }
 
     /**.
@@ -58,6 +64,15 @@ public class Board {
             throw new FigureNotFoundException("this cell empty, check your choise");
         }
 
+		if (srcRow == disRow && srcCol == disCol) {
+			throw new ImposibleMoveException("It cell is busy, make outher choice");
+        }
+
+		if (disRow > 7 || disRow < 0 || disCol > 7 || disCol < 0) {
+            throw new ImposibleMoveException("incorrect choice, change outher cell");
+        }
+
+		fillFigure();
 		Cell[] cell = this.figures[index].way(dist);
 
         if (cell == null) {
