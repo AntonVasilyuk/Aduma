@@ -30,22 +30,12 @@ public class Bishop extends Figure {
 	@Override
 	public Cell[] way(Cell dist) throws ImposibleMoveException {
 
-		Board board = new Board();
 		Cell[] cell;
-		board.fillFigure();
 
         int srcRow = this.cellPosition.getRow();
         int srcCol = this.cellPosition.getCol();
         int disRow = dist.getRow();
         int disCol = dist.getCol();
-
-		if (srcRow == disRow && srcCol == disCol) {
-			throw new ImposibleMoveException("It cell is busy, make outher choice");
-        }
-
-		if (disRow > 7 || disRow < 0 || disCol > 7 || disCol < 0) {
-            throw new ImposibleMoveException("incorrect choice, change outher cell");
-        }
 
 		if (Math.abs(disRow - srcRow) != Math.abs(disCol - srcCol)) {
 			throw new ImposibleMoveException("this figure don't can go to the cell");
