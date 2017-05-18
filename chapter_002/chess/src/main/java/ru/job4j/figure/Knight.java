@@ -37,21 +37,7 @@ public class Knight extends Figure {
         int disRow = dist.getRow();
         int disCol = dist.getCol();
 
-		if (disRow == srcRow + 2 && disCol == srcCol - 1) {
-			cell[0] = new Cell(disRow, disCol);
-		} else if (disRow == srcRow + 2 && disCol == srcCol + 1) {
-			cell[0] = new Cell(disRow, disCol);
-		} else if (disRow == srcRow + 1 && disCol == srcCol + 2) {
-			cell[0] = new Cell(disRow, disCol);
-		} else if (disRow == srcRow - 1 && disCol == srcCol + 2) {
-			cell[0] = new Cell(disRow, disCol);
-		} else if (disRow == srcRow - 2 && disCol == srcCol + 1) {
-			cell[0] = new Cell(disRow, disCol);
-		} else if (disRow == srcRow - 2 && disCol == srcCol - 1) {
-			cell[0] = new Cell(disRow, disCol);
-		} else if (disRow == srcRow + 1 && disCol == srcCol - 2) {
-			cell[0] = new Cell(disRow, disCol);
-		} else if (disRow == srcRow - 1 && disCol == srcCol - 2) {
+		if (Math.abs(srcRow - disRow) == 2 && Math.abs(srcCol - disCol) == 1 || Math.abs(srcRow - disRow) == 1 && Math.abs(srcCol - disCol) == 2) {
 			cell[0] = new Cell(disRow, disCol);
 		} else {
 			throw new ImposibleMoveException("incorrect choise cell");
