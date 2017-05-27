@@ -1,0 +1,19 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>chapter_003</groupId>
+	<artifactId>chapter_003</artifactId>
+	<version>2.0</version>
+	<packaging>pom</packaging>
+	<name>chapter_003</name>
+	
+	<parent>
+		<groupId>ru.job4j</groupId>
+		<artifactId>git_test</artifactId>
+		<version>2.0</version>
+	</parent>
+
+	<modules>
+		<module>checkTime</module>
+		<module>reverseArray</module>
+	</modules>
+</project>
