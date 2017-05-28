@@ -23,11 +23,13 @@ public class CheckTime {
 	*/
 	public long add(Collection<String> collection, String line, int amount) {
 
-		String word = "a";
+		String word;
+		int num = 0;
 		long firstTime = System.currentTimeMillis();
 
 		for (int i = 0; i < amount; i++) {
-			word += line;
+			num++;
+			word = line + num;
 			collection.add(word);
 		}
 		long secondTime = System.currentTimeMillis();
