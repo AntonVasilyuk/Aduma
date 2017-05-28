@@ -28,8 +28,8 @@ public class CheckTimeTest {
 		List<String> wordsArray = new ArrayList<>();
 		Set<String> wordsTree = new TreeSet<>();
 
-		String line = "a";
-		int amount = 10000;
+		String line = "Ship";
+		int amount = 1000000;
 
 		long timeOperationLink = checkTime.add(wordsLink, line, amount);
 		long timeOperationArray = checkTime.add(wordsArray, line, amount);
@@ -58,15 +58,15 @@ public class CheckTimeTest {
 		List<String> wordsArray = new ArrayList<>();
 		Set<String> wordsTree = new TreeSet<>();
 
-		String line = "a";
-		int amount = 10000;
+		String line = "Ship";
+		int amount = 1000000;
 
 		checkTime.add(wordsLink, line, amount);
-		long timeOperationLink = checkTime.delete(wordsLink, amount);
+		long timeOperationLink = checkTime.delete(wordsLink, 500000);
 		checkTime.add(wordsArray, line, amount);
-		long timeOperationArray = checkTime.delete(wordsArray, amount);
+		long timeOperationArray = checkTime.delete(wordsArray, 500000);
 		checkTime.add(wordsTree, line, amount);
-		long timeOperationTree = checkTime.delete(wordsTree, amount);
+		long timeOperationTree = checkTime.delete(wordsTree, 500000);
 
 		System.out.println(timeOperationLink);
 		System.out.println(timeOperationArray);
