@@ -15,5 +15,6 @@
 	<modules>
 		<module>checkTime</module>
 		<module>reverseArray</module>
+		<module>users</module>
 	</modules>
 </project>
