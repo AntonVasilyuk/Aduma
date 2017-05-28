@@ -67,4 +67,29 @@ public class ReverseArrayTest {
         }
         assertThat(fact, is(expect));
     }
+
+    /**.
+     * Test Create List<Integer> from Array
+     */
+    @Test
+    public void whenNeedCreateListFromSeveralArrayThenCheckIt() {
+        ReverseArray reverseArray = new ReverseArray();
+        List<Integer> listInteger = new LinkedList<>();
+        List<Integer> listCheck = new LinkedList<>();
+        listCheck.add(1);
+        listCheck.add(2);
+        listCheck.add(3);
+        listCheck.add(7);
+        listCheck.add(9);
+        List<int[]> listArray = new LinkedList<>();
+        int[] one = {1, 2, 3};
+        int[] second = {7, 9};
+        listArray.add(one);
+        listArray.add(second);
+        listInteger = reverseArray.convert(listArray);
+        boolean fact = false;
+        boolean expect = true;
+        if (listCheck.containsAll(listInteger)) {fact = true;}
+        assertThat(fact, is(expect));
+    }
 }
