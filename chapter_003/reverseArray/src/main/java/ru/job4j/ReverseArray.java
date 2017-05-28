@@ -34,7 +34,10 @@ public class ReverseArray {
      */
     public int[][] toArray (List<Integer> list, int rows) {
         int longList = list.size();
-        int longRowArray = (longList / rows) + 1;
+        int longRowArray;
+        if ((longList % rows) != 0) {
+            longRowArray = (longList / rows) + 1;
+        } else { longRowArray = longList / rows;}
         int[][] array = new int[longRowArray][longRowArray];
         Iterator<Integer> iter = list.iterator();
 
@@ -48,5 +51,22 @@ public class ReverseArray {
             }
         }
         return array;
+    }
+
+    /**.
+     * Method for create List<Integer> from a bunch of array int
+     * @param list
+     * @return List
+     */
+    public List<Integer> convert (List<int[]> list) {
+        List<Integer> result = new LinkedList<>();
+        int size;
+        for (int[] array: list) {
+            size = array.length;
+            for (int i = 0; i < size; i++) {
+                result.add(array[i]);
+            }
+        }
+        return result;
     }
 }
