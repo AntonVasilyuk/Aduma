@@ -35,7 +35,7 @@ public class ConsolInput implements Input {
 	* @param ranges array for correct number
 	* @return enter user
 	*/
-	public int ask(String question, int[] ranges) {
+	public int ask(String question, List<Integer> ranges) {
 		int key = Integer.valueOf(this.ask(question));
 		boolean check = false;
 		for (int value : ranges) {
