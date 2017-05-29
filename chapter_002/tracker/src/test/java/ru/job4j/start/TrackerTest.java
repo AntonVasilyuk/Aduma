@@ -1,5 +1,6 @@
 package ru.job4j.start;
 
+import java.util.*;
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -69,9 +70,9 @@ public class TrackerTest {
 		Tracker tracker = new Tracker();
 		Item itemTemp = new Item("Valera", "Small man", 1975);
 		tracker.add(itemTemp);
-		Item[] showAll = tracker.findAll();
+		List<Item> showAll = tracker.findAll();
 		String expect = itemTemp.getName();
-		String fact = showAll[0].getName();
+		String fact = showAll.get(0).getName();
 		assertThat(fact, is(expect));
 	}
 
@@ -86,8 +87,8 @@ public class TrackerTest {
 		tracker.add(itemTempOne);
 		tracker.add(itemTempTwo);
 		String expect = itemTempTwo.getDesc();
-		Item[] itemArrayName = tracker.findByName("Valera");
-		String fact = itemArrayName[0].getDesc();
+		List<Item> itemArrayName = tracker.findByName("Valera");
+		String fact = itemArrayName.get(0).getDesc();
 		assertThat(fact, is(expect));
 	}
 
