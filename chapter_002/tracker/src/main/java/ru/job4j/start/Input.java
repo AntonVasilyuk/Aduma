@@ -1,5 +1,7 @@
 package ru.job4j.start;
 
+import java.util.*;
+
 /**.
 * Chapter_002
 * It's interface for give users enter
@@ -12,5 +14,5 @@ package ru.job4j.start;
 public interface Input {
 	
 	String ask(String question);
-	int ask(String question, int[] ranges);
+	int ask(String question, List<Integer> ranges);
 }
