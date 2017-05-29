@@ -29,9 +29,7 @@ public class MenuTracker {
 	/**.
 	* @actions Array for actions
 	*/
-	private UserAction[] actions = new UserAction[6];
-
-	private int position = 0;
+	private List<UserAction> actions = new ArrayList<>();
 
 	private String nameAction;
 	/**.
@@ -48,12 +46,12 @@ public class MenuTracker {
 	* method for write in array action
 	*/
 	public void fillActions() {
-		this.actions[0] = this.new AddItem(0, "Add new item");
-		this.actions[1] = this.new FindAll(1, "Show info about all item");
-		this.actions[2] = this.new EditItem(2, "Edit item by id");
-		this.actions[3] = this.new DeleteItem(3, "Delete item");
-		this.actions[4] = this.new FindById(4, "Find item by id");
-		this.actions[5] = this.new FindByName(5, "Find item by name");
+		this.actions.add(this.new AddItem(0, "Add new item"));
+		this.actions.add(this.new FindAll(1, "Show info about all item"));
+		this.actions.add(this.new EditItem(2, "Edit item by id"));
+		this.actions.add(this.new DeleteItem(3, "Delete item"));
+		this.actions.add(this.new FindById(4, "Find item by id"));
+		this.actions.add(this.new FindByName(5, "Find item by name"));
 	}
 
 /* 	public void addActions(UserAction action) {
@@ -64,7 +62,9 @@ public class MenuTracker {
 	* @param key number action
 	*/
 	public void select(int key) {
-		this.actions[key].execute(this.input, this.tracker);
+		for(UserAction u : actions) {
+			if (u.key() == key) {u.execute(this.input, this.tracker);}
+		}
 	}
 
 	/**.
@@ -82,10 +82,10 @@ public class MenuTracker {
 	* method for array corect number
 	* @return array
 	*/
-	public int[] getArrayNumber() {
-		int[] ranges = new int[actions.length];
-		for (int i = 0; i < actions.length; i++) {
-			ranges[i] = i;
+	public List<Integer> getArrayNumber() {
+		List<Integer> ranges = new ArrayList<>();
+		for (UserAction u : actions) {
+			ranges.add(u.key());
 		}
 		return ranges;
 	}
@@ -118,9 +118,9 @@ public class MenuTracker {
 
 		@Override
 		public void execute(Input input, Tracker tracker) {
-			Item[] array = tracker.findAll();
-			for (int index = 0; index < array.length; index++) {
-				System.out.println(array[index].getName() + ", " + array[index].getDesc());
+			List<Item> arrayElement = tracker.findAll();
+			for (Item element : arrayElement) {
+				System.out.println(element.getName() + ", " + element.getDesc());
 			}
 			System.out.println("Thanks you! Your wish fulfilled");
 		}
@@ -194,9 +194,9 @@ public class MenuTracker {
 		@Override
 		public void execute(Input input, Tracker tracker) {
 			String name = input.ask("Enter the name for item:");
-			Item[] items = tracker.findByName(name);
-			for (int index = 0; index < items.length; index++) {
-				System.out.println(items[index].getName() + ", " + items[index].getDesc());
+			List<Item> arrayElement = tracker.findByName(name);
+			for (Item element : arrayElement) {
+				System.out.println(element.getName() + ", " + element.getDesc());
 			}
 			System.out.println("Thanks you! Your wish fulfilled");
 		}
