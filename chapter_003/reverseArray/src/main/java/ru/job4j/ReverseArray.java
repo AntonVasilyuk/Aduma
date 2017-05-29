@@ -38,7 +38,7 @@ public class ReverseArray {
         if ((longList % rows) != 0) {
             longRowArray = (longList / rows) + 1;
         } else { longRowArray = longList / rows;}
-        int[][] array = new int[longRowArray][longRowArray];
+        int[][] array = new int[rows][longRowArray];
         Iterator<Integer> iter = list.iterator();
 
         for (int i = 0; i < longRowArray; i++) {
@@ -62,9 +62,8 @@ public class ReverseArray {
         List<Integer> result = new LinkedList<>();
         int size;
         for (int[] array: list) {
-            size = array.length;
-            for (int i = 0; i < size; i++) {
-                result.add(array[i]);
+            for (int a : array) {
+                result.add(a);
             }
         }
         return result;
