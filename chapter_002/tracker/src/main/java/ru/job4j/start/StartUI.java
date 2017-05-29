@@ -1,7 +1,7 @@
 package ru.job4j.start;
 
 import ru.job4j.models.*;
-import java.util.Date;
+import java.util.*;
 
 
 /**.
@@ -40,8 +40,8 @@ public class StartUI {
 	public void init() {
 		MenuTracker menu = new MenuTracker(this.input, this.tracker);
 
-		int[] ranges = menu.getArrayNumber();
- 		menu.fillActions();
+		menu.fillActions();
+		List<Integer> ranges = menu.getArrayNumber();
 		// UserAction deleteAction = new UserAction() {
 			// public int key() {
 				// return 3;
