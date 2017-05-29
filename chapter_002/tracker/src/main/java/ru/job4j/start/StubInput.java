@@ -1,6 +1,7 @@
 package ru.job4j.start;
 
 import ru.job4j.models.*;
+import java.util.*;
 
 /**.
 * Chapter_002
@@ -47,10 +48,10 @@ public class StubInput implements Input {
 	* @param ranges
 	* @return -1
 	*/
-	public int ask(String question, int[] ranges) {
-		int key = Integer.valueOf(this.ask(question));
+	public int ask(String question, List<Integer> ranges) {
+		Integer key = Integer.valueOf(this.ask(question));
 		boolean check = false;
-		for (int value : ranges) {
+		for (Integer value : ranges) {
 			if (value == key) {
 				check = true;
 				break;
