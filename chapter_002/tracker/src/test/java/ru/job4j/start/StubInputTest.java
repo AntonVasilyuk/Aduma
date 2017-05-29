@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.*;
@@ -14,8 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 
 import ru.job4j.models.Item;
-import ru.job4j.start.*;
-
 
 /**.
 * Chapter_002
@@ -53,7 +50,8 @@ public class StubInputTest {
 		Tracker tracker = new Tracker();
 		Input input = new StubInput(new String[] {"0", "Testing name", "desc", "y"});
 		new StartUI(input, tracker).init();
-		assertThat(tracker.findAll()[0].getName(), is("Testing name"));
+		System.out.print(tracker.findAll().get(0).getName());
+		assertThat(tracker.findAll().get(0).getName(), is("Testing name"));
 	}
 
 	/**.
@@ -66,7 +64,7 @@ public class StubInputTest {
 		tracker.add(item);
 		Input input = new StubInput(new String[] {"1", "y"});
 		new StartUI(input, tracker).init();
-		assertThat(tracker.findAll()[0].getName(), is("Ivan"));
+		assertThat(tracker.findAll().get(0).getName(), is("Ivan"));
 	}
 
 	/**.
@@ -80,7 +78,7 @@ public class StubInputTest {
 		item.setId("1");
 		Input input = new StubInput(new String[] {"2", "1", "Egor", "desc", "y"});
 		new StartUI(input, tracker).init();
-		assertThat(tracker.findAll()[0].getName(), is("Egor"));
+		assertThat(tracker.findAll().get(0).getName(), is("Egor"));
 	}
 
 	/**.
@@ -94,7 +92,7 @@ public class StubInputTest {
 		String itemId = item.getId();
 		Input input = new StubInput(new String[] {"3", itemId, "y"});
 		new StartUI(input, tracker).init();
-		assertNull(tracker.findById(itemId));
+		assertThat(tracker.findAll().size(), is(0));
 	}
 
 	/**.
@@ -123,7 +121,7 @@ public class StubInputTest {
 		tracker.add(item);
 		Input input = new StubInput(new String[] {"5", "Zoiberg", "y"});
 		new StartUI(input, tracker).init();
-		assertThat(tracker.findAll()[0].getDesc(), is("Bingo"));
+		assertThat(tracker.findAll().get(0).getDesc(), is("Bingo"));
 	}
 
 	@Test(expected = MenuOutException.class)
