@@ -20,7 +20,7 @@ public class ValidateInput extends ConsolInput {
 	* @param ranges
 	* @return value
 	*/
-	public int ask(String question, int[] ranges) {
+	public int ask(String question, List<Integer> ranges) {
 		boolean invalid = true;
 		int value = -1;
 		do {
