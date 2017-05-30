@@ -16,5 +16,6 @@
 		<module>checkTime</module>
 		<module>reverseArray</module>
 		<module>users</module>
+		<module>sorting</module>
 	</modules>
 </project>
