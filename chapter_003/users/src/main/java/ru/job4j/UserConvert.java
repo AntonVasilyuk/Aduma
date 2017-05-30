@@ -21,8 +21,7 @@ public class UserConvert {
         Integer id;
         HashMap<Integer, User> hashMapUsers = new HashMap<>();
         for (User user: list) {
-            id = user.getId();
-            hashMapUsers.put(id, user);
+            hashMapUsers.put(user.getId(), user);
         }
         return hashMapUsers;
     }
