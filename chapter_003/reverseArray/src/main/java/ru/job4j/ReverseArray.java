@@ -60,7 +60,6 @@ public class ReverseArray {
      */
     public List<Integer> convert (List<int[]> list) {
         List<Integer> result = new LinkedList<>();
-        int size;
         for (int[] array: list) {
             for (int a : array) {
                 result.add(a);
