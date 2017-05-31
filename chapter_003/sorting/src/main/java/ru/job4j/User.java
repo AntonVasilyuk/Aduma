@@ -20,14 +20,14 @@ public class User implements Comparable<User>{
     /**.
      * @age user
      */
-    private String age;
+    private Integer age;
 
     /**.
      * Constructor user
      * @param name
      * @param age
      */
-    public User(String name, String age) {
+    public User(String name, Integer age) {
         this.name = name;
         this.age = age;
     }
@@ -40,7 +40,7 @@ public class User implements Comparable<User>{
         return name;
     }
 
-    public String getAge() {
+    public Integer getAge() {
         return age;
     }
 
