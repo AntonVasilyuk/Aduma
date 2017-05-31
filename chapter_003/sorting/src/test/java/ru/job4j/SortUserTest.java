@@ -24,9 +24,9 @@ public class SortUserTest {
         SortUser sortUser = new SortUser();
         List<User> list = new ArrayList<>();
         Set<User> sortingList = new TreeSet<>();
-        User one = new User("Ivan", "23");
-        User two = new User("Boris", "20");
-        User three = new User("Vladimir", "55");
+        User one = new User("Ivan", 23);
+        User two = new User("Boris", 20);
+        User three = new User("Vladimir", 55);
         list.add(one);
         list.add(two);
         list.add(three);
@@ -48,9 +48,9 @@ public class SortUserTest {
         SortUser sortUser = new SortUser();
         List<User> list = new ArrayList<>();
         List<User> sortingList = new ArrayList<>();
-        User one = new User("Ivan", "23");
-        User two = new User("Boris", "20");
-        User three = new User("Vladimir", "55");
+        User one = new User("Ivan", 23);
+        User two = new User("Boris", 20);
+        User three = new User("Vladimir", 55);
         list.add(one);
         list.add(two);
         list.add(three);
@@ -59,7 +59,7 @@ public class SortUserTest {
         for (User user : sortingList) {
             fact += user.getAge();
         }
-        String expect = "Result sorting : 205523";
+        String expect = "Result sorting : 552320";
         assertThat(fact, is(expect));
 
     }
@@ -72,9 +72,9 @@ public class SortUserTest {
         SortUser sortUser = new SortUser();
         List<User> list = new ArrayList<>();
         List<User> sortingList = new ArrayList<>();
-        User one = new User("Ivan", "23");
-        User two = new User("Boris", "20");
-        User three = new User("Vladimir", "55");
+        User one = new User("Ivan", 23);
+        User two = new User("Boris", 20);
+        User three = new User("Vladimir", 55);
         list.add(one);
         list.add(two);
         list.add(three);
