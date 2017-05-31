@@ -31,20 +31,12 @@ public class SortUser {
      * @return sorting array
      */
     public List<User> sortHash (List<User> list) {
-        Collections.sort(list, new Comparator<User>() {
-            public int compare(User o1, User o2) {
-                return String.valueOf(o1.hashCode()).compareTo(String.valueOf(o2.hashCode()));
-            }
-        });
+        Collections.sort(list, (o1, o2) -> Integer.valueOf(o1.hashCode()).compareTo(Integer.valueOf(o2.hashCode())));
         return list;
     }
 
     public List<User> sortLength (List<User> list) {
-        Collections.sort(list, new Comparator<User>() {
-            public int compare(User o1, User o2) {
-                return String.valueOf(o1.getName().length()).compareTo(String.valueOf(o2.getName().length()));
-            }
-        });
+        Collections.sort(list, (o1, o2) -> Integer.valueOf(o1.getName().length()).compareTo((o2.getName().length())));
         return list;
     }
 
