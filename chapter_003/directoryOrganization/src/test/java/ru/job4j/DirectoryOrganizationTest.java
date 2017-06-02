@@ -1,7 +1,151 @@
 package ru.job4j;
 
+import java.util.*;
+
+import org.junit.Test;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+
 /**
  * Created by ANTON on 01.06.2017.
  */
 public class DirectoryOrganizationTest {
+
+    /**.
+     * Testing method check all organization to array
+     */
+    @Test
+    public void whenArrayNameOrganizationThenCheckAllElement() {
+        List<String> list = new ArrayList<>();
+        List<String> checkList = new ArrayList<>();
+        String one = "K1/SK1";
+        String two = "K1/SK2";
+        String three = "K1/SK1/SSK1";
+        String four = "K1/SK1/SSK2";
+        String five = "K2";
+        String six = "K2/SK1/SSK1";
+        String seven = "K2/SK1/SSK2";
+        String eight = "K2/SK1";
+        String nine = "K1";
+        list.add(one);
+        list.add(two);
+        list.add(three);
+        list.add(four);
+        list.add(five);
+        list.add(six);
+        list.add(seven);
+        checkList.addAll(list);
+        checkList.add(eight);
+        checkList.add(nine);
+        DirectoryOrganization dir = new DirectoryOrganization();
+        list = dir.checkOrganization(list);
+
+        boolean expect = true;
+        boolean fact = false;
+        if (list.containsAll(checkList)) {fact = true;}
+        assertThat(fact, is(expect));
+    }
+
+    /**.
+     * Test method natural sorting array organization
+     */
+    @Test
+    public void whenArrayNameOrganizationThenSortArray() {
+        List<String> list = new ArrayList<>();
+        String[] checkList = new String[9];
+        int num = 0;
+        int i = 0;
+        String one = "K1/SK1";
+        String two = "K1/SK2";
+        String three = "K1/SK1/SSK1";
+        String four = "K1/SK1/SSK2";
+        String five = "K2";
+        String six = "K2/SK1/SSK1";
+        String seven = "K2/SK1/SSK2";
+        String eight = "K2/SK1";
+        String nine = "K1";
+
+        list.add(one);
+        list.add(two);
+        list.add(three);
+        list.add(four);
+        list.add(five);
+        list.add(six);
+        list.add(seven);
+
+        checkList[0] = nine;
+        checkList[1] = one;
+        checkList[2] = three;
+        checkList[3] = four;
+        checkList[4] = two;
+        checkList[5] = five;
+        checkList[6] = eight;
+        checkList[7] = six;
+        checkList[8] = seven;
+
+        DirectoryOrganization dir = new DirectoryOrganization();
+        list = dir.checkOrganization(list);
+        list = dir.sortOrganization(list);
+        System.out.println(list);
+        for (String s : list) {
+            if (s.equals(checkList[i++])) {
+            } else {num++;}
+        }
+        boolean expect = true;
+        boolean fact = false;
+        if (num == 0) {fact = true;}
+        assertThat(fact, is(expect));
+    }
+
+    /**.
+     * Testing reverse sort array organization
+     */
+    @Test
+    public void whenArrayNameOrganizationThenReverseSortArray() {
+        List<String> list = new ArrayList<>();
+        String[] checkList = new String[9];
+        int num = 0;
+        int i = 8;
+        String one = "K1/SK1";
+        String two = "K1/SK2";
+        String three = "K1/SK1/SSK1";
+        String four = "K1/SK1/SSK2";
+        String five = "K2";
+        String six = "K2/SK1/SSK1";
+        String seven = "K2/SK1/SSK2";
+        String eight = "K2/SK1";
+        String nine = "K1";
+
+        list.add(one);
+        list.add(two);
+        list.add(three);
+        list.add(four);
+        list.add(five);
+        list.add(six);
+        list.add(seven);
+
+        checkList[0] = nine;
+        checkList[1] = one;
+        checkList[2] = three;
+        checkList[3] = four;
+        checkList[4] = two;
+        checkList[5] = five;
+        checkList[6] = eight;
+        checkList[7] = six;
+        checkList[8] = seven;
+
+        DirectoryOrganization dir = new DirectoryOrganization();
+        list = dir.checkOrganization(list);
+        list = dir.reverseSortOrganization(list);
+        System.out.println(list);
+        for (String s : list) {
+            if (s.equals(checkList[i--])) {
+            } else {num++;}
+        }
+        boolean expect = true;
+        boolean fact = false;
+        if (num == 0) {fact = true;}
+        assertThat(fact, is(expect));
+    }
 }
+
