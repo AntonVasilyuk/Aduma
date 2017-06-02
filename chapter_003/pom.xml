@@ -17,5 +17,7 @@
 		<module>reverseArray</module>
 		<module>users</module>
 		<module>sorting</module>
+		<module>bank</module>
+		<module>directoryOrganization</module>
 	</modules>
 </project>
