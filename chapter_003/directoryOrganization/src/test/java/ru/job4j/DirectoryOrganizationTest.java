@@ -7,8 +7,14 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Created by ANTON on 01.06.2017.
+ * Testing Task 3.4.1
+ * Create Directory oragnization
+ *
+ * @author Anton Vasilyuk
+ * @version 1.0
+ * @since 0.1
  */
+
 public class DirectoryOrganizationTest {
 
     /**.
