@@ -45,7 +45,7 @@ public class DirectoryOrganization {
                 num = 0;
             }
         }
-        
+
         list.addAll(addString);
         return list;
     }
