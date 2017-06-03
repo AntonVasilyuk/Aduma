@@ -1,5 +1,5 @@
 /**
- * Create iterator for even number.
+ * Test working iterator for even number.
  *
  * @author Anton Vasilyuk (wrajina99@gmail.com)
  * @version $Id$
