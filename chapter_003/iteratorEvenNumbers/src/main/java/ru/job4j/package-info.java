@@ -1,5 +1,5 @@
 /**
- * Test working iterator for multidimensional array.
+ * Create iterator for even number.
  *
  * @author Anton Vasilyuk (wrajina99@gmail.com)
  * @version $Id$
