@@ -19,5 +19,7 @@
 		<module>sorting</module>
 		<module>bank</module>
 		<module>directoryOrganization</module>
+		<module>iteratorArray</module>
+		<module>iteratorEvenNumbers</module>
 	</modules>
 </project>
