@@ -35,7 +35,9 @@ public class BankReception {
      * @param user
      */
     public void deleteUser(User user) {
-        this.bank.remove(user);
+        if (bank.containsKey(user)) {
+            this.bank.remove(user);
+        }
     }
 
     /**
@@ -46,9 +48,10 @@ public class BankReception {
      * @param account
      */
     public void addAccountToUser(User user, Account account) {
-        List<Account> list = this.bank.get(user);
-        list.add(account);
-        this.bank.put(user, list);
+        if (bank.containsKey(user)) {
+            List<Account> list = this.bank.get(user);
+            list.add(account);
+        }
     }
 
     /**
@@ -59,10 +62,12 @@ public class BankReception {
      * @param account
      */
     public void deleteAccountFromUser(User user, Account account) {
-        List<Account> list = this.bank.get(user);
-        int position = list.indexOf(account);
-        list.remove(position);
-        this.bank.put(user, list);
+        if (bank.containsKey(user)) {
+            List<Account> list = this.bank.get(user);
+            int position = list.indexOf(account);
+            list.remove(position);
+            this.bank.put(user, list);
+        }
     }
 
     /**.
@@ -74,26 +79,40 @@ public class BankReception {
         return this.bank.get(user);
     }
 
+    /**.
+     * Method for transfer money
+     * @param srcUser one client bank
+     * @param srcAccount his account
+     * @param dstUser second user
+     * @param dstAccount his account
+     * @param amount of money
+     * @return may be
+     */
     public boolean transferMoney (User srcUser, Account srcAccount, User dstUser, Account dstAccount, double amount) {
 
-        List<Account> listOne = this.bank.get(srcUser);
-        List<Account> listSecond = this.bank.get(dstUser);
+        boolean result;
+        if (bank.containsKey(dstUser) && bank.containsKey(srcUser)) {
+            List<Account> listOne = this.bank.get(srcUser);
+            List<Account> listSecond = this.bank.get(dstUser);
 
-        Account accountOne = listOne.get(listOne.indexOf(srcAccount));
-        Account accountSecond = listSecond.get(listSecond.indexOf(dstAccount));
+            Account accountOne = listOne.get(listOne.indexOf(srcAccount));
+            Account accountSecond = listSecond.get(listSecond.indexOf(dstAccount));
 
-        double valueOne = accountOne.getValue();
-        double valueTwo = accountSecond.getValue();
+            double valueOne = accountOne.getValue();
+            double valueTwo = accountSecond.getValue();
 
-        if ((valueOne - amount) < 0) {return false;}
-        accountSecond.setValue(valueTwo + amount);
-        listSecond.set(listSecond.indexOf(dstAccount), accountSecond);
-        this.bank.put(dstUser, listSecond);
-        accountOne.setValue(valueOne - amount);
-        listOne.set(listOne.indexOf(srcAccount), accountOne);
-        this.bank.put(srcUser, listOne);
-
-        return true;
+            if ((valueOne - amount) < 0) {
+                return false;
+            }
+            accountSecond.setValue(valueTwo + amount);
+            listSecond.set(listSecond.indexOf(dstAccount), accountSecond);
+            this.bank.put(dstUser, listSecond);
+            accountOne.setValue(valueOne - amount);
+            listOne.set(listOne.indexOf(srcAccount), accountOne);
+            this.bank.put(srcUser, listOne);
+            result = true;
+        } else {result = false;}
+        return result;
      }
 
      public Map<User, List<Account>> getBankBase() {
