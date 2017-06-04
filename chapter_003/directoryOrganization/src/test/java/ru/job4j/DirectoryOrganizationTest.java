@@ -57,10 +57,9 @@ public class DirectoryOrganizationTest {
      */
     @Test
     public void whenArrayNameOrganizationThenSortArray() {
-        List<String> list = new ArrayList<>();
-        String[] checkList = new String[9];
         int num = 0;
         int i = 0;
+
         String one = "K1/SK1";
         String two = "K1/SK2";
         String three = "K1/SK1/SSK1";
@@ -70,15 +69,11 @@ public class DirectoryOrganizationTest {
         String seven = "K2/SK1/SSK2";
         String eight = "K2/SK1";
         String nine = "K1";
+        List<String> asLists = Arrays.asList(one, two, three, four, five, six, seven);
+        List<String> list = new LinkedList<>();
+        list.addAll(asLists);
 
-        list.add(one);
-        list.add(two);
-        list.add(three);
-        list.add(four);
-        list.add(five);
-        list.add(six);
-        list.add(seven);
-
+        String[] checkList = new String[9];
         checkList[0] = nine;
         checkList[1] = one;
         checkList[2] = three;
@@ -90,9 +85,7 @@ public class DirectoryOrganizationTest {
         checkList[8] = seven;
 
         DirectoryOrganization dir = new DirectoryOrganization();
-        list = dir.checkOrganization(list);
         list = dir.sortOrganization(list);
-        System.out.println(list);
         for (String s : list) {
             if (s.equals(checkList[i++])) {
             } else {num++;}
@@ -100,6 +93,7 @@ public class DirectoryOrganizationTest {
         boolean expect = true;
         boolean fact = false;
         if (num == 0) {fact = true;}
+
         assertThat(fact, is(expect));
     }
 
@@ -108,8 +102,7 @@ public class DirectoryOrganizationTest {
      */
     @Test
     public void whenArrayNameOrganizationThenReverseSortArray() {
-        List<String> list = new ArrayList<>();
-        String[] checkList = new String[9];
+        List<String> list = new LinkedList<>();
         int num = 0;
         int i = 8;
         String one = "K1/SK1";
@@ -122,14 +115,9 @@ public class DirectoryOrganizationTest {
         String eight = "K2/SK1";
         String nine = "K1";
 
-        list.add(one);
-        list.add(two);
-        list.add(three);
-        list.add(four);
-        list.add(five);
-        list.add(six);
-        list.add(seven);
-
+        List<String> asLists= Arrays.asList(one, two, three, four, five, six, seven);
+        list.addAll(asLists);
+        String[] checkList = new String[9];
         checkList[0] = nine;
         checkList[1] = one;
         checkList[2] = three;
@@ -141,9 +129,7 @@ public class DirectoryOrganizationTest {
         checkList[8] = seven;
 
         DirectoryOrganization dir = new DirectoryOrganization();
-        list = dir.checkOrganization(list);
         list = dir.reverseSortOrganization(list);
-        System.out.println(list);
         for (String s : list) {
             if (s.equals(checkList[i--])) {
             } else {num++;}
