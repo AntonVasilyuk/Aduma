@@ -29,10 +29,41 @@ public class Account {
         this.value = value;
         this.recvisite = recvisite;
     }
+
+    /**.
+     * Transfer money to an account
+     * @param value
+     */
     public void setValue(double value) {
         this.value = value;
     }
+
+    /**.
+     * View money in the account
+     * @return result
+     */
     public double getValue() {
         return this.value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Account account = (Account) o;
+
+        if (Double.compare(account.value, value) != 0) return false;
+        return recvisite != null ? recvisite.equals(account.recvisite) : account.recvisite == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(value);
+        result = (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (recvisite != null ? recvisite.hashCode() : 0);
+        return result;
     }
 }
