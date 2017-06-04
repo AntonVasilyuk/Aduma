@@ -51,14 +51,18 @@ public class DirectoryOrganization {
     }
 
     public List<String> sortOrganization(List<String> list) {
-        Collections.sort(list, (o1, o2) -> o1.compareTo(o2));
+        List<String> result;
+        result = checkOrganization(list);
+        Collections.sort(result, (o1, o2) -> o1.compareTo(o2));
 
-        return list;
+        return result;
     }
 
     public List<String> reverseSortOrganization(List<String> list) {
-        Collections.sort(list, (o1, o2) -> o2.compareTo(o1));
+        List<String> result;
+        result = checkOrganization(list);
+        Collections.sort(result, (o1, o2) -> o2.compareTo(o1));
 
-        return list;
+        return result;
     }
 }
