@@ -21,5 +21,6 @@
 		<module>directoryOrganization</module>
 		<module>iteratorArray</module>
 		<module>iteratorEvenNumbers</module>
+		<module>iteratorSimpleNumbers</module>
 	</modules>
 </project>
