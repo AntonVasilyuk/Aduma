@@ -33,13 +33,9 @@ public class DirectoryOrganizationTest {
         String seven = "K2/SK1/SSK2";
         String eight = "K2/SK1";
         String nine = "K1";
-        list.add(one);
-        list.add(two);
-        list.add(three);
-        list.add(four);
-        list.add(five);
-        list.add(six);
-        list.add(seven);
+        List<String> asLists = Arrays.asList(one, two, three, four, five, six, seven);
+        list = new LinkedList<>();
+        list.addAll(asLists);
         checkList.addAll(list);
         checkList.add(eight);
         checkList.add(nine);
