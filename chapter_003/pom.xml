@@ -22,5 +22,6 @@
 		<module>iteratorArray</module>
 		<module>iteratorEvenNumbers</module>
 		<module>iteratorSimpleNumbers</module>
+		<module>iteratorIterators</module>
 	</modules>
 </project>
