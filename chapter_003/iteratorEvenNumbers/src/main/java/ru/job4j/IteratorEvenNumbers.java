@@ -1,6 +1,7 @@
 package ru.job4j;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Task 4.1.2
@@ -37,6 +38,9 @@ public class IteratorEvenNumbers implements Iterator {
      */
     @Override
     public boolean hasNext() {
+        if (this.values == null) {
+            throw new NoSuchElementException("No element in this array.");
+        }
         return this.values.length > index;
     }
 
