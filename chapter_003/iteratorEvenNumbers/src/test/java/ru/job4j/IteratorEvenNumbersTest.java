@@ -1,6 +1,9 @@
 package ru.job4j;
 
 import org.junit.Test;
+
+import java.util.NoSuchElementException;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
@@ -34,5 +37,33 @@ public class IteratorEvenNumbersTest {
             if (arrayResult[i] != check[i]) {fact = false;}
         }
         assertThat(fact, is(expect));
+    }
+
+    @Test
+    public void whenIterateOneTimeThenHasNextReturnTrue() {
+        IteratorEvenNumbers iter = new IteratorEvenNumbers(new int[] {1, 2, 3, 4});
+        iter.next();
+        boolean result = iter.hasNext();
+        assertThat(result, is(true));
+    }
+
+    @Test
+    public void whenIterateTwoTimeThenHasNextReturnFalse() {
+        IteratorEvenNumbers iter = new IteratorEvenNumbers(new int[] {1, 2, 3, 4});
+        iter.next();
+        iter.next();
+        boolean result = iter.hasNext();
+        assertThat(result, is(false));
+    }
+
+    @Test
+    public void whenArrayIsNullThenHasNextReturnNEE() {
+        int[] value = null;
+        IteratorEvenNumbers iter = new IteratorEvenNumbers(value);
+        try {
+            iter.hasNext();
+        } catch (NoSuchElementException nee) {
+            assertThat(nee.getMessage(), is("No element in this array."));
+        }
     }
 }
