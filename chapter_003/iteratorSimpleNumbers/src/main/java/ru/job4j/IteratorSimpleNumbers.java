@@ -35,7 +35,17 @@ public class IteratorSimpleNumbers implements Iterator{
      */
     @Override
     public boolean hasNext() {
-        return this.value.length > index;
+        boolean result = true;
+        if (this.value == null) {throw new NoSuchElementException("In this array not element");}
+        if (this.value.length < index) {result = false;}
+        int num = 0;
+        for (int i = 0; i < value.length; i++) {
+            for(int j = 2; j < value.length; j++) {
+                if((value[i] % j) == 0) {num++;}
+            }
+        }
+        if (num > 0) {result = false;}
+        return result;
     }
 
     /**.
