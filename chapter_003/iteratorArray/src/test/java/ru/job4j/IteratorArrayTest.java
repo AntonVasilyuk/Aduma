@@ -1,6 +1,9 @@
 package ru.job4j;
 
 import org.junit.Test;
+
+import java.util.NoSuchElementException;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
@@ -35,5 +38,26 @@ public class IteratorArrayTest {
         boolean fact = false;
         if (num == 0) {fact = true;}
         assertThat(fact, is(expect));
+    }
+
+    @Test
+    public void whenIterateTreeTimeArrayThenHasNextIsTrue() {
+        IteratorArray iter = new IteratorArray(new int[][] {{1, 2}, {3, 4}});
+        iter.next();
+        iter.next();
+        iter.next();
+        boolean fact = iter.hasNext();
+        assertThat(fact, is(true));
+    }
+
+    @Test
+    public void whenNotArrayThenErorNSEE() {
+        int[][] value = null;
+        IteratorArray iter = new IteratorArray(value);
+        try {
+            iter.hasNext();
+        } catch (NoSuchElementException nee) {
+            assertThat(nee.getMessage(), is("No numbers in iterators."));
+        }
     }
 }
