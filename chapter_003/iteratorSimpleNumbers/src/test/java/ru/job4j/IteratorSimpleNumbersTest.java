@@ -1,6 +1,9 @@
 package ru.job4j;
 
 import org.junit.Test;
+
+import java.util.NoSuchElementException;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
@@ -34,7 +37,43 @@ public class IteratorSimpleNumbersTest {
         boolean expect = true;
         if(checkNum != 0) {fact = false;}
         assertThat(fact, is(expect));
-
     }
 
+    /**.
+     * Test working hasNext
+     */
+    @Test
+    public void whenIterateTwoTimeArrayThenHasNextReturnTrue() {
+        int[] array = {2, 3, 4, 5};
+        IteratorSimpleNumbers iter = new IteratorSimpleNumbers(array);
+        iter.next();
+        iter.next();
+        boolean result = iter.hasNext();
+        assertThat(result, is(true));
+    }
+
+    /**.
+     * Test working hasNext if not simple numbers
+     */
+    @Test
+    public void whenInArrayNotSimpleNumberThenHasNextReturnFalse() {
+        int[] array = {4, 6, 8, 9};
+        IteratorSimpleNumbers iter = new IteratorSimpleNumbers(array);
+        boolean result = iter.hasNext();
+        assertThat(result, is(false));
+    }
+
+    /**.
+     * Test working hasNext if in array not numbers
+     */
+    @Test
+    public void whenInArrayNoElementThenHasNextReturnNEE() {
+        int[] value = null;
+        IteratorSimpleNumbers iter = new IteratorSimpleNumbers(value);
+        try {
+            iter.hasNext();
+        } catch (NoSuchElementException nee) {
+            assertThat(nee.getMessage(), is("In this array not element"));
+        }
+    }
 }
