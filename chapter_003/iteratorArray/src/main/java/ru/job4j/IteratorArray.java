@@ -41,7 +41,8 @@ public class IteratorArray implements Iterator {
      */
     @Override
     public boolean hasNext() {
-        return this.value.length > index;
+        if (this.value == null) {throw new NoSuchElementException("No numbers in iterators.");}
+        return this.value != null && this.value.length > index;
     }
 
     /**.
