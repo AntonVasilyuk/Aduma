@@ -54,7 +54,6 @@ public class DirectoryOrganizationTest {
     @Test
     public void whenArrayNameOrganizationThenSortArray() {
         int num = 0;
-        int i = 0;
 
         String one = "K1/SK1";
         String two = "K1/SK2";
@@ -63,17 +62,17 @@ public class DirectoryOrganizationTest {
         String five = "K2";
         String six = "K2/SK1/SSK1";
         String seven = "K2/SK1/SSK2";
-        String eight = "K2/SK1";
-        String nine = "K1";
+
         List<String> asLists = Arrays.asList(one, two, three, four, five, six, seven);
         List<String> list = new LinkedList<>();
         list.addAll(asLists);
 
-        String[] checkList = {"K1", "K1/SK1", "K1/SK1/SSK1", "K1/SK1/SSK2", "K1/SK2", "K2", "K2/SK1", "K2/SK1/SSK1","K2/SK1/SSK2"};
+        List<String> checkListOne = Arrays.asList("K1", "K1/SK1", "K1/SK1/SSK1", "K1/SK1/SSK2", "K1/SK2", "K2", "K2/SK1", "K2/SK1/SSK1","K2/SK1/SSK2");
         DirectoryOrganization dir = new DirectoryOrganization();
+        Iterator<String> checkIt = checkListOne.iterator();
         list = dir.sortOrganization(list);
         for (String s : list) {
-            if (s.equals(checkList[i++])) {
+            if (s.equals(checkIt.next())) {
             } else {num++;}
         }
         boolean expect = true;
@@ -90,7 +89,7 @@ public class DirectoryOrganizationTest {
     public void whenArrayNameOrganizationThenReverseSortArray() {
         List<String> list = new LinkedList<>();
         int num = 0;
-        int i = 8;
+
         String one = "K1/SK1";
         String two = "K1/SK2";
         String three = "K1/SK1/SSK1";
@@ -98,17 +97,15 @@ public class DirectoryOrganizationTest {
         String five = "K2";
         String six = "K2/SK1/SSK1";
         String seven = "K2/SK1/SSK2";
-        String eight = "K2/SK1";
-        String nine = "K1";
 
         List<String> asLists= Arrays.asList(one, two, three, four, five, six, seven);
         list.addAll(asLists);
-        String[] checkList = {"K1", "K1/SK1", "K1/SK1/SSK1", "K1/SK1/SSK2", "K1/SK2", "K2", "K2/SK1", "K2/SK1/SSK1","K2/SK1/SSK2"};
-
+        List<String> checkListOne = Arrays.asList("K2/SK1/SSK2", "K2/SK1/SSK1", "K2/SK1", "K2", "K1/SK2", "K1/SK1/SSK2", "K1/SK1/SSK1", "K1/SK1","K1");
+        Iterator<String> checkIt = checkListOne.iterator();
         DirectoryOrganization dir = new DirectoryOrganization();
         list = dir.reverseSortOrganization(list);
         for (String s : list) {
-            if (s.equals(checkList[i--])) {
+            if (s.equals(checkIt.next())) {
             } else {num++;}
         }
         boolean expect = true;
