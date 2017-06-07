@@ -42,7 +42,10 @@ public class IteratorIterators implements IteratorInterface, Iterator {
      */
     @Override
     public boolean hasNext() {
-        return subIter.hasNext() || iter.hasNext();
+        boolean result = false;
+        if(iter == null) {throw new NoSuchElementException("No element in this array.");}
+        if(subIter.hasNext() || iter.hasNext()) {result = true;}
+        return result;
     }
 
     /**.
