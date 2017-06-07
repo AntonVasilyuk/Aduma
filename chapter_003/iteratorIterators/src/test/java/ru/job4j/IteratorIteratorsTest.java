@@ -41,21 +41,47 @@ public class IteratorIteratorsTest {
      * Test method hasNext
      */
     @Test
-    public void whenNeedCheckNextElement() {
+    public void whenCheckNextElementThenHasNextReturnTrue() {
         boolean result = convertIterator.hasNext();
         assertThat(result, is(true));
+    }
+
+    /**.
+     * Test method hasNext
+     */
+    @Test
+    public void whenIterateEightTimeThenHasNextReturnFalse() {
+        for (int i = 0; i < 8; i++) {
+            convertIterator.next();
+        }
+        boolean result = convertIterator.hasNext();
+        assertThat(result, is(false));
     }
 
     /**.
      * Test method next
      */
     @Test
-    public void whenNeedCheckMoveIterator() {
+    public void whenIterateFiveTimeArrayThenHasNextReturnFive() {
         convertIterator.next();
         convertIterator.next();
         convertIterator.next();
         convertIterator.next();
         Integer result = convertIterator.next();
         assertThat(result, is(5));
+    }
+
+    /**.
+     * Test method hasNext
+     */
+    @Test
+    public void whenArrayIsNullThenHasNextReturnNEE() {
+        Iterator<Iterator<Integer>> value = null;
+        IteratorIterators iter = new IteratorIterators();
+        try {
+            iter.hasNext();
+        } catch (NoSuchElementException nee) {
+            assertThat(nee.getMessage(), is("No element in this array."));
+        }
     }
 }
