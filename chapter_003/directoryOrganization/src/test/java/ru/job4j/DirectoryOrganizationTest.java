@@ -69,17 +69,7 @@ public class DirectoryOrganizationTest {
         List<String> list = new LinkedList<>();
         list.addAll(asLists);
 
-        String[] checkList = new String[9];
-        checkList[0] = nine;
-        checkList[1] = one;
-        checkList[2] = three;
-        checkList[3] = four;
-        checkList[4] = two;
-        checkList[5] = five;
-        checkList[6] = eight;
-        checkList[7] = six;
-        checkList[8] = seven;
-
+        String[] checkList = {"K1", "K1/SK1", "K1/SK1/SSK1", "K1/SK1/SSK2", "K1/SK2", "K2", "K2/SK1", "K2/SK1/SSK1","K2/SK1/SSK2"};
         DirectoryOrganization dir = new DirectoryOrganization();
         list = dir.sortOrganization(list);
         for (String s : list) {
@@ -113,16 +103,7 @@ public class DirectoryOrganizationTest {
 
         List<String> asLists= Arrays.asList(one, two, three, four, five, six, seven);
         list.addAll(asLists);
-        String[] checkList = new String[9];
-        checkList[0] = nine;
-        checkList[1] = one;
-        checkList[2] = three;
-        checkList[3] = four;
-        checkList[4] = two;
-        checkList[5] = five;
-        checkList[6] = eight;
-        checkList[7] = six;
-        checkList[8] = seven;
+        String[] checkList = {"K1", "K1/SK1", "K1/SK1/SSK1", "K1/SK1/SSK2", "K1/SK2", "K2", "K2/SK1", "K2/SK1/SSK1","K2/SK1/SSK2"};
 
         DirectoryOrganization dir = new DirectoryOrganization();
         list = dir.reverseSortOrganization(list);
