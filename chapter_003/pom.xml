@@ -23,5 +23,6 @@
 		<module>iteratorEvenNumbers</module>
 		<module>iteratorSimpleNumbers</module>
 		<module>iteratorIterators</module>
+		<module>genericOne</module>
 	</modules>
 </project>
