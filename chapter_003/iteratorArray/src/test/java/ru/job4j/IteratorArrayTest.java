@@ -60,4 +60,14 @@ public class IteratorArrayTest {
             assertThat(nee.getMessage(), is("No numbers in iterators."));
         }
     }
+
+    /**.
+     * Test when is one array
+     */
+    @Test
+    public void whenOne() {
+        IteratorArray it = new IteratorArray(new int[][] {{1, 2}});
+        it.next();
+        assertThat(it.hasNext(), is(true));
+    }
 }
