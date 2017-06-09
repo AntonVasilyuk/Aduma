@@ -42,7 +42,9 @@ public class IteratorArray implements Iterator {
     @Override
     public boolean hasNext() {
         if (this.value == null) {throw new NoSuchElementException("No numbers in iterators.");}
-        return this.value != null && this.value.length > index;
+        if (this.value[colon].length > index) {
+            return true;
+        } else  {return false;}
     }
 
     /**.
@@ -56,7 +58,9 @@ public class IteratorArray implements Iterator {
         } else {
             index = 0;
             colon++;
-            return this.value[colon][index++];
+            if (hasNext()) {
+                return this.value[colon][index++];
+            } else {throw new ArrayIndexOutOfBoundsException("The number were over");}
         }
     }
 }
