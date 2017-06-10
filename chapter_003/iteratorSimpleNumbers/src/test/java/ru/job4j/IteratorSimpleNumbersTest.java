@@ -24,10 +24,10 @@ public class IteratorSimpleNumbersTest {
     @Test
     public void whenNeedTakeAwayOnlySimpleNumbersThenDoIt() {
         int checkNum = 0;
-        int[] array = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+        int[][] array = {{2, 3}, {7, 8}};
         IteratorSimpleNumbers iter = new IteratorSimpleNumbers(array);
-        int[] testArray = {2, 3, 5, 7, 11};
-        int[] resultArray = new int[5];
+        int[] testArray = {2, 3, 7};
+        int[] resultArray = new int[3];
 
         for (int i = 0; i < resultArray.length; i++) {
             resultArray[i] = (Integer) iter.next();
@@ -43,8 +43,8 @@ public class IteratorSimpleNumbersTest {
      * Test working hasNext
      */
     @Test
-    public void whenIterateTwoTimeArrayThenHasNextReturnTrue() {
-        int[] array = {2, 3, 4, 5};
+    public void whenIterateTwoTimeArrayThenHasNextReturnfalse() {
+        int[][] array = {{2, 3, 11}, {4, 5}};
         IteratorSimpleNumbers iter = new IteratorSimpleNumbers(array);
         iter.next();
         iter.next();
@@ -57,7 +57,7 @@ public class IteratorSimpleNumbersTest {
      */
     @Test
     public void whenInArrayNotSimpleNumberThenHasNextReturnFalse() {
-        int[] array = {4, 6, 8, 9};
+        int[][] array = {{4, 6}, {8, 9}};
         IteratorSimpleNumbers iter = new IteratorSimpleNumbers(array);
         boolean result = iter.hasNext();
         assertThat(result, is(false));
@@ -68,12 +68,22 @@ public class IteratorSimpleNumbersTest {
      */
     @Test
     public void whenInArrayNoElementThenHasNextReturnNEE() {
-        int[] value = null;
+        int[][] value = null;
         IteratorSimpleNumbers iter = new IteratorSimpleNumbers(value);
         try {
             iter.hasNext();
         } catch (NoSuchElementException nee) {
             assertThat(nee.getMessage(), is("In this array not element"));
         }
+    }
+
+    /**.
+     * Test when is one array
+     */
+    @Test
+    public void whenIsOneArray() {
+        IteratorSimpleNumbers it = new IteratorSimpleNumbers(new int[][] {{1, 2, 3, 4}});
+        it.next();
+        assertThat(it.hasNext(), is(true));
     }
 }
