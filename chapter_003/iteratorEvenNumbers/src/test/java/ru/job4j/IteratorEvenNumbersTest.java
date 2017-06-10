@@ -23,7 +23,7 @@ public class IteratorEvenNumbersTest {
      */
     @Test
     public void whenNeedAddOnlyEvenNumbers() {
-        IteratorEvenNumbers iter = new IteratorEvenNumbers(new int[] {1, 2, 3, 4});
+        IteratorEvenNumbers iter = new IteratorEvenNumbers(new int[][] {{1, 2}, {3, 4}});
         int[] arrayResult = new int[2];
         int[] check = {2, 4};
 
@@ -31,17 +31,16 @@ public class IteratorEvenNumbersTest {
             arrayResult[i] = (Integer) iter.next();
         }
 
-        boolean expect = true;
         boolean fact = true;
         for (int i = 0; i < arrayResult.length; i++) {
             if (arrayResult[i] != check[i]) {fact = false;}
         }
-        assertThat(fact, is(expect));
+        assertThat(fact, is(true));
     }
 
     @Test
     public void whenIterateOneTimeThenHasNextReturnTrue() {
-        IteratorEvenNumbers iter = new IteratorEvenNumbers(new int[] {1, 2, 3, 4});
+        IteratorEvenNumbers iter = new IteratorEvenNumbers(new int[][] {{1, 2}, {3, 4}});
         iter.next();
         boolean result = iter.hasNext();
         assertThat(result, is(true));
@@ -49,7 +48,7 @@ public class IteratorEvenNumbersTest {
 
     @Test
     public void whenIterateTwoTimeThenHasNextReturnFalse() {
-        IteratorEvenNumbers iter = new IteratorEvenNumbers(new int[] {1, 2, 3, 4});
+        IteratorEvenNumbers iter = new IteratorEvenNumbers(new int[][] {{1, 2}, {3, 4}});
         iter.next();
         iter.next();
         boolean result = iter.hasNext();
@@ -58,12 +57,22 @@ public class IteratorEvenNumbersTest {
 
     @Test
     public void whenArrayIsNullThenHasNextReturnNEE() {
-        int[] value = null;
+        int[][] value = null;
         IteratorEvenNumbers iter = new IteratorEvenNumbers(value);
         try {
             iter.hasNext();
         } catch (NoSuchElementException nee) {
             assertThat(nee.getMessage(), is("No element in this array."));
         }
+    }
+
+    /**.
+     * Test when is one array
+     */
+    @Test
+    public void whenIsOneArray() {
+        IteratorEvenNumbers it = new IteratorEvenNumbers(new int[][] {{1, 2, 3, 4}});
+        it.next();
+        assertThat(it.hasNext(), is(true));
     }
 }
