@@ -1,5 +1,6 @@
 package ru.job4j;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.NoSuchElementException;
 
 /**
@@ -10,35 +11,52 @@ import java.util.NoSuchElementException;
  * @version 1.0
  * @since 0.1
  */
-public class SimpleList<E> {
+public class SimpleList<T> {
 
     private Object[] objects;
     private int index = 0;
 
     public SimpleList(int size) {
         this.objects = new Object[size];
+        //Class<T> t = (Class<T>) ((ParameterizedType) (getClass().getGenericSuperclass())).getActualTypeArguments()[0];
+        //try {
+        //    T value = t.newInstance();
+         //   System.out.printf("string: +" + value);
+        //} catch (Exception e) {
+        //    e.printStackTrace();
+        //}
     }
 
-    public <K> K print(K value) {
-        System.out.println(value);
-        return value;
+    public void add(T value) {
+        if (value == null) {throw new NullPointerException("Element is null");}
+        if (validate()) {
+            this.objects[index++] = value;
+        } else {
+            throw new ArrayIndexOutOfBoundsException("Too far");
+        }
     }
 
-    public void add(E value) {
-        this.objects[index++] = value;
+    public T get (int position) {
+        return (T) this.objects[position];
     }
 
-    public E get (int position) {
-        return (E) this.objects[position];
-    }
-
-    public void update(int position, E value) {
+    public void update(int position, T value) {
         if (value != null) {
             this.objects[position] = value;
         } else {throw new NullPointerException("this value is null");}
     }
 
     public void delete(int position) {
-        this.objects[position] = null;
+
+        if (this.objects[position] != null) {
+            this.objects[position] = null;
+        } else {
+            throw new NoSuchElementException("In this no element");
+        }
+        index--;
+    }
+
+    public boolean validate() {
+        return this.objects.length > index;
     }
 }
