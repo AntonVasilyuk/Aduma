@@ -16,7 +16,7 @@ public class BaseStore<T extends Base> implements Store<T> {
     /**.
      * aList is object for class SimpleList
      */
-    SimpleList sList = new SimpleList(capacityArray);
+    SimpleList<T> sList = new SimpleList(capacityArray);
 
     /**.
      * Method for add element to containers
@@ -29,12 +29,15 @@ public class BaseStore<T extends Base> implements Store<T> {
 
     /**.
      * Method for update element on this position
-     * @param position is position in array
      * @param t is element
      */
     @Override
-    public void update(int position, T t) {
-        sList.update(position, t);
+    public void update(String id, T t) {
+        int position = findValueById(t);
+        if (position != 99) {
+            t.setId(id);
+            sList.update(position, t);
+        }
     }
 
     /**.
@@ -52,6 +55,20 @@ public class BaseStore<T extends Base> implements Store<T> {
      * @return element
      */
     public Base showByPosition(int position) {
-        return (Base) sList.get(position);
+        return sList.get(position);
+    }
+
+    public int findValueById(T t) {
+        int position = 99;
+        for (int i = 0; i < capacityArray; i++) {
+            T value = sList.get(i);
+            if (value != null) {
+                if (value.getId().equals(t.getId())) {
+                    position = i;
+                    break;
+                }
+            }
+        }
+        return position;
     }
 }
