@@ -31,7 +31,7 @@ public class RoleStoreTest {
      */
     @Test
     public void whenAddOneElementToArray() {
-        User userOne = new User("Awast");
+        Role userOne = new Role("Awast");
         rolSrore.add(userOne);
         assertThat(rolSrore.showByPosition(0).getId(), is("Awast"));
     }
@@ -41,8 +41,9 @@ public class RoleStoreTest {
      */
     @Test
     public void whenUpdateUserOneToUserTwo() {
-        User userTwo = new User("No Awast");
-        rolSrore.update(0, userTwo);
+        Role userOne = new Role("Awast");
+        rolSrore.add(userOne);
+        rolSrore.update("No Awast", userOne);
         assertThat(rolSrore.showByPosition(0).getId(), is("No Awast"));
     }
 
@@ -51,8 +52,8 @@ public class RoleStoreTest {
      */
     @Test
     public void whenRemoveElement() {
-        User userTree = new User("No Awast");
-        rolSrore.add(userTree);
+        Role roleTree = new Role("No Awast");
+        rolSrore.add(roleTree);
         rolSrore.remove(0);
         assertNull(rolSrore.showByPosition(0));
     }

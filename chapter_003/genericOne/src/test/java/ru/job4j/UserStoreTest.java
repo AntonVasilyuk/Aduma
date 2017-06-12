@@ -42,8 +42,9 @@ public class UserStoreTest{
     @Test
     public void whenUpdateUserOneToUserTwo() {
         User userTwo = new User("No Bingo");
-        usStore.update(0, userTwo);
-        assertThat(usStore.showByPosition(0).getId(), is("No Bingo"));
+        usStore.add(userTwo);
+        usStore.update("Bingo", userTwo);
+        assertThat(usStore.showByPosition(0).getId(), is("Bingo"));
     }
 
     /**.
