@@ -15,10 +15,15 @@ public class SimpleList<T> {
 
     private Object[] objects;
     private int index = 0;
+    private static final int defaultSize = 10;
 
     public SimpleList(int size) {
         this.objects = new Object[size];
      }
+
+    public SimpleList() {
+        this.objects = new Object[defaultSize];
+    }
 
     public void add(T value) {
         if (value == null) {throw new NullPointerException("Element is null");}
