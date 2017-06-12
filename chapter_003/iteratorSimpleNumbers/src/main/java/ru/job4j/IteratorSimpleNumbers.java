@@ -17,21 +17,16 @@ public class IteratorSimpleNumbers implements Iterator {
     private int index = 0;
 
     /**.
-     * Colon array
-     */
-    int colon = 0;
-
-    /**.
      * @value is array numbers
      */
-    private int[][] values;
+    private int[] values;
 
     /**.
      * Constructor for class Iterator SimpleNumbers
      *
      * @param value is array numbers
      */
-    public IteratorSimpleNumbers(int[][] value) {
+    public IteratorSimpleNumbers(int[] value) {
         this.values = value;
     }
 
@@ -48,25 +43,21 @@ public class IteratorSimpleNumbers implements Iterator {
         }
         int checkNum = 0;
         for (int i = 0; i < this.values.length; i++) {
-            for (int j = 0; j < this.values[i].length; j++) {
-                int checkSimple = 1;
-                for (int x = 2; x < this.values[i][j]; x++) {
-                    if ((this.values[i][j] % x) == 0) {
-                        checkSimple = 0;
-                    }
+            int checkSimple = 1;
+            for (int x = 2; x < this.values[i]; x++) {
+                if ((this.values[i] % x) == 0) {
+                    checkSimple = 0;
                 }
-                if (checkSimple == 1) {
-                    checkNum++;
-                }
+            }
+            if (checkSimple == 1) {
+                checkNum++;
             }
         }
         if (checkNum == 0) {
             return false;
         }
-        if (!(this.values.length > colon)) {
-            return false;
-        }
-        if (this.values[colon].length > index) {
+
+        if (this.values.length > index) {
             return true;
         } else {
             return false;
@@ -84,8 +75,8 @@ public class IteratorSimpleNumbers implements Iterator {
         if (hasNext()) {
             do {
                 num = 1;
-                for (int i = 2; i < this.values[colon][index]; i++) {
-                    if ((this.values[colon][index] % i) == 0) {
+                for (int i = 2; i < this.values[index]; i++) {
+                    if ((this.values[index] % i) == 0) {
                         num = 0;
                     }
                 }
@@ -93,21 +84,8 @@ public class IteratorSimpleNumbers implements Iterator {
                 index++;
             } while (num > 0);
         } else {
-            colon++;
-            index = 0;
-            if (hasNext()) {
-                do {
-                    num = 1;
-                    for (int i = 2; i < this.values[colon][index]; i++) {
-                        if ((this.values[colon][index] % i) == 0) {
-                            num = 0;
-                        }
-                    }
-                    if (num > 0) {break;}
-                    index++;
-                } while (num > 0);
-            }
+            throw new NoSuchElementException("No more elements");
         }
-        return this.values[colon][index++];
+        return this.values[index++];
     }
 }

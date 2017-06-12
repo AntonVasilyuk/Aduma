@@ -24,7 +24,7 @@ public class IteratorSimpleNumbersTest {
     @Test
     public void whenNeedTakeAwayOnlySimpleNumbersThenDoIt() {
         int checkNum = 0;
-        int[][] array = {{2, 3}, {7, 8}};
+        int[] array = {2, 3, 7, 8};
         IteratorSimpleNumbers iter = new IteratorSimpleNumbers(array);
         int[] testArray = {2, 3, 7};
         int[] resultArray = new int[3];
@@ -44,7 +44,7 @@ public class IteratorSimpleNumbersTest {
      */
     @Test
     public void whenIterateTwoTimeArrayThenHasNextReturnfalse() {
-        int[][] array = {{2, 3, 11}, {4, 5}};
+        int[] array = {2, 3, 11, 4, 5};
         IteratorSimpleNumbers iter = new IteratorSimpleNumbers(array);
         iter.next();
         iter.next();
@@ -57,7 +57,7 @@ public class IteratorSimpleNumbersTest {
      */
     @Test
     public void whenInArrayNotSimpleNumberThenHasNextReturnFalse() {
-        int[][] array = {{4, 6}, {8, 9}};
+        int[] array = {4, 6, 8, 9};
         IteratorSimpleNumbers iter = new IteratorSimpleNumbers(array);
         boolean result = iter.hasNext();
         assertThat(result, is(false));
@@ -68,7 +68,7 @@ public class IteratorSimpleNumbersTest {
      */
     @Test
     public void whenInArrayNoElementThenHasNextReturnNEE() {
-        int[][] value = null;
+        int[] value = null;
         IteratorSimpleNumbers iter = new IteratorSimpleNumbers(value);
         try {
             iter.hasNext();
@@ -82,8 +82,23 @@ public class IteratorSimpleNumbersTest {
      */
     @Test
     public void whenIsOneArray() {
-        IteratorSimpleNumbers it = new IteratorSimpleNumbers(new int[][] {{1, 2, 3, 4}});
+        IteratorSimpleNumbers it = new IteratorSimpleNumbers(new int[] {1, 2, 3, 4});
         it.next();
         assertThat(it.hasNext(), is(true));
+    }
+
+    /**.
+     * Test when the element run out
+     */
+    @Test
+    public void whenElementRunOut() {
+        IteratorSimpleNumbers it = new IteratorSimpleNumbers(new int[] {1, 2});
+        it.next();
+        it.next();
+        try {
+            it.next();
+        } catch (NoSuchElementException nee) {
+            assertThat(nee.getMessage(), is("No more elements"));
+        }
     }
 }
