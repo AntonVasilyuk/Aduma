@@ -11,28 +11,22 @@ import java.util.*;
  */
 public class IteratorSimpleNumbers implements Iterator {
 
-    /**
-     * .
-     *
+    /**.
      * @index is index array
      */
     private int index = 0;
 
-    /**
-     * .
+    /**.
      * Colon array
      */
     int colon = 0;
 
-    /**
-     * .
-     *
+    /**.
      * @value is array numbers
      */
     private int[][] values;
 
-    /**
-     * .
+    /**.
      * Constructor for class Iterator SimpleNumbers
      *
      * @param value is array numbers
@@ -41,8 +35,7 @@ public class IteratorSimpleNumbers implements Iterator {
         this.values = value;
     }
 
-    /**
-     * .
+    /**.
      * Method for check next member array
      *
      * @return is there a next element
@@ -80,8 +73,7 @@ public class IteratorSimpleNumbers implements Iterator {
         }
     }
 
-    /**
-     * .
+    /**.
      * Method for output next simple number
      *
      * @return simple number
