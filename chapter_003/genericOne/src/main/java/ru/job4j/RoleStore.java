@@ -7,4 +7,8 @@ package ru.job4j;
  * @version 1.0
  */
 public class RoleStore<T extends Base> extends BaseStore<T> {
+
+    public RoleStore() {
+        super();
+    }
 }

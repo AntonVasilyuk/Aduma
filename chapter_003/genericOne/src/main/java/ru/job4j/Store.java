@@ -9,7 +9,7 @@ public interface  Store<T extends Base> {
 
     void add(T t);
 
-    void update(int position, T t);
+    void update(String id, T t);
 
     void remove(int position);
 }
