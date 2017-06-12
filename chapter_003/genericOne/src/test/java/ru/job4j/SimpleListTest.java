@@ -39,7 +39,7 @@ public class SimpleListTest<String> {
         String newObj = (String) "Test two";
         sLT.update(0, newObj);
         String test = sLT.get(0);
-        assertThat(test, is(newObj));
+        assertThat(test, is("Test two"));
     }
 
     @Test
