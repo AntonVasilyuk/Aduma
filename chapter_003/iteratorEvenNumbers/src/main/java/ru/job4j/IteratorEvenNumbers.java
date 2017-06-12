@@ -17,17 +17,12 @@ public class IteratorEvenNumbers implements Iterator {
     /**.
      * @values is array numbers
      */
-    private int[][] values;
+    private int[] values;
 
     /**.
      * @index is index array
      */
     private int index = 0;
-
-    /**.
-     * @index is colon array
-     */
-    private int colon = 0;
 
     /**.
      * Amount returned even numbers
@@ -37,7 +32,7 @@ public class IteratorEvenNumbers implements Iterator {
      * Constructor for class IteratorEvenNumber
      * @param values is array numbers
      */
-    public IteratorEvenNumbers(int[][] values) {
+    public IteratorEvenNumbers(int[] values) {
         this.values = values;
     }
 
@@ -52,14 +47,12 @@ public class IteratorEvenNumbers implements Iterator {
             throw new NoSuchElementException("No element in this array.");
         }
         int checkNum = 0;
-        for (int i = 0; i < this.values.length; i++) {
-            for (int j = 0; j < this.values[i].length; j++) {
-                if ((this.values[i][j] % 2) == 0) {checkNum++;}
-            }
+        for (int j = 0; j < this.values.length; j++) {
+            if ((this.values[j] % 2) == 0) {checkNum++;}
         }
         if (checkNum == 0) {return false;}
         if (returnCheckNum == checkNum) {return false;}
-        if (this.values[colon].length > index) {
+        if (this.values.length > index) {
             return true;
         } else  {return false;}
     }
@@ -71,20 +64,12 @@ public class IteratorEvenNumbers implements Iterator {
     @Override
     public Object next() {
         if (hasNext()) {
-            while ((this.values[colon][index] % 2) != 0) {
+            while ((this.values[index] % 2) != 0) {
                 index++;
-            }
-        } else {
-            colon++;
-            index = 0;
-            if (hasNext()) {
-                while ((this.values[colon][index] % 2) != 0) {
-                    index++;
-                }
             }
         }
         returnCheckNum++;
-        return this.values[colon][index++];
+        return this.values[index++];
     }
 }
 

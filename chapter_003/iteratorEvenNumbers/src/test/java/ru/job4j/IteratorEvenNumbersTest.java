@@ -23,7 +23,7 @@ public class IteratorEvenNumbersTest {
      */
     @Test
     public void whenNeedAddOnlyEvenNumbers() {
-        IteratorEvenNumbers iter = new IteratorEvenNumbers(new int[][] {{1, 2}, {3, 4}});
+        IteratorEvenNumbers iter = new IteratorEvenNumbers(new int[] {1, 2, 3, 4});
         int[] arrayResult = new int[2];
         int[] check = {2, 4};
 
@@ -40,7 +40,7 @@ public class IteratorEvenNumbersTest {
 
     @Test
     public void whenIterateOneTimeThenHasNextReturnTrue() {
-        IteratorEvenNumbers iter = new IteratorEvenNumbers(new int[][] {{1, 2}, {3, 4}});
+        IteratorEvenNumbers iter = new IteratorEvenNumbers(new int[] {1, 2, 3, 4});
         iter.next();
         boolean result = iter.hasNext();
         assertThat(result, is(true));
@@ -48,7 +48,7 @@ public class IteratorEvenNumbersTest {
 
     @Test
     public void whenIterateTwoTimeThenHasNextReturnFalse() {
-        IteratorEvenNumbers iter = new IteratorEvenNumbers(new int[][] {{1, 2}, {3, 4}});
+        IteratorEvenNumbers iter = new IteratorEvenNumbers(new int[] {1, 2, 3, 4});
         iter.next();
         iter.next();
         boolean result = iter.hasNext();
@@ -57,7 +57,7 @@ public class IteratorEvenNumbersTest {
 
     @Test
     public void whenArrayIsNullThenHasNextReturnNEE() {
-        int[][] value = null;
+        int[] value = null;
         IteratorEvenNumbers iter = new IteratorEvenNumbers(value);
         try {
             iter.hasNext();
@@ -71,7 +71,7 @@ public class IteratorEvenNumbersTest {
      */
     @Test
     public void whenIsOneArray() {
-        IteratorEvenNumbers it = new IteratorEvenNumbers(new int[][] {{1, 2, 3, 4}});
+        IteratorEvenNumbers it = new IteratorEvenNumbers(new int[] {1, 2, 3, 4});
         it.next();
         assertThat(it.hasNext(), is(true));
     }
