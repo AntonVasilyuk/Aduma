@@ -1,5 +1,5 @@
 /**
- * Create model for PseodoArrayList.
+ * Create model for realisation list.
  *
  * @author Anton Vasilyuk (wrajina99@gmail.com)
  * @version $Id$

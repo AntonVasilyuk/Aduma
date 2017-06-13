@@ -1,5 +1,5 @@
 /**
- * Test working pseodo List.
+ * Test working realisation List.
  *
  * @author Anton Vasilyuk (wrajina99@gmail.com)
  * @version $Id$

@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
  * @author  Anton Vasilyuk on 12.06.2017.
  * @version 1.0
  */
-public class PseodoArrayList<E> implements Iterable<E> {
+public class PseodoArrayList<E> implements SimpleContainers<E> {
 
     /**.
      * @size is size array
@@ -45,19 +45,15 @@ public class PseodoArrayList<E> implements Iterable<E> {
      * @param value
      */
     public void add(E value) {
-        if (iterator().hasNext()) {
+        if (this.sizeObjects() < size) {
             this.container[cursor++] = (Object) value;
         } else {
-            int sizeTemp = size + 10;
+            int sizeTemp = size * 2;
             Object[] newContainer = new Object[sizeTemp];
-            for (int i = 0; i < size; i++) {
-                newContainer[i] = container[i];
-            }
+            System.arraycopy(container, 0, newContainer, 0, size);
             container = newContainer;
             size = sizeTemp;
-            if (iterator().hasNext()) {
-                this.container[cursor++] = (Object) value;
-            }
+            this.container[cursor++] = (Object) value;
         }
     }
 
@@ -66,7 +62,7 @@ public class PseodoArrayList<E> implements Iterable<E> {
      * @param index
      * @return
      */
-    public Object get(int index) {
+    public E get(int index) {
         cursor = 0;
         for (int i = 0; i < index; i++) {
             if (iterator().hasNext()) {
@@ -76,7 +72,7 @@ public class PseodoArrayList<E> implements Iterable<E> {
                 throw new NoSuchElementException("There is not such index");
             }
         }
-        return container[cursor];
+        return (E) container[cursor];
     }
 
     /**.
@@ -114,6 +110,7 @@ public class PseodoArrayList<E> implements Iterable<E> {
      * @return
      */
     public int sizeObjects() {
+        numElement = 0;
         for (int i = 0; i < container.length; i++) {
             if (container[i] != null) {numElement++;}
         }
