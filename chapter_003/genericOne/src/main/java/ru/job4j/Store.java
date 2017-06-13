@@ -11,5 +11,5 @@ public interface  Store<T extends Base> {
 
     void update(String id, T t);
 
-    void remove(int position);
+    void remove(String id);
 }

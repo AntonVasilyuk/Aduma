@@ -33,7 +33,7 @@ public class UserStoreTest{
     public void whenAddOneElementToArray() {
         User userOne = new User("Bingo");
         usStore.add(userOne);
-        assertThat(usStore.showByPosition(0).getId(), is("Bingo"));
+        assertThat(usStore.showByPosition("Bingo").getId(), is("Bingo"));
     }
 
     /**.
@@ -44,7 +44,7 @@ public class UserStoreTest{
         User userTwo = new User("No Bingo");
         usStore.add(userTwo);
         usStore.update("Bingo", userTwo);
-        assertThat(usStore.showByPosition(0).getId(), is("Bingo"));
+        assertThat(usStore.showByPosition("Bingo").getId(), is("Bingo"));
     }
 
     /**.
@@ -52,9 +52,10 @@ public class UserStoreTest{
      */
     @Test
     public void whenRemoveElement() {
-        User userTree = new User("No Bingo");
+        String text = "No Bingo";
+        User userTree = new User(text);
         usStore.add(userTree);
-        usStore.remove(0);
-        assertNull(usStore.showByPosition(0));
+        usStore.remove(text);
+        assertNull(usStore.showByPosition(text));
     }
 }
