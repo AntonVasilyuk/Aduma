@@ -36,25 +36,15 @@ public class CycleList<T> {
     }
 
     public boolean hasCycle(){
-        boolean result = false;
-        List<T> list = new LinkedList<>();
+        boolean result = true;
         Node<T> temp = hadNode;
-        int checkOfNum = 1;
+        if (size == 1) {throw new NoSuchElementException("Add more element!");}
         if (temp != null) {
-            while(checkOfNum == 1) {
-                checkOfNum = 0;
-                list.add(temp.value);
-                for(T t : list) {
-                    if (t == temp.value) {checkOfNum++;}
-                }
-
-                if (checkOfNum > 1) {result = true;}
-
+            for (int i = 0; i < size + 2; i++) {
                 if (temp.getNext() != null) {temp = temp.getNext();}
-                else {break;}
+                else {result = false; break;}
             }
         } else {throw new NoSuchElementException("It list is empty");}
-        if (size == 1) {throw new NoSuchElementException("Add more element!");}
         return result;
     }
 
