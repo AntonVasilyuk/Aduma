@@ -1,7 +1,5 @@
 package ru.job4j;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -14,11 +12,30 @@ import java.util.NoSuchElementException;
 
 public class CycleList<T> {
 
+    /**.
+     * @hadNode is first element
+     */
     private Node<T> hadNode;
+
+    /**.
+     * @previos is back element
+     */
     private Node<T> previos;
+
+    /**.
+     * @nowNode is now element
+     */
     private Node<T> nowNode;
+
+    /**.
+     * @size is size list
+     */
     private int size = 0;
 
+    /**.
+     * Method for add element to the list
+     * @param value is element for adding
+     */
     public void add(T value) {
         if (value == null) {throw new NullPointerException("Element is null");}
         if (hadNode == null) {
@@ -35,6 +52,10 @@ public class CycleList<T> {
         }
     }
 
+    /**.
+     * Method for checking on cyclicity
+     * @return
+     */
     public boolean hasCycle(){
         boolean result = true;
         Node<T> temp = hadNode;
@@ -48,11 +69,18 @@ public class CycleList<T> {
         return result;
     }
 
+    /**.
+     * Closing links
+     */
     public void makeCycle() {
         nowNode.setNext(hadNode);
         hadNode.setPrevios(nowNode);
     }
 
+    /**.
+     * Class for Node
+     * @param <T> is type element
+     */
     class Node<T> {
 
         /**.
