@@ -49,7 +49,7 @@ public class SimpleSetArray<E> implements Iterable {
         if (value == null) {throw new NullPointerException("Element is null");}
         boolean check = true;
         for (int i = 0; i < cursor; i++) {
-            String temp = (String) container[i];
+            E temp = (E) container[i];
             if (temp.equals(value)) {check = false;}
         }
         if (check) {
