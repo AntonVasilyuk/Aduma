@@ -10,21 +10,41 @@ import java.util.NoSuchElementException;
  * Created by ANTON on 16.06.2017.
  * @version 1.0
  */
-public class SimpleSet<E> implements Iterable {
+public class SimpleSetArray<E> implements Iterable {
 
+    /**.
+     * @Cursor is cursor in the set
+     */
     private int cursor = 0;
 
+    /**.
+     * @cursorIter is location iterator
+     */
     private int cursorIter = 0;
 
+    /**.
+     * @size is size array for set
+     */
     private int size;
 
+    /**.
+     * @container is link for set
+     */
     private Object[] container;
 
-    public SimpleSet(int aSize) {
+    /**.
+     * Constructor for SimpleSetArray
+     * @param aSize
+     */
+    public SimpleSetArray(int aSize) {
         this.size = aSize;
         container = new Object[aSize];
     }
 
+    /**.
+     * Method for add element to the set
+     * @param value is element
+     */
     public void add(E value) {
         if (value == null) {throw new NullPointerException("Element is null");}
         boolean check = true;

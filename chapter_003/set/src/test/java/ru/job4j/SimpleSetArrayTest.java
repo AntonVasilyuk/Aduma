@@ -8,24 +8,24 @@ import static org.junit.Assert.*;
 
 /**
  * Task 5.4.1.
- * Test working class SimpleSet
+ * Test working class SimpleSetArray
  *
  * Created by ANTON on 16.06.2017.
  * @version 1.0
  */
-public class SimpleSetTest {
+public class SimpleSetArrayTest {
 
     /**.
-     * Link for SimpleSet
+     * Link for SimpleSetArray
      */
-    SimpleSet set;
+    SimpleSetArray set;
 
     /**.
      * Preparing for test
      */
     @Before
     public void preparingForTest() {
-        set = new SimpleSet(3);
+        set = new SimpleSetArray(3);
     }
 
     /**.
