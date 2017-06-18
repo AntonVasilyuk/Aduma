@@ -67,7 +67,7 @@ public class SimpleSetArray<E> implements Iterable {
 
     }
     /**.
-     * Realisation iterator
+     * Realisation iterator for set
      * @return iterator
      */
     @Override
