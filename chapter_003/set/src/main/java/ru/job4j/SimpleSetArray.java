@@ -93,5 +93,4 @@ public class SimpleSetArray<E> implements Iterable {
         };
         return it;
     }
-
 }
