@@ -21,15 +21,14 @@ public class PseodoArrayList<E> implements SimpleContainers<E> {
      */
     private int cursor = 0;
 
+    /**
+     * @cursorIter is position for iterator
+      */
+    private int cursorIter = 0;
     /**.
      * @container is array objects
      */
     private Object[] container;
-
-    /**.
-     * @numElement is amount objects
-     */
-    private int numElement = 0;
 
     /**.
      * Constructor fot this class
@@ -45,15 +44,17 @@ public class PseodoArrayList<E> implements SimpleContainers<E> {
      * @param value
      */
     public void add(E value) {
-        if (this.sizeObjects() < size) {
-            this.container[cursor++] = (Object) value;
+        if (cursor < size) {
+            this.container[cursor] = value;
+            cursor++;
         } else {
             int sizeTemp = size * 2;
             Object[] newContainer = new Object[sizeTemp];
             System.arraycopy(container, 0, newContainer, 0, size);
             container = newContainer;
             size = sizeTemp;
-            this.container[cursor++] = (Object) value;
+            this.container[cursor] = value;
+            cursor++;
         }
     }
 
@@ -63,16 +64,10 @@ public class PseodoArrayList<E> implements SimpleContainers<E> {
      * @return
      */
     public E get(int index) {
-        cursor = 0;
-        for (int i = 0; i < index; i++) {
-            if (iterator().hasNext()) {
-                iterator().next();
-                cursor++;
-            } else {
-                throw new NoSuchElementException("There is not such index");
-            }
-        }
-        return (E) container[cursor];
+        E result = null;
+        if (index < cursor) {result = (E) container[index];}
+        else {throw new IndexOutOfBoundsException("On this position no element");}
+        return result;
     }
 
     /**.
@@ -83,23 +78,21 @@ public class PseodoArrayList<E> implements SimpleContainers<E> {
     public Iterator<E> iterator() {
         Iterator<E> it = (Iterator<E>) new Iterator<Object>() {
 
-            private int cursorIter = 0;
-
             @Override
             public boolean hasNext() {
-                return cursor < size;
+                return cursorIter < size;
             }
 
             @Override
             public Object next() {
-                if (hasNext()) {return container[cursor];}
+                if (hasNext()) {return container[cursorIter++];}
                 else {throw new NoSuchElementException("Need add cell in this array");}
             }
 
             @Override
             public void remove() {
-                container[cursor] = null;
-                cursor--;
+                container[cursorIter] = null;
+                cursorIter--;
             }
         };
         return it;
@@ -110,7 +103,7 @@ public class PseodoArrayList<E> implements SimpleContainers<E> {
      * @return
      */
     public int sizeObjects() {
-        numElement = 0;
+        int numElement = 0;
         for (int i = 0; i < container.length; i++) {
             if (container[i] != null) {numElement++;}
         }
