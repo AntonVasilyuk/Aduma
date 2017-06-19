@@ -59,11 +59,13 @@ public class SimpleSetArrayTest {
     public void whenAddTwoSameElementThenAddingOneElement() {
         String one = "Test";
         String two = "Test";
+        String three = "Bingo";
         set.add(one);
         set.add(two);
+        set.add(three);
         set.iterator().next();
         String test = (String) set.iterator().next();
-        assertNull(test);
+        assertThat(test, is ("Bingo"));
     }
 
     /**.
