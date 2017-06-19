@@ -11,17 +11,6 @@ import java.util.Iterator;
  */
 public class SimpleSetLinked<E> implements Iterable<E>{
 
-
-    /**.
-     * @previosElement is previos element for this position
-     */
-    private Node<E> previosElement;
-
-    /**.
-     * @headNode is first position
-     */
-    private Node<E> headNode;
-
     /**.
      * @size is size list
      */
@@ -32,21 +21,11 @@ public class SimpleSetLinked<E> implements Iterable<E>{
      */
     private int cursorIter = 0;
 
-    /**.
-     * @tempPrevios is link on back element for iterator
-     */
-    private Node<E> tempPrevios = null;
+    private PseodoLinkedList link;
 
-    /**.
-     * @tempNext is link on next element for iterator
-     */
-    private Node<E> tempNext = null;
-
-    /**.
-     * @tempNow is link on now element for iterator
-     */
-    private Node<E> tempNow = null;
-
+    public SimpleSetLinked() {
+        link = new PseodoLinkedList();
+    }
     /**.
      * Method for add element to link
      * @param value is elemnt for adding
@@ -54,28 +33,13 @@ public class SimpleSetLinked<E> implements Iterable<E>{
     public void add(E value) {
         if (value == null) {throw new NullPointerException("Element is null");}
         boolean check = true;
-        Node<E> temp = headNode;
-
-        if (size != 0) {
-            for(int i = 0; i < size; i++) {
-                E tempValue = temp.getElement();
-                if(tempValue.equals(value)) {check = false;}
-                temp = temp.getNext();
-            }
+        for (int i = 0; i < size; i++) {
+            E temp = (E) link.iterator().next();
+            if (temp.equals(value)) {check = false;}
         }
-
         if (check) {
-            if (size == 0) {
-                Node<E> node = new Node<E>(value, null, null);
-                headNode = node;
-                previosElement = node;
-                size++;
-            } else {
-                Node<E> node = new Node<E>(value, previosElement, null);
-                previosElement.setNext(node);
-                previosElement = node;
-                size++;
-            }
+            link.add(value);
+            size++;
         }
     }
 
@@ -89,27 +53,18 @@ public class SimpleSetLinked<E> implements Iterable<E>{
 
             @Override
             public boolean hasNext() {
-                if (headNode == null) {throw new NullPointerException("It is empty container");}
-                return tempNow.getNext() != null;
+                if (size == 0) {throw new NullPointerException("It is empty container");}
+                return cursorIter < size;
             }
 
             @Override
             public Object next() {
-                Node<E> result = null;
-                if (tempNow == null) {
-                    tempNow = headNode;
-                    result = tempNow;
+                E result = null;
+                if (hasNext()) {
+                    result = (E) link.iterator().next();
                     cursorIter++;
-                } else {
-                    if (hasNext()) {
-                        tempNow = tempNow.getNext();
-                        result = tempNow;
-                        if (tempNow.getNext() != null) {tempNext = tempNow.getNext();}
-                        tempPrevios = tempNow.getPrevios();
-                        cursorIter++;
-                    }
-                }
-                return result.getElement();
+                } else {throw new NullPointerException("No more element");}
+                return result;
             }
         };
         return it;
