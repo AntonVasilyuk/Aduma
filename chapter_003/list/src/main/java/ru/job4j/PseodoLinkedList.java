@@ -32,6 +32,7 @@ public class PseodoLinkedList<E> implements SimpleContainers<E> {
      */
     @Override
     public void add(E value) {
+        if (value == null) {throw new NullPointerException("Element is null");}
         if (size == 0) {
             Node<E> node = new Node<E>(value, null, null);
             headNode = node;
@@ -40,6 +41,7 @@ public class PseodoLinkedList<E> implements SimpleContainers<E> {
         } else {
             Node<E> node = new Node<E>(value, previosElement, null);
             previosElement.setNext(node);
+            previosElement = node;
             size++;
         }
     }
@@ -93,7 +95,7 @@ public class PseodoLinkedList<E> implements SimpleContainers<E> {
                         cursorIter++;
                     }
                 }
-                return result;
+                return result.getElement();
             }
         };
         return it;
