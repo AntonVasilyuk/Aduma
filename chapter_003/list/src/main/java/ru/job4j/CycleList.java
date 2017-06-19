@@ -58,11 +58,18 @@ public class CycleList<T> {
      */
     public boolean hasCycle(){
         boolean result = true;
-        Node<T> temp = hadNode;
+        Node<T> tempOne = hadNode;
+        Node<T> tempTwo = hadNode;
         if (size == 1) {throw new NoSuchElementException("Add more element!");}
-        if (temp != null) {
-            for (int i = 0; i < size + 2; i++) {
-                if (temp.getNext() != null) {temp = temp.getNext();}
+        if (tempOne != null) {
+            for (int i = 0; i < size * 3; i++) {
+                if (tempOne.getNext() != null && tempTwo.getNext() != null) {
+                    tempOne = tempOne.getNext();
+                    tempTwo = tempTwo.getNext().getNext();
+                    if(tempOne.getNext() == tempTwo.getNext() && tempOne.getPrevios() == tempTwo.getPrevios()) {
+                        result = true;
+                    }
+                }
                 else {result = false; break;}
             }
         } else {throw new NoSuchElementException("It list is empty");}
