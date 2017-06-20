@@ -24,5 +24,8 @@
 		<module>iteratorSimpleNumbers</module>
 		<module>iteratorIterators</module>
 		<module>genericOne</module>
+		<module>list</module>
+		<module>set</module>
+		<module>map</module>
 	</modules>
 </project>
