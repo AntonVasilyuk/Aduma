@@ -33,11 +33,12 @@ public class MyMapTest {
      */
     @Test
     public void put() {
-        User user = new User("Egor", 2, 1985, 5, 25);
-        String testFirst = "Bingo";
-        String testSecond = "No Bingo";
-        map.put(user, testFirst);
-        map.put(user, testSecond);
+        User userFirst = new User("Egor", 2, 1985, 5, 25);
+        User userSecond = new User("Egor", 2, 1985, 5, 25);
+        String testFirst = "First object";
+        String testSecond = "Second object";
+        map.put(userFirst, testFirst);
+        map.put(userSecond, testSecond);
         map.print();
     }
 

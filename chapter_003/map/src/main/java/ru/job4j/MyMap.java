@@ -93,7 +93,7 @@ public class MyMap<U, E> {
     public void print() {
         System.out.print("This map have: ");
         for (int i = 0; i < cursor; i++) {
-            System.out.print(map[i].getObject());
+            System.out.print(map[i].getObject() + " ,");
         }
     }
  }
