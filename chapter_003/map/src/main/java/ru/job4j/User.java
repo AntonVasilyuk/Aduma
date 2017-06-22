@@ -2,6 +2,7 @@ package ru.job4j;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Objects;
 
 /**
  * Task 5.5.1.
@@ -27,11 +28,21 @@ public class User {
      */
     Calendar birthday;
 
+    /**.
+     * @day is day the birth
+     */
     private int day;
 
+    /**.
+     * @month is month the birth
+     */
     private int month;
 
+    /**.
+     * @year is year the birth
+     */
     private int year;
+
     /**.
      * Is constructor for model User
      * @param name
@@ -85,10 +96,31 @@ public class User {
      */
     public void setBirthday(Calendar date) {this.birthday = date;}
 
+    /**.
+     * Override method hashCode for User
+     * @return hash code
+     */
     @Override
     public int hashCode() {
-        int result = this.name != null ? this.name.hashCode() : 0;
-        result = 31 * (result + this.children + this.year + this.month + this.day);
+        if (this == null) {throw new NullPointerException("Value is null");}
+        int result = Objects.hash(this.name, this.children, this.year, this.month, this.day);
+        return result;
+    }
+
+    /**.
+     * Override method equals
+     * @param otherObject is other user
+     * @return boolean
+     */
+    @Override
+    public boolean equals(Object otherObject) {
+        boolean result = false;
+        User user = (User) otherObject;
+        if (this == otherObject) {return true;}
+        if (this.getClass() != otherObject.getClass()) {return false;}
+        if (this.name.equals(user.getName())
+                && this.getChildren() == user.getChildren()
+                && this.getBirthday().equals(user.getBirthday())) {result = true;}
         return result;
     }
 }
