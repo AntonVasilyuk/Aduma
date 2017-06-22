@@ -32,7 +32,7 @@ public class MyMapTest {
      * Test working method put when add two time with one the key
      */
     @Test
-    public void put() {
+    public void whenPutTwoElementWithSemilarKey() {
         User userFirst = new User("Egor", 2, 1985, 5, 25);
         User userSecond = new User("Egor", 2, 1985, 5, 25);
         String testFirst = "First object";
@@ -46,7 +46,7 @@ public class MyMapTest {
      * Test working method get
      */
     @Test
-    public void get() {
+    public void whenGetElementByKey() {
         User user = new User("Egor", 2, 1985, 5, 25);
         String testFirst = "Bingo";
         map.put(user, testFirst);

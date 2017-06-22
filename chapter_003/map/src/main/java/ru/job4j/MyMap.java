@@ -50,7 +50,7 @@ public class MyMap<U, E> {
         } else {
             if(cursor < size) {
                 for (int i = 0; i < cursor; i++) {
-                    if (map[i].getUser().equals(key)) {
+                    if (map[i].getUser().hashCode() == key.hashCode() && map[i].getUser().equals(key)) {
                         tempValue = (E) map[i];
                         map[i].setObject(value);
                     } else {map[cursor++] = new Entry(key, value);}
@@ -64,7 +64,7 @@ public class MyMap<U, E> {
 
                 for (int i = 0; i < cursor; i++) {
                     if (map[i].getUser().equals(key)) {
-                        tempValue = (E) map[i];
+                        tempValue = (E) map[i].getObject();
                         map[i].setObject(value);
                     } else {map[cursor++] = new Entry(key, value);}
                 }
