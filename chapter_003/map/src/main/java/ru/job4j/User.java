@@ -27,6 +27,11 @@ public class User {
      */
     Calendar birthday;
 
+    private int day;
+
+    private int month;
+
+    private int year;
     /**.
      * Is constructor for model User
      * @param name
@@ -39,6 +44,9 @@ public class User {
         this.name = name;
         this.children = children;
         this.birthday = new GregorianCalendar(year, month, day);
+        this.day = day;
+        this.month = month;
+        this.year = year;
     }
 
     /**.
@@ -76,4 +84,11 @@ public class User {
      * @param date is new date
      */
     public void setBirthday(Calendar date) {this.birthday = date;}
+
+    @Override
+    public int hashCode() {
+        int result = this.name != null ? this.name.hashCode() : 0;
+        result = 31 * (result + this.children + this.year + this.month + this.day);
+        return result;
+    }
 }
