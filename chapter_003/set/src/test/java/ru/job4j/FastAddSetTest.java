@@ -47,6 +47,7 @@ public class FastAddSetTest {
         }
         long secondTimeOne = System.currentTimeMillis();
         long resultOne = secondTimeOne - firstTimeOne;
+        System.out.println("Old method adding " + linkOne.getSize() + " element for the " + resultOne + " milisec.");
 
         long firstTimeTwo = System.currentTimeMillis();
         for (int i = 0; i < 100000; i++) {
@@ -54,6 +55,7 @@ public class FastAddSetTest {
         }
         long secondTimeTwo = System.currentTimeMillis();
         long resultTwo = secondTimeTwo - firstTimeTwo;
+        System.out.println("New method adding " + linkTwo.getSize() + " element for the " + resultTwo + " milisec.");
 
         boolean result = false;
         if (resultOne > resultTwo) {result = true;}
