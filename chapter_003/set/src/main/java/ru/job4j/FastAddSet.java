@@ -34,12 +34,18 @@ public class FastAddSet<E> implements Iterable {
     private Object[] container;
 
     /**.
+     * @link is link on the SimpleSetArray
+     */
+    private SimpleSetArray link;
+
+    /**.
      * Constructor for SimpleSetArray
      * @param aSize
      */
     public FastAddSet(int aSize) {
         this.size = aSize;
-        container = new Object[aSize];
+        this.container = new Object[aSize];
+        this.link = new SimpleSetArray(aSize);
     }
 
     /**.
@@ -48,23 +54,8 @@ public class FastAddSet<E> implements Iterable {
      */
     public void addFirst(E value) {
         if (value == null) {throw new NullPointerException("Element is null");}
-        boolean check = true;
-        for (int i = 0; i < cursor; i++) {
-            E temp = (E) container[i];
-            if (temp.equals(value)) {check = false;}
-        }
-        if (check) {
-            if(this.cursor < container.length) {
-                container[cursor] = value;
-                cursor++;
-            } else {
-                Object[] newConteiner = new Object[size * 2];
-                System.arraycopy(container, 0, newConteiner, 0, size);
-                container = newConteiner;
-                container[size] = value;
-                cursor++;
-            }
-        }
+        link.add(value);
+        cursor = link.getSize();
     }
 
     /**.
@@ -73,28 +64,28 @@ public class FastAddSet<E> implements Iterable {
      */
     public void addSecond(E value) {
         if (value == null) {throw new NullPointerException("Element is null");}
-        if (cursor == 0) {
-            container[cursor] = value;
-            cursor++;
+        if (this.cursor == 0) {
+            this.container[cursor] = value;
+            this.cursor++;
         } else {
             int position = searchValue(value, container, 0, cursor - 1);
 
             if (position != -1) {
                 if (this.cursor < container.length) {
-                    for (int i = cursor; i > position; i--) {
-                        container[i] = container[i - 1];
+                    for (int i = this.cursor; i > position; i--) {
+                        this.container[i] = container[i - 1];
                     }
                     container[position] = value;
-                    cursor++;
+                    this.cursor++;
                 } else {
                     Object[] newConteiner = new Object[size * 2];
                     System.arraycopy(container, 0, newConteiner, 0, size);
                     container = newConteiner;
-                    for (int i = cursor; i > position; i--) {
-                        container[i] = container[i - 1];
+                    for (int i = this.cursor; i > position; i--) {
+                        this.container[i] = container[i - 1];
                     }
                     container[position] = value;
-                    cursor++;
+                    this.cursor++;
                 }
             }
         }
@@ -169,4 +160,6 @@ public class FastAddSet<E> implements Iterable {
         } else if (array[mid].equals(value)) {return -1;}
         else {return result;}
     }
+
+    public int getSize() {return this.cursor;}
 }
