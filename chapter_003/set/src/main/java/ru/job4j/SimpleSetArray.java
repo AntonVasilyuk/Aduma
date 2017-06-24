@@ -85,4 +85,6 @@ public class SimpleSetArray<E> implements Iterable {
         };
         return it;
     }
+
+    public int getSize() {return this.cursor;}
 }
