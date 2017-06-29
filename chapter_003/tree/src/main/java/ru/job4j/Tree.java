@@ -17,7 +17,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     /**.
      * @size is amount element in tree
      */
-    private int size = 0;
+    private int maxSize = 0;
 
     /**.
      * @cursorIter is cursor in the iterator
@@ -67,19 +67,27 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     public boolean add(E parent, E child) {
         if (firstNode != null && parent == null) {throw new NullPointerException("Parent is null!");}
         if (child == null) {throw new NullPointerException("Child is null");}
-        if (size == 0) {
+        if (firstNode == null) {
             Node<E> node = new Node<>(child, null);
             firstNode = node;
-            size++;
             return true;
         } else {
             Node<E> node = searchParent(firstNode, parent);
             if (node != null) {
                 node.childen.add(new Node<E>(child, node));
-                size++;
+                if(node.childen.size() > maxSize) {maxSize = node.childen.size();}
                 return true;
             } else {return false;}
         }
+    }
+
+    /**.
+     * Method for check on binary the tree
+     * @return boolean result
+     */
+    public boolean isBinary() {
+        if (maxSize <= 2) {return true;}
+        else {return false;}
     }
 
     /**.
@@ -108,7 +116,6 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         if (node != null) {
             if (!elements.contains(node.value)) {
                 elements.add(node.value);
-                System.out.println(node.value);
             }
             for (Node<E> tempNode : node.childen) {
                 if (tempNode.value != null) {
