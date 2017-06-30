@@ -22,17 +22,17 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     /**.
      * @cursorIter is cursor in the iterator
      */
-    int cursorIter = 0;
+    private int cursorIter = 0;
 
     /**.
      * @elements is container for iterator
      */
-    List<E> elements;
+    private List<E> elements;
 
     /**.
      * @firstNode is first node
      */
-    Node<E> firstNode;
+    private Node<E> firstNode;
 
     /**.
      * Constructor for this class
