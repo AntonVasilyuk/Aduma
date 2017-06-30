@@ -1,5 +1,7 @@
 # git_test
-Java A to Z
+Java A to Z, or from null skill to the middle!
+
+Примерная дата окончания курса 31.01.2017.
 
 Пройденный материал:
 
