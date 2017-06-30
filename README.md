@@ -10,5 +10,7 @@ Chapter_1 - syntax
 
 Chapter_2 - OOP
  
-Chapter_3 - Collections 
+Chapter_3 - Collections
+ 
+Learning resource - http://job4j.ru/
 
