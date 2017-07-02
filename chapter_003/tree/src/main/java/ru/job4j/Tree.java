@@ -75,7 +75,6 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
             Node<E> node = searchParent(firstNode, parent);
             if (node != null) {
                 node.childen.add(new Node<E>(child, node));
-                if(node.childen.size() > maxSize) {maxSize = node.childen.size();}
                 return true;
             } else {return false;}
         }
@@ -114,6 +113,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      */
     private void fillList(Node<E> node) {
         if (node != null) {
+            if(node.childen.size() > maxSize) {maxSize = node.childen.size();}
             if (!elements.contains(node.value)) {
                 elements.add(node.value);
             }
