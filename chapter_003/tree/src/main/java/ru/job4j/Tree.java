@@ -15,11 +15,6 @@ import java.util.NoSuchElementException;
 public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
     /**.
-     * @size is amount element in tree
-     */
-    private int maxSize = 0;
-
-    /**.
      * @cursorIter is cursor in the iterator
      */
     private int cursorIter = 0;
@@ -34,6 +29,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      */
     private Node<E> firstNode;
 
+    private boolean isBinary = true;
     /**.
      * Constructor for this class
      */
@@ -85,8 +81,8 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      * @return boolean result
      */
     public boolean isBinary() {
-        if (maxSize <= 2) {return true;}
-        else {return false;}
+        if (firstNode != null) {return checkIsBinary(firstNode);}
+        else {throw new NoSuchElementException("This Tree is empty");}
     }
 
     /**.
@@ -107,13 +103,22 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         return result;
     }
 
+    private boolean checkIsBinary(Node<E> node) {
+        if(node.childen.size() > 2) {isBinary = false;}
+        if(node.childen.size() > 0) {
+            for (Node<E> tempNode : node.childen) {
+                isBinary = checkIsBinary(tempNode);
+            }
+        }
+        return isBinary;
+    }
+
     /**.
      * Recursive method for fill List
      * @param node
      */
     private void fillList(Node<E> node) {
         if (node != null) {
-            if(node.childen.size() > maxSize) {maxSize = node.childen.size();}
             if (!elements.contains(node.value)) {
                 elements.add(node.value);
             }
