@@ -58,4 +58,20 @@ public class OrderBookTest {
         link.addOrder("Book_One", "Ask", 98.20, 50);
         link.printOrder("Book_One");
     }
+
+    /**.
+     * Time test
+     */
+    @Test
+    public void whenNeedAddMoreElement() {
+        double number = 100.21;
+        long timeOne = System.currentTimeMillis();
+        for(int i = 0; i < 100000; i++) {
+            link.addOrder("Book_One", "Bid", number, 1);
+            number = number + 0.01;
+            if (number > 200.00) {number = 100.21;}
+        }
+        long timeTwo = System.currentTimeMillis();
+        System.out.printf("Time adding 100000 element = %d", (timeTwo - timeOne));
+    }
 }
