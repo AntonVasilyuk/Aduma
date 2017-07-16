@@ -35,7 +35,7 @@ public class CountingSpaces {
     private char space = ' ';
 
     /**.
-     * @tempChar is array char
+     * @tempChar is array the char
      */
     private char[] tempChar;
 

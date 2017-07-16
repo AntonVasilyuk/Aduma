@@ -1,7 +1,7 @@
 /**
  * Test calculating spaces and words in the text.
  *
- * @author Anton Vasilyuk (wrajina99@gmail.com)
+ * @author Anton Vasilyuk  (wrajina99@gmail.com)
  * @version $Id$
  * @since 0.1
  */

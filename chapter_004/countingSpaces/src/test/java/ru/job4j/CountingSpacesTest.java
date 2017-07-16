@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class CountingSpacesTest {
 
     /**.
-     * Test working method simulataneous search space and word in text
+     * Test working method simulataneous search space and word in the text
      */
     @Test
     public void whenIsTextThenSimultaneousSearchOfWordsAndSpaces() throws InterruptedException {
