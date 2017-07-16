@@ -63,6 +63,10 @@ public class CountingSpaces {
                 }
             }
             System.out.printf("Thread count space is finished, and count space is %d%n", numSpace);
+            Thread check = Thread.currentThread();
+            if (check.isInterrupted()) {
+                System.out.printf("Thread is interrupted");
+            }
         });
 
         executor.execute(() -> {
@@ -80,7 +84,10 @@ public class CountingSpaces {
                 numWord++;
             }
             System.out.printf("Thread count word is finished, and count word is %d%n", numWord);
-
+            Thread check = Thread.currentThread();
+            if (check.isInterrupted()) {
+                System.out.printf("Thread is interrupted");
+            }
         });
 
         while (executor.awaitTermination(1, TimeUnit.SECONDS)) {
