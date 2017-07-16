@@ -50,6 +50,7 @@ public class CountingSpaces {
         tempChar = msg.toCharArray();
         arrayLength = tempChar.length;
 
+        System.out.printf("Hello, my aplication will start to work now!%n");
         ExecutorService executor = Executors.newCachedThreadPool();
 
         executor.execute(() -> {
@@ -85,6 +86,7 @@ public class CountingSpaces {
         while (executor.awaitTermination(1, TimeUnit.SECONDS)) {
             executor.shutdown();
         }
+        System.out.printf("Finish all calculation!");
         return numSpace + " and " + numWord;
     }
 }

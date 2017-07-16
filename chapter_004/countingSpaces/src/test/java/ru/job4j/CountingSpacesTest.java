@@ -22,7 +22,6 @@ public class CountingSpacesTest {
         CountingSpaces link = new CountingSpaces();
         String line = "World is beautiful World is beautiful World is beautiful World is beautiful";
         String result = link.parseToSpacesAndWords(line);
-        System.out.println(result);
         assertThat(result, is("11 and 12"));
     }
 }
