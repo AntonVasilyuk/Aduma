@@ -1,7 +1,5 @@
 package ru.job4j;
 
-import net.jcip.annotations.ThreadSafe;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -13,7 +11,6 @@ import java.util.NoSuchElementException;
  * @author Anton Vasilyuk on 27.07.2017.
  * @version 1.0.
  */
-@ThreadSafe
 public class UserStorage {
 
     /**.

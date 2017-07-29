@@ -1,5 +1,7 @@
 package ru.job4j;
 
+import net.jcip.annotations.ThreadSafe;
+
 /**
  * Task 7.3.2.
  * Create User for User Storage
@@ -7,9 +9,11 @@ package ru.job4j;
  * @author Anton Vasilyuk on 27.07.2017.
  * @version 1.0.
  */
+@ThreadSafe
 public class User {
 
     private int id;
+
     private int amount;
 
     /**.
