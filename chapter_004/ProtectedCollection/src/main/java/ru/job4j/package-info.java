@@ -1,5 +1,5 @@
 /**
- * Creat protected collection the ArrayList.
+ * Create protected collection the List.
  *
  * @author Anton Vasilyuk  (wrajina99@gmail.com)
  * @version $Id$
