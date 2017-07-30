@@ -1,5 +1,6 @@
 package ru.job4j;
 
+import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
 import java.util.Iterator;
@@ -19,11 +20,13 @@ public class ProtectedLinkedList<E> implements Iterable<E>{
     /**.
      * @previosElement is previos element for this position
      */
+    @GuardedBy("lock")
     private Node<E> previosElement;
 
     /**.
      * @headNode is first position
      */
+    @GuardedBy("lock")
     private Node<E> headNode;
 
     /**.
