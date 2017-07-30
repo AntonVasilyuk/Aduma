@@ -17,6 +17,7 @@
 		<module>JMM</module>
 		<module>Count</module>
 		<module>UserStorage</module>
+		<module>ProtectedCollection</module>
 	</modules>
 
 </project>
