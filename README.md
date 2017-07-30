@@ -11,6 +11,8 @@ Chapter_1 - syntax
 Chapter_2 - OOP
  
 Chapter_3 - Collections
+
+Chapter_4 - Multithreading
  
 Learning resource - http://job4j.ru/
 
