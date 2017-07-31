@@ -101,8 +101,10 @@ public class Count {
          * Getter for variable number
          * @return number
          */
-        public synchronized int getNum() {
-            return this.num;
+        public int getNum() {
+            synchronized (lock) {
+                return this.num;
+            }
         }
     }
 
