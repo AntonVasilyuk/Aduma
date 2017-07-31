@@ -79,28 +79,33 @@ public class UserStorage {
      * @param amount is the amount of money
      */
     public void transfer(Integer fromId, Integer toId, int amount) {
-        if (storage.get(fromId).getAmount() < amount) {
-            System.out.printf("The user has insufficient funds");
-            return;
+        synchronized (this) {
+            if (storage.get(fromId).getAmount() < amount) {
+                System.out.printf("The user has insufficient funds");
+                return;
+            }
+
+            if (!storage.containsKey(fromId) || !storage.containsKey(toId)) {
+                new NoSuchElementException("This id no registered");
+            }
+
+            int amountForFromUser = 0 - amount;
+            int amountForToUser = amount;
+
+            update(fromId, amountForFromUser);
+            update(toId, amountForToUser);
+
+            if (storage.get(fromId).getAmount() == 0) {
+                delete(fromId);
+            }
         }
-
-        if (!storage.containsKey(fromId) || !storage.containsKey(toId)) {
-            new NoSuchElementException("This id no registered");
-        }
-
-        int amountForFromUser = 0 - amount;
-        int amountForToUser = amount;
-
-        update(fromId, amountForFromUser);
-        update(toId,amountForToUser);
-
-        if (storage.get(fromId).getAmount() == 0) {delete(fromId);}
     }
 
     /**.
      * The method for checking change in this the data structure
      * @return storage
      */
-    public synchronized Map<Integer, User> getStorage() {return this.storage;}
+    public Map<Integer, User> getStorage() {
+        synchronized (this) {return this.storage;}}
 
 }
