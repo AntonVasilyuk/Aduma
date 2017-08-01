@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.List;
-
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 /**
@@ -15,11 +15,16 @@ import static org.junit.Assert.*;
  */
 public class SearchFileTest {
 
+    /**.
+     * Testing working class SearchFile.
+     * @throws InterruptedException may be Exception
+     */
     @Test
     public void whenNeedSearchTextInDirectory() throws InterruptedException {
         List<String> exts = new LinkedList<>();
         exts.add("txt");
         exts.add("java");
+
         SearchFile link = new SearchFile("src", "Test", exts);
         link.startApp();
         link.result();

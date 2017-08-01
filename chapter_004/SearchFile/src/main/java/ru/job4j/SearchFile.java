@@ -154,4 +154,6 @@ public class SearchFile {
             }
         }
     }
+
+    public List<String> getResult() {synchronized (this) {return this.files;}}
 }
