@@ -4,12 +4,7 @@ import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
 import java.io.*;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-
-import static java.lang.System.in;
+import java.util.*;
 
 /**
  * Task 7.3.4.
@@ -46,8 +41,8 @@ public class SearchFile {
         this.root = root;
         this.text = text;
         this.exts = exts;
-        files = new LinkedList<>();
-        passed = new HashSet<>();
+        passed = Collections.synchronizedSet(new HashSet<String>());
+        files = Collections.synchronizedList(new ArrayList<String>());
     }
 
     /**.
@@ -65,10 +60,9 @@ public class SearchFile {
     }
 
     public List<String> result() {
-        synchronized (this) {
             System.out.println(files);
+
             return files;
-        }
     }
 
     private Thread searchThread(File file) {
@@ -91,22 +85,17 @@ public class SearchFile {
      * @throws InterruptedException may be exception
      */
     private void recursiveSearchFile(File file) throws InterruptedException, FileNotFoundException {
-        synchronized (this) {
-            if (file == null) {
-                new NullPointerException("File is empty");
-            }
-            if (!passed.contains(file.getPath())) {
-                if (file.isFile()) {
-                    if (checkExtension(file)) {
-                        searchAndWrite(file);
-                        passed.add(file.getPath());
-                    }
-                } else {
-                    File[] arrayFile = file.listFiles();
-                    for (int i = 0; i < arrayFile.length; i++) {
-                        recursiveSearchFile(arrayFile[i]);
-                        passed.add(file.getPath());
-                    }
+        if (!passed.contains(file.getPath()) && !files.contains(file.getPath())) {
+            if (file.isFile()) {
+                if (checkExtension(file)) {
+                    searchAndWrite(file);
+                    passed.add(file.getPath());
+                }
+            } else {
+                File[] arrayFile = file.listFiles();
+                for (int i = 0; i < arrayFile.length; i++) {
+                    recursiveSearchFile(arrayFile[i]);
+                    passed.add(file.getPath());
                 }
             }
         }
@@ -118,12 +107,10 @@ public class SearchFile {
      * @return if the file
      */
     private boolean checkExtension(File file) {
-        synchronized (this) {
-            String name = file.getName();
-            int index = name.indexOf('.');
-            String extensionFile = name.substring(index + 1);
-            return exts.contains(extensionFile) ? true : false;
-        }
+        String name = file.getName();
+        int index = name.indexOf('.');
+        String extensionFile = name.substring(index + 1);
+        return exts.contains(extensionFile) ? true : false;
     }
 
     /**.
@@ -131,29 +118,25 @@ public class SearchFile {
      * @param file is file for action
      */
     private void searchAndWrite(File file) throws FileNotFoundException {
-        synchronized (this) {
-            StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file.getAbsoluteFile()));
             try {
-                BufferedReader br = new BufferedReader(new FileReader(file.getAbsoluteFile()));
-                try {
-                    String s;
-                    while ((s = br.readLine()) != null) {
-                        sb.append(s);
-                        sb.append("\n");
-                    }
-                } finally {
-                    br.close();
+                String s;
+                while ((s = br.readLine()) != null) {
+                    sb.append(s);
+                    sb.append("\n");
                 }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            } finally {
+                br.close();
             }
-            String name = file.getPath();
-            int num = sb.indexOf(text);
-            if (num != -1) {
-                files.add(name);
-            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+        String name = file.getPath();
+        int num = sb.indexOf(text);
+        if (num != -1) {files.add(name);}
     }
 
-    public List<String> getResult() {synchronized (this) {return this.files;}}
+    public List<String> getResult() {return this.files;}
 }
