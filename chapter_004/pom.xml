@@ -18,6 +18,9 @@
 		<module>Count</module>
 		<module>UserStorage</module>
 		<module>ProtectedCollection</module>
+		<module>SearchFile</module>
+		<module>MyProducerCustomer</module>
+		<module>ThreadPool</module>
 	</modules>
 
 </project>
