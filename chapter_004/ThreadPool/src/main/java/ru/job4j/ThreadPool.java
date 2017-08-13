@@ -50,7 +50,7 @@ public class ThreadPool{
     public void add(Work work) {
         synchronized (lock) {
             this.workQueue.add(work);
-            lock.notify();
+            lock.notifyAll();
         }
     }
 
@@ -58,7 +58,7 @@ public class ThreadPool{
      * Method for end working
      */
     public void shutdown() {
-        if(!workQueue.isEmpty()) {
+        while(!workQueue.isEmpty()) {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
