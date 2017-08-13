@@ -21,6 +21,7 @@
 		<module>SearchFile</module>
 		<module>MyProducerCustomer</module>
 		<module>ThreadPool</module>
+		<module>Lock</module>
 	</modules>
 
 </project>
