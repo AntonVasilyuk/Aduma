@@ -22,6 +22,8 @@
 		<module>MyProducerCustomer</module>
 		<module>ThreadPool</module>
 		<module>Lock</module>
+		<module>NonBlock</module>
+		<module>Bomberman</module>
 	</modules>
 
 </project>
