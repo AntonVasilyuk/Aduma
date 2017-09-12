@@ -34,7 +34,7 @@ public class Board {
     /**.
      * @endGame is flag for end game
      */
-    private boolean endGame = false;
+    private boolean endGame = true;
 
     /**.
      * Constructor for this class

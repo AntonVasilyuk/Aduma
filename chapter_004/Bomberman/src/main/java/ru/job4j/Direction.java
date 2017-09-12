@@ -37,29 +37,29 @@ public class Direction {
         int height;
         int[] dirct = null;
         Random rd = new Random();
-        int randomNumber = rd.nextInt(40);
-        if(randomNumber <= 10) {
+        int randomNumber = rd.nextInt(4);
+        if(randomNumber <= 1) {
             if((x + step) <= max) {
                 width = x + step;
                 height = y;
                 dirct = new int[]{width, height};
-            } else {randomNumber += 10;}
+            } else {randomNumber += 1;}
         }
-        if(randomNumber > 10 && randomNumber <= 20) {
+        if(randomNumber == 2) {
             if((x - step) >= 0) {
                 width = x - step;
                 height = y;
                 dirct = new int[]{width, height};
-            } else {randomNumber += 10;}
+            } else {randomNumber += 1;}
         }
-        if(randomNumber > 20 && randomNumber <= 30) {
+        if(randomNumber == 3) {
             if ((y + step) <= max) {
                 width = x;
                 height = y + step;
                 dirct = new int[]{width, height};
-            } else {randomNumber += 10;}
+            } else {randomNumber += 1;}
         }
-        if(randomNumber > 30 && randomNumber <= 40) {
+        if(randomNumber == 4) {
             if((y - step) >= 0) {
                 width = x;
                 height = y - step;
