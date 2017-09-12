@@ -90,6 +90,6 @@ public class Board {
      * Set flag endGame
      */
     public void setEndGame() {
-        this.endGame = true;
+        this.endGame = false;
     }
 }
