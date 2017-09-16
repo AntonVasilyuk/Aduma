@@ -8,7 +8,7 @@ package ru.job4j;
  * @version 1.0.
  */
 
-public class Player implements Figure{
+public class Player implements Figure {
 
     /**.
      * @name is name this figure
