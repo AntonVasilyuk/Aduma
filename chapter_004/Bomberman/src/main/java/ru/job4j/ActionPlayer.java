@@ -30,24 +30,30 @@ public class ActionPlayer implements Runnable {
     @Override
     public void run() {
         boolean flag;
-        int[] oldPlace;
+        Location oldPlace;
         ReentrantLock[][] field = board.getBoard();
         while (endGame) {
             flag = false;
             while (!flag) {
-                int[] step = bomber.step();
+                boolean flagSecond = false;
+                Location step = bomber.step();
                 try {
-                    if (field[step[0]][step[1]].tryLock(500, MILLISECONDS)) {
+                    if(field[step.getX()][step.getY()].tryLock(500, MILLISECONDS)) {
                         flag = true;
+                        flagSecond = true;
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    oldPlace = bomber.getPlace();
-                    field[oldPlace[0]][oldPlace[1]].unlock();
+                    if(flagSecond) {
+                        oldPlace = bomber.getPlace();
+                        field[oldPlace.getX()][oldPlace.getY()].unlock();
+                    }
                 }
-                bomber.newPlace(step[0], step[1]);
-                System.out.println(bomber);
+                if(flagSecond) {
+                    bomber.newPlace(step);
+                    System.out.println(bomber);
+                }
             }
             try {
                 Thread.sleep(1000);

@@ -16,9 +16,9 @@ public class Player implements Figure {
     private String name;
 
     /**.
-     * @x is location the figure
+     * @locationPlayer is location the figure
      */
-    private int x;
+    private final Location locationPlayer;
 
     /**.
      * @y is location the figure
@@ -48,8 +48,7 @@ public class Player implements Figure {
      */
     public Player(String name, int sizeStep, int max) {
         this.name = name;
-        this.x = 0;
-        this.y = 0;
+        this.locationPlayer = new Location(0, 0);
         this.max = max;
         this.sizeStep = sizeStep;
         this.direction = new Direction(sizeStep);
@@ -59,30 +58,25 @@ public class Player implements Figure {
      * Method for moving figure
      * @return
      */
-    public int[] step() {
-        int[] way = direction.choiseDirection(x, y, max);
-        this.x = way[0];
-        this.y = way[1];
-        return way;
+    public Location step() {
+        direction.choiseDirection(locationPlayer, max);
+        return this.locationPlayer;
     }
 
     /**.
      * Overwrite new location
-     * @param x
-     * @param y
+     * @param location is new location player
      */
-    public void newPlace(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public void newPlace(Location location) {
+        this.locationPlayer.setPosition(location.getX(), location.getY());
     }
 
     /**.
      * Rerurn old location
      * @return array with x and y ola location
      */
-    public int[] getPlace() {
-        int[] place = {this.x, this.y};
-        return place;
+    public Location getPlace() {
+        return locationPlayer;
     }
 
     /**.
@@ -90,7 +84,7 @@ public class Player implements Figure {
      * @return String
      */
     public String toString() {
-        return "Player navigates to a cell " + this.x + ", " + this.y;
+        return "Player navigates to a cell " + this.locationPlayer.getX() + ", " + this.locationPlayer.getY();
     }
 }
 

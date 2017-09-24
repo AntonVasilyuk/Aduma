@@ -27,47 +27,48 @@ public class Direction {
 
     /**.
      * Searching direction for moving
-     * @param x is old x
-     * @param y is old y
+     * @param location is location
      * @param max is max location on the board
      * @return new place
      */
-    public int[] choiseDirection(int x, int y, int max) {
+    public Location choiseDirection(Location location, int max) {
+        int x = location.getX();
+        int y = location.getY();
         int width;
         int height;
-        int[] dirct = null;
+        Location locon = null;
         Random rd = new Random();
         int randomNumber = rd.nextInt(4);
         if(randomNumber <= 1) {
             if((x + step) <= max) {
                 width = x + step;
                 height = y;
-                dirct = new int[]{width, height};
+                locon = new Location(width, height);
             } else {randomNumber += 1;}
         }
         if(randomNumber == 2) {
             if((x - step) >= 0) {
                 width = x - step;
                 height = y;
-                dirct = new int[]{width, height};
+                locon = new Location(width, height);
             } else {randomNumber += 1;}
         }
         if(randomNumber == 3) {
             if ((y + step) <= max) {
                 width = x;
                 height = y + step;
-                dirct = new int[]{width, height};
+                locon = new Location(width, height);
             } else {randomNumber += 1;}
         }
         if(randomNumber == 4) {
             if((y - step) >= 0) {
                 width = x;
                 height = y - step;
-                dirct = new int[]{width, height};
+                locon = new Location(width, height);
             } else {
-                dirct = choiseDirection(x, y, max);
+                locon = choiseDirection(location, max);
             }
         }
-        return dirct;
+        return locon;
     }
 }
