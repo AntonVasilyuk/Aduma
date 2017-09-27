@@ -4,21 +4,21 @@ package ru.job4j;
  * Task 7.6.2.
  * Create game Bomberman
  *
- * @author Anton Vasilyuk on 04.09.2017
+ * @author Anton Vasilyuk on 27.09.2017
  * @version 1.0.
  */
 
-public class Player implements Figure {
+public class Monster implements Figure{
 
     /**.
      * @name is name this figure
      */
-    private String name;
+    private String name = "Monster";
 
     /**.
      * @locationPlayer is location the figure
      */
-    private final Location locationPlayer;
+    private final Location locationMonster;
 
     /**.
      * @max is max x or y
@@ -37,33 +37,31 @@ public class Player implements Figure {
 
     /**.
      * Constructor for this class
-     * @param name is name this figure
+     * @param numMonster is name this figure
      * @param sizeStep is max step for this figure
      * @param max is max step for this figure
      */
-    public Player(String name, int sizeStep, int max) {
-        this.name = name;
-        this.locationPlayer = new Location(0, 0);
+    public Monster(int numMonster, int sizeStep, int max) {
+        this.name = this.name + numMonster;
+        this.locationMonster = new Location(0, 0);
         this.max = max;
         this.sizeStep = sizeStep;
         this.direction = new Direction(sizeStep);
     }
 
-    /**.
-     * Method for moving figure
-     * @return
-     */
+    @Override
     public Location step() {
-        direction.choiseDirection(locationPlayer, max);
-        return this.locationPlayer;
+        direction.choiseDirection(locationMonster, max);
+        return this.locationMonster;
     }
+
 
     /**.
      * Overwrite new location
      * @param location is new location player
      */
     public void newPlace(Location location) {
-        this.locationPlayer.setPosition(location.getX(), location.getY());
+        this.locationMonster.setPosition(location.getX(), location.getY());
     }
 
     /**.
@@ -71,15 +69,19 @@ public class Player implements Figure {
      * @return array with x and y ola location
      */
     public Location getPlace() {
-        return locationPlayer;
+        return locationMonster;
     }
+
+    /**.
+     * Method getter for name
+     */
+    public String getName() {return this.name;}
 
     /**.
      * Method for description action the figure
      * @return String
      */
     public String toString() {
-        return "Player navigates to a cell " + this.locationPlayer.getX() + ", " + this.locationPlayer.getY();
+        return "Monster navigates to a cell " + this.locationMonster.getX() + ", " + this.locationMonster.getY();
     }
 }
-

@@ -11,6 +11,10 @@ package ru.job4j;
 public class GameBomberman {
 
     private final ActionPlayer bomberman;
+    private final ActionMonster[] monsters;
+
+    private final Player player;
+    private int difficultyGame;
 
     /**.
      * @SIZEFIELD is max size for field the board
@@ -28,9 +32,12 @@ public class GameBomberman {
      * @param stepPlayer is max step for the player
      */
     public GameBomberman(String name, int stepPlayer, int difficulty) {
+        this.difficultyGame = difficulty;
         board = new Board();
         Block block = new Block(difficulty, board.getBoard());
-        this.bomberman = new ActionPlayer(new Player(name, stepPlayer, SIZEFIELD), board);
+        player = new Player(name, stepPlayer, SIZEFIELD);
+        this.bomberman = new ActionPlayer(player, board);
+        monsters = new ActionMonster[difficultyGame];
     }
 
     /**.
@@ -39,6 +46,11 @@ public class GameBomberman {
     public void mainAction() {
         Thread tBomberMan = new Thread(bomberman);
         tBomberMan.start();
+        for (int i = 0; i < difficultyGame; i++) {
+            monsters[i] = new ActionMonster(new Monster(i, 1, SIZEFIELD), board, player.getPlace());
+            Thread thread = new Thread(monsters[i]);
+            thread.start();
+        }
     }
 
     /**.
@@ -46,5 +58,9 @@ public class GameBomberman {
      */
     public void endGame() {
         bomberman.setEndGame();
+        for(int i = 0; i < monsters.length; i++) {
+            monsters[i].setEndGame();
+            System.out.printf("Player is alive!");
+        }
     }
 }
