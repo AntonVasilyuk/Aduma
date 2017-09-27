@@ -19,8 +19,9 @@ public class GameBomberman {
      * @param name is name for the player
      * @param stepPlayer is max step for the player
      */
-    public GameBomberman(String name, int stepPlayer) {
+    public GameBomberman(String name, int stepPlayer, int difficulty) {
         board = new Board();
+        Block block = new Block(difficulty, board.getBoard());
         this.bomberman = new ActionPlayer(new Player(name, stepPlayer, SIZEFIELD), board);
     }
 
