@@ -1,5 +1,13 @@
 package ru.job4j;
 
+/**.
+ * Task 7.6.2.
+ * Create game Bomberman
+ *
+ * @author Anton Vasilyuk on 04.09.2017
+ * @version 1.0.
+ */
+
 public class GameBomberman {
 
     private final ActionPlayer bomberman;
