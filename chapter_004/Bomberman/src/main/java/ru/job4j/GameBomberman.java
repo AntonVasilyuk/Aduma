@@ -14,6 +14,7 @@ public class GameBomberman {
     private final ActionMonster[] monsters;
 
     private final Player player;
+    private final EndGame endGame;
     private final int difficultyGame;
 
     /**.
@@ -39,6 +40,7 @@ public class GameBomberman {
         player = new Player(name, stepPlayer, SIZEFIELD);
         this.bomberman = new ActionPlayer(player, board);
         monsters = new ActionMonster[difficultyGame];
+        this.endGame = new EndGame(bomberman, monsters);
     }
 
     /**.
@@ -48,7 +50,7 @@ public class GameBomberman {
         Thread tBomberMan = new Thread(bomberman);
         tBomberMan.start();
         for (int i = 0; i < difficultyGame; i++) {
-            monsters[i] = new ActionMonster(new Monster(i, 1, SIZEFIELD), board, player.getPlace());
+            monsters[i] = new ActionMonster(new Monster(i, 1, SIZEFIELD), board, player.getPlace(), endGame);
             Thread thread = new Thread(monsters[i]);
             thread.start();
         }
@@ -58,10 +60,7 @@ public class GameBomberman {
      * Is initialisation end the game
      */
     public void endGame() {
-        bomberman.setEndGame();
-        for(int i = 0; i < monsters.length; i++) {
-            monsters[i].setEndGame();
-        }
+        endGame.theEnd();
         System.out.printf("Player is alive!");
     }
 }

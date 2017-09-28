@@ -18,6 +18,7 @@ public class ActionMonster implements Runnable {
     private final Monster monster;
     private final Board board;
     private final Location locationPlayer;
+    private final EndGame linkEndGame;
 
     /**.
      * Checkpoint for end the game
@@ -30,10 +31,11 @@ public class ActionMonster implements Runnable {
      * @param board is link for this board
      * @param location is location the player
      */
-    public ActionMonster(Monster monster, Board board, Location location) {
+    public ActionMonster(Monster monster, Board board, Location location, EndGame linkEndGame) {
         this.monster = monster;
         this.board = board;
         this.locationPlayer = location;
+        this.linkEndGame = linkEndGame;
     }
 
     /**.
@@ -52,8 +54,8 @@ public class ActionMonster implements Runnable {
                 if (step.getX() == locationPlayer.getX() && step.getY() == locationPlayer.getY()) {
                     flag = true;
                     flagSecond = true;
-                    endGame = false;
                     System.out.printf("Monster %s caught the player", this.monster.getName());
+                    linkEndGame.theEnd();
                 }
                 try {
                     if(endGame && field[step.getX()][step.getY()].tryLock(5, SECONDS)) {
