@@ -28,6 +28,7 @@ public class ActionMonster implements Runnable {
      * Constructor for this class
      * @param monster is link for this player
      * @param board is link for this board
+     * @param location is location the player
      */
     public ActionMonster(Monster monster, Board board, Location location) {
         this.monster = monster;

@@ -16,12 +16,20 @@ public class Block {
     private final int count;
     private final ReentrantLock[][] field;
 
+    /**.
+     * Constructor for this class
+     * @param difficulty is level difficulty
+     * @param field is field the game
+     */
     public Block(int difficulty, ReentrantLock[][] field) {
         this.count = difficulty * 2;
         this.field = field;
         choiceLocation();
     }
 
+    /**.
+     * Arrangemanet of blocks
+     */
     public void choiceLocation() {
         Random rd = new Random(10);
         int x = 0;

@@ -14,7 +14,7 @@ public class GameBomberman {
     private final ActionMonster[] monsters;
 
     private final Player player;
-    private int difficultyGame;
+    private final int difficultyGame;
 
     /**.
      * @SIZEFIELD is max size for field the board
@@ -30,6 +30,7 @@ public class GameBomberman {
      * Constructor for this class
      * @param name is name for the player
      * @param stepPlayer is max step for the player
+     * @param difficulty is level difficulty for this game
      */
     public GameBomberman(String name, int stepPlayer, int difficulty) {
         this.difficultyGame = difficulty;
@@ -60,7 +61,7 @@ public class GameBomberman {
         bomberman.setEndGame();
         for(int i = 0; i < monsters.length; i++) {
             monsters[i].setEndGame();
-            System.out.printf("Player is alive!");
         }
+        System.out.printf("Player is alive!");
     }
 }

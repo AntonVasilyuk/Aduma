@@ -37,9 +37,9 @@ public class Monster implements Figure{
 
     /**.
      * Constructor for this class
-     * @param numMonster is name this figure
-     * @param sizeStep is max step for this figure
-     * @param max is max step for this figure
+     * @param numMonster is count of the monsters
+     * @param sizeStep is max size step the monsters
+     * @param max is size field
      */
     public Monster(int numMonster, int sizeStep, int max) {
         this.name = this.name + numMonster;
@@ -49,6 +49,10 @@ public class Monster implements Figure{
         this.direction = new Direction(sizeStep);
     }
 
+    /**.
+     * Step the monster
+     * @return new location
+     */
     @Override
     public Location step() {
         direction.choiseDirection(locationMonster, max);
@@ -79,7 +83,7 @@ public class Monster implements Figure{
 
     /**.
      * Method for description action the figure
-     * @return String
+     * @return String is text for print
      */
     public String toString() {
         return "Monster navigates to a cell " + this.locationMonster.getX() + ", " + this.locationMonster.getY();
