@@ -54,8 +54,7 @@ public class Player implements Figure {
      * @return
      */
     public Location step() {
-        direction.choiseDirection(locationPlayer, max);
-        return this.locationPlayer;
+        return direction.choiseDirection(locationPlayer, max);
     }
 
     /**.
