@@ -122,4 +122,26 @@ public class CompareWordsTest {
         boolean result = link.compareWordsTwo(wordOne, twoWord);
         assertThat(result, is(true)) ;
     }
+
+    /**.
+     * Test second method when 500000 charecters in words
+     */
+    @Test
+    public void whenNeedCompareNumberFirstMethod() {
+        String wordOne = "113";
+        String twoWord = "133";
+        boolean result = link.compareWordsOne(wordOne, twoWord);
+        assertThat(result, is(false)) ;
+    }
+
+    /**.
+     * Test second method when 500000 charecters in words
+     */
+    @Test
+    public void whenNeedCompareNumberSecondMethod() {
+        String wordOne = "1131";
+        String twoWord = "1331";
+        boolean result = link.compareWordsTwo(wordOne, twoWord);
+        assertThat(result, is(false)) ;
+    }
 }
