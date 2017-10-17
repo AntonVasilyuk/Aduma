@@ -2,7 +2,7 @@ package ru.job4j;
 
 import com.sun.org.apache.bcel.internal.classfile.SourceFile;
 
-import java.util.HashSet;
+import java.util.*;
 
 /**.
  * Task 5.7.3.
@@ -52,13 +52,14 @@ public class CompareWords {
     /**.
      * @oneCollection is one Collection
      */
-    private HashSet<Character> oneColletcion;
+    private List<Character> oneColletcion;
 
     /**.
      * @twoCollection is two collection
      */
-    private HashSet<Character> twoColletcion;
+    private List<Character> twoColletcion;
 
+    Character temp;
 
     /**.
      * Constructor for this class
@@ -66,8 +67,8 @@ public class CompareWords {
     public CompareWords() {
         hashOne = 0;
         hashTwo = 0;
-        oneColletcion = new HashSet<>();
-        twoColletcion = new HashSet<>();
+        oneColletcion = new LinkedList<>();
+        twoColletcion = new LinkedList<>();
     }
 
     /**.
@@ -119,9 +120,19 @@ public class CompareWords {
             twoColletcion.add((Character) twoArray[i]);
         }
         if (lengthOne > lengthTwo) {
-            result = oneColletcion.containsAll(twoColletcion);
+            Iterator<Character> iterOne = oneColletcion.iterator();
+            for(int i = 0; i < lengthOne; i++) {
+                temp = iterOne.next();
+                if(twoColletcion.contains(temp)) {twoColletcion.remove(temp);}
+            }
+            if (twoColletcion.isEmpty()) result = true;
         } else {
-            result = twoColletcion.containsAll(oneColletcion);
+            Iterator<Character> iterTwo = twoColletcion.iterator();
+            for(int i = 0; i < lengthTwo; i++) {
+                temp = iterTwo.next();
+                if(oneColletcion.contains(temp)) {oneColletcion.remove(temp);}
+            }
+            if (oneColletcion.isEmpty()) result = true;;
         }
         timeEnd = System.currentTimeMillis();
         timeWork = timeEnd - timeStart;
