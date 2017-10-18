@@ -27,5 +27,9 @@
 		<module>list</module>
 		<module>set</module>
 		<module>map</module>
+		<module>tree</module>
+		<module>orderBook</module>
+		<module>CompareWords</module>
 	</modules>
+
 </project>
