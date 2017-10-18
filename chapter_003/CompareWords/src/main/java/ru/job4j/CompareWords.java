@@ -52,12 +52,12 @@ public class CompareWords {
     /**.
      * @oneCollection is one Collection
      */
-    private List<Character> oneColletcion;
+    private Map<Character, Integer> oneColletcion;
 
     /**.
      * @twoCollection is two collection
      */
-    private List<Character> twoColletcion;
+    private Map<Character, Integer> twoColletcion;
 
     Character temp;
 
@@ -67,8 +67,8 @@ public class CompareWords {
     public CompareWords() {
         hashOne = 0;
         hashTwo = 0;
-        oneColletcion = new LinkedList<>();
-        twoColletcion = new LinkedList<>();
+        oneColletcion = new HashMap<>();
+        twoColletcion = new HashMap<>();
     }
 
     /**.
@@ -108,31 +108,35 @@ public class CompareWords {
     public boolean compareWordsTwo(String one, String two) {
         lengthOne = one.length();
         lengthTwo = two.length();
-        boolean result = false;
+        boolean result = true;
 
         timeStart = System.currentTimeMillis();
         char[] oneArray = one.toCharArray();
         char[] twoArray = two.toCharArray();
         for(int i = 0; i < lengthOne; i++) {
-            oneColletcion.add((Character) oneArray[i]);
+            Character key = oneArray[i];
+            oneColletcion.putIfAbsent(key, 1);
+            oneColletcion.computeIfPresent(key, (k, v) -> {
+                v = v + 1;
+                return v;
+            });
         }
         for(int i = 0; i < lengthTwo; i++) {
-            twoColletcion.add((Character) twoArray[i]);
+            Character key = twoArray[i];
+            twoColletcion.putIfAbsent(key, 1);
+            twoColletcion.computeIfPresent(key, (k, v) -> {
+                v = v + 1;
+                return v;
+            });
         }
-        if (lengthOne > lengthTwo) {
-            Iterator<Character> iterOne = oneColletcion.iterator();
-            for(int i = 0; i < lengthOne; i++) {
-                temp = iterOne.next();
-                if(twoColletcion.contains(temp)) {twoColletcion.remove(temp);}
+
+        Set<Character> keys = oneColletcion.keySet();
+        Iterator<Character> iter = keys.iterator();
+        for (int i = 0; i < lengthOne; i++) {
+            if (iter.hasNext()) {
+                temp = iter.next();
+                if (!oneColletcion.get(temp).equals(twoColletcion.get(temp))) {result = false;}
             }
-            if (twoColletcion.isEmpty()) result = true;
-        } else {
-            Iterator<Character> iterTwo = twoColletcion.iterator();
-            for(int i = 0; i < lengthTwo; i++) {
-                temp = iterTwo.next();
-                if(oneColletcion.contains(temp)) {oneColletcion.remove(temp);}
-            }
-            if (oneColletcion.isEmpty()) result = true;;
         }
         timeEnd = System.currentTimeMillis();
         timeWork = timeEnd - timeStart;
