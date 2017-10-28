@@ -18,6 +18,8 @@
 		<module>chapter_001</module>
 		<module>chapter_002</module>
 		<module>chapter_003</module>
+		<module>chapter_004</module>
+		<module>chapter_005</module>>
 	</modules>
 
 	<dependencies>
@@ -37,6 +39,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.4</version>
+		</dependency>
+		<dependency>
+			<groupId>net.jcip</groupId>
+			<artifactId>jcip-annotations</artifactId>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 	
