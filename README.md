@@ -13,6 +13,8 @@ Chapter_2 - OOP
 Chapter_3 - Collections
 
 Chapter_4 - Multithreading
+
+Chapter_5 - SQL and JDBC
  
 Learning resource - http://job4j.ru/
 
