@@ -1,0 +1,19 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>chapter_005</groupId>
+	<artifactId>chapter_005</artifactId>
+	<version>2.0</version>
+	<packaging>pom</packaging>
+	<name>chapter_005</name>
+	
+	<parent>
+		<groupId>ru.job4j</groupId>
+		<artifactId>git_test</artifactId>
+		<version>2.0</version>
+	</parent>
+
+	<modules>
+		<module>Basic_function</module>
+	</modules>
+
+</project>
