@@ -2,10 +2,8 @@ package ru.job4j;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.rmi.runtime.Log;
-
 import java.sql.*;
-import java.util.Properties;
+
 
 public class SQLStorage {
     private final static Logger log = LoggerFactory.getLogger(SQLStorage.class);
