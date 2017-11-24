@@ -14,6 +14,23 @@
 
 	<modules>
 		<module>Basic_function</module>
+		<module>Cars</module>
+		<module>JDBC</module>
 	</modules>
+
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.1-901-1.jdbc4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.23</version>
+		</dependency>
+
+	</dependencies>
 
 </project>
