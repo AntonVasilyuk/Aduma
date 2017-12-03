@@ -2,6 +2,7 @@ package ru.job4j;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.sql.*;
 
 
@@ -9,15 +10,12 @@ public class SQLStorage {
     private final static Logger log = LoggerFactory.getLogger(SQLStorage.class);
 
     public static void main(String[] args) {
-        String url = "jdbc:postgresql://localhost:5432/java_from_a_to_z";
-        String username = "postgres";
-        String password = "password";
-
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection(url, username, password);
+            Class.forName("org.sqlite.JDBC");
+            conn = DriverManager.getConnection("jdbc:sqlite:C:/SQLite/java_a_to_z.db");
             Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM cars");
+            ResultSet rs = st.executeQuery("SELECT * FROM work");
             while (rs.next()) {
                 System.out.println(String.format("%d %S", rs.getInt("id"),
                         rs.getString("name") ));
