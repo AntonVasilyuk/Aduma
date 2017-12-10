@@ -12,9 +12,9 @@ public class SQLStorage {
     public static void main(String[] args) {
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:Users/administrator/java_from_a_to_z.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:/Users/administrator/java_from_a_to_z.db");
             Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM test");
+            ResultSet rs = st.executeQuery("SELECT * FROM TEST");
             while (rs.next()) {
                 System.out.println(String.format("%d %S", rs.getInt("id"),
                         rs.getString("name") ));
@@ -24,12 +24,12 @@ public class SQLStorage {
             log.error(e.getMessage(), e);
         } finally {
             if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                log.error(e.getMessage(), e);
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    log.error(e.getMessage(), e);
+                }
             }
-        }
         }
     }
 }
