@@ -41,12 +41,4 @@ public class Concole {
             return 0;
         }
     }
-
-    /**.
-     * For printing result
-     * @param summ
-     */
-    public void print(int summ) {
-        System.out.printf("%d", summ);
-    }
 }

@@ -139,4 +139,12 @@ public class XML {
         }
         return -1;
     }
+    /**.
+     * For printing result
+     * @param summ
+     */
+    public void print(int summ) {
+        System.out.printf("%d", summ);
+    }
 }
+

@@ -33,12 +33,11 @@ public class SQLStorage {
 
         MainClass main = new MainClass();
         XML xmlCreater = new XML();
-        Concole console = new Concole();
 
         main.fillMyDB();
         List<Integer> list = main.getDBWrite();
         xmlCreater.createXMLOne(main.getDBWrite());
         xmlCreater.convertXML();
-        console.print(xmlCreater.summCount());
+        xmlCreater.print(xmlCreater.summCount());
     }
 }
