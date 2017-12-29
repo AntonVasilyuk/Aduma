@@ -3,33 +3,42 @@ package ru.job4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.transform.TransformerException;
 import java.sql.*;
 
+import java.util.List;
+
+/**.
+ * Task 8.4.1.
+ * Create SqlStorage
+ *
+ * @author Anton Vasilyuk
+ * @version 1.0.
+ */
 
 public class SQLStorage {
+
+    /**.
+     * Create logger.
+     */
     private final static Logger log = LoggerFactory.getLogger(SQLStorage.class);
 
-    public static void main(String[] args) {
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection("jdbc:sqlite:/Users/administrator/java_from_a_to_z.db");
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM TEST");
-            while (rs.next()) {
-                System.out.println(String.format("%d %S", rs.getInt("id"),
-                        rs.getString("name") ));
-            } rs.close();
-            st.close();
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    log.error(e.getMessage(), e);
-                }
-            }
-        }
+    /**.
+     * Point for enter in this app
+     * @param args its default argument
+     * @throws SQLException my be exception
+     * @throws TransformerException my be exception
+     */
+    public static void main(String[] args) throws SQLException, TransformerException {
+
+        MainClass main = new MainClass();
+        XML xmlCreater = new XML();
+        Concole console = new Concole();
+
+        main.fillMyDB();
+        List<Integer> list = main.getDBWrite();
+        xmlCreater.createXMLOne(main.getDBWrite());
+        xmlCreater.convertXML();
+        console.print(xmlCreater.summCount());
     }
 }
