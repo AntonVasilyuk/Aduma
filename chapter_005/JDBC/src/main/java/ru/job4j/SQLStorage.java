@@ -35,7 +35,6 @@ public class SQLStorage {
         XML xmlCreater = new XML();
 
         main.fillMyDB();
-        List<Integer> list = main.getDBWrite();
         xmlCreater.createXMLOne(main.getDBWrite());
         xmlCreater.convertXML();
         xmlCreater.print(xmlCreater.summCount());
