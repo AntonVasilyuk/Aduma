@@ -21,7 +21,7 @@ import java.io.FileOutputStream;
 
 /**
  * Task 8.4.1.
- * Create worker for db
+ * Create worker for my db
  *
  * @author Anton Vasilyuk on 29.12.2017
  * @version 1.0.
