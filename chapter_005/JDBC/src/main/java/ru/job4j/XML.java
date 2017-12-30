@@ -72,16 +72,16 @@ public class XML {
      * XML reader
      * @return list writes
      */
-    public List<String> readerXML() {
+    public List<String> readerXML(String adress, String teg, String values) {
         List<String> list = new LinkedList<>();
         Document doc;
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder db = dbf.newDocumentBuilder();
-            doc = db.parse("chapter_005/JDBC/src/main/resourcec/1.xml");
-            NodeList node = doc.getElementsByTagName("FIELD");
+            doc = db.parse(adress);
+            NodeList node = doc.getElementsByTagName(teg);
             for (int i = 0; i < node.getLength(); i++) {
-                list.add(node.item(i).getTextContent());
+                list.add(node.item(i).getAttributes().getNamedItem(values).getNodeValue());
             }
             return list;
         } catch (ParserConfigurationException e) {
@@ -118,26 +118,17 @@ public class XML {
     public int summCount() {
         int summ = 0;
         String adress = "chapter_005/JDBC/src/main/resourcec/2.xml";
-        Document doc;
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        try {
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            doc = db.parse(adress);
-            NodeList node = doc.getElementsByTagName("entry");
+        String teg = "entry";
+        String values = "field";
 
-            for (int i = 0; i < node.getLength(); i++) {
-                String text = node.item(i).getAttributes().getNamedItem("field").getNodeValue();
-                summ = summ + Integer.parseInt(text);
-            }
-            return summ;
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        List<String> list = readerXML(adress, teg, values);
+        Iterator<String> iter = list.iterator();
+
+        while(iter.hasNext()) {
+            String text = iter.next();
+            summ = summ + Integer.parseInt(text);
         }
-        return -1;
+        return summ;
     }
     /**.
      * For printing result

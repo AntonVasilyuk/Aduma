@@ -103,7 +103,7 @@ public class MainClass {
             st.close();
         } catch (Exception e) {
             this.conn.rollback();
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
     }
 
