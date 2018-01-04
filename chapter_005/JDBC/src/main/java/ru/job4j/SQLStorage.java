@@ -6,8 +6,6 @@ import org.slf4j.LoggerFactory;
 import javax.xml.transform.TransformerException;
 import java.sql.*;
 
-import java.util.List;
-
 /**.
  * Task 8.4.1.
  * Create SqlStorage
