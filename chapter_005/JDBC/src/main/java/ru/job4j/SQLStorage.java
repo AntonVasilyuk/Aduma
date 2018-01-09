@@ -3,7 +3,10 @@ package ru.job4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.bind.JAXBException;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.transform.TransformerException;
+import java.io.FileNotFoundException;
 import java.sql.*;
 
 /**.
@@ -27,14 +30,17 @@ public class SQLStorage {
      * @throws SQLException my be exception
      * @throws TransformerException my be exception
      */
-    public static void main(String[] args) throws SQLException, TransformerException {
+    public static void main(String[] args) throws SQLException, TransformerException, FileNotFoundException, XMLStreamException, JAXBException {
 
         MainClass main = new MainClass();
         XML xmlCreater = new XML();
 
         main.fillMyDB();
-        xmlCreater.createXMLOne(main.getDBWrite());
+        xmlCreater.createXMLDOM(main.getDBWrite());
+        xmlCreater.createXMLSAX(main.getDBWrite());
+        xmlCreater.createXMLJAXB(main.getDBWrite());
         xmlCreater.convertXML();
         xmlCreater.print(xmlCreater.summCount());
+        xmlCreater.print(xmlCreater.summCountJAXB());
     }
 }
