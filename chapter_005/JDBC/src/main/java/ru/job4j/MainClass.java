@@ -63,12 +63,6 @@ public class MainClass {
     public MainClass() {
         concole = new Concole();
         numCount = concole.ask("Please enter count:");
-        try {
-            conn = DriverManager.getConnection("jdbc:sqlite:/Users/administrator/java_from_a_to_z.db");
-            conn.setAutoCommit(false);
-        } catch (SQLException e) {
-            log.error(e.getMessage(), e);
-        }
     }
 
     /**.
@@ -76,18 +70,29 @@ public class MainClass {
      * @throws SQLException my be exception
      */
     public void fillMyDB() throws SQLException {
-        try {
+        try (Connection conn = DriverManager.getConnection
+                ("jdbc:sqlite:/Users/administrator/java_from_a_to_z.db"))
+        {
+            conn.setAutoCommit(false);
             dell();
-            Statement statement = this.conn.createStatement();
+            Statement statement = conn.createStatement();
             for (int i = 0; i < numCount; i++) {
                 statement.addBatch(String.format("INSERT INTO TEST(FIELD) VALUES (%d)", i));
             }
             statement.executeBatch();
-            this.conn.commit();
+            conn.commit();
             statement.close();
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
-            this.conn.rollback();
+            conn.rollback();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    log.error(e.getMessage(), e);
+                }
+            }
         }
     }
 
@@ -96,14 +101,24 @@ public class MainClass {
      * @throws SQLException my be exception
      */
     public void dell() throws SQLException {
-        try {
+        try (Connection conn = DriverManager.getConnection
+                ("jdbc:sqlite:/Users/administrator/java_from_a_to_z.db")){
+            conn.setAutoCommit(false);
             Statement st = conn.createStatement();
             st.execute(delete);
-            this.conn.commit();
+            conn.commit();
             st.close();
         } catch (Exception e) {
-            this.conn.rollback();
+            conn.rollback();
             log.error(e.getMessage(), e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    log.error(e.getMessage(), e);
+                }
+            }
         }
     }
 
@@ -114,8 +129,10 @@ public class MainClass {
      */
     public List<Integer> getDBWrite() throws SQLException {
         List<Integer> list = new LinkedList<>();
-        try {
-            Statement st = this.conn.createStatement();
+        try (Connection conn = DriverManager.getConnection
+                ("jdbc:sqlite:/Users/administrator/java_from_a_to_z.db")) {
+            conn.setAutoCommit(false);
+            Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(quere);
                 while (rs.next()) {
                     list.add(rs.getInt("FIELD"));
@@ -123,12 +140,20 @@ public class MainClass {
             conn.commit();
             st.close();
             rs.close();
-            return  list;
+            return list;
 
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
             conn.rollback();
             return null;
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    log.error(e.getMessage(), e);
+                }
+            }
         }
     }
 }

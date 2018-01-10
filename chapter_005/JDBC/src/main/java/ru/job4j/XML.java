@@ -4,7 +4,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import ru.job4j.Tracker.Entry;
+import ru.job4j.Entry;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -123,11 +123,9 @@ public class XML {
             JAXBContext jaxbContext = JAXBContext.newInstance(Entries.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
-            // output pretty printed
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
             jaxbMarshaller.marshal(entries, file);
-            //jaxbMarshaller.marshal(customer, System.out);
 
         } catch (JAXBException e) {
             e.printStackTrace();
@@ -237,6 +235,7 @@ public class XML {
         }
         return summ;
     }
+
     /**.
      * For printing result
      * @param summ
