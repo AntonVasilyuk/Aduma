@@ -1,5 +1,8 @@
 package ru.job4j.Tracker.JDBCStorage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ru.job4j.SQLStorage;
 import ru.job4j.Tracker.models.Item;
 
 import java.sql.*;
@@ -18,16 +21,26 @@ import java.util.List;
 public class JDBCStorage {
 
     /**.
+     * Create logger
+     */
+    private final static Logger log = LoggerFactory.getLogger(SQLStorage.class);
+
+    /**.
      * Is link for connection
      */
     private Connection conn;
+
+    /**.
+     * Is setting for connection
+     */
+    private Settings settings;
 
     /**.
      * Constructor
      */
     public JDBCStorage() {
         try {
-            Settings settings = Settings.getInstance();
+            settings = Settings.getInstance();
             conn = DriverManager.getConnection(settings.getValues("url"));
             conn.setAutoCommit(false);
         } catch (SQLException e) {
@@ -43,7 +56,10 @@ public class JDBCStorage {
     public void add(Item item) throws SQLException {
         createTable();
         try {
-            PreparedStatement st = conn.prepareStatement("INSERT INTO StorageTracker VALUES (?, ?, ?, ?)");
+            conn = DriverManager.getConnection(settings.getValues("url"));
+            conn.setAutoCommit(false);
+            PreparedStatement st = conn.prepareStatement
+                    ("INSERT INTO StorageTracker VALUES (?, ?, ?, ?)");
             st.setString(1, item.getId());
             st.setString(2, item.getName());
             st.setString(3, item.getDesc());
@@ -51,7 +67,15 @@ public class JDBCStorage {
             st.executeUpdate();
             st.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    log.error(e.getMessage(), e);
+                }
+            }
         }
     }
 
@@ -62,13 +86,21 @@ public class JDBCStorage {
      */
     public void delete(String id) throws SQLException{
         try {
+            conn = DriverManager.getConnection(settings.getValues("url"));
+            conn.setAutoCommit(false);
             Statement st = conn.createStatement();
             st.execute(String.format("DELETE FROM TABLE StorageTracker WHERE id = %s", id));
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    log.error(e.getMessage(), e);
+                }
+            }
         }
-
-
     }
 
     /**.
@@ -79,6 +111,8 @@ public class JDBCStorage {
     public List<Item> getAll() throws SQLException{
         List<Item> list = new ArrayList<>();
         try {
+            conn = DriverManager.getConnection(settings.getValues("url"));
+            conn.setAutoCommit(false);
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM StorageTracker");
             while(rs.next()) {
@@ -88,7 +122,15 @@ public class JDBCStorage {
             st.close();
             return list;
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    log.error(e.getMessage(), e);
+                }
+            }
         }
         return null;
     }
@@ -100,11 +142,21 @@ public class JDBCStorage {
     public void createTable() throws SQLException{
         Statement st = null;
         try {
+            conn = DriverManager.getConnection(settings.getValues("url"));
+            conn.setAutoCommit(false);
             st = conn.createStatement();
             st.execute("CREATE TABLE StorageTracker (id VARCHAR(25), name VARCHAR(25), " +
                     "desc VARCHAR(100), created LONG) IF NOT EXISTS ");
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    log.error(e.getMessage(), e);
+                }
+            }
         }
     }
 }
