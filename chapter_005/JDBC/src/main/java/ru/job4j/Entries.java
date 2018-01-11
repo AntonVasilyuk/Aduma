@@ -1,6 +1,6 @@
 package ru.job4j;
 
-import ru.job4j.Tracker.Entry;
+import ru.job4j.Entry;
 
 import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
