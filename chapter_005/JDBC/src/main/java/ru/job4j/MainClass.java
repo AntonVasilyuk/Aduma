@@ -20,7 +20,7 @@ public class MainClass {
     /**.
      * Create logger
      */
-    private final static Logger log = LoggerFactory.getLogger(SQLStorage.class);
+    private final static Logger log = LoggerFactory.getLogger(MainClass.class);
 
     /**.
      * Its count writes to db
@@ -63,35 +63,32 @@ public class MainClass {
     public MainClass() {
         concole = new Concole();
         numCount = concole.ask("Please enter count:");
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite:/Users/administrator/java_from_a_to_z.db");
+            conn.setAutoCommit(false);
+        } catch (SQLException e) {
+            log.error(e.getMessage(), e);
+        }
     }
 
     /**.
      * Fill writes to db
-     * @throws SQLException my be exception
      */
-    public void fillMyDB() throws SQLException {
-        try (Connection conn = DriverManager.getConnection
-                ("jdbc:sqlite:/Users/administrator/java_from_a_to_z.db"))
+    public void fillMyDB() {
+        dell();
+        try (Statement statement = conn.createStatement();)
         {
-            conn.setAutoCommit(false);
-            dell();
-            Statement statement = conn.createStatement();
             for (int i = 0; i < numCount; i++) {
                 statement.addBatch(String.format("INSERT INTO TEST(FIELD) VALUES (%d)", i));
             }
             statement.executeBatch();
             conn.commit();
-            statement.close();
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
-            conn.rollback();
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    log.error(e.getMessage(), e);
-                }
+            try {
+                conn.rollback();
+            } catch (SQLException e1) {
+                log.error(e1.getMessage(), e1);
             }
         }
     }
@@ -100,25 +97,17 @@ public class MainClass {
      * Delete all writes from db
      * @throws SQLException my be exception
      */
-    public void dell() throws SQLException {
-        try (Connection conn = DriverManager.getConnection
-                ("jdbc:sqlite:/Users/administrator/java_from_a_to_z.db")){
-            conn.setAutoCommit(false);
-            Statement st = conn.createStatement();
+    public void dell() {
+        try (Statement st = conn.createStatement()){
             st.execute(delete);
             conn.commit();
-            st.close();
         } catch (Exception e) {
-            conn.rollback();
-            log.error(e.getMessage(), e);
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    log.error(e.getMessage(), e);
-                }
+            try {
+                conn.rollback();
+            } catch (SQLException e1) {
+                log.error(e1.getMessage(), e1);
             }
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -127,32 +116,33 @@ public class MainClass {
      * @return list writes form db
      * @throws SQLException my be exception
      */
-    public List<Integer> getDBWrite() throws SQLException {
+    public List<Integer> getDBWrite() {
         List<Integer> list = new LinkedList<>();
-        try (Connection conn = DriverManager.getConnection
-                ("jdbc:sqlite:/Users/administrator/java_from_a_to_z.db")) {
-            conn.setAutoCommit(false);
-            Statement st = conn.createStatement();
+        try (Statement st = conn.createStatement();) {
             ResultSet rs = st.executeQuery(quere);
                 while (rs.next()) {
                     list.add(rs.getInt("FIELD"));
                 }
             conn.commit();
-            st.close();
             rs.close();
             return list;
-
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
-            conn.rollback();
+            try {
+                conn.rollback();
+            } catch (SQLException e1) {
+                log.error(e1.getMessage(), e1);
+            }
             return null;
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    log.error(e.getMessage(), e);
-                }
+        }
+    }
+
+    public void close() {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                log.error(e.getMessage(), e);
             }
         }
     }

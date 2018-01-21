@@ -30,17 +30,16 @@ public class SQLStorage {
      * @throws SQLException my be exception
      * @throws TransformerException my be exception
      */
-    public static void main(String[] args) throws SQLException, TransformerException, FileNotFoundException, XMLStreamException, JAXBException {
+    public static void main(String[] args) {
 
         MainClass main = new MainClass();
         XML xmlCreater = new XML();
 
         main.fillMyDB();
-        xmlCreater.createXMLDOM(main.getDBWrite());
         xmlCreater.createXMLSAX(main.getDBWrite());
         xmlCreater.createXMLJAXB(main.getDBWrite());
+        main.close();
         xmlCreater.convertXML();
         xmlCreater.print(xmlCreater.summCount());
-        xmlCreater.print(xmlCreater.summCountJAXB());
     }
 }

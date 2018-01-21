@@ -1,5 +1,7 @@
 package ru.job4j;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -39,44 +41,9 @@ import java.io.FileOutputStream;
 public class XML {
 
     /**.
-     * Create XML file from our db with DOM
-     * @param list is list all writes
+     * Is logger
      */
-    public void createXMLDOM(List<Integer> list) {
-        Iterator<Integer> iter = list.iterator();
-        Document doc = null;
-        Element el = null;
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        try {
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            doc = db.newDocument();
-            Element entries = doc.createElement("entries");
-            while (iter.hasNext()) {
-                el = doc.createElement("entry");
-                Element child = doc.createElement("field");
-                child.setTextContent(iter.next().toString());
-                el.appendChild(child);
-                entries.appendChild(el);
-            }
-            doc.appendChild(entries);
-
-            try {
-                Transformer tr = TransformerFactory.newInstance().newTransformer();
-                tr.setOutputProperty(OutputKeys.INDENT, "yes");
-                tr.setOutputProperty(OutputKeys.METHOD, "xml");
-                tr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-                tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-
-                tr.transform(new DOMSource(doc),
-                        new StreamResult(new FileOutputStream("1.xml")));
-
-            } catch (TransformerException | IOException te) {
-                System.out.println(te.getMessage());
-            }
-        } catch (ParserConfigurationException pce) {
-            System.out.println("UsersXML: Error trying to instantiate DocumentBuilder " + pce);
-        }
-    }
+    private final static Logger log = LoggerFactory.getLogger(XML.class);
 
     /**.
      * Create XML with SAX
@@ -84,26 +51,33 @@ public class XML {
      * @throws FileNotFoundException
      * @throws XMLStreamException
      */
-    public void createXMLSAX(List<Integer> list) throws FileNotFoundException, XMLStreamException {
+    public void createXMLSAX(List<Integer> list) {
         Iterator<Integer> iter = list.iterator();
         String root = "entries";
         String child = "entry";
         XMLOutputFactory factory = XMLOutputFactory.newFactory();
-        XMLStreamWriter writer = factory.createXMLStreamWriter(new FileOutputStream("11.xml"));
-        writer.writeStartDocument();
-        writer.writeStartElement(root);
-        while(iter.hasNext()) {
-            writer.writeStartElement(child);
-            writer.writeStartElement("field");
-            writer.writeCharacters(String.valueOf(iter.next()));
+        XMLStreamWriter writer = null;
+        try {
+            writer = factory.createXMLStreamWriter(new FileOutputStream("11.xml"));
+            writer.writeStartDocument();
+            writer.writeStartElement(root);
+            while(iter.hasNext()) {
+                writer.writeStartElement(child);
+                writer.writeStartElement("field");
+                writer.writeCharacters(String.valueOf(iter.next()));
+                writer.writeEndElement();
+                writer.writeEndElement();
+            }
             writer.writeEndElement();
-            writer.writeEndElement();
-        }
-        writer.writeEndElement();
-        writer.writeEndDocument();
+            writer.writeEndDocument();
 
-        writer.flush();
-        writer.close();
+            writer.flush();
+            writer.close();
+        } catch (XMLStreamException e) {
+            log.error(e.getMessage() ,e);
+        } catch (FileNotFoundException e) {
+            log.error(e.getMessage(), e);
+        }
     }
 
     /**.
@@ -119,7 +93,7 @@ public class XML {
 
 
         try {
-            File file = new File("111.xml");
+            File file = new File("1.xml");
             JAXBContext jaxbContext = JAXBContext.newInstance(Entries.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
@@ -128,35 +102,9 @@ public class XML {
             jaxbMarshaller.marshal(entries, file);
 
         } catch (JAXBException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
 
-    }
-
-    /**.
-     * XML reader with DOM
-     * @return list writes
-     */
-    public List<String> readerXML(String adress, String teg, String values) {
-        List<String> list = new LinkedList<>();
-        Document doc;
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        try {
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            doc = db.parse(adress);
-            NodeList node = doc.getElementsByTagName(teg);
-            for (int i = 0; i < node.getLength(); i++) {
-                list.add(node.item(i).getAttributes().getNamedItem(values).getNodeValue());
-            }
-            return list;
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     /**.
@@ -164,21 +112,26 @@ public class XML {
      * @return list
      * @throws JAXBException my be exception
      */
-    public List<String> XMLReaderWithJAXB() throws JAXBException {
+    public List<String> XMLReaderWithJAXB() {
         File file = new File("1.xml");
-        JAXBContext context = JAXBContext.newInstance(Entries.class);
-
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        Entries entries = (Entries) unmarshaller.unmarshal(file);
-        List<Entry> list = entries.getList();
-        Iterator<Entry> iter = list.iterator();
-        List<String> listNum = new ArrayList<>();
-        while (iter.hasNext()) {
-            int num = iter.next().getField();
-            String temp = String.valueOf(num);
-            listNum.add(temp);
+        JAXBContext context = null;
+        try {
+            context = JAXBContext.newInstance(Entries.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            Entries entries = (Entries) unmarshaller.unmarshal(file);
+            List<Entry> list = entries.getList();
+            Iterator<Entry> iter = list.iterator();
+            List<String> listNum = new ArrayList<>();
+            while (iter.hasNext()) {
+                int num = iter.next().getField();
+                String temp = String.valueOf(num);
+                listNum.add(temp);
+            }
+            return listNum;
+        } catch (JAXBException e) {
+            log.error(e.getMessage(), e);
         }
-        return listNum;
+        return null;
     }
 
 
@@ -186,17 +139,24 @@ public class XML {
      * Convert xml file to other format xml file.
      * @throws TransformerException my be exception
      */
-    public void convertXML() throws TransformerException {
+    public void convertXML() {
         String sourseFile = "1.xml";
         String stileFile = "chapter_005/JDBC/src/main/resourcec/StileForConvert.xml";
         String result = "2.xml";
 
         TransformerFactory trans = TransformerFactory.newInstance();
         Source xlts = new StreamSource(new File(stileFile));
-        Transformer transformer = trans.newTransformer(xlts);
-        Source text = new StreamSource(new File(sourseFile));
+        Transformer transformer = null;
+        try {
+            transformer = trans.newTransformer(xlts);
+            Source text = new StreamSource(new File(sourseFile));
 
-        transformer.transform(text, new StreamResult(result));
+            transformer.transform(text, new StreamResult(result));
+        } catch (TransformerConfigurationException e) {
+            log.error(e.getMessage(), e);
+        } catch (TransformerException e) {
+            log.error(e.getMessage(), e);
+        }
     }
 
     /**.
@@ -204,26 +164,6 @@ public class XML {
      * @return summ all number
      */
     public int summCount() {
-        int summ = 0;
-        String adress = "2.xml";
-        String teg = "entry";
-        String values = "field";
-
-        List<String> list = readerXML(adress, teg, values);
-        Iterator<String> iter = list.iterator();
-
-        while(iter.hasNext()) {
-            String text = iter.next();
-            summ = summ + Integer.parseInt(text);
-        }
-        return summ;
-    }
-
-    /**.
-     * Summ all nubber with JAXB
-     * @return summ all number
-     */
-    public int summCountJAXB() throws JAXBException {
         int summ = 0;
 
         List<String> list = XMLReaderWithJAXB();
