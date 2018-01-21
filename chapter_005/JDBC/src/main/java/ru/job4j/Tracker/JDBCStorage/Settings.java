@@ -4,6 +4,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Task 8.4.2.
  * Update Tracker from part 2
@@ -14,6 +17,9 @@ import java.util.Properties;
  */
 
 public class Settings {
+
+    private final static Logger log = LoggerFactory.getLogger(Settings.class);
+
     private static final Settings INSTANCE = new Settings();
 
     private final Properties properties = new Properties();
@@ -22,7 +28,7 @@ public class Settings {
         try {
             properties.load(new FileInputStream(getClass().getClassLoader().getResource("Storage.properties").getFile()));
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
     }
 

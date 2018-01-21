@@ -23,7 +23,7 @@ public class JDBCStorage {
     /**.
      * Create logger
      */
-    private final static Logger log = LoggerFactory.getLogger(SQLStorage.class);
+    private final static Logger log = LoggerFactory.getLogger(JDBCStorage.class);
 
     /**.
      * Is link for connection
@@ -44,7 +44,7 @@ public class JDBCStorage {
             conn = DriverManager.getConnection(settings.getValues("url"));
             conn.setAutoCommit(false);
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -53,13 +53,11 @@ public class JDBCStorage {
      * @param item is new item
      * @throws SQLException my be exception
      */
-    public void add(Item item) throws SQLException {
+    public void add(Item item) {
         createTable();
-        try {
-            conn = DriverManager.getConnection(settings.getValues("url"));
-            conn.setAutoCommit(false);
-            PreparedStatement st = conn.prepareStatement
-                    ("INSERT INTO StorageTracker VALUES (?, ?, ?, ?)");
+        try (PreparedStatement st = conn.prepareStatement
+                ("INSERT INTO StorageTracker VALUES (?, ?, ?, ?)"))
+        {
             st.setString(1, item.getId());
             st.setString(2, item.getName());
             st.setString(3, item.getDesc());
@@ -68,14 +66,6 @@ public class JDBCStorage {
             st.close();
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    log.error(e.getMessage(), e);
-                }
-            }
         }
     }
 
@@ -85,21 +75,10 @@ public class JDBCStorage {
      * @throws SQLException my be exception
      */
     public void delete(String id) throws SQLException{
-        try {
-            conn = DriverManager.getConnection(settings.getValues("url"));
-            conn.setAutoCommit(false);
-            Statement st = conn.createStatement();
+        try (Statement st = conn.createStatement()){
             st.execute(String.format("DELETE FROM TABLE StorageTracker WHERE id = %s", id));
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    log.error(e.getMessage(), e);
-                }
-            }
         }
     }
 
@@ -110,10 +89,7 @@ public class JDBCStorage {
      */
     public List<Item> getAll() throws SQLException{
         List<Item> list = new ArrayList<>();
-        try {
-            conn = DriverManager.getConnection(settings.getValues("url"));
-            conn.setAutoCommit(false);
-            Statement st = conn.createStatement();
+        try (Statement st = conn.createStatement()){
             ResultSet rs = st.executeQuery("SELECT * FROM StorageTracker");
             while(rs.next()) {
                 list.add(new Item(rs.getString("name"), rs.getString("desc"), rs.getLong("created")));
@@ -123,14 +99,6 @@ public class JDBCStorage {
             return list;
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    log.error(e.getMessage(), e);
-                }
-            }
         }
         return null;
     }
@@ -139,24 +107,12 @@ public class JDBCStorage {
      * Create table if not exist
      * @throws SQLException my be exception
      */
-    public void createTable() throws SQLException{
-        Statement st = null;
-        try {
-            conn = DriverManager.getConnection(settings.getValues("url"));
-            conn.setAutoCommit(false);
-            st = conn.createStatement();
+    public void createTable() {
+        try (Statement st = conn.createStatement()){
             st.execute("CREATE TABLE StorageTracker (id VARCHAR(25), name VARCHAR(25), " +
                     "desc VARCHAR(100), created LONG) IF NOT EXISTS ");
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    log.error(e.getMessage(), e);
-                }
-            }
         }
     }
 }
