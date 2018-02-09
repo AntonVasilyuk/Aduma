@@ -5,8 +5,12 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 
-/**
- * Created by administrator on 14.01.2018.
+/**.
+ * Task 8.5.1.
+ * Connect to a database to record found data
+ *
+ * @author Anton Vasilyuk
+ * @version 1.0.
  */
 public class ConnectDB {
 
@@ -38,6 +42,11 @@ public class ConnectDB {
         }
     }
 
+    /**.
+     * Method for add white to db
+     * @param href is link offers
+     * @param tmp is date offers
+     */
     public void add(String href, Timestamp tmp) {
         createTable();
         try (PreparedStatement st = conn.prepareStatement
@@ -68,6 +77,7 @@ public class ConnectDB {
             log.error(e.getMessage(), e);
         }
     }
+
 
     public void printDB() {
         try (Statement st = conn.createStatement()) {

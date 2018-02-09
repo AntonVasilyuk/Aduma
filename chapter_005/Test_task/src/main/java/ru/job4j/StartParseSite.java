@@ -7,8 +7,12 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Created by administrator on 26.01.2018.
+/**.
+ * Task 8.5.1.
+ * Search offers the job
+ *
+ * @author Anton Vasilyuk
+ * @version 1.0.
  */
 public class StartParseSite {
 
