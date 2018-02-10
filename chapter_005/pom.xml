@@ -14,7 +14,7 @@
 
 	<modules>
 		<module>Basic_function</module>
-		<module>Cars</module>
+		<module>Test_task</module>
 		<module>JDBC</module>
 	</modules>
 
