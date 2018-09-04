@@ -38,7 +38,7 @@ public class ConnectionWeb {
     /**.
      * Is main url page for parsing
      */
-    private String MAIN_URL;
+    private String mainUrl;
 
     /**.
      * For date format
@@ -86,6 +86,16 @@ public class ConnectionWeb {
     private int countWrites = 1;
 
     /**.
+     * Index for page on this site
+     */
+    private int page = 1;
+
+    /**.
+     * Is end of the cicle for searching now
+     */
+    private boolean endSearch = false;
+
+    /**.
      * Constructor for class ConnectionWeb
      */
     private ConnectionWeb() {
@@ -94,7 +104,7 @@ public class ConnectionWeb {
         year = date.get(Calendar.YEAR);
 
         Settings settings = Settings.getInstance();
-        MAIN_URL = settings.getValues("jdbc.url");
+        mainUrl = settings.getValues("jdbc.url");
 
         checkFirst = true;
     }
@@ -104,66 +114,35 @@ public class ConnectionWeb {
      */
     public void getDataWebSite() {
         log.info("Initialization parsing site from connetionWeb");
-        boolean endSearch = true;
-        int page = 1;
-        Document document;
-
         try {
-            while (endSearch) {
-                if (page == 1) {
-                    document = Jsoup.connect(MAIN_URL).get();
-                } else {
-                    document = Jsoup.connect(String.format("%s/%d", MAIN_URL, page)).get();
-                }
-
-                Elements headEl = document.select("tr:has(td.postslisttopic)");
-
+            while (!endSearch) {
+                Elements headEl = checkPage();
                 if (headEl.size() < 5) {
                     break;
                 }
-
                 page++;
                 for (Element element : headEl) {
                     String text = element.text().toLowerCase();
                     if (text.contains("java") && !text.contains("script")) {
                         Elements info = element.select("td.postslisttopic");
                         Elements date = element.select("td.altCol");
-
                         String infoText = info.get(0).getElementsByTag("a").text();
                         String dateText = date.get(1).text();
 
-                        if (!dateText.contains("сегодня") && !dateText.contains("вчера")) {
-                            int timer = 2000 + Integer.parseInt(dateText.split(" ")[2].substring(0, 2));
-                            if (year != +timer) {
-                                endSearch = false;
-                                break;
-                            }
+                        if (checkTimeThisYear(dateText)) {
+                            break;
                         }
+
                         String time = getTimeAdding(dateText);
-
                         if (checkFirst) {
-                            firstOfferToSearch = infoText;
-                            firstDateToSearch = time;
-                            checkFirst = false;
+                            initializeFirstData(infoText, time);
                         }
-
-                        if (checkTime != null && checkOffer != null) {
-                            if (!checkOffer.equals(infoText) && !checkTime.equals(time)) {
-                                db.add(countWrites, infoText, time);
-                                countWrites++;
-                            } else {
-                                checkOffer = firstOfferToSearch;
-                                checkTime = firstDateToSearch;
-                                checkFirst = true;
-                                break;
-                            }
-                        } else {
-                            db.add(countWrites, infoText, time);
-                            countWrites++;
-                        }
+                        addDataToDB(infoText, time);
                     }
                 }
             }
+            endSearch = false;
+            checkFirst = true;
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
@@ -198,6 +177,70 @@ public class ConnectionWeb {
     }
 
     /**.
+     * Get date from page
+     * @return headEl is all data from this page
+     * @throws IOException my be exception
+     */
+    private Elements checkPage() throws IOException {
+        Document document;
+        if (page == 1) {
+            document = Jsoup.connect(mainUrl).get();
+        } else {
+            document = Jsoup.connect(String.format("%s/%d", mainUrl, page)).get();
+        }
+        Elements headEl = document.select("tr:has(td.postslisttopic)");
+        return headEl;
+    }
+
+    /**.
+     * Method for checking actual year the write
+     * @param dateWrites is date for writes
+     * @return result checking
+     */
+    private boolean checkTimeThisYear(String dateWrites) {
+        if (!dateWrites.contains("сегодня") && !dateWrites.contains("вчера")) {
+            int timer = 2000 + Integer.parseInt(dateWrites.split(" ")[2].substring(0, 2));
+            if (year != timer) {
+                endSearch = true;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**.
+     * Method for initialization the first writes on searching now
+     * @param firstOffer is first offer
+     * @param firstDate is date the first offer
+     */
+    private void initializeFirstData(String firstOffer, String firstDate) {
+        firstOfferToSearch = firstOffer;
+        firstDateToSearch = firstDate;
+        checkFirst = false;
+    }
+
+    /**.
+     * Method for adding data to database
+     * @param offer is offer jobs
+     * @param dateOffer is date the offer jobs
+     */
+    private void addDataToDB(String offer, String dateOffer) {
+        if (checkTime != null && checkOffer != null) {
+            if (!checkOffer.equals(offer) && !checkTime.equals(dateOffer)) {
+                db.add(countWrites, offer, dateOffer);
+                countWrites++;
+            } else {
+                checkOffer = firstOfferToSearch;
+                checkTime = firstDateToSearch;
+                endSearch = true;
+            }
+        } else {
+            db.add(countWrites, offer, dateOffer);
+            countWrites++;
+        }
+    }
+
+    /**.
      * Create and return object for connetionWeb
      * @return connectionWeb
      */
@@ -206,6 +249,10 @@ public class ConnectionWeb {
         if (connectionWeb == null) {
             connectionWeb = new ConnectionWeb();
         }
+        return connectionWeb;
+    }
+
+    public ConnectionWeb getConnectionWeb() {
         return connectionWeb;
     }
 }
