@@ -52,12 +52,9 @@ public class ConnectDB {
         try {
             settings = Settings.getInstance();
             Class.forName(settings.getValues("jdbc.driver"));
-
             urlDB = settings.getValues("jdbc.urldb");
             userName = settings.getValues("jdbc.username");
             password = settings.getValues("jdbc.password");
-
-            //System.out.println("text info " + urlDB + userName + password);
             conn = DriverManager.getConnection(urlDB, userName, password);
             if (conn.isClosed() || conn == null) {
                 log.error("Соединение не установлено");

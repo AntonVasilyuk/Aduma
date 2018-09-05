@@ -31,11 +31,6 @@ public class ConnectionWeb {
     private final static Logger log = LoggerFactory.getLogger(ConnectionWeb.class);
 
     /**.
-     * Link to Singleton class
-     */
-    private static ConnectionWeb connectionWeb;
-
-    /**.
      * Is main url page for parsing
      */
     private String mainUrl;
@@ -98,14 +93,12 @@ public class ConnectionWeb {
     /**.
      * Constructor for class ConnectionWeb
      */
-    private ConnectionWeb() {
+    public ConnectionWeb() {
         log.info("Initializing the constructor");
         Calendar date = Calendar.getInstance();
         year = date.get(Calendar.YEAR);
-
         Settings settings = Settings.getInstance();
         mainUrl = settings.getValues("jdbc.url");
-
         checkFirst = true;
     }
 
@@ -128,11 +121,9 @@ public class ConnectionWeb {
                         Elements date = element.select("td.altCol");
                         String infoText = info.get(0).getElementsByTag("a").text();
                         String dateText = date.get(1).text();
-
                         if (checkTimeThisYear(dateText)) {
                             break;
                         }
-
                         String time = getTimeAdding(dateText);
                         if (checkFirst) {
                             initializeFirstData(infoText, time);
@@ -177,7 +168,7 @@ public class ConnectionWeb {
     }
 
     /**.
-     * Get date from page
+     * Get data from page
      * @return headEl is all data from this page
      * @throws IOException my be exception
      */
@@ -238,21 +229,5 @@ public class ConnectionWeb {
             db.add(countWrites, offer, dateOffer);
             countWrites++;
         }
-    }
-
-    /**.
-     * Create and return object for connetionWeb
-     * @return connectionWeb
-     */
-    public static ConnectionWeb newInstance() {
-        log.info("Returned single object connectionWeb");
-        if (connectionWeb == null) {
-            connectionWeb = new ConnectionWeb();
-        }
-        return connectionWeb;
-    }
-
-    public ConnectionWeb getConnectionWeb() {
-        return connectionWeb;
     }
 }

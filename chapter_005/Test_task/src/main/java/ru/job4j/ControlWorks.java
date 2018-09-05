@@ -26,17 +26,14 @@ public class ControlWorks {
     public static void main(String[] args) {
         log.info("Programm start");
         int periodScanning = Integer.parseInt(Settings.getInstance().getValues("cron.time"));
-
         try {
             JobDetail job = JobBuilder.newJob(ParsingSite.class).withIdentity("parsingsite").build();
-
-            Trigger trigger = TriggerBuilder.newTrigger().withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInHours(periodScanning).repeatForever()).build();
-
+            Trigger trigger = TriggerBuilder.newTrigger().withSchedule(SimpleScheduleBuilder.simpleSchedule().
+                    withIntervalInHours(periodScanning).repeatForever()).build();
             SchedulerFactory schFactory = new StdSchedulerFactory();
             Scheduler scheduler = schFactory.getScheduler();
             scheduler.start();
             scheduler.scheduleJob(job, trigger);
-
         }catch (SchedulerException e) {
             log.error(e.getMessage(), e);
         }

@@ -13,12 +13,20 @@ public class ParsingSite implements Job {
     private final static Logger log = LoggerFactory.getLogger(ParsingSite.class);
 
     /**.
+     * Link to the this object
+     */
+    private ConnectionWeb connectionWeb;
+
+    /**.
      * Method for start parsing
      * @param jobExecutionContext
      */
     @Override
     public void execute(JobExecutionContext jobExecutionContext) {
         log.info("Run the scan site...");
-        ConnectionWeb.newInstance().getDataWebSite();
+        if (connectionWeb == null) {
+            connectionWeb = new ConnectionWeb();
+        }
+        connectionWeb.getDataWebSite();
     }
 }
