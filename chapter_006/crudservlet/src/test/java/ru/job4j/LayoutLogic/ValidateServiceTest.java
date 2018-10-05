@@ -10,26 +10,53 @@ import java.util.List;
 
 public class ValidateServiceTest {
 
+    /**.
+     * Is link for instance layout logic
+     */
     final ValidateService service = ValidateService.getInstance();
 
+    /**.
+     * Is link for instance layout persistment
+     */
     final Store store = MemoryStore.getInstance();
 
+    /**.
+     * Is test name
+     */
     final String name = "testName";
 
+    /**.
+     * Is test login
+     */
     final String login = "testLogin";
 
+    /**.
+     * Is test email
+     */
     final String email = "testEmail";
 
+    /**.
+     * Is test instance user
+     */
     final User user = new User(store.getId(), name, login, email);
 
+    /**.
+     * Is storage from layout persistment
+     */
     final List<User> storage = store.getStorage();
 
+    /**.
+     * Testing method getInstance
+     */
     @Test
     public void whenNeedGetInstanceThisSingletonClass() {
         Assert.assertEquals(service, ValidateService.getInstance());
 
     }
 
+    /**.
+     * Testing method add when need adding user
+     */
     @Test
     public void whenNeedAddingOneUser() {
         boolean result = service.add(name, login, email);
@@ -41,6 +68,9 @@ public class ValidateServiceTest {
         Assert.assertTrue(result);
     }
 
+    /**.
+     * Testing method add when adding two equality users
+     */
     @Test
     public void whenNeedAddingOneUserAndCheckingHis() {
         service.add(name, login, email);
@@ -53,6 +83,9 @@ public class ValidateServiceTest {
         Assert.assertFalse(result);
     }
 
+    /**.
+     * Testing method update
+     */
     @Test
     public void whenNeedUpdatingListing() {
         int id = store.getId();
@@ -74,6 +107,9 @@ public class ValidateServiceTest {
         Assert.assertTrue(result);
     }
 
+    /**.
+     * Testing method delete
+     */
     @Test
     public void whenNeedDeletingUser() {
         int id = store.getId();
@@ -89,6 +125,9 @@ public class ValidateServiceTest {
         Assert.assertTrue(result);
     }
 
+    /**.
+     * Testing getter for storage
+     */
     @Test
     public void getListStorage() {
         List<User> list = service.getListStorage();

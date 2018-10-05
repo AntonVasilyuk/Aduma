@@ -5,6 +5,9 @@ import org.junit.Test;
 
 public class UserTest {
 
+    /**.
+     * Testing method equals from class user
+     */
     @Test
     public void whenNeedEqualsUsers() {
         int id = 0;
@@ -14,6 +17,9 @@ public class UserTest {
         Assert.assertTrue(user.equals(name, email));
     }
 
+    /**.
+     * Testing getter id from class user
+     */
     @Test
     public void whenNeedGettingIdForUser() {
         int id = 0;
