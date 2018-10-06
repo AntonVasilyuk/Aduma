@@ -21,7 +21,7 @@ import java.util.List;
  * @version 1.0.
  */
 
-public class UserServlet extends HttpServlet{
+public class UserServlet extends HttpServlet {
 
     /**.
      * Is link for instance of the ValidateService class
