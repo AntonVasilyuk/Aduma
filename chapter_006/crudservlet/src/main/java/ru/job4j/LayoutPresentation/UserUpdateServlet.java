@@ -35,18 +35,18 @@ public class UserUpdateServlet extends HttpServlet {
         resp.setContentType("text/html");
         PrintWriter printWriter = new PrintWriter(resp.getOutputStream());
         printWriter.append("<!DOCTYPE html>" +
-                "<html lang=\"en\">" +
+                "<html lang='en'>" +
                 "<head>" +
-                "    <meta charset=\"UTF-8\">" +
+                "    <meta charset='UTF-8'>" +
                 "    <title>Title</title>" +
                 "</head>" +
                 "<body>" +
-                "<form action='\" + req.getContextPath() + \"/users' method='post'>" +
+                "<form action='" + req.getContextPath() + "/edit' method='post'>" +
                 "ID : <input type='number' name='id'/>" +
                 "Name : <input type='text' name='name'/>" +
                 "Login : <input type='text' name='login'/>" +
                 "Email : <input type='text' name='email'/>" +
-                "<input type='submit>" +
+                "<input type='submit'>" +
                 "</form>" +
                 "</body>" +
                 "</html>");

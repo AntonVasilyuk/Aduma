@@ -40,7 +40,7 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        StringBuilder sb = new StringBuilder("<form action='" + req.getContextPath() + "/users' method='post'><table>");
+        StringBuilder sb = new StringBuilder("<form action='" + req.getContextPath() + "/edit' method='post'><table>");
         for (User user : storage) {
             sb.append("<tr>");
             sb.append("<td>" + user.getId() + "</td>");
@@ -51,6 +51,7 @@ public class UsersServlet extends HttpServlet {
             sb.append("<td>" + "<button type='button' form='action'>delete</button>" + "</td>");
             sb.append("</tr>");
         }
+        sb.append("</form");
         sb.append("</form");
         PrintWriter printWriter = new PrintWriter(resp.getOutputStream());
         printWriter.append("<!DOCTYPE html>" +
@@ -66,18 +67,5 @@ public class UsersServlet extends HttpServlet {
                 "</body>" +
                 "</html>");
         printWriter.flush();
-    }
-
-    /**.
-     * Method for posting info
-     * @param req is question
-     * @param resp is answer
-     * @throws ServletException my be exception
-     * @throws IOException it's too
-     */
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        doGet(req, resp);
     }
 }

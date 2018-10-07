@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class UserCreateServlet extends HttpServlet {
+public class UserDeleteServlet extends HttpServlet {
 
     /**.
      * Is link for instance of the ValidateService class
@@ -21,7 +21,7 @@ public class UserCreateServlet extends HttpServlet {
     /**.
      * Logger for this class
      */
-    private final Logger logger = LoggerFactory.getLogger(UsersServlet.class);
+    private final Logger logger = LoggerFactory.getLogger(UserDeleteServlet.class);
 
     /**.
      * Method for getting info about client
@@ -35,13 +35,14 @@ public class UserCreateServlet extends HttpServlet {
         resp.setContentType("text/html");
         PrintWriter printWriter = new PrintWriter(resp.getOutputStream());
         printWriter.append("<!DOCTYPE html>" +
-                "<html lang=\"en\">" +
+                "<html lang='en'>" +
                 "<head>" +
-                "    <meta charset=\"UTF-8\">" +
+                "    <meta charset='UTF-8'>" +
                 "    <title>Title</title>" +
                 "</head>" +
                 "<body>" +
-                "<form action='" + req.getContextPath() + "/create' method='post'>" +
+                "<form action='" + req.getContextPath() + "/delete' method='post'>" +
+                "ID : <input type='number' name='id'/>" +
                 "Name : <input type='text' name='name'/>" +
                 "Login : <input type='text' name='login'/>" +
                 "Email : <input type='text' name='email'/>" +
@@ -62,10 +63,8 @@ public class UserCreateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String name = req.getParameter("name");
-        String login = req.getParameter("login");
-        String email = req.getParameter("email");
-        logic.add(name, login, email);
+        int id = Integer.parseInt(req.getParameter("id"));
+        logic.delete(id);
         doGet(req, resp);
     }
 
