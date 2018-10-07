@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 public class UsersServlet extends HttpServlet {
@@ -40,7 +39,8 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        StringBuilder sb = new StringBuilder("<form action='" + req.getContextPath() + "/edit' method='post'><table>");
+        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
+        /*StringBuilder sb = new StringBuilder("<form action='" + req.getContextPath() + "/edit' method='post'><table>");
         for (User user : storage) {
             sb.append("<tr>");
             sb.append("<td>" + user.getId() + "</td>");
@@ -67,5 +67,6 @@ public class UsersServlet extends HttpServlet {
                 "</body>" +
                 "</html>");
         printWriter.flush();
+        */
     }
 }
