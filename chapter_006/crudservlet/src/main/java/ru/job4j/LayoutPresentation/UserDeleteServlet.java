@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class UserDeleteServlet extends HttpServlet {
 
@@ -33,24 +32,7 @@ public class UserDeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        PrintWriter printWriter = new PrintWriter(resp.getOutputStream());
-        printWriter.append("<!DOCTYPE html>" +
-                "<html lang='en'>" +
-                "<head>" +
-                "    <meta charset='UTF-8'>" +
-                "    <title>Title</title>" +
-                "</head>" +
-                "<body>" +
-                "<form action='" + req.getContextPath() + "/delete' method='post'>" +
-                "ID : <input type='number' name='id'/>" +
-                "Name : <input type='text' name='name'/>" +
-                "Login : <input type='text' name='login'/>" +
-                "Email : <input type='text' name='email'/>" +
-                "<input type='submit'>" +
-                "</form>" +
-                "</body>" +
-                "</html>");
-        printWriter.flush();
+        resp.sendRedirect(String.format("%s/delete.jsp", req.getContextPath()));
     }
 
     /**.

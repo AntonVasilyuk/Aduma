@@ -40,33 +40,5 @@ public class UsersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
-        /*StringBuilder sb = new StringBuilder("<form action='" + req.getContextPath() + "/edit' method='post'><table>");
-        for (User user : storage) {
-            sb.append("<tr>");
-            sb.append("<td>" + user.getId() + "</td>");
-            sb.append("<td>" + user.getName() + "</td>");
-            sb.append("<td>" + user.getLogin() + "</td>");
-            sb.append("<td>" + user.getEmail() + "</td>");
-            sb.append("<td>" + "<button type='button' form='action'>edit</button>" + "</td>");
-            sb.append("<td>" + "<button type='button' form='action'>delete</button>" + "</td>");
-            sb.append("</tr>");
-        }
-        sb.append("</form");
-        sb.append("</form");
-        PrintWriter printWriter = new PrintWriter(resp.getOutputStream());
-        printWriter.append("<!DOCTYPE html>" +
-                "<html lang=\"en\">" +
-                "<head>" +
-                "    <meta charset=\"UTF-8\">" +
-                "    <title>Title</title>" +
-                "</head>" +
-                "<body>" +
-                "<form action='" + req.getContextPath() + "/users' method='post'>" +
-                        "<button type='button' form='action'>edit</button>" +
-                sb.toString() +
-                "</body>" +
-                "</html>");
-        printWriter.flush();
-        */
     }
 }
