@@ -1,10 +1,10 @@
-package ru.job4j.LayoutLogic;
+package ru.job4j.layoutLogic;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.job4j.LayoutPersistent.MemoryStore;
-import ru.job4j.LayoutPersistent.Store;
-import ru.job4j.LayoutPersistent.User;
+import ru.job4j.layoutPersistent.MemoryStore;
+import ru.job4j.layoutPersistent.Store;
+import ru.job4j.layoutPersistent.User;
 
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class ValidateService {
      * @param email is email new user
      * @return result operation
      */
-    public boolean add(String name, String login, String email) {
+    public synchronized boolean add(String name, String login, String email) {
         if (!checkOnDublicate(login, email)) {
             store.add(name, login, email);
             return true;
@@ -70,7 +70,7 @@ public class ValidateService {
      * @param email is email user
      * @return result operation
      */
-    public boolean update(int id, String name, String login, String email) {
+    public synchronized boolean update(int id, String name, String login, String email) {
         int index = searchUser(id);
         if (index == -1) {
             return false;
@@ -84,7 +84,7 @@ public class ValidateService {
      * @param id is id user for deleting
      * @return result operation
      */
-    public boolean delete(int id) {
+    public synchronized boolean delete(int id) {
         int index = searchUser(id);
         if (index != -1) {
             store.delete(id);
@@ -128,7 +128,7 @@ public class ValidateService {
      * Getter for storage
      * @return storage
      */
-    public List<User> getListStorage() {
+    public synchronized List<User> getListStorage() {
         return store.findByAll();
     }
 

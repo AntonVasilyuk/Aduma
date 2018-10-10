@@ -6,7 +6,7 @@
          version="2.4">
     <servlet>
         <servlet-name>UserServlet</servlet-name>
-        <servlet-class>ru.job4j.LayoutPresentation.UserServlet</servlet-class>
+        <servlet-class>ru.job4j.layoutPresentation.UserServlet</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -15,7 +15,7 @@
     </servlet>
     <servlet>
         <servlet-name>UsersServlet</servlet-name>
-        <servlet-class>ru.job4j.LayoutPresentation.UsersServlet</servlet-class>
+        <servlet-class>ru.job4j.layoutPresentation.UsersServlet</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -24,7 +24,7 @@
     </servlet>
     <servlet>
         <servlet-name>UserCreateServlet</servlet-name>
-        <servlet-class>ru.job4j.LayoutPresentation.UserCreateServlet</servlet-class>
+        <servlet-class>ru.job4j.layoutPresentation.UserCreateServlet</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -33,7 +33,7 @@
     </servlet>
     <servlet>
         <servlet-name>UserUpdateServlet</servlet-name>
-        <servlet-class>ru.job4j.LayoutPresentation.UserUpdateServlet</servlet-class>
+        <servlet-class>ru.job4j.layoutPresentation.UserUpdateServlet</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>

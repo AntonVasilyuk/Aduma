@@ -1,5 +1,6 @@
-package ru.job4j.LayoutPersistent;
+package ru.job4j.layoutPersistent;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -57,6 +58,15 @@ public class User {
         this.login = login;
         this.email = email;
         this.createDate = new GregorianCalendar();
+    }
+
+    public User(int id, String name, String login, String email, String date) throws ParseException {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.createDate = Calendar.getInstance();
+        this.createDate.setTime(sdf.parse(date));
     }
 
     /**.

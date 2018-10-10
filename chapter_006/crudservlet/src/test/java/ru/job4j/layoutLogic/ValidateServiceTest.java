@@ -1,10 +1,10 @@
-package ru.job4j.LayoutLogic;
+package ru.job4j.layoutLogic;
 
 import org.junit.Assert;
 import org.junit.Test;
-import ru.job4j.LayoutPersistent.MemoryStore;
-import ru.job4j.LayoutPersistent.Store;
-import ru.job4j.LayoutPersistent.User;
+import ru.job4j.layoutPersistent.MemoryStore;
+import ru.job4j.layoutPersistent.Store;
+import ru.job4j.layoutPersistent.User;
 
 import java.util.List;
 

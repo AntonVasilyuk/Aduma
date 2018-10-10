@@ -1,5 +1,5 @@
-<%@ page import="ru.job4j.LayoutPersistent.User" %>
-<%@ page import="ru.job4j.LayoutLogic.ValidateService" %>
+<%@ page import="ru.job4j.layoutPersistent.User" %>
+<%@ page import="ru.job4j.layoutLogic.ValidateService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

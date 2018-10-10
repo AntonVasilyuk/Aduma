@@ -1,28 +1,21 @@
-package ru.job4j.LayoutPresentation;
+package ru.job4j.layoutPresentation;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.job4j.LayoutLogic.ValidateService;
-import ru.job4j.LayoutPersistent.User;
+import ru.job4j.layoutLogic.ValidateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-public class UsersServlet extends HttpServlet {
+public class UserCreateServlet extends HttpServlet {
 
     /**.
      * Is link for instance of the ValidateService class
      */
     private final ValidateService logic = ValidateService.getInstance();
-
-    /**.
-     * Is storage for keeping all users
-     */
-    private final List<User> storage = logic.getListStorage();
 
     /**.
      * Logger for this class
@@ -39,6 +32,24 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
+        resp.sendRedirect(String.format("%s/create.jsp", req.getContextPath()));
     }
+
+    /**.
+     * Method for posting info
+     * @param req is question
+     * @param resp is answer
+     * @throws ServletException my be exception
+     * @throws IOException it's too
+     */
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        String name = req.getParameter("name");
+        String login = req.getParameter("login");
+        String email = req.getParameter("email");
+        logic.add(name, login, email);
+        doGet(req, resp);
+    }
+
 }

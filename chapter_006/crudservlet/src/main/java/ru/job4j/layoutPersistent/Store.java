@@ -1,4 +1,4 @@
-package ru.job4j.LayoutPersistent;
+package ru.job4j.layoutPersistent;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package ru.job4j.LayoutPresentation;
+package ru.job4j.layoutPresentation;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.job4j.LayoutLogic.ValidateService;
+import ru.job4j.layoutLogic.ValidateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
