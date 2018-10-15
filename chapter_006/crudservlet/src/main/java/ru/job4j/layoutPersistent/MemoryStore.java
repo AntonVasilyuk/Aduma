@@ -24,7 +24,7 @@ public class MemoryStore implements Store{
     /**.
      * Is id for users
      */
-    private int id;
+    private volatile int id;
 
     /**.
      * It's link for this singleton class
