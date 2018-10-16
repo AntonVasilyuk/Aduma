@@ -21,12 +21,12 @@ public class DBStore implements Store {
     /**.
      * It's pool for create connection
      */
-    private BasicDataSource SOURCE = new BasicDataSource();
+    private final BasicDataSource SOURCE = new BasicDataSource();
 
     /**.
      * It's example pattern singleton
      */
-    private static DBStore INSTANCE = new DBStore();
+    private final static DBStore INSTANCE = new DBStore();
 
     /**.
      * It's my setting
@@ -59,7 +59,7 @@ public class DBStore implements Store {
 
     /**.
      * Method for getting singleton example this class
-     * @return
+     * @return instance class BDStore
      */
     public static DBStore getInstance() {
         return INSTANCE;
@@ -73,22 +73,30 @@ public class DBStore implements Store {
      */
     @Override
     public void add(String name, String login, String email) {
+        Connection connectionRollBack = null;
         String query = String.format("INSERT INTO users VALUES(?, ?, ?, ?, ?)");
         Calendar date = Calendar.getInstance();
         try (Connection connection = SOURCE.getConnection();
              PreparedStatement st = connection.prepareStatement(query)
         ) {
-            System.out.println(connection);
+            connectionRollBack = connection;
             st.addBatch();
             st.setInt(1, currentID.get());
             st.setString(2, name);
             st.setString(3, login);
             st.setString(4, email);
-            st.setString(5, "Ha");
+            st.setTimestamp(5, new Timestamp(date.getTimeInMillis()));
             st.execute();
             connection.commit();
             currentID.incrementAndGet();
         } catch (Exception e) {
+            if (connectionRollBack != null) {
+                try {
+                    connectionRollBack.rollback();
+                } catch (SQLException e1) {
+                    LOG.error(e1.getMessage(), e1);
+                }
+            }
             LOG.error(e.getMessage(), e);
         }
     }
@@ -102,13 +110,27 @@ public class DBStore implements Store {
      */
     @Override
     public void update(int id, String name, String login, String email) {
-        String query = String.format("UPDATE users SET name='%s', login='%s', email='%s'" +
-                " where id=%d", name, login, email, id);
+        Connection connectionRollBack = null;
+        String query = String.format("UPDATE users SET name=?, login=?, email=? WHERE id=?;");
         try (Connection connection = SOURCE.getConnection();
-             Statement st = connection.createStatement();
+             PreparedStatement st = connection.prepareStatement(query);
         ) {
+            connectionRollBack = connection;
+            st.addBatch();
+            st.setString(1, name);
+            st.setString(2, login);
+            st.setString(3, email);
+            st.setInt(4, id);
             st.executeUpdate(query);
+            connection.commit();
         } catch (Exception e) {
+            if (connectionRollBack != null) {
+                try {
+                    connectionRollBack.rollback();
+                } catch (SQLException e1) {
+                    LOG.error(e1.getMessage(), e1);
+                }
+            }
             LOG.error(e.getMessage(), e);
         }
     }
@@ -119,13 +141,23 @@ public class DBStore implements Store {
      */
     @Override
     public void delete(int id) {
-        String query = String.format("DELETE FROM users where id=%d", id);
+        Connection connectionRollback = null;
+        String query = String.format("DELETE FROM users where id=?");
         try (Connection connection = SOURCE.getConnection();
-             Statement st = connection.createStatement();
+             PreparedStatement st = connection.prepareStatement(query);
         ) {
+            connectionRollback = connection;
+            st.addBatch();
             st.executeUpdate(query);
+            connection.commit();
         } catch (Exception e) {
-            LOG.error(String.format("Error in mehtod delete - class DBStore"));
+            if (connectionRollback != null) {
+                try {
+                    connectionRollback.rollback();
+                } catch (SQLException e1) {
+                    LOG.error(e1.getMessage(), e1);
+                }
+            }
         }
     }
 
@@ -146,8 +178,9 @@ public class DBStore implements Store {
                 String name = rs.getString("name");
                 String login = rs.getString("login");
                 String email = rs.getString("email");
+                long date = rs.getTimestamp("date").getTime();
                 System.out.println(String.format("%d %s %s", idUser, name, login));
-                User user = new User(idUser, name, login, email);
+                User user = new User(idUser, name, login, email, date);
                 listAllUser.add(user);
             }
             return listAllUser;
@@ -163,7 +196,20 @@ public class DBStore implements Store {
      */
     @Override
     public int getId() {
-        return currentID.get();
+        int id = 0;
+        String query = String.format("SELECT max(id) FROM users;");
+        try (Connection connection = SOURCE.getConnection();
+             Statement st = connection.createStatement()
+        ) {
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                id = rs.getInt("id");
+            }
+            return id;
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return id;
     }
 
     /**.
@@ -183,7 +229,7 @@ public class DBStore implements Store {
     @Override
     public User findById(int id) {
         User user = null;
-        String query = String.format("SELECT * FROM users WHERE id=%d;", id);
+        String query = String.format("SELECT * FROM users WHERE id=?;");
         try (Connection connection = SOURCE.getConnection();
              Statement st = connection.createStatement()
         ) {
@@ -193,7 +239,8 @@ public class DBStore implements Store {
                 String name = rs.getString("name");
                 String login = rs.getString("login");
                 String email = rs.getString("email");
-                user = new User(idUser, name, login, email);
+                long date = rs.getTimestamp("date").getTime();
+                user = new User(idUser, name, login, email, date);
                 return user;
             }
         } catch (Exception e) {
