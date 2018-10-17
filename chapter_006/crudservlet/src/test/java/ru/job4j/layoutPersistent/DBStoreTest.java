@@ -44,7 +44,7 @@ public class DBStoreTest {
         int firstSize = dbStore.getStorage().size();
         dbStore.add(name, login, email);
         int secondSize = dbStore.getStorage().size();
-        dbStore.delete(dbStore.getId() - 1);
+        dbStore.delete(dbStore.getId());
         int result = secondSize - firstSize;
         System.out.println(result);
         Assert.assertTrue(result == 1);
@@ -58,8 +58,9 @@ public class DBStoreTest {
         String newName = "newName";
         String newLogin = "newLogin";
         String newEmail = "newEmail";
-        int id = dbStore.getId();
         dbStore.add(name, login, email);
+        int id = dbStore.getId();
+        System.out.println(id);
         dbStore.update(id, newName, newLogin, newEmail);
         User user = dbStore.findById(id);
         dbStore.delete(id);
@@ -73,8 +74,10 @@ public class DBStoreTest {
     @Test
     public void whenNeedDeletingUser() {
         dbStore.add(name, login, email);
-        dbStore.delete(dbStore.getId()-1);
-        User user = dbStore.findById(dbStore.getId()-1);
+        int id = dbStore.getId();
+        dbStore.delete(id);
+        User user = dbStore.findById(id);
+        System.out.println(user);
         Assert.assertTrue(user == null);
     }
 

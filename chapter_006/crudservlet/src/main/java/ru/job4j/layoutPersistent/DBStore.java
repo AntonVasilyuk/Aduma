@@ -74,21 +74,20 @@ public class DBStore implements Store {
     @Override
     public void add(String name, String login, String email) {
         Connection connectionRollBack = null;
-        String query = String.format("INSERT INTO users VALUES(?, ?, ?, ?, ?)");
+        String query = String.format("INSERT INTO users(name, login, email, date) VALUES(?, ?, ?, ?)");
         Calendar date = Calendar.getInstance();
         try (Connection connection = SOURCE.getConnection();
              PreparedStatement st = connection.prepareStatement(query)
         ) {
+            connection.setAutoCommit(false);
             connectionRollBack = connection;
             st.addBatch();
-            st.setInt(1, currentID.get());
-            st.setString(2, name);
-            st.setString(3, login);
-            st.setString(4, email);
-            st.setTimestamp(5, new Timestamp(date.getTimeInMillis()));
+            st.setString(1, name);
+            st.setString(2, login);
+            st.setString(3, email);
+            st.setTimestamp(4, new Timestamp(date.getTimeInMillis()));
             st.execute();
             connection.commit();
-            currentID.incrementAndGet();
         } catch (Exception e) {
             if (connectionRollBack != null) {
                 try {
@@ -115,13 +114,14 @@ public class DBStore implements Store {
         try (Connection connection = SOURCE.getConnection();
              PreparedStatement st = connection.prepareStatement(query);
         ) {
+            connection.setAutoCommit(false);
             connectionRollBack = connection;
             st.addBatch();
             st.setString(1, name);
             st.setString(2, login);
             st.setString(3, email);
             st.setInt(4, id);
-            st.executeUpdate(query);
+            st.execute();
             connection.commit();
         } catch (Exception e) {
             if (connectionRollBack != null) {
@@ -142,13 +142,15 @@ public class DBStore implements Store {
     @Override
     public void delete(int id) {
         Connection connectionRollback = null;
-        String query = String.format("DELETE FROM users where id=?");
+        String query = String.format("DELETE FROM users where id=?;");
         try (Connection connection = SOURCE.getConnection();
              PreparedStatement st = connection.prepareStatement(query);
         ) {
+            connection.setAutoCommit(false);
             connectionRollback = connection;
             st.addBatch();
-            st.executeUpdate(query);
+            st.setInt(1, id);
+            st.execute();
             connection.commit();
         } catch (Exception e) {
             if (connectionRollback != null) {
@@ -178,9 +180,12 @@ public class DBStore implements Store {
                 String name = rs.getString("name");
                 String login = rs.getString("login");
                 String email = rs.getString("email");
-                long date = rs.getTimestamp("date").getTime();
-                System.out.println(String.format("%d %s %s", idUser, name, login));
-                User user = new User(idUser, name, login, email, date);
+                Timestamp date = rs.getTimestamp("date");
+                long time = 0;
+                if (date != null) {
+                    time = date.getTime();
+                }
+                User user = new User(idUser, name, login, email, time);
                 listAllUser.add(user);
             }
             return listAllUser;
@@ -203,7 +208,7 @@ public class DBStore implements Store {
         ) {
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
-                id = rs.getInt("id");
+                id = rs.getInt("max");
             }
             return id;
         } catch (Exception e) {
@@ -229,7 +234,7 @@ public class DBStore implements Store {
     @Override
     public User findById(int id) {
         User user = null;
-        String query = String.format("SELECT * FROM users WHERE id=?;");
+        String query = String.format("SELECT * FROM users WHERE id=%d;", id);
         try (Connection connection = SOURCE.getConnection();
              Statement st = connection.createStatement()
         ) {

@@ -3,6 +3,7 @@ package ru.job4j.layoutPersistent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -59,7 +60,8 @@ public class MemoryStore implements Store{
      */
     @Override
     public void add(String name, String login, String email) {
-        storage.add(new User(id++, name, login, email));
+        long time = Calendar.getInstance().getTimeInMillis();
+        storage.add(new User(id++, name, login, email, time));
     }
 
     /**.
@@ -71,7 +73,8 @@ public class MemoryStore implements Store{
      */
     @Override
     public void update(int id, String name, String login, String email) {
-        storage.set(storage.indexOf(findById(id)), new User(id, name, login, email));
+        long timeupdating = Calendar.getInstance().getTimeInMillis();
+        storage.set(storage.indexOf(findById(id)), new User(id, name, login, email, timeupdating));
     }
 
     /**.

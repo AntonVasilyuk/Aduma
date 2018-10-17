@@ -6,6 +6,7 @@ import ru.job4j.layoutPersistent.MemoryStore;
 import ru.job4j.layoutPersistent.Store;
 import ru.job4j.layoutPersistent.User;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class ValidateServiceTest {
@@ -36,9 +37,14 @@ public class ValidateServiceTest {
     final String email = "testEmail";
 
     /**.
+     * Is long values for time
+     */
+    final long time = Calendar.getInstance().getTimeInMillis();
+
+    /**.
      * Is test instance user
      */
-    final User user = new User(store.getId(), name, login, email);
+    final User user = new User(store.getId(), name, login, email, time);
 
     /**.
      * Is storage from layout persistment

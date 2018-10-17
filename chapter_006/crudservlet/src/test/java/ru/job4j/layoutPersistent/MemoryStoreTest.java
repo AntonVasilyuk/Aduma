@@ -3,6 +3,7 @@ package ru.job4j.layoutPersistent;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class MemoryStoreTest {
@@ -28,9 +29,14 @@ public class MemoryStoreTest {
     final MemoryStore store = MemoryStore.getInstance();
 
     /**.
+     * Is time for date
+     */
+    final long timeForDate = Calendar.getInstance().getTimeInMillis();
+
+    /**.
      * It's test user
      */
-    final User user = new User(store.getId(), testName, testLogin, testEmail);
+    final User user = new User(store.getId(), testName, testLogin, testEmail, timeForDate);
 
     /**.
      * It's storage this model

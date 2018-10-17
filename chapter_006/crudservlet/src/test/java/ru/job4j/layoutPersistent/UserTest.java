@@ -3,6 +3,8 @@ package ru.job4j.layoutPersistent;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Calendar;
+
 public class UserTest {
 
     /**.
@@ -13,7 +15,7 @@ public class UserTest {
         int id = 0;
         String name = "user";
         String email = "resu";
-        User user = new User(id, name, name, email);
+        User user = new User(id, name, name, email, Calendar.getInstance().getTimeInMillis());
         Assert.assertTrue(user.equals(name, email));
     }
 
@@ -25,7 +27,8 @@ public class UserTest {
         int id = 0;
         String name = "user";
         String email = "resu";
-        User user = new User(id, name, name, email);
+        long time = Calendar.getInstance().getTimeInMillis();
+        User user = new User(id, name, name, email, time);
         Assert.assertTrue(user.getId() == 0);
     }
 }
