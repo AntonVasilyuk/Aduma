@@ -42,7 +42,7 @@ public class UserServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/httl");
+        resp.setContentType("text/html");
         PrintWriter printWriter = new PrintWriter(resp.getOutputStream());
         List<User> listUsers = logic.getListStorage();
         for (User user : listUsers) {

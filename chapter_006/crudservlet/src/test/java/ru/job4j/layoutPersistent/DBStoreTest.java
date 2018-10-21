@@ -77,7 +77,6 @@ public class DBStoreTest {
         int id = dbStore.getId();
         dbStore.delete(id);
         User user = dbStore.findById(id);
-        System.out.println(user);
         Assert.assertTrue(user == null);
     }
 
