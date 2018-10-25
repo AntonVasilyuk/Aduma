@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Update</title>
 </head>
 <body>
 <form action="${pageContext.servletContext.contextPath}/edit" method="post">

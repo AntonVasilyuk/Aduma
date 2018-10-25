@@ -47,7 +47,7 @@
 
     <servlet-mapping>
         <servlet-name>UserUpdateServlet</servlet-name>
-        <url-pattern>/edit</url-pattern>
+        <url-pattern>/update</url-pattern>
     </servlet-mapping>
 
     <servlet>

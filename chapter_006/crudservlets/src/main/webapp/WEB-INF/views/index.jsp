@@ -8,24 +8,24 @@
 
 <h3>List for store writes about users</h3>
 
-<a href="${pageContext.servletContext.contextPath}/WEB-INF/views/create.jsp">Add new user</a>
+<a href="${pageContext.servletContext.contextPath}/create">Add new user</a>
 <table border="1">
     <tr>
+        <th>ID</th>
         <th>NAME</th>
         <th>LOGIN</th>
         <th>EMAIL</th>
-        <th>CREATED</th>
         <th>EDIT_WRITES</th>
     </tr>
     <c:forEach items="${users}" var="user" varStatus="status">
         <tr>
-            <td><c:out value="${user.login}"></c:out></td>
+            <td><c:out value="${user.id}"></c:out></td>
             <td><c:out value="${user.name}"></c:out></td>
+            <td><c:out value="${user.login}"></c:out></td>
             <td><c:out value="${user.email}"></c:out></td>
-            <td><c:out value="${user.createDate}"></c:out></td>
             <td>
-                <a href="${pageContext.servletContext.contextPath}/WEB-INF/views/update.jsp">edit</a>
-                <a href="${pageContext.servletContext.contextPath}/WEB-INF/views/delete.jsp">del</a>
+                <a href="${pageContext.servletContext.contextPath}/update?id=${user.id}">edit</a>
+                <a href="${pageContext.servletContext.contextPath}/delete?id=${user.id}">del</a>
             </td>
         </tr>
     </c:forEach>

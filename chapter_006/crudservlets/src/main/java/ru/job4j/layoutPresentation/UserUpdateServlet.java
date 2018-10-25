@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class UserCreateServlet extends HttpServlet {
+public class UserUpdateServlet extends HttpServlet {
 
     /**.
      * Is link for instance of the ValidateService class
@@ -20,7 +20,7 @@ public class UserCreateServlet extends HttpServlet {
     /**.
      * Logger for this class
      */
-    private final Logger logger = LoggerFactory.getLogger(UsersServlet.class);
+    private final Logger logger = LoggerFactory.getLogger(UserUpdateServlet.class);
 
     /**.
      * Method for getting info about client
@@ -31,10 +31,10 @@ public class UserCreateServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //resp.setContentType("text/html");
-        //resp.sendRedirect(String.format("%s/", req.getContextPath()));
-        req.setAttribute("users", logic.getListStorage());
-        req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
+        resp.setContentType("text/html");
+        String id = req.getParameter("id");
+        req.setAttribute("id", id);
+        req.getRequestDispatcher("/WEB-INF/views/update.jsp").forward(req, resp);
     }
 
     /**.
@@ -46,12 +46,17 @@ public class UserCreateServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
+        String idUser = req.getParameter("id");
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String email = req.getParameter("email");
-        logic.add(name, login, email);
-        doGet(req, resp);
+        if (!idUser.equals("")) {
+            int id = Integer.parseInt(req.getParameter("id"));
+            logic.update(id, name, login, email);
+        } else {
+            logger.info("Not correct id for updating.");
+        }
+        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 
 }
