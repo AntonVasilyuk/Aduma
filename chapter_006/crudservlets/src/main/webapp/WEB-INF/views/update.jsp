@@ -6,10 +6,15 @@
 </head>
 <body>
 <form action='${pageContext.servletContext.contextPath}/update' method=post>
-    ID : <input type='text' name='id' value='${id}'/>
-    Name : <input type='text' name='name'/>
-    Login : <input type='text' name='login'/>
-    Email : <input type='text' name='email'>
+     <input type='hidden' name='id' value='${id}'/>
+    Name : <input type='text' name='name' value="${name}"/>
+    Login : <input type='text' name='login' value="${login}"/>
+    Password : <input type="text" name='password' value="${password}"/>
+    Email : <input type='text' name='email' value="${email}"/>
+    Role: <select name="role"/>
+    <option value="admin">admin</option>
+    <option value="user">user</option>
+    </select>
     <input type='submit' value='Update'>
 </form>
 </body>

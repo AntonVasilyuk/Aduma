@@ -5,9 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-    <form action="${pageContext.servletContext.contextPath}/delete" method=post>
-        ID : <input type="text" name="id" value="${id}">
-        <input type="submit" name="DELETE">
+    <form action="${pageContext.servletContext.contextPath}/delete?id=${id}" method=post>
+
     </form>
 </body>
 </html>

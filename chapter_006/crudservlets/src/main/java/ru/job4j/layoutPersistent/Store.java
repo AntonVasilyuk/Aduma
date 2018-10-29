@@ -12,8 +12,8 @@ import java.util.List;
 
 public interface Store{
 
-    void add(String name, String login, String email);
-    void update(int id, String name, String login, String email);
+    void add(String name, String login, String password, String email, String role);
+    void update(int id, String name, String login, String password, String email, String role);
     void delete(int id);
     User findById(int id);
     List<User> findByAll();

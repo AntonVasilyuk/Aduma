@@ -41,6 +41,16 @@ public class User {
     private final Calendar createDate;
 
     /**.
+     * It's password for user
+     */
+    private final String password;
+
+    /**.
+     * It's role user
+     */
+    private final String role;
+
+    /**.
      * It's format for formating date
      */
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -50,15 +60,18 @@ public class User {
      * @param id it's id the user
      * @param name it's name the user
      * @param login it's login the user
+     * @param password it's password the user
      * @param email it's email the user
      */
-    public User(int id, String name, String login, String email, Long time) {
+    public User(int id, String name, String login, String password, String email, Long time, String role) {
         this.id = id;
         this.name = name;
         this.login = login;
+        this.password = password;
         this.email = email;
         this.createDate = new GregorianCalendar();
         createDate.setTime(new Date(time));
+        this.role = role;
     }
 
     /**.
@@ -130,5 +143,19 @@ public class User {
         return email;
     }
 
+    /**.
+     * Getter for password
+     * @return password the user
+     */
+    public String getPassword() {
+        return password;
+    }
 
+    /**.
+     * Getter for role
+     * @return role
+     */
+    public String getRole() {
+        return role;
+    }
 }

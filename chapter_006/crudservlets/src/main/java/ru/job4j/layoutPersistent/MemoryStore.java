@@ -59,9 +59,9 @@ public class MemoryStore implements Store{
      * @param email is email of the user
      */
     @Override
-    public void add(String name, String login, String email) {
+    public void add(String name, String login, String password, String email, String role) {
         long time = Calendar.getInstance().getTimeInMillis();
-        storage.add(new User(id++, name, login, email, time));
+        storage.add(new User(id++, name, login, password, email, time, role));
     }
 
     /**.
@@ -72,9 +72,9 @@ public class MemoryStore implements Store{
      * @param email is new email of the user
      */
     @Override
-    public void update(int id, String name, String login, String email) {
+    public void update(int id, String name, String login, String password, String email, String role) {
         long timeupdating = Calendar.getInstance().getTimeInMillis();
-        storage.set(storage.indexOf(findById(id)), new User(id, name, login, email, timeupdating));
+        storage.set(storage.indexOf(findById(id)), new User(id, name, login, password, email, timeupdating, role));
     }
 
     /**.

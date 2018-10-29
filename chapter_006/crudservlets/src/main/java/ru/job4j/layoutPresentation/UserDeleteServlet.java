@@ -32,19 +32,6 @@ public class UserDeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        req.getRequestDispatcher("/WEB-INF/views/delete.jsp").forward(req, resp);
-    }
-
-    /**.
-     * Method for posting info
-     * @param req is question
-     * @param resp is answer
-     * @throws ServletException my be exception
-     * @throws IOException it's too
-     */
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
         int id = Integer.parseInt(req.getParameter("id"));
         logic.delete(id);
         resp.sendRedirect(String.format("%s/", req.getContextPath()));

@@ -3,14 +3,17 @@ package ru.job4j.layoutPresentation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.job4j.layoutLogic.ValidateService;
+import ru.job4j.layoutPersistent.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
-public class UserUpdateServlet extends HttpServlet {
+public class SigninController extends HttpServlet {
 
     /**.
      * Is link for instance of the ValidateService class
@@ -18,9 +21,14 @@ public class UserUpdateServlet extends HttpServlet {
     private final ValidateService logic = ValidateService.getInstance();
 
     /**.
+     * Is storage for keeping all users
+     */
+    private final List<User> storage = logic.getListStorage();
+
+    /**.
      * Logger for this class
      */
-    private final Logger logger = LoggerFactory.getLogger(UserUpdateServlet.class);
+    private final Logger logger = LoggerFactory.getLogger(SigninController.class);
 
     /**.
      * Method for getting info about client
@@ -31,22 +39,11 @@ public class UserUpdateServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        String id = req.getParameter("id");
-        String name = req.getParameter("name");
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
-        String email = req.getParameter("email");
-        req.setAttribute("id", id);
-        req.setAttribute("name", name);
-        req.setAttribute("login", login);
-        req.setAttribute("password", password);
-        req.setAttribute("email", email);
-        req.getRequestDispatcher("/WEB-INF/views/update.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
     }
 
     /**.
-     * Method for posting info
+     * Method for checking authorisation user
      * @param req is question
      * @param resp is answer
      * @throws ServletException my be exception
@@ -54,19 +51,19 @@ public class UserUpdateServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String idUser = req.getParameter("id");
-        String name = req.getParameter("name");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        String email = req.getParameter("email");
-        String role = req.getParameter("role");
-        if (!idUser.equals("")) {
-            int id = Integer.parseInt(req.getParameter("id"));
-            logic.update(id, name, login, password, email, role);
+        if (logic.isCredentional(login, password)) {
+            HttpSession session = req.getSession();
+            session.setAttribute("login", login);
+            if (logic.isAdmin(login, password)) {
+                session.setAttribute("role", "admin");
+            }
+            resp.sendRedirect(String.format("%s/", req.getContextPath()));
         } else {
-            logger.info("Not correct id for updating.");
+            req.setAttribute("error", "Credentional is invalid");
+            doGet(req, resp);
         }
-        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
-
 }
+

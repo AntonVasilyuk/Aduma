@@ -54,9 +54,9 @@ public class ValidateService {
      * @param email is email new user
      * @return result operation
      */
-    public synchronized boolean add(String name, String login, String email) {
+    public synchronized boolean add(String name, String login, String password, String email, String role) {
         if (!checkOnDublicate(login, email)) {
-            store.add(name, login, email);
+            store.add(name, login, password, email, role);
             return true;
         }
         return false;
@@ -70,12 +70,12 @@ public class ValidateService {
      * @param email is email user
      * @return result operation
      */
-    public synchronized boolean update(int id, String name, String login, String email) {
+    public synchronized boolean update(int id, String name, String login, String password, String email, String role) {
         int index = searchUser(id);
         if (index == -1) {
             return false;
         }
-        store.update(id, name, login, email);
+        store.update(id, name, login, password, email, role);
         return true;
     }
 
@@ -140,7 +140,40 @@ public class ValidateService {
         return store;
     }
 
+    /**.
+     * Method for searching users by id
+     * @param id is id
+     * @return user
+     */
     public User findById(int id) {
         return store.findById(id);
+    }
+
+    /**.
+     * Method for checking authorisation
+     * @param login for checking
+     * @param password for checking
+     * @return result
+     */
+    public boolean isCredentional(String login, String password) {
+        for (User user : getListStorage()) {
+            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isAdmin(String login, String password) {
+        for (User user : store.getStorage()) {
+            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
+                if (user.getRole().equals("admin")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 }

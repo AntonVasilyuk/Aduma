@@ -69,12 +69,13 @@ public class DBStore implements Store {
      * Method for adding new writes to database
      * @param name
      * @param login
+     * @param password
      * @param email
      */
     @Override
-    public void add(String name, String login, String email) {
+    public void add(String name, String login, String password, String email, String role) {
         Connection connectionRollBack = null;
-        String query = String.format("INSERT INTO users(name, login, email, date) VALUES(?, ?, ?, ?)");
+        String query = String.format("INSERT INTO users(name, login, password, email, date, role) VALUES(?, ?, ?, ?, ?, ?)");
         Calendar date = Calendar.getInstance();
         try (Connection connection = SOURCE.getConnection();
              PreparedStatement st = connection.prepareStatement(query)
@@ -84,8 +85,10 @@ public class DBStore implements Store {
             st.addBatch();
             st.setString(1, name);
             st.setString(2, login);
-            st.setString(3, email);
-            st.setTimestamp(4, new Timestamp(date.getTimeInMillis()));
+            st.setString(3, password);
+            st.setString(4, email);
+            st.setTimestamp(5, new Timestamp(date.getTimeInMillis()));
+            st.setString(6, role);
             st.execute();
             connection.commit();
         } catch (Exception e) {
@@ -108,9 +111,9 @@ public class DBStore implements Store {
      * @param email
      */
     @Override
-    public void update(int id, String name, String login, String email) {
+    public void update(int id, String name, String login, String password, String email, String role) {
         Connection connectionRollBack = null;
-        String query = String.format("UPDATE users SET name=?, login=?, email=? WHERE id=?;");
+        String query = String.format("UPDATE users SET name=?, login=?, password=?, email=?, role=? WHERE id=?;");
         try (Connection connection = SOURCE.getConnection();
              PreparedStatement st = connection.prepareStatement(query);
         ) {
@@ -119,8 +122,10 @@ public class DBStore implements Store {
             st.addBatch();
             st.setString(1, name);
             st.setString(2, login);
-            st.setString(3, email);
-            st.setInt(4, id);
+            st.setString(3, password);
+            st.setString(4, email);
+            st.setString(5, role);
+            st.setInt(6, id);
             st.execute();
             connection.commit();
         } catch (Exception e) {
@@ -179,13 +184,15 @@ public class DBStore implements Store {
                 int idUser = rs.getInt("id");
                 String name = rs.getString("name");
                 String login = rs.getString("login");
+                String password = rs.getString("password");
                 String email = rs.getString("email");
                 Timestamp date = rs.getTimestamp("date");
+                String role = rs.getString("role");
                 long time = 0;
                 if (date != null) {
                     time = date.getTime();
                 }
-                User user = new User(idUser, name, login, email, time);
+                User user = new User(idUser, name, login, password, email, time, role);
                 listAllUser.add(user);
             }
             return listAllUser;
@@ -244,9 +251,11 @@ public class DBStore implements Store {
                 int idUser = rs.getInt("id");
                 String name = rs.getString("name");
                 String login = rs.getString("login");
+                String password = rs.getString("password");
                 String email = rs.getString("email");
                 long date = rs.getTimestamp("date").getTime();
-                user = new User(idUser, name, login, email, date);
+                String role = rs.getString("role");
+                user = new User(idUser, name, login, password, email, date, role);
                 return user;
             }
         } catch (Exception e) {

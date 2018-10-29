@@ -46,8 +46,11 @@ public class UserCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String login = req.getParameter("login");
+        String password = req.getParameter("password");
         String email = req.getParameter("email");
-        logic.add(name, login, email);
+        String role = req.getParameter("role");
+        System.out.println(String.format("%s %s %s %s %s", name, login, password, email, role));
+        logic.add(name, login, password, email, role);
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 
