@@ -38,4 +38,29 @@ public class CRUDServletTest {
         verify(request, atLeast(1)).getParameter("email");
         verify(request, atLeast(1)).getParameter("role");
     }
+
+    @Test
+    public void updateTest() throws ServletException, IOException {
+        UserUpdateServlet userUpdate = new UserUpdateServlet();
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        DBStore db = DBStore.getInstance();
+        this.createUser();
+        when(request.getParameter("id")).thenReturn(String.valueOf(db.getId()));
+        when(request.getParameter("name")).thenReturn("newTest");
+        when(request.getParameter("login")).thenReturn("newTest");
+        when(request.getParameter("password")).thenReturn("newPassword");
+        when(request.getParameter("email")).thenReturn("newTest@test.te");
+        when(request.getParameter("role")).thenReturn("user");
+        userUpdate.doPost(request,response);
+        User user = db.findById(db.getId());
+        Assert.assertTrue(user.getLogin().equals("newTest") &
+                user.getPassword().equals("newPassword"));
+        verify(request, atLeast(1)).getParameter("id");
+        verify(request, atLeast(1)).getParameter("name");
+        verify(request, atLeast(1)).getParameter("login");
+        verify(request, atLeast(1)).getParameter("password");
+        verify(request, atLeast(1)).getParameter("email");
+        verify(request, atLeast(1)).getParameter("role");
+    }
 }

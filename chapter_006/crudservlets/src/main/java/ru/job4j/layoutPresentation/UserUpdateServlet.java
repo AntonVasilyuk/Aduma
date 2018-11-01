@@ -54,15 +54,14 @@ public class UserUpdateServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String idUser = req.getParameter("id");
+        String id = req.getParameter("id");
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         String email = req.getParameter("email");
         String role = req.getParameter("role");
-        if (!idUser.equals("")) {
-            int id = Integer.parseInt(req.getParameter("id"));
-            logic.update(id, name, login, password, email, role);
+        if (!id.equals("")) {
+            logic.update(Integer.parseInt(id), name, login, password, email, role);
         } else {
             logger.info("Not correct id for updating.");
         }
