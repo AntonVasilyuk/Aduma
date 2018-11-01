@@ -53,5 +53,4 @@ public class UserCreateServlet extends HttpServlet {
         logic.add(name, login, password, email, role);
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
-
 }
