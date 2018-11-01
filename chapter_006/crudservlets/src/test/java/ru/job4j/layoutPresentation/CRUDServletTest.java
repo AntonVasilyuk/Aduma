@@ -14,6 +14,11 @@ import static org.mockito.Mockito.*;
 
 public class CRUDServletTest {
 
+    /**.
+     * Test adding user to database
+     * @throws ServletException
+     * @throws IOException
+     */
     @Test
     public void createUser() throws ServletException, IOException {
         UserCreateServlet userCreate = new UserCreateServlet();
@@ -39,6 +44,11 @@ public class CRUDServletTest {
         verify(request, atLeast(1)).getParameter("role");
     }
 
+    /**.
+     * Test updating user to database
+     * @throws ServletException
+     * @throws IOException
+     */
     @Test
     public void updateTest() throws ServletException, IOException {
         UserUpdateServlet userUpdate = new UserUpdateServlet();
@@ -64,6 +74,11 @@ public class CRUDServletTest {
         verify(request, atLeast(1)).getParameter("role");
     }
 
+    /**.
+     * Test deleting user to database
+     * @throws ServletException
+     * @throws IOException
+     */
     @Test
     public void deleteTest() throws ServletException, IOException {
         UserDeleteServlet deleteUser = new UserDeleteServlet();
