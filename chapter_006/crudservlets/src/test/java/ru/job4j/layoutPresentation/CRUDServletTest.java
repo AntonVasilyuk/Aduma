@@ -63,4 +63,19 @@ public class CRUDServletTest {
         verify(request, atLeast(1)).getParameter("email");
         verify(request, atLeast(1)).getParameter("role");
     }
+
+    @Test
+    public void deleteTest() throws ServletException, IOException {
+        UserDeleteServlet deleteUser = new UserDeleteServlet();
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        this.createUser();
+        DBStore db = DBStore.getInstance();
+        int currentId = db.getId();
+        when(request.getParameter("id")).thenReturn(String.valueOf(currentId));
+        deleteUser.doGet(request, response);
+        User user = db.findById(currentId);
+        Assert.assertNull(user);
+        verify(request, atLeast(1)).getParameter("id");
+    }
 }
