@@ -7,40 +7,94 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function validate() {
+            var checkID = document.forms["dataEntry"]["id"].value;
+            var checkName = document.forms["dataEntry"]["name"].value;
+            var checkFamily = document.forms["dataEntry"]["family"].value;
+            var checkSex = document.forms["dataEntry"]["sex"].value;
+            var checkDescription = document.forms["dataEntry"]["description"].value;
+            if (checkID == '' || checkID == null) {
+                alert("Enter correct id.");
+                return false;
+            }
+            if (checkName == '' || checkName == null) {
+                alert("Enter correct name.");
+                return false;
+            }
+            if (checkFamily == '' || checkFamily == null) {
+                alert("Enter correct family.");
+                return false;
+            }
+            if (checkSex == '' || checkSex == null) {
+                alert("Choise your sex.");
+                return false;
+            }
+            if (checkDescription == '' || checkDescription == null) {
+                alert("Enter correct description.");
+                return false;
+            }
+            return true;
+        }
+    </script>
     <style>
         .all-fields {
             align-items: center;
             text-align: center;
             font-style: inherit;
         }
+        .table-bordered {
+            width: 100%;
+        }
     </style>
 </head>
 <body>
 
 <div class="all-fields">
-    <form action="/create" method="post">
+    <h3>Form creating users</h3><br/>
+    <form name="dataEntry" action="/create" method="post" >
         <br/>
+        ID: <input type="text" name="id"><br/>
         NAME: <input type="text" name="name"><br/>
         FAMILY: <input type="text" name="family"><br/><br/>
         SEX:<br/>
         <input type="radio" name="sex">&nbspMALE&nbsp
         <input type="radio" name="sex">&nbspFEMALE<br/><br/>
         DESCRIPTION: <br/><textarea name="description"></textarea><br/>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default" onclick="return validate()">Submit</button>
     </form>
+
+    <!--<div class="container">
+        <h2>Form control: input</h2>
+        <p>The form below contains two input elements; one of type text and one of type password:</p>
+        <form>
+            <div class="form-group">
+                <label for="usr">Name:</label>
+                <input type="text" class="form-control" title="Enter user name." id="usr">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="pwd">
+            </div>
+            <button type="button" class="btn btn-default" onclick="return validate();">Submit</button>
+        </form>
+    </div>-->
+
 </div>
 <br/><br/>
-<div class="table-bordered">
-    <table class="table">
+<div class="table table-bordered">
+    <table class="table-bordered">
         <tr>
-        <th scope="col">NAME</th>
-        <th scope="col">FAMILY</th>
-        <th scope="col">DESCRIPTION</th>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>FAMILY</th>
+            <th>DESCRIPTION</th>
         </tr>
         <tr>
-            <td scope="col">testName</td>
-            <td scope="col">testFamily</td>
-            <td scope="col">testDescr</td>
+            <td>testID</td>
+            <td>testName</td>
+            <td>testFamily</td>
+            <td>testDescr</td>
         </tr>
     </table>
 </div>
