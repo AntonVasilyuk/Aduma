@@ -36,6 +36,39 @@
             }
             return true;
         }
+
+        function addRow(id) {
+            var checkID = document.forms["dataEntry"]["id"].value;
+            var checkName = document.forms["dataEntry"]["name"].value;
+            var checkFamily = document.forms["dataEntry"]["family"].value;
+            var checkDescription = document.forms["dataEntry"]["description"].value;
+
+            var tableBody = document.getElementById(id).getElementsByTagName("TBODY")[0];
+            var row = document.createElement("TR")
+            var td1 = document.createElement("TD")
+            td1.appendChild(document.createTextNode(checkID))
+            var td2 = document.createElement("TD")
+            td2.appendChild (document.createTextNode(checkName))
+            var td3 = document.createElement("TD")
+            td3.appendChild (document.createTextNode(checkFamily))
+            var td4 = document.createElement("TD")
+            td2.appendChild (document.createTextNode(checkDescription))
+            row.appendChild(td1);
+            row.appendChild(td2);
+            row.appendChild(td3);
+            row.appendChild(td4);
+            tableBody.appendChild(row);
+        }
+
+        function addRows() {
+            var checkID = document.forms["dataEntry"]["id"].value;
+            var checkName = document.forms["dataEntry"]["name"].value;
+            var checkFamily = document.forms["dataEntry"]["family"].value;
+            var checkDescription = document.forms["dataEntry"]["description"].value;
+            $('#currentTable tr:last').after('<tr><td>' + checkID + '</td><td>' +
+            + checkName + '</td><td>' + checkFamily + '</td><td>' + checkDescription +
+            + '</td></tr>');
+        }
     </script>
     <style>
         .all-fields {
@@ -52,7 +85,7 @@
 
 <div class="all-fields">
     <h3>Form creating users</h3><br/>
-    <form name="dataEntry" action="/create" method="post" >
+    <form name="dataEntry">
         <br/>
         ID: <input type="text" name="id"><br/>
         NAME: <input type="text" name="name"><br/>
@@ -62,40 +95,24 @@
         <input type="radio" name="sex">&nbspFEMALE<br/><br/>
         DESCRIPTION: <br/><textarea name="description"></textarea><br/>
         <button type="submit" class="btn btn-default" onclick="return validate()">Submit</button>
+        <button type="button" class="btn btn-default" onclick="addRows()">Add</button>
+        <button type="button" class="btn btn-default" onclick="addRow('currentTable')">Add2</button>
     </form>
-
-    <!--<div class="container">
-        <h2>Form control: input</h2>
-        <p>The form below contains two input elements; one of type text and one of type password:</p>
-        <form>
-            <div class="form-group">
-                <label for="usr">Name:</label>
-                <input type="text" class="form-control" title="Enter user name." id="usr">
-            </div>
-            <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd">
-            </div>
-            <button type="button" class="btn btn-default" onclick="return validate();">Submit</button>
-        </form>
-    </div>-->
 
 </div>
 <br/><br/>
-<div class="table table-bordered">
-    <table class="table-bordered">
-        <tr>
-            <th>ID</th>
-            <th>NAME</th>
-            <th>FAMILY</th>
-            <th>DESCRIPTION</th>
-        </tr>
-        <tr>
-            <td>testID</td>
-            <td>testName</td>
-            <td>testFamily</td>
-            <td>testDescr</td>
-        </tr>
+<div>
+    <table class='table-bordered' id='currentTable'>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>FAMILY</th>
+                <th>DESCRIPTION</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
     </table>
 </div>
 </body>
