@@ -83,23 +83,36 @@
 </head>
 <body>
 
-<div class="all-fields">
-    <h3>Form creating users</h3><br/>
-    <form name="dataEntry">
-        <br/>
-        ID: <input type="text" name="id"><br/>
-        NAME: <input type="text" name="name"><br/>
-        FAMILY: <input type="text" name="family"><br/><br/>
-        SEX:<br/>
-        <input type="radio" name="sex">&nbspMALE&nbsp
-        <input type="radio" name="sex">&nbspFEMALE<br/><br/>
-        DESCRIPTION: <br/><textarea name="description"></textarea><br/>
-        <button type="submit" class="btn btn-default" onclick="return validate()">Submit</button>
-        <button type="button" class="btn btn-default" onclick="addRows()">Add</button>
-        <button type="button" class="btn btn-default" onclick="addRow('currentTable')">Add2</button>
-    </form>
+<form name="dataEntry">
+    <h2>Form for creating users</h2>
+    <div class="input-group">
+        <span class="input-group-addon">Id&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+        <input id="id" type="text" class="form-control" name="id" placeholder="Enter id">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">Name&nbsp</span>
+        <input id="name" type="text" class="form-control" name="name" placeholder="Enter name">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">Family</span>
+        <input id="family" type="text" class="form-control" name="family" placeholder="Enter family">
+    </div>
 
-</div>
+    <div class="radio">
+        <label><input type="radio" name="sex">Male</label>
+    </div>
+    <div class="radio">
+        <label><input type="radio" name="sex">Female</label>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Comment:</label>
+        <textarea class="form-control" rows="3" id="description"></textarea>
+    </div>
+    <button type="submit" class="btn btn-default" onclick="return validate()">Submit</button>
+    <button type="button" class="btn btn-default" onclick="addRows()">Add user</button>
+</form>
+
 <br/><br/>
 <div>
     <table class='table-bordered' id='currentTable'>
