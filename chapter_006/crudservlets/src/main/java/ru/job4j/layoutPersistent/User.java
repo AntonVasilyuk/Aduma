@@ -107,8 +107,8 @@ public class User {
      */
     @Override
     public String toString() {
-        return "User " + "id-'" + id + " name-'" + name + " login-'" + login + ", email-'" + email + '\'' +
-                ", createDate-'" + sdf.format(createDate.getTime());
+        return "User " + "id-" + id + " name-" + name + " login-" + login + ", email-" + email +
+                 "role - " + role;
     }
 
     /**.

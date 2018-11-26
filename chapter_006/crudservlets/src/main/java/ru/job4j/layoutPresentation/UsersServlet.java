@@ -43,13 +43,4 @@ public class UsersServlet extends HttpServlet {
         req.setAttribute("users", logic.getListStorage());
         req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("test/json");
-        PrintWriter writer = resp.getWriter();
-        ObjectMapper mapper = new ObjectMapper();
-        writer.append(mapper.writeValueAsString(logic.getListStorage()));
-        writer.flush();
-    }
 }

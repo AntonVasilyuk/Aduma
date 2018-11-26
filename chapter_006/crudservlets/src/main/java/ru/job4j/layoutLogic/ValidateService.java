@@ -169,11 +169,14 @@ public class ValidateService {
             if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
                 if (user.getRole().equals("admin")) {
                     return true;
-                } else {
-                    return false;
                 }
             }
         }
         return false;
+    }
+
+    public static void main(String[] args) {
+        ValidateService s = new ValidateService();
+        System.out.println(s.isAdmin("admin", "root"));
     }
 }

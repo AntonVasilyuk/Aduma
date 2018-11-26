@@ -186,7 +186,7 @@ public class DBStore implements Store {
                 String login = rs.getString("login");
                 String password = rs.getString("password");
                 String email = rs.getString("email");
-                Timestamp date = rs.getTimestamp("date");
+                Timestamp date = rs.getTimestamp("time");
                 String role = rs.getString("role");
                 long time = 0;
                 if (date != null) {
@@ -263,4 +263,13 @@ public class DBStore implements Store {
         }
         return user;
     }
+
+    public static void main(String[] args) {
+        DBStore db = new DBStore();
+        List<User> list = db.findByAll();
+        for (User u : list) {
+            System.out.println(u);
+        }
+    }
+
 }
