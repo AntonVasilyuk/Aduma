@@ -41,7 +41,6 @@ public class JsonController extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
-        if (storage.isEmpty()) {storage.add(new Person("test", "test", "Male", "test"));}
         String sendPerson = mapper.writeValueAsString(storage);
         PrintWriter writer = resp.getWriter();
         writer.write(sendPerson);
