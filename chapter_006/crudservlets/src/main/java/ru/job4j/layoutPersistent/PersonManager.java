@@ -29,7 +29,7 @@ public class PersonManager {
     }
 
     /**.
-     * Method for adding new person to this class
+     * Method for adding new person
      * @param person
      */
     public void add(Person person) {
