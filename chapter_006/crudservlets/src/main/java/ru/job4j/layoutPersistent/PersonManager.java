@@ -4,35 +4,43 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class PersonManager {
 
-    private CopyOnWriteArrayList<Person> list = new CopyOnWriteArrayList<>();
+    /**.
+     * It's storage for perons
+     */
+    private final CopyOnWriteArrayList<Person> storage = new CopyOnWriteArrayList<>();
 
-    private static PersonManager manager = new PersonManager();
+    /**.
+     * It's link for this class
+     */
+    private static final PersonManager manager = new PersonManager();
 
+    /**.
+     * It's constructor for this class
+     */
     private PersonManager() {
     }
 
+    /**.
+     * It's method for getting link to example for this class
+     * @return
+     */
     public static PersonManager getInstance() {
         return manager;
     }
 
-    public boolean add(Person person) {
-        for (Person checkPerson : list) {
-            if (checkPerson.equals(person)) {
-                return false;
-            }
-        }
-        list.add(person);
-        return true;
+    /**.
+     * Method for adding new person to this class
+     * @param person
+     */
+    public void add(Person person) {
+        storage.add(person);
     }
 
-    public boolean delete(int id) {
-        boolean result = false;
-        for (Person checkPerson : list) {
-            if (checkPerson.checkID(id)) {
-                list.remove(checkPerson);
-                return true;
-            }
-        }
-        return result;
+    /**.
+     * Getter for this storage
+     * @return storage
+     */
+    public CopyOnWriteArrayList<Person> getStorage() {
+        return this.storage;
     }
 }

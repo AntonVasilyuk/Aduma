@@ -16,8 +16,6 @@
 		<module>webproject</module>
 		<module>crudservlet</module>
 		<module>crudservlets</module>
-		<module>indexServlet</module>
-
 	</modules>
 
 	<dependencies>

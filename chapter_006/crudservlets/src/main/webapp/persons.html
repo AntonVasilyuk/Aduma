@@ -8,70 +8,95 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function getUsers() {
-            $.ajax
-        });
         function validate() {
-            var checkID = document.forms["dataEntry"]["id"].value;
-            var checkName = document.forms["dataEntry"]["name"].value;
-            var checkFamily = document.forms["dataEntry"]["family"].value;
-            var checkSex = document.forms["dataEntry"]["sex"].value;
-            var checkDescription = document.forms["dataEntry"]["description"].value;
-            if (checkID == '' || checkID == null) {
-                alert("Enter correct id.");
-                return false;
+            var result = true;
+            var message = "Enter your";
+            var cName = $('#name').val();
+            var cFamily = $('#family').val();
+            var cSex = $('input[type=radio][name=sex]:checked').val();
+            var cDesc = $('#desc').val();
+            if (cName == '' || cName == null) {
+                message += " name";
+                result = false;
             }
-            if (checkName == '' || checkName == null) {
-                alert("Enter correct name.");
-                return false;
+            if (cFamily == '' || cFamily == null) {
+                message += " family";
+                result = false;
             }
-            if (checkFamily == '' || checkFamily == null) {
-                alert("Enter correct family.");
-                return false;
+            if (cSex == '' || cSex == null) {
+                message += " your gender";
+                result = false;
             }
-            if (checkSex == '' || checkSex == null) {
-                alert("Choise your sex.");
-                return false;
+            if (cDesc == '' || cDesc == null) {
+                message += " description";
+                result = false;
             }
-            if (checkDescription == '' || checkDescription == null) {
-                alert("Enter correct description.");
-                return false;
+            if (!result) {
+                alert(message);
             }
-            return true;
-        }
-
-        function addRow(id) {
-            var checkID = document.forms["dataEntry"]["id"].value;
-            var checkName = document.forms["dataEntry"]["name"].value;
-            var checkFamily = document.forms["dataEntry"]["family"].value;
-            var checkDescription = document.forms["dataEntry"]["description"].value;
-
-            var tableBody = document.getElementById(id).getElementsByTagName("TBODY")[0];
-            var row = document.createElement("TR")
-            var td1 = document.createElement("TD")
-            td1.appendChild(document.createTextNode(checkID))
-            var td2 = document.createElement("TD")
-            td2.appendChild (document.createTextNode(checkName))
-            var td3 = document.createElement("TD")
-            td3.appendChild (document.createTextNode(checkFamily))
-            var td4 = document.createElement("TD")
-            td2.appendChild (document.createTextNode(checkDescription))
-            row.appendChild(td1);
-            row.appendChild(td2);
-            row.appendChild(td3);
-            row.appendChild(td4);
-            tableBody.appendChild(row);
+            return result;
         }
 
         function addRows() {
-            var checkID = document.forms["dataEntry"]["id"].value;
-            var checkName = document.forms["dataEntry"]["name"].value;
-            var checkFamily = document.forms["dataEntry"]["family"].value;
-            var checkDescription = document.forms["dataEntry"]["description"].value;
-            $('#currentTable tr:last').after('<tr><td>' + checkID + '</td><td>' +
-                + checkName + '</td><td>' + checkFamily + '</td><td>' + checkDescription +
-                + '</td></tr>');
+            var cName = $('#name').val();
+            var cFamily = $('#family').val();
+            var cSex = $('input[type=radio][name=sex]:checked').val();
+            var cDesc = $('#desc').val();
+            $('#currentTable tr:last').after('<tr><td>'+cName+"</td><td>"+cFamily+"</td><td>"+cSex+"</td><td>"+cDesc+"</td></tr>");
         }
+
+        function ajaxGetUser() {
+            $.ajax('./json', {
+                method: 'get',
+                complete: function (data) {
+                    var result = "";
+                    var persons = JSON.parse(data.responseText);
+                    if (persons.length > 0) {
+                        for (var i = 0; i < persons.length; i++) {
+                            result += "<tr>"
+                                + "<td>" + persons[i].name + "</td>"
+                                + "<td>" + persons[i].family + "</td>"
+                                + "<td>" + persons[i].sex + "</td>"
+                                + "<td>" + persons[i].description + "</td>"
+                                + "</tr>"
+                        }
+                        var table = document.getElementById("currentTable");
+                        table.innerHTML = result;
+                    }
+                }
+            });
+        }
+
+        function ajaxCreateUser() {
+            var cName = $('#name').val();
+            var cFamily = $('#family').val();
+            var cSex = $('input[type=radio][name=sex]:checked').val();
+            var cDesc = $('#desc').val();
+            var person = {
+                "name": cName,
+                "family": cFamily,
+                "sex": cSex,
+                "description": cDesc
+            };
+            alert(person.toString());
+            $.ajax('./json', {
+                method: 'post',
+                data: JSON.stringify(person),
+                contentType: 'json',
+                error: function (message) {
+                    console.log(message);
+                },
+                complete: function () {
+                    ajaxGetUser()
+                },
+                success: function (data) {
+                    console.log(data);
+                }
+            })
+        }
+        $(document).ready(function () {
+            ajaxGetUser();
+        })
     </script>
     <style>
         .all-fields {
@@ -85,7 +110,6 @@
         .inputText {
             width: 40%;
             margin: auto;
-
         }
     </style>
 </head>
@@ -93,47 +117,46 @@
 
 <div class="inputText">
     <form name="dataEntry">
-        <h2>Form for creating users</h2>
-        <div class="input-group">
-            <span class="input-group-addon">Id&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
-            <input id="id" type="text" class="form-control" name="id" placeholder="Enter id">
-        </div>
+        <h2 align="center">Form for creating users</h2>
         <div class="input-group">
             <span class="input-group-addon">Name&nbsp</span>
-            <input id="name" type="text" class="form-control" name="name" placeholder="Enter name">
+            <input id="name" type="text" class="form-control" placeholder="Enter your name">
         </div>
         <div class="input-group">
             <span class="input-group-addon">Family</span>
-            <input id="family" type="text" class="form-control" name="family" placeholder="Enter family">
+            <input id="family" type="text" class="form-control" placeholder="Enter your family">
         </div>
 
         <div class="radio">
-            <label><input type="radio" name="sex">Male</label>
+            <label><input type="radio" name="sex" value="Male" checked>Male</label>
         </div>
         <div class="radio">
-            <label><input type="radio" name="sex">Female</label>
+            <label><input type="radio" name="sex" value="Female">Female</label>
         </div>
 
         <div class="form-group">
-            <label for="description">Comment:</label>
-            <textarea class="form-control" rows="3" id="description"></textarea>
+            <label for="desc">Comment:</label>
+            <textarea class="form-control" rows="3" id="desc"></textarea>
         </div>
-        <button type="submit" class="btn btn-default" onclick="return validate()">Submit</button>
         <button type="button" class="btn btn-default" onclick="addRows()">Add user</button>
+        <button type="button" class="btn btn-default" onclick="ajaxCreateUser()">Ajax add</button>
+        <button type="button" class="btn btn-default" onclick="ajaxGetUser()">Ajax get</button>
     </form>
 </div>
 <br/><br/>
-<div>
-    <table class='table-bordered' id='currentTable'>
+<div class="table-conteyner">
+    <h2 align="center">Persons</h2>
+    <table class='table-bordered'>
         <thead>
         <tr>
-            <th>ID</th>
             <th>NAME</th>
             <th>FAMILY</th>
+            <th>SEX</th>
             <th>DESCRIPTION</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="currentTable">
+        <tr></tr>
         </tbody>
     </table>
 </div>

@@ -1,79 +1,128 @@
 package ru.job4j.layoutPersistent;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.io.Serializable;
 
 public class Person implements Serializable {
 
-    private int id;
-
+    /**.
+     * It's name for person
+     */
     private String name;
 
+    /**.
+     * It's family for person
+     */
     private String family;
 
+    /**.
+     * It's gender for person
+     */
     private String sex;
 
+    /**.
+     * It's description for person
+     */
     private String description;
 
-    public Person(int id, String name, String family, String sex, String description) {
-        this.id = id;
+    /**.
+     * It's constructor for this class
+     * @param name
+     * @param family
+     * @param sex
+     * @param description
+     */
+    @JsonPropertyOrder({"name", "family", "sex", "description"})
+    public Person(String name, String family, String sex, String description) {
         this.name = name;
         this.family = family;
         this.sex = sex;
         this.description = description;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getFamily() {
-        return family;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
+    /**.
+     * It's method for comparison persons
+     * @param p it's other person
+     * @return result boolean
+     */
     public boolean equals(Person p) {
         boolean result = false;
-        if (this.id == p.getId() && this.name.equals(p.getName()) && this.family.equals(p.getFamily())) {
+        if (this.name.equals(p.getName()) && this.family.equals(p.getFamily())) {
             result = true;
         }
         return result;
     }
 
-    public boolean checkID(int id) {
-        if (id==this.id) {
-            return true;
-        } else {
-            return false;
-        }
+    /**.
+     * It's person for print
+     * @return
+     */
+    @Override
+    public String toString() {
+        return String.format("%s %s %s %s", name, family, sex, description);
     }
 
-    public void setId(int id) {
-        this.id = id;
+    /**.
+     * It's getter for name
+     * @return name
+     */
+    public String getName() {
+        return name;
     }
 
+    /**.
+     * It's setter for name
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**.
+     * It's getter for family
+     * @return family
+     */
+    public String getFamily() {
+        return family;
+    }
+
+    /**.
+     * It's setter for family
+     * @param family
+     */
     public void setFamily(String family) {
         this.family = family;
     }
 
+    /**.
+     * It's getter for sex
+     * @return return gender for person
+     */
+    public String getSex() {
+        return sex;
+    }
+
+    /**.
+     * It's setter for sex
+     * @param sex
+     */
     public void setSex(String sex) {
         this.sex = sex;
     }
 
+    /**.
+     * It's getter for description
+     * @return description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**.
+     * it's setter for description
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
