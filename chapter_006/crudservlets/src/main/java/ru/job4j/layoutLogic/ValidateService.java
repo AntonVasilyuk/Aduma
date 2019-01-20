@@ -34,13 +34,13 @@ public class ValidateService {
     private final Store store = DBStore.getInstance();
 
     /**.
-     * Constructor
+     * Hidden constructor
      */
     private ValidateService() {
     }
 
     /**.
-     * Method for getting instance of this class
+     * Method for getting instance single example for this class
      * @return instance
      */
     public static ValidateService getInstance() {
@@ -49,14 +49,12 @@ public class ValidateService {
 
     /**.
      * Method for adding new user
-     * @param name is name new user
-     * @param login is login new user
-     * @param email is email new user
+     * @param user is new user
      * @return result operation
      */
-    public synchronized boolean add(String name, String login, String password, String email, String role) {
-        if (!checkOnDublicate(login, email)) {
-            store.add(name, login, password, email, role);
+    public boolean add(User user) {
+        if (!isCredentional(user)) {
+            store.add(user);
             return true;
         }
         return false;
@@ -64,19 +62,14 @@ public class ValidateService {
 
     /**.
      * Method for update user in storage
-     * @param id is id user
-     * @param name is name user
-     * @param login is login user
-     * @param email is email user
+     * @param user is new user
      * @return result operation
      */
-    public synchronized boolean update(int id, String name, String login, String password, String email, String role) {
-        int index = searchUser(id);
-        if (index == -1) {
-            return false;
+    public boolean update(User user) {
+        if (!isCredentional(user)) {
+            store.update(user);
         }
-        store.update(id, name, login, password, email, role);
-        return true;
+        return false;
     }
 
     /**.
@@ -84,44 +77,13 @@ public class ValidateService {
      * @param id is id user for deleting
      * @return result operation
      */
-    public synchronized boolean delete(int id) {
-        int index = searchUser(id);
-        if (index != -1) {
+    public boolean delete(int id) {
+        if (store.existID(id)) {
             store.delete(id);
             return true;
         } else {
             return false;
         }
-    }
-
-    /**.
-     * Method for check adding user on dublicate in the storage
-     * @param login is login of the user
-     * @param email is email of the user
-     * @return result checking
-     */
-    private boolean checkOnDublicate(String login, String email) {
-        for (User temp : store.findByAll()) {
-            if (temp.equals(login, email)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**.
-     * Method for searching user in the storage
-     * @param id is id user
-     * @return position user in the storage
-     */
-    private int searchUser(int id) {
-        List<User> allUsers = store.findByAll();
-        for (User user : allUsers) {
-            if (user.getId() == id) {
-                return allUsers.indexOf(user);
-            }
-        }
-        return -1;
     }
 
     /**.
@@ -133,50 +95,50 @@ public class ValidateService {
     }
 
     /**.
-     * Getter for link to the store
-     * @return link to the store
-     */
-    public Store getStore() {
-        return store;
-    }
-
-    /**.
-     * Method for searching users by id
-     * @param id is id
-     * @return user
-     */
-    public User findById(int id) {
-        return store.findById(id);
-    }
-
-    /**.
      * Method for checking authorisation
-     * @param login for checking
-     * @param password for checking
+     * @param user for checking
      * @return result
      */
-    public boolean isCredentional(String login, String password) {
-        for (User user : getListStorage()) {
-            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
-                return true;
-            }
+    public boolean isCredentional(User user) {
+        if (store.isCredentional(user)) {
+            return true;
         }
         return false;
     }
 
-    public boolean isAdmin(String login, String password) {
-        for (User user : store.getStorage()) {
-            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
-                if (user.getRole().equals("admin")) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    /**.
+     * Method for checking role the user
+     * @param login
+     * @return true if user is admin
+     */
+    public boolean isAdmin(String login) {
+        return store.isAdmin(login);
     }
 
-    public static void main(String[] args) {
-        ValidateService s = new ValidateService();
-        System.out.println(s.isAdmin("admin", "root"));
+    /**.
+     * Getter for list of the countries
+     * @return list countries
+     */
+    public List<String> getCountries() {
+        return store.getCountries();
+    }
+
+    /**.
+     * Getter for list of the cies for this country
+     * @param country
+     * @return list of the cities
+     */
+    public List<String> getCity(String country) {
+        return store.getCity(country);
+    }
+
+    /**.
+     * Method for checking user for existing
+     * @param login for user
+     * @param password for user
+     * @return true if exist
+     */
+    public boolean isExisting(String login, String password) {
+        return (store.isExisting(login, password));
     }
 }

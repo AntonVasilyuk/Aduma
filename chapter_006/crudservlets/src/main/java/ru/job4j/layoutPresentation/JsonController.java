@@ -40,7 +40,6 @@ public class JsonController extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-
         String sendPerson = mapper.writeValueAsString(storage);
         PrintWriter writer = resp.getWriter();
         writer.write(sendPerson);

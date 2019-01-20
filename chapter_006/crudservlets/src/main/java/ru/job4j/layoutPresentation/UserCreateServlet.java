@@ -3,6 +3,7 @@ package ru.job4j.layoutPresentation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.job4j.layoutLogic.ValidateService;
+import ru.job4j.layoutPersistent.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,14 +44,17 @@ public class UserCreateServlet extends HttpServlet {
      * @throws IOException it's too
      */
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         String email = req.getParameter("email");
         String role = req.getParameter("role");
-        System.out.println(String.format("%s %s %s %s %s", name, login, password, email, role));
-        logic.add(name, login, password, email, role);
+        String country = req.getParameter("country");
+        String city = req.getParameter("city");
+        User newUser = new User(name, login, password, email, role, country, city);
+        logic.add(newUser);
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
+
     }
 }

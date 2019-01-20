@@ -53,14 +53,18 @@ public class SigninController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        if (logic.isCredentional(login, password)) {
+        System.out.println(login + password);
+        if (logic.isExisting(login, password)) {
+            System.out.println("user is valid");
             HttpSession session = req.getSession();
             session.setAttribute("login", login);
-            if (logic.isAdmin(login, password)) {
+            if (logic.isAdmin(login)) {
                 session.setAttribute("role", "admin");
+                System.out.println("user is admin");
             }
             resp.sendRedirect(String.format("%s/", req.getContextPath()));
         } else {
+            System.out.println("user is no valid");
             req.setAttribute("error", "Credentional is invalid");
             doGet(req, resp);
         }

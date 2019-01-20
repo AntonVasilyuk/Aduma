@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Storage for users</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    function ajaxGetUser() {
+        $.ajax('./json', {
+            method: 'get',
+            complete: function (data) {
+                var result = "";
+                var persons = JSON.parse(data.responseText);
+                if (persons.length > 0) {
+                    for (var i = 0; i < persons.length; i++) {
+                        result += "<tr>"
+                            + "<td>" + persons[i].name + "</td>"
+                            + "<td>" + persons[i].family + "</td>"
+                            + "<td>" + persons[i].sex + "</td>"
+                            + "<td>" + persons[i].description + "</td>"
+                            + "</tr>"
+                    }
+                    var table = document.getElementById("currentTable");
+                    table.innerHTML = result;
+                }
+            }
+        });
+    }
+    $(document).ready(function () {
+        ajaxGetUser();
+    })
+</script>
+
+<style>
+    .text_header {
+        align-content: center;
+    }
+    .table-contayner {
+        align-items: center;
+        width: 70%;
+        margin: auto;
+    }
+    body {
+        background: #c7b39b url(../resource/image.jpg); /* Цвет фона и путь к файлу */
+        color: #fff; /* Цвет текста */
+        background-size: 100%;
+    }
+    .table {
+        align-items: center;
+        align-content: center;
+    }
+
+</style>
+
+</head>
+
+<body>
+    <div class="table-contayner">
+        <h2 class="text-center">Storage for users</h2>
+        <table class="table" border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>LOGIN</th>
+                    <th>EMAIL</th>
+                    <th>EDIT_WRITES</th>
+                    <th>DELETE</th>
+                </tr>
+            </thead>
+            <tbody id="storageTable">
+                <tr></tr>
+            </tbody>
+        </table>
+    </div>
+    <div align="center">
+        <button class="btn btn-primary" onclick="createPage.html">Add user</button>
+    </div>
+</body>
+
+</html>

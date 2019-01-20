@@ -3,12 +3,14 @@ package ru.job4j.layoutPresentation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.job4j.layoutLogic.ValidateService;
+import ru.job4j.layoutPersistent.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.GregorianCalendar;
 
 public class UserUpdateServlet extends HttpServlet {
 
@@ -53,19 +55,21 @@ public class UserUpdateServlet extends HttpServlet {
      * @throws IOException it's too
      */
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String id = req.getParameter("id");
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         String email = req.getParameter("email");
         String role = req.getParameter("role");
+        String country = req.getParameter("country");
+        String city = req.getParameter("city");
         if (!id.equals("")) {
-            logic.update(Integer.parseInt(id), name, login, password, email, role);
+            logic.update(new User(Integer.parseInt(id), name, login, password, email,
+                    new GregorianCalendar().getTimeInMillis(), role, country, city));
         } else {
             logger.info("Not correct id for updating.");
         }
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
-
 }

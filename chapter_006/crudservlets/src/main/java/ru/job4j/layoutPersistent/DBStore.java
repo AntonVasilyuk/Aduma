@@ -39,11 +39,6 @@ public class DBStore implements Store {
     private final SimpleDateFormat sdf = new SimpleDateFormat("d MMM yy, HH:mm");
 
     /**.
-     * It's thread-safe counter for id
-     */
-    private final AtomicInteger currentID = new AtomicInteger(1);
-
-    /**.
      * Constructor for this class
      */
     private DBStore() {
@@ -55,6 +50,7 @@ public class DBStore implements Store {
         SOURCE.setMinIdle(5);
         SOURCE.setMaxIdle(10);
         SOURCE.setMaxOpenPreparedStatements(100);
+        createTable();
     }
 
     /**.
@@ -67,15 +63,12 @@ public class DBStore implements Store {
 
     /**.
      * Method for adding new writes to database
-     * @param name
-     * @param login
-     * @param password
-     * @param email
+     * @param user it's new user
      */
     @Override
-    public void add(String name, String login, String password, String email, String role) {
+    public void add(User user) {
         Connection connectionRollBack = null;
-        String query = String.format("INSERT INTO users(name, login, password, email, date, role) VALUES(?, ?, ?, ?, ?, ?)");
+        String query = String.format("INSERT INTO users(name, login, password, email, time, role, country, city) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
         Calendar date = Calendar.getInstance();
         try (Connection connection = SOURCE.getConnection();
              PreparedStatement st = connection.prepareStatement(query)
@@ -83,12 +76,14 @@ public class DBStore implements Store {
             connection.setAutoCommit(false);
             connectionRollBack = connection;
             st.addBatch();
-            st.setString(1, name);
-            st.setString(2, login);
-            st.setString(3, password);
-            st.setString(4, email);
+            st.setString(1, user.getName());
+            st.setString(2, user.getLogin());
+            st.setString(3, user.getPassword());
+            st.setString(4, user.getPassword());
             st.setTimestamp(5, new Timestamp(date.getTimeInMillis()));
-            st.setString(6, role);
+            st.setString(6, user.getRole());
+            st.setString(7, user.getCountry());
+            st.setString(8, user.getCity());
             st.execute();
             connection.commit();
         } catch (Exception e) {
@@ -105,27 +100,26 @@ public class DBStore implements Store {
 
     /**.
      * Method for update writes to database
-     * @param id
-     * @param name
-     * @param login
-     * @param email
+     * @param user is user for updating
      */
     @Override
-    public void update(int id, String name, String login, String password, String email, String role) {
+    public void update(User user) {
         Connection connectionRollBack = null;
-        String query = String.format("UPDATE users SET name=?, login=?, password=?, email=?, role=? WHERE id=?;");
+        String query = String.format("UPDATE users SET name=?, login=?, password=?, email=?, role=?, country=?, city=? WHERE id=?;");
         try (Connection connection = SOURCE.getConnection();
              PreparedStatement st = connection.prepareStatement(query);
         ) {
             connection.setAutoCommit(false);
             connectionRollBack = connection;
             st.addBatch();
-            st.setString(1, name);
-            st.setString(2, login);
-            st.setString(3, password);
-            st.setString(4, email);
-            st.setString(5, role);
-            st.setInt(6, id);
+            st.setString(1, user.getName());
+            st.setString(2, user.getLogin());
+            st.setString(3, user.getPassword());
+            st.setString(4, user.getEmail());
+            st.setString(5, user.getRole());
+            st.setString(6, user.getCountry());
+            st.setString(7, user.getCity());
+            st.setInt(8, user.getId());
             st.execute();
             connection.commit();
         } catch (Exception e) {
@@ -188,11 +182,13 @@ public class DBStore implements Store {
                 String email = rs.getString("email");
                 Timestamp date = rs.getTimestamp("time");
                 String role = rs.getString("role");
+                String country = rs.getString("country");
+                String city = rs.getString("city");
                 long time = 0;
                 if (date != null) {
                     time = date.getTime();
                 }
-                User user = new User(idUser, name, login, password, email, time, role);
+                User user = new User(idUser, name, login, password, email, time, role, country, city);
                 listAllUser.add(user);
             }
             return listAllUser;
@@ -226,6 +222,26 @@ public class DBStore implements Store {
     }
 
     /**.
+     * Method for checking on exist id in database
+     * @param id for checking
+     * @return return true if exist
+     */
+    public boolean existID(int id) {
+        String query = String.format("SELECT * FROM users WHERE id='%d';", id);
+        try (Connection connection = SOURCE.getConnection();
+             Statement st = connection.createStatement()
+        ) {
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        return false;
+    }
+
+    /**.
      * Getter for all writes
      * @return list writes
      */
@@ -255,7 +271,9 @@ public class DBStore implements Store {
                 String email = rs.getString("email");
                 long date = rs.getTimestamp("date").getTime();
                 String role = rs.getString("role");
-                user = new User(idUser, name, login, password, email, date, role);
+                String country = rs.getString("country");
+                String city = rs.getString("city");
+                user = new User(idUser, name, login, password, email, date, role, country, city);
                 return user;
             }
         } catch (Exception e) {
@@ -264,12 +282,145 @@ public class DBStore implements Store {
         return user;
     }
 
-    public static void main(String[] args) {
-        DBStore db = new DBStore();
-        List<User> list = db.findByAll();
-        for (User u : list) {
-            System.out.println(u);
+    /**.
+     * Getter for counties
+     * @return countries
+     */
+    public List<String> getCountries() {
+        List<String> countries = new ArrayList<>();
+        String query = "SELECT country FROM location GROUP BY country";
+        try (Connection connection = SOURCE.getConnection();
+        Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()) {
+                countries.add(rs.getString("country"));
+            }
+            return countries;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return countries;
+    }
+
+    /**.
+     * Getter for cities
+     * @param country
+     * @return cities
+     */
+    public List<String> getCity(String country) {
+        List<String> city = new ArrayList<>();
+        String query = "SELECT city FROM location WHERE country='" + country + "';";
+        System.out.println(query);
+        try (Connection connection = SOURCE.getConnection();
+             Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()) {
+                city.add(rs.getString("city"));
+            }
+            return city;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return city;
+    }
+
+    /**.
+     * Cheking user on exist
+     * @param user for cheking
+     * @return result
+     */
+    @Override
+    public boolean isCredentional(User user) {
+        String queryLogin = String.format("SELECT * FROM users WHERE login='%s';", user.getLogin());
+        String queryEmail = String.format("SELECT * FROM users WHERE email='%s';", user.getEmail());
+        try (Connection connection = SOURCE.getConnection();
+             Statement st = connection.createStatement()
+        ) {
+            ResultSet rsOne = st.executeQuery(queryLogin);
+            while (rsOne.next()) {
+                System.out.println("Login exist");
+                return false;
+            }
+            ResultSet rsTwo = st.executeQuery(queryEmail);
+            while (rsTwo.next()) {
+                System.out.println("email is exist");
+                return false;
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        return true;
+    }
+
+    /**.
+     * Creating tables if not exist
+     */
+    public void createTable() {
+        String queryCreate = "CREATE TABLE IF NOT EXISTS public.users (id SERIAL PRIMARY KEY, name varchar(50)," +
+                "login varchar(50), password varchar(50), email varchar(50), time TIMESTAMP, role varchar(50)," +
+                "country varchar(50), city varchar(50));";
+        try (Connection connection = SOURCE.getConnection();
+             PreparedStatement statement = connection.prepareStatement(queryCreate);
+        ) {
+            connection.setAutoCommit(false);
+            statement.execute();
+            connection.commit();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
     }
 
+    /**.
+     * Cheking role for this user
+     * @param login
+     * @param password
+     * @return true if user is admin
+     */
+    @Override
+    public boolean isExisting(String login, String password) {
+        String query = String.format("SELECT * FROM users WHERE login='%s';", login);
+        try (Connection connection = SOURCE.getConnection();
+             Statement st = connection.createStatement()
+        ) {
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                String pass = rs.getString("password");
+                System.out.println(pass);
+                if (pass.equals(password)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error(e.getMessage(), e);
+        }
+        return false;
+    }
+
+    /**.
+     * Cheking role for this user
+     * @param login
+     * @return true if user is admin
+     */
+    @Override
+    public boolean isAdmin(String login) {
+        String query = String.format("SELECT * FROM users WHERE login='%s';", login);
+        try (Connection connection = SOURCE.getConnection();
+             Statement st = connection.createStatement()
+        ) {
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                if (rs.getString("role").equals("admin")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        return false;
+    }
 }

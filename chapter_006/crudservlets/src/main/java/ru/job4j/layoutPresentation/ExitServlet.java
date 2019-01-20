@@ -8,6 +8,13 @@ import java.io.IOException;
 
 public class ExitServlet extends HttpServlet {
 
+    /**.
+     * It's getter for this servlet
+     * @param req is requaest
+     * @param resp is response
+     * @throws ServletException may be exception
+     * @throws IOException may be exceprions
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().invalidate();

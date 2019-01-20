@@ -51,6 +51,16 @@ public class User {
     private final String role;
 
     /**.
+     * It's country users
+     */
+    private String country;
+
+    /**.
+     * It's city
+     */
+    private String city;
+
+    /**.
      * It's format for formating date
      */
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -62,8 +72,11 @@ public class User {
      * @param login it's login the user
      * @param password it's password the user
      * @param email it's email the user
+     * @param country it's country for user
+     * @patam city it's city user
      */
-    public User(int id, String name, String login, String password, String email, Long time, String role) {
+    public User(int id, String name, String login, String password, String email, Long time,
+                String role, String country, String city) {
         this.id = id;
         this.name = name;
         this.login = login;
@@ -72,6 +85,29 @@ public class User {
         this.createDate = new GregorianCalendar();
         createDate.setTime(new Date(time));
         this.role = role;
+        this.country = country;
+        this.city = city;
+    }
+
+    /**.
+     * Construcor for class User
+     * @param name it's name the user
+     * @param login it's login the user
+     * @param password it's password the user
+     * @param email it's email the user
+     * @param country it's country for user
+     * @patam city it's city user
+     */
+    public User(String name, String login, String email, String password, String role, String country, String city) {
+        id = -1;
+        createDate = new GregorianCalendar();
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.country = country;
+        this.city = city;
     }
 
     /**.
@@ -157,5 +193,37 @@ public class User {
      */
     public String getRole() {
         return role;
+    }
+
+    /**.
+     * Getter for country
+     * @return country
+     */
+    public String getCountry() {
+        return country;
+    }
+
+    /**.
+     * Setter for country
+     * @param country
+     */
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    /**.
+     * Getter for city
+     * @return city
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**.
+     * Setter for city
+     * @param city
+     */
+    public void setCity(String city) {
+        this.city = city;
     }
 }

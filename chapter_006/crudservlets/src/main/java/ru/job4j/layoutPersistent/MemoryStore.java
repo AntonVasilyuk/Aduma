@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -54,27 +55,23 @@ public class MemoryStore implements Store{
 
     /**.
      * Method for adding user
-     * @param name is name of the user
-     * @param login is login of the user
-     * @param email is email of the user
+     * @param user is new user
      */
     @Override
-    public void add(String name, String login, String password, String email, String role) {
+    public void add(User user) {
         long time = Calendar.getInstance().getTimeInMillis();
-        storage.add(new User(id++, name, login, password, email, time, role));
+        storage.add(new User(id++, user.getName(), user.getLogin(), user.getPassword(), user.getPassword(), time,
+                user.getRole(), user.getCountry(), user.getCity()));
     }
 
     /**.
      * Method for updating user
-     * @param id is id of the user
-     * @param name is new name of the user
-     * @param login is new login of the user
-     * @param email is new email of the user
+     * @param user is new user
      */
     @Override
-    public void update(int id, String name, String login, String password, String email, String role) {
+    public void update(User user) {
         long timeupdating = Calendar.getInstance().getTimeInMillis();
-        storage.set(storage.indexOf(findById(id)), new User(id, name, login, password, email, timeupdating, role));
+        storage.set(storage.indexOf(findById(user.getId())), user);
     }
 
     /**.
@@ -118,11 +115,62 @@ public class MemoryStore implements Store{
         return storage;
     }
 
+    @Override
+    public List<String> getCountries() {
+        //TODO
+        return null;
+    }
+
+    @Override
+    public List<String> getCity(String country) {
+        //TODO
+        return null;
+    }
+
     /**.
      * Getter for id of the user
      * @return id
      */
     public int getId() {
         return id;
+    }
+
+    /**.
+     *
+     * @param user
+     * @return
+     */
+    @Override
+    public boolean isCredentional(User user) {
+        return false;
+    }
+
+    /**.
+     *
+     * @param login
+     * @param password
+     * @return
+     */
+    @Override
+    public boolean isExisting(String login, String password) {
+        //TODO
+        return false;
+    }
+
+    /**.
+     *
+     * @param login
+     * @return
+     */
+    @Override
+    public boolean isAdmin(String login) {
+        //TODO
+        return false;
+    }
+
+    @Override
+    public boolean existID(int id) {
+        //TODO
+        return false;
     }
 }
