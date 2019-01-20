@@ -173,4 +173,10 @@ public class MemoryStore implements Store{
         //TODO
         return false;
     }
+
+    @Override
+    public boolean needUpdate(User user) {
+        //TODO
+        return false;
+    }
 }

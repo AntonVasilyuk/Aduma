@@ -194,7 +194,6 @@ public class DBStore implements Store {
             return listAllUser;
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            e.printStackTrace();
         }
         return listAllUser;
     }
@@ -297,7 +296,7 @@ public class DBStore implements Store {
             }
             return countries;
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
         return countries;
     }
@@ -319,7 +318,7 @@ public class DBStore implements Store {
             }
             return city;
         } catch (SQLException e) {
-            e.printStackTrace();
+           log.error(e.getMessage(), e);
         }
         return city;
     }
@@ -352,6 +351,37 @@ public class DBStore implements Store {
         return true;
     }
 
+    /**.
+     * Method for checking needing update
+     * @param user
+     * @return
+     */
+    @Override
+    public boolean needUpdate(User user) {
+        String query = String.format("SELECT * FROM users WHERE id=%d;", user.getId());
+        try (Connection connection = SOURCE.getConnection();
+             Statement st = connection.createStatement()
+        ) {
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String login = rs.getString("login");
+                String password = rs.getString("password");
+                String email = rs.getString("email");
+                String role = rs.getString("role");
+                String country = rs.getString("country");
+                String city = rs.getString("city");
+                if (!name.equals(user.getName()) || !login.equals(user.getLogin()) || !password.equals(user.getPassword()) ||
+                        !email.equals(user.getEmail()) || !role.equals(user.getRole()) || !country.equals(user.getCountry()) ||
+                        !city.equals(user.getCity())) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        return false;
+    }
     /**.
      * Creating tables if not exist
      */
@@ -393,7 +423,6 @@ public class DBStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
             log.error(e.getMessage(), e);
         }
         return false;

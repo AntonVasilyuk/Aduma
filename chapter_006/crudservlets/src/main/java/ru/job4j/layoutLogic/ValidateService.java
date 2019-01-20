@@ -66,7 +66,7 @@ public class ValidateService {
      * @return result operation
      */
     public boolean update(User user) {
-        if (!isCredentional(user)) {
+        if (store.needUpdate(user)) {
             store.update(user);
         }
         return false;

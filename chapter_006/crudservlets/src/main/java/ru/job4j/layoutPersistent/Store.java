@@ -22,6 +22,7 @@ public interface Store{
     List<String> getCountries();
     List<String> getCity(String country);
     boolean isCredentional(User user);
+    boolean needUpdate(User user);
     boolean isExisting(String login, String password);
     boolean isAdmin(String login);
 }
