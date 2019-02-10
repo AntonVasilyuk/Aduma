@@ -14,9 +14,9 @@
 
 	<modules>
 		<module>webproject</module>
-		<module>crudservlet</module>
 		<module>crudservlets</module>
 		<module>cinema</module>
+		<module>cinemaTest</module>
 	</modules>
 
 	<dependencies>

@@ -11,18 +11,37 @@ import java.util.List;
 
 public class DataBase {
 
-    Logger log = LoggerFactory.getLogger(DataBase.class);
+    /**.
+     * It's logger for this class
+     */
+    private final Logger log = LoggerFactory.getLogger(DataBase.class);
 
+    /**.
+     * It's example for this class
+     */
     private static final DataBase db = new DataBase();
 
+    /**.
+     * It's sourse for multiple working for database
+     */
     private final BasicDataSource SOURCE = new BasicDataSource();
 
-    Settings settings = Settings.getInstance();
+    /**.
+     * It's settings
+     */
+    private final Settings settings = Settings.getInstance();
 
+    /**.
+     * It's getter for singleton class
+     * @return example this class
+     */
     public static DataBase getInstance() {
         return db;
     }
 
+    /**.
+     * Constructor for this class
+     */
     private DataBase() {
         SOURCE.setDriverClassName(settings.getValues("jdbc.driver"));
         SOURCE.setUrl(settings.getValues("jdbc.url"));
@@ -35,25 +54,35 @@ public class DataBase {
         createTables();
     }
 
+    /**.
+     * Method for adding new order to database
+     * @param place
+     */
     public void add(Place place) {
         addAccounts(place);
-        addHall(place);
+        int idAccount = getIDAccaunt(place);
+        addHall(place, idAccount);
     }
 
-    public boolean addHall(Place place) {
+    /**.
+     * Add writes to table hall
+     * @param place
+     * @param idAccount
+     */
+    public void addHall(Place place, int idAccount) {
         Connection connectionRollBack = null;
-        String queryEdit = String.format("UPDATE halls SET occupied='unfree' WHERE id=?");
+        String queryEdit = String.format("UPDATE halls SET occupied='unfree', userID=? WHERE id=?");
         try (Connection connection = SOURCE.getConnection();
              PreparedStatement stEdit = connection.prepareStatement(queryEdit)
         ) {
             connection.setAutoCommit(false);
             connectionRollBack = connection;
             stEdit.addBatch();
-            stEdit.setInt(1, getIDPlace(place));
+            stEdit.setInt(1, idAccount);
+            stEdit.setInt(2, getIDPlace(place));
             stEdit.execute();
             connection.commit();
         } catch (Exception e) {
-            e.printStackTrace();
             if (connectionRollBack != null) {
                 try {
                     connectionRollBack.rollback();
@@ -63,10 +92,13 @@ public class DataBase {
             }
             log.error(e.getMessage(), e);
         }
-        return true;
     }
 
-    public boolean addAccounts(Place place) {
+    /**.
+     * Method for adding writes to table accounts
+     * @param place
+     */
+    public void addAccounts(Place place) {
         Connection connectionRollBack = null;
         String queryAdd = String.format("INSERT INTO accounts(name, phone, idPlace) " +
                 "VALUES(?, ?, ?)");
@@ -82,7 +114,6 @@ public class DataBase {
             stAdd.execute();
             connection.commit();
         } catch (Exception e) {
-            e.printStackTrace();
             if (connectionRollBack != null) {
                 try {
                     connectionRollBack.rollback();
@@ -92,9 +123,13 @@ public class DataBase {
             }
             log.error(e.getMessage(), e);
         }
-        return true;
     }
 
+    /**.
+     * Method for getting id place from table hall
+     * @param place
+     * @return all places
+     */
     public int getIDPlace(Place place) {
         int id = 0;
         String query = String.format("SELECT id FROM halls WHERE row=%d AND place=%d;",
@@ -108,13 +143,38 @@ public class DataBase {
             }
             return id;
         } catch (Exception e) {
-            e.printStackTrace();
             log.error(e.getMessage(), e);
         }
-        System.out.println(id);
         return id;
     }
 
+    /**.
+     * Method getter id from accounts
+     * @param place
+     * @return id buyer
+     */
+    public int getIDAccaunt(Place place) {
+        int id = 0;
+        String query = String.format("SELECT id FROM accounts WHERE name='%s' AND phone='%s';",
+                place.getName(), place.getPhone());
+        try (Connection connection = SOURCE.getConnection();
+             Statement st = connection.createStatement()
+        ) {
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                id = rs.getInt("id");
+            }
+            return id;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        return id;
+    }
+
+    /**.
+     * Method for getting all place from table hall
+     * @return all writes
+     */
     public List<Place> getPlaces() {
         List<Place> listAllUser = new ArrayList<>();
         String query = String.format("SELECT * FROM halls;");
@@ -135,7 +195,6 @@ public class DataBase {
                 listAllUser.add(placeForAdding);
             }
             Collections.sort(listAllUser);
-            System.out.println(listAllUser);
             return listAllUser;
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -143,11 +202,17 @@ public class DataBase {
         return listAllUser;
     }
 
+    /**.
+     * Method for create tables
+     */
     public void createTables() {
         createTableHall();
         createTableAccount();
     }
 
+    /**.
+     * Method for create table accounts
+     */
     public void createTableAccount() {
         String queryAccounts = String.format("CREATE TABLE IF NOT EXISTS accounts (id SERIAL PRIMARY KEY, name VARCHAR(50) ," +
                 "phone VARCHAR(15) NOT NULL, idPlace INT NOT NULL );");
@@ -159,11 +224,13 @@ public class DataBase {
             st.execute();
             connection.commit();
         } catch (Exception e) {
-            e.printStackTrace();
             log.error(e.getMessage(), e);
         }
     }
 
+    /**.
+     * Method for create table hall
+     */
     public void createTableHall() {
         String queryHall = String.format("CREATE TABLE IF NOT EXISTS halls (id SERIAL PRIMARY KEY, row INT NOT NULL ," +
                 "place INT NOT NULL , occupied VARCHAR(10) NOT NULL, userID INT);");
@@ -175,15 +242,7 @@ public class DataBase {
             st.execute();
             connection.commit();
         } catch (Exception e) {
-            e.printStackTrace();
             log.error(e.getMessage(), e);
         }
-    }
-
-
-    public static void main(String[] args) {
-        DataBase db = DataBase.getInstance();
-        Place place = new Place(1, 2, "tony", "79825054792", true);
-        db.getPlaces();
     }
 }

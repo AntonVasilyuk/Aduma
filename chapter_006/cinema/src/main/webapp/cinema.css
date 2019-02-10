@@ -1,0 +1,14 @@
+.occupied {
+    background-color: lightgray;
+
+}
+
+.unoccupied {
+    background-color: lightgreen;
+}
+
+.description {
+    width: 20%;
+    padding: 10px;
+    text-align: center;
+}
