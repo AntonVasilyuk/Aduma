@@ -1,5 +1,3 @@
-document.ready
-
 function validate() {
     var result = true;
     var message = "Enter your";

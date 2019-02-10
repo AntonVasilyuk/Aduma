@@ -55,7 +55,6 @@ public class JsonController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         BufferedReader bf = req.getReader();
         String sb = bf.readLine();
-        System.out.println(sb);
         Person person = new Gson().fromJson(sb, Person.class);
         storage.add(person);
     }
