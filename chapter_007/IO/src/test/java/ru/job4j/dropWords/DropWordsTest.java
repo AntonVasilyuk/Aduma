@@ -27,4 +27,18 @@ public class DropWordsTest {
         String result = arrayOutputStream.toString();
         assertTrue(result.equals(textForResult));
     }
+
+    @Test
+    public void whenNeedDropWordsUsesSreamApi() {
+        String text = "It's line for test";
+        String textForResult = "It's line for ";
+        String[] arrayWords = new String[1];
+        arrayWords[0] = "test";
+
+        ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(text.getBytes());
+        ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+        exampleTestClass.dropAbusesStreamAPI(arrayInputStream, arrayOutputStream, arrayWords);
+        String result = arrayOutputStream.toString();
+        assertTrue(result.equals(textForResult));
+    }
 }

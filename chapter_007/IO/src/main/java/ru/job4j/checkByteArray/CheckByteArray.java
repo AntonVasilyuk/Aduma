@@ -46,18 +46,4 @@ public class CheckByteArray {
             return false;
         }
     }
-
-    /**.
-     * Main method
-     * @param args
-     */
-    public static void main(String[] args) {
-        CheckByteArray check = new CheckByteArray();
-        System.out.println("Enter an even number:");
-        if (check.isNumber(System.in)) {
-            System.out.println("Ok");
-        } else {
-            System.out.println("It's troble");
-        }
-    }
 }

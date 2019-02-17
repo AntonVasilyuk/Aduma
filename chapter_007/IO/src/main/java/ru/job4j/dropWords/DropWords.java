@@ -1,6 +1,11 @@
 package ru.job4j.dropWords;
 
+import org.apache.log4j.LogManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
+import java.util.stream.Collectors;
 
 /**.
  * Chapter_007
@@ -13,6 +18,11 @@ import java.io.*;
  */
 
 public class DropWords {
+
+    /**.
+     * Is logger for this class
+     */
+    private final Logger logger = LoggerFactory.getLogger(DropWords.class);
 
     /**.
      * It's method for deleting words from text in stream
@@ -35,7 +45,22 @@ public class DropWords {
                 writer.flush();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+        }
+    }
+
+    public void dropAbusesStreamAPI(InputStream in, OutputStream out, String[] abuse) {
+        try(BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out))) {
+        writer.write(reader.lines()
+                .map(line -> {
+                    for(String word : abuse) {
+                        line = line.replaceAll(word, "");
+                    }
+                    return line.replaceAll("  ", " ");
+                }).collect(Collectors.joining("\n")));
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
         }
     }
 }
