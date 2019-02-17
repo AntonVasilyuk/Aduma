@@ -49,6 +49,12 @@ public class DropWords {
         }
     }
 
+    /**.
+     * It's method for deleting words from text in stream with stream api
+     * @param in is inputStream
+     * @param out is outputStream
+     * @param abuse is array words for deleting
+     */
     public void dropAbusesStreamAPI(InputStream in, OutputStream out, String[] abuse) {
         try(BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out))) {
