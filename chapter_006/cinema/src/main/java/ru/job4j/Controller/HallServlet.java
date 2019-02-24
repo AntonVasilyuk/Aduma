@@ -2,6 +2,8 @@ package ru.job4j.Controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.job4j.Persistence.Place;
 import ru.job4j.Service.Service;
 
@@ -15,6 +17,7 @@ import java.util.List;
 
 public class HallServlet extends HttpServlet {
 
+    private static final Logger logg = LoggerFactory.getLogger(HallServlet.class);
     /**.
      * Example for class Service
      */
@@ -30,11 +33,7 @@ public class HallServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ObjectMapper mapper = new ObjectMapper();
-        System.out.println("I am servlet!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
         List<Place> hall = service.getPlaces();
-        System.out.println(hall);
         resp.getWriter().write(mapper.writeValueAsString(service.getPlaces()));
     }
 
@@ -51,6 +50,6 @@ public class HallServlet extends HttpServlet {
         sb = bf.readLine();
         Place place = new Gson().fromJson(sb, Place.class);
         service.add(place);
-        resp.sendRedirect(String.format("index.html", req.getContextPath()));
+        resp.sendRedirect(String.format("%s/index.html", req.getContextPath()));
     }
 }
