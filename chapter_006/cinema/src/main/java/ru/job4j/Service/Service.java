@@ -2,6 +2,7 @@ package ru.job4j.Service;
 
 import ru.job4j.Persistence.DataBase;
 import ru.job4j.Persistence.Place;
+import ru.job4j.Persistence.Store;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class Service {
     /**.
      * Example for class database
      */
-    private final DataBase base = DataBase.getInstance();
+    private final Store base = DataBase.getInstance();
 
     /**.
      * Example for this class

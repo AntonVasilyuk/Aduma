@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class DataBase {
+public class DataBase implements Store {
 
     /**.
      * It's logger for this class
@@ -51,7 +51,6 @@ public class DataBase {
         SOURCE.setMinIdle(5);
         SOURCE.setMaxIdle(10);
         SOURCE.setMaxOpenPreparedStatements(100);
-        createTables();
     }
 
     /**.
@@ -200,49 +199,5 @@ public class DataBase {
             log.error(e.getMessage(), e);
         }
         return listAllUser;
-    }
-
-    /**.
-     * Method for create tables
-     */
-    public void createTables() {
-        createTableHall();
-        createTableAccount();
-    }
-
-    /**.
-     * Method for create table accounts
-     */
-    public void createTableAccount() {
-        String queryAccounts = String.format("CREATE TABLE IF NOT EXISTS accounts (id SERIAL PRIMARY KEY, name VARCHAR(50) ," +
-                "phone VARCHAR(15) NOT NULL, idPlace INT NOT NULL );");
-        try (Connection connection = SOURCE.getConnection();
-             PreparedStatement st = connection.prepareStatement(queryAccounts);
-        ) {
-            connection.setAutoCommit(false);
-            st.addBatch();
-            st.execute();
-            connection.commit();
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        }
-    }
-
-    /**.
-     * Method for create table hall
-     */
-    public void createTableHall() {
-        String queryHall = String.format("CREATE TABLE IF NOT EXISTS halls (id SERIAL PRIMARY KEY, row INT NOT NULL ," +
-                "place INT NOT NULL , occupied VARCHAR(10) NOT NULL, userID INT);");
-        try (Connection connection = SOURCE.getConnection();
-             PreparedStatement st = connection.prepareStatement(queryHall);
-        ) {
-            connection.setAutoCommit(false);
-            st.addBatch();
-            st.execute();
-            connection.commit();
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        }
     }
 }
