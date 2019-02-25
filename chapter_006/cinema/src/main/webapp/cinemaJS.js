@@ -18,20 +18,17 @@ function validateUser() {
         alert(message);
         return false;
     }
-    alert("Данные верны!");
+
     return true;
 }
 
 function checkPlace() {
-    alert("Получение данных");
     $.ajax({
         url: "/cinema/hall",
         method: "get",
         complete: function(data) {
-            alert("data getting");
             var result = "";
             var hall = JSON.parse(data.responseText);
-            alert(hall.toString());
             for(var i = 0; i < hall.length; i++) {
                 if (hall[i].place == 1) {
                     result += "<tr><th>" + hall[i].row + "</th>";
@@ -48,7 +45,6 @@ function checkPlace() {
                     result += "</tr>";
                 }
             }
-            alert(result);
             document.getElementById("cinemaHall").innerHTML = result;
         }
     });
@@ -69,11 +65,15 @@ function addNewOrder() {
         "phone":phone,
         "occupied":true
     };
+    document.location.href = 'index.html';
     $.ajax({
         url: "/cinema/hall",
         method: "post",
         data: JSON.stringify(newOrder),
         contentType: "application/json",
+        complete: function () {
+            window.location.href = 'index.html';
+        }
     })
 }
 
@@ -86,7 +86,6 @@ function getPlaceForPayment() {
     var place = getValuePlace();
     var rowAndPlace = place.split("");
     var result = "Вы выбрали ряд " + rowAndPlace[0]+ " место " + rowAndPlace[1] + ", Сумма : 500 рублей.";
-    alert(result);
     document.getElementById("placePayment").innerHTML = result;
 
 }
