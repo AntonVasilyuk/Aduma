@@ -1,11 +1,11 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>ru.job4j.chapter_003</groupId>
-	<artifactId>CompareWords</artifactId>
+	<groupId>ru.job4j.chapter_005.Cars</groupId>
+	<artifactId>Cars</artifactId>
 	<version>2.0</version>
 	<packaging>jar</packaging>
-	<name>CompareWords</name>
-	
+	<name>Cars</name>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -39,7 +39,7 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
-							<finalName>CompareWords</finalName>
+							<finalName>Cars</finalName>
 							<transformers>
 								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<mainClass>ru.job4j.start.StartUI</mainClass>
@@ -51,10 +51,10 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<parent>
 		<groupId>ru.job4j</groupId>
-		<artifactId>chapter_003</artifactId>
+		<artifactId>chapter_005</artifactId>
 		<version>2.0</version>
 	</parent>
 

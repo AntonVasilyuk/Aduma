@@ -1,6 +1,6 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>chapter_002</groupId>
+	<groupId>ru.job4j</groupId>
 	<artifactId>chapter_002</artifactId>
 	<version>2.0</version>
 	<packaging>pom</packaging>
