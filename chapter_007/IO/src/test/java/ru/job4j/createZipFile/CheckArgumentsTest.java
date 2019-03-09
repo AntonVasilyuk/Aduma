@@ -4,6 +4,13 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test working class CheckArgument.
+ * @author Anton Vasilyuk (z241287@yandex.ru)
+ * @version 0.1$
+ * @since 0.1
+ * 06.03.2019
+ */
 public class CheckArgumentsTest {
 
     /**.
@@ -21,6 +28,9 @@ public class CheckArgumentsTest {
         assertTrue(result);
     }
 
+    /**.
+     * Test getting root
+     */
     @Test
     public void whenGetingRootName() {
         checker.getArgumets();
@@ -30,6 +40,9 @@ public class CheckArgumentsTest {
         assertTrue(rootName.equals(expectation));
     }
 
+    /**.
+     * Test getting zipName
+     */
     @Test
     public void whenGetingZipName() {
         checker.getArgumets();
@@ -38,6 +51,9 @@ public class CheckArgumentsTest {
         assertTrue(zipName.equals(expectation));
     }
 
+    /**.
+     * Test getting extense
+     */
     @Test
     public void whenGetingListExtense() {
         checker.getArgumets();
