@@ -1,8 +1,8 @@
-/**.
- * Testing app for archiving directories.
+/**
+ * It's console chat.
  *
  * @author Anton Vasilyuk  (wrajina99@gmail.com)
  * @version $Id$
  * @since 0.1
  */
-package ru.job4j.createZipFile;
+package ru.job4j.consoleChat;
