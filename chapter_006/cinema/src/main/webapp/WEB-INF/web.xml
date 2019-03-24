@@ -6,7 +6,7 @@
          version="2.4">
     <servlet>
         <servlet-name>HallServlet</servlet-name>
-        <servlet-class>ru.job4j.Controller.HallServlet</servlet-class>
+        <servlet-class>ru.job4j.controller.HallServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
 
@@ -17,7 +17,7 @@
 
     <filter>
         <filter-name>Filter</filter-name>
-        <filter-class>ru.job4j.Controller.AuthFilter</filter-class>
+        <filter-class>ru.job4j.controller.AuthFilter</filter-class>
     </filter>
 
     <filter-mapping>

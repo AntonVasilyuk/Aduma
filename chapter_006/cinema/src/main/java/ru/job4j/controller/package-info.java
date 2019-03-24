@@ -1,8 +1,8 @@
 /**
- * Is Layout for persistence in this programm.
+ * It's Layout for controller.
  *
  * @author Anton Vasilyuk  (wrajina99@gmail.com)
  * @version $Id$
  * @since 0.1
  */
-package ru.job4j.Persistence;
+package ru.job4j.controller;

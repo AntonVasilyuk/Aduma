@@ -1,4 +1,4 @@
-package ru.job4j.Controller;
+package ru.job4j.controller;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;

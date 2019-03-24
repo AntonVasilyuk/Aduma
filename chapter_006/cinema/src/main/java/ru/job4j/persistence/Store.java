@@ -1,8 +1,5 @@
-package ru.job4j.Persistence;
+package ru.job4j.persistence;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public interface Store {

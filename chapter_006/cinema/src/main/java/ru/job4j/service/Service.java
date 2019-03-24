@@ -1,8 +1,8 @@
-package ru.job4j.Service;
+package ru.job4j.service;
 
-import ru.job4j.Persistence.DataBase;
-import ru.job4j.Persistence.Place;
-import ru.job4j.Persistence.Store;
+import ru.job4j.persistence.DataBase;
+import ru.job4j.persistence.Place;
+import ru.job4j.persistence.Store;
 
 import java.util.List;
 

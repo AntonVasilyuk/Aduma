@@ -1,4 +1,4 @@
-package ru.job4j.Persistence;
+package ru.job4j.persistence;
 
 public class Place implements Comparable<Place>{
 

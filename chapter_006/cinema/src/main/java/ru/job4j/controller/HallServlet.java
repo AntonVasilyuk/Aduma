@@ -1,11 +1,11 @@
-package ru.job4j.Controller;
+package ru.job4j.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.job4j.Persistence.Place;
-import ru.job4j.Service.Service;
+import ru.job4j.persistence.Place;
+import ru.job4j.service.Service;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
