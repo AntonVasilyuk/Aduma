@@ -16,8 +16,6 @@ import static org.junit.Assert.assertThat;
 
 	/**.
 	* Тест сложения
-	* @param first
-	* @param second
 	*/
 	@Test
 	public void testWhenAddOneToOneThenTwo() {
