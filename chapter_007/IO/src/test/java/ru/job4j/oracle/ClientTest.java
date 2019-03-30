@@ -12,6 +12,14 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * Testing class client for class client.
+ * @author Anton Vasilyuk (z241287@yandex.ru)
+ * @version 0.1$
+ * @since 0.1
+ * 27.03.2019
+ */
+
 public class ClientTest {
 
     /**.

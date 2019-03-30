@@ -9,6 +9,13 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * Class server for oracle.
+ * @author Anton Vasilyuk (z241287@yandex.ru)
+ * @version 0.1$
+ * @since 0.1
+ * 27.03.2019
+ */
 public class Server {
 
     /**.
