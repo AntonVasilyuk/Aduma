@@ -42,21 +42,15 @@ public class ChatLogic {
      */
     private boolean exit = false;
 
+    /**.
+     * Text for pause
+     */
     private String pause = "Chat paused";
+
+    /**.
+     * Text for resume
+     */
     private String resume = "Chat resumed, i am at your service";
-
-    /**.
-     * It's hidden constructor
-     */
-    private ChatLogic() {}
-
-    /**.
-     * It's method for getting single example this class
-     * @return link
-     */
-    public static ChatLogic getInstance() {
-        return logic;
-    }
 
     /**.
      * Start working chat

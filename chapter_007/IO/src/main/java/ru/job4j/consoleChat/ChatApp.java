@@ -14,6 +14,6 @@ public class ChatApp {
      * @param args
      */
     public static void main(String[] args) {
-        ChatLogic.getInstance().startChat();
+        new ChatLogic().startChat();
     }
 }
