@@ -1,6 +1,14 @@
 package ru.job4j.persistence;
 
-public class Place implements Comparable<Place>{
+/**
+ * Model for place in the hall.
+ * @author Anton Vasilyuk (z241287@yandex.ru)
+ * @version 0.1$
+ * @since 0.1
+ * 02.03.2019
+ */
+
+public class Place implements Comparable<Place> {
 
     /**.
      * It's id in database
@@ -151,13 +159,13 @@ public class Place implements Comparable<Place>{
      */
     @Override
     public String toString() {
-        return "Place{" +
-                "row=" + row +
-                ", place=" + place +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", occupied=" + occupied +
-                '}';
+        return "Place{"
+                + "row=" + row
+                + ", place=" + place
+                + ", name='" + name + '\''
+                + ", phone='" + phone + '\''
+                + ", occupied=" + occupied
+                + '}';
     }
 
     /**.
@@ -167,7 +175,7 @@ public class Place implements Comparable<Place>{
      */
     @Override
     public int compareTo(Place place) {
-        if (this.getId() > place.getId() ) {
+        if (this.getId() > place.getId()) {
             return 1;
         } else if (this.getId() < place.getId()) {
             return -1;

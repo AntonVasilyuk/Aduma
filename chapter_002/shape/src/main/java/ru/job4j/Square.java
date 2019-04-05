@@ -10,6 +10,7 @@ package ru.job4j;
 */
 
 public class Square implements Shape {
+
 	/**.
 	* @height height this shape
 	*/
@@ -25,7 +26,6 @@ public class Square implements Shape {
 
 	/**.
 	* method for build square
-	* @param height square
 	* @return square to paint
 	*/
 	public String pic() {

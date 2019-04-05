@@ -6,6 +6,15 @@ import ru.job4j.persistence.Store;
 
 import java.util.List;
 
+
+/**
+ * Class for working to database.
+ *
+ * @author Anton Vasilyuk (z241287@yandex.ru)
+ * @version 0.1$
+ * @since 0.1
+ * 02.03.2019
+ */
 public class Service {
 
     /**.
@@ -16,7 +25,7 @@ public class Service {
     /**.
      * Example for this class
      */
-    private static final Service service = new Service();
+    private static final Service INSTANCE = new Service();
 
     /**.
      * It's private constructor
@@ -29,12 +38,12 @@ public class Service {
      * @return example
      */
     public static Service getInstance() {
-        return service;
+        return INSTANCE;
     }
 
     /**.
      * Getter all writes form table halls
-     * @return
+     * @return all places
      */
     public List<Place> getPlaces() {
         return base.getPlaces();
@@ -42,7 +51,7 @@ public class Service {
 
     /**.
      * Method for adding new order to writes
-     * @param place
+     * @param place for adding
      */
     public void add(Place place) {
         base.add(place);

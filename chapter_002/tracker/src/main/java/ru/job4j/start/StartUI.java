@@ -1,8 +1,6 @@
 package ru.job4j.start;
 
-import ru.job4j.models.*;
-import java.util.*;
-
+import java.util.List;
 
 /**.
 * Chapter_002
@@ -42,25 +40,12 @@ public class StartUI {
 
 		menu.fillActions();
 		List<Integer> ranges = menu.getArrayNumber();
-		// UserAction deleteAction = new UserAction() {
-			// public int key() {
-				// return 3;
-			// }
-			// public void execute(Input input, Tracker tracker) {
-			//	tam tam
-			// }
-			// public String info() {
-				// return "3. Delete";
-			// }
-		//}
-		//menu.addAction(deleteAction);
 
 		do {
 			menu.show();
 			int key = Integer.valueOf(input.ask("Select:", ranges));
 			menu.select(key);
-			
-		} while(!"y".equals(this.input.ask("Exit?(y):")));
+		} while (!"y".equals(this.input.ask("Exit?(y):")));
 	}
 
 	/**.

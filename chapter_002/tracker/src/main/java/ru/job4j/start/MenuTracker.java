@@ -1,8 +1,11 @@
 package ru.job4j.start;
 
-import java.util.*;
 import ru.job4j.models.Item;
 import ru.job4j.templates.BaseAction;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**.
 * Chapter_002
@@ -31,11 +34,15 @@ public class MenuTracker {
 	*/
 	private List<UserAction> actions = new ArrayList<>();
 
-	private String nameAction;
 	/**.
-	* Constructor
-	* @param input
-	* @param tracker
+	 * It's name for action
+	 */
+	private String nameAction;
+
+	/**.
+	* Constructor.
+	* @param input instance for input.
+	* @param tracker instance for tracker.
 	*/
 	public MenuTracker(Input input, Tracker tracker) {
 		this.input = input;
@@ -43,7 +50,7 @@ public class MenuTracker {
 	}
 
 	/**.
-	* method for write in array action
+	* Method for write in array action.
 	*/
 	public void fillActions() {
 		this.actions.add(this.new AddItem(0, "Add new item"));
@@ -62,24 +69,26 @@ public class MenuTracker {
 	* @param key number action
 	*/
 	public void select(int key) {
-		for(UserAction u : actions) {
-			if (u.key() == key) {u.execute(this.input, this.tracker);}
+		for (UserAction u : actions) {
+			if (u.key() == key) {
+				u.execute(this.input, this.tracker);
+			}
 		}
 	}
 
 	/**.
-	* method for show all menu
+	* Method for show all menu
 	*/
 	public void show() {
 		for (UserAction action : this.actions) {
-			if(action != null) {
+			if (action != null) {
 			System.out.println(action.info(nameAction));
 			}
 		}
 	}
 
 	/**.
-	* method for array corect number
+	* Method for array corect number
 	* @return array
 	*/
 	public List<Integer> getArrayNumber() {
@@ -93,10 +102,21 @@ public class MenuTracker {
 	* Class for action ADD
 	*/
 	private class AddItem extends BaseAction {
+
+		/**.
+		 * Constructor
+		 * @param key key for action
+		 * @param nameAction name for action
+		 */
 		private AddItem(int key, String nameAction) {
 			super(key, nameAction);
 		}
 
+		/**.
+		 * Execute logic this class
+		 * @param input instance for input
+		 * @param tracker instance for tracker
+		 */
 		@Override
 		public void execute(Input input, Tracker tracker) {
 			Date date = new Date();
@@ -112,10 +132,21 @@ public class MenuTracker {
 	* Class for action FindAll
 	*/
 	private class FindAll extends BaseAction {
+
+		/**.
+		 * Constructor
+		 * @param key key for action
+		 * @param nameAction name for action
+		 */
 		private FindAll(int key, String nameAction) {
 			super(key, nameAction);
 		}
 
+		/**.
+		 * Execute logic this class
+		 * @param input instance for input
+		 * @param tracker instance for tracker
+		 */
 		@Override
 		public void execute(Input input, Tracker tracker) {
 			List<Item> arrayElement = tracker.findAll();
@@ -130,10 +161,21 @@ public class MenuTracker {
 	* Class for action EDIT
 	*/
 	private class EditItem extends BaseAction {
+
+		/**.
+		 * Constructor
+		 * @param key key for action
+		 * @param nameAction name for action
+		 */
 		private EditItem(int key, String nameAction) {
 			super(key, nameAction);
 		}
 
+		/**.
+		 * Execute logic this class
+		 * @param input instance for input
+		 * @param tracker instance for tracker
+		 */
 		@Override
 		public void execute(Input input, Tracker tracker) {
 			Date date = new Date();
@@ -152,10 +194,20 @@ public class MenuTracker {
 	*/
 	private class DeleteItem extends BaseAction {
 
+		/**.
+		 * Constructor
+		 * @param key it's key for action
+		 * @param nameAction it's name for action
+		 */
 		private DeleteItem(int key, String nameAction) {
 			super(key, nameAction);
 		}
 
+		/**.
+		 * Execute logic this class
+		 * @param input instance for input
+		 * @param tracker instance for tracker
+		 */
 		@Override
 		public void execute(Input input, Tracker tracker) {
 			String id = input.ask("Enter the id for item:");
@@ -169,10 +221,20 @@ public class MenuTracker {
 	*/
 	private class FindById extends BaseAction {
 
+		/**.
+		 * Constructor
+		 * @param key key for action
+		 * @param nameAction name for action
+		 */
 		private FindById(int key, String nameAction) {
 			super(key, nameAction);
 		}
 
+		/**.
+		 * Execute logic this class
+		 * @param input instance for input
+		 * @param tracker instance for tracker
+		 */
 		@Override
 		public void execute(Input input, Tracker tracker) {
 			String id = input.ask("Enter the id for item:");
@@ -187,10 +249,20 @@ public class MenuTracker {
 	*/
 	private class FindByName extends BaseAction {
 
+		/**.
+		 * Constructor
+		 * @param key key for action
+		 * @param nameAction name for action
+		 */
 		private FindByName(int key, String nameAction) {
 			super(key, nameAction);
 		}
 
+		/**.
+		 * Execute logic this class
+		 * @param input instance for input
+		 * @param tracker instance for tracker
+		 */
 		@Override
 		public void execute(Input input, Tracker tracker) {
 			String name = input.ask("Enter the name for item:");

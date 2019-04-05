@@ -10,5 +10,9 @@ package ru.job4j;
 */
 
 public interface Shape {
-	public String pic();
+	/**.
+	 * It's action method
+	 * @return result
+	 */
+	String pic();
 }

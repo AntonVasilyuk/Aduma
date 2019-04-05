@@ -1,11 +1,12 @@
 package ru.job4j.start;
 
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
 /**.
 * Chapter_002
 * It's class need for interaction for user
-* 
+*
 * @author Anton Vasilyuk
 * @version 1.0
 * @since 0.1

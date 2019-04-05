@@ -3,8 +3,7 @@ package ru.job4j.start;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Arrays;
-import ru.job4j.models.*;
+import ru.job4j.models.Item;
 
 /**.
 * Chapter_002

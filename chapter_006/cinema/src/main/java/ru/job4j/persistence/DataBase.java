@@ -1,46 +1,60 @@
 package ru.job4j.persistence;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
-import java.sql.*;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Class for working with database.
+ *
+ * @author Anton Vasilyuk (z241287@yandex.ru)
+ * @version 0.1$
+ * @since 0.1
+ * 02.03.2019
+ */
+
 public class DataBase implements Store {
 
     /**.
-     * It's logger for this class
+     * It's logger for this class.
      */
-    private final Logger log = LoggerFactory.getLogger(DataBase.class);
+    private static final Logger LOG = Logger.getLogger(DataBase.class);
 
     /**.
-     * It's example for this class
+     * It's example for this class.
      */
-    private static final DataBase db = new DataBase();
+    private static final DataBase DB = new DataBase();
 
     /**.
-     * It's sourse for multiple working for database
+     * It's sourse for multiple working for database.
      */
-    private final BasicDataSource SOURCE = new BasicDataSource();
+    private static final BasicDataSource SOURCE = new BasicDataSource();
 
     /**.
-     * It's settings
+     * It's settings.
      */
     private final Settings settings = Settings.getInstance();
 
     /**.
-     * It's getter for singleton class
-     * @return example this class
+     * It's getter for singleton class.
+     * @return example this class.
      */
     public static DataBase getInstance() {
-        return db;
+        return DB;
     }
 
     /**.
-     * Constructor for this class
+     * Constructor for this class.
      */
     private DataBase() {
         SOURCE.setDriverClassName(settings.getValues("jdbc.driver"));
@@ -55,7 +69,7 @@ public class DataBase implements Store {
 
     /**.
      * Method for adding new order to database
-     * @param place
+     * @param place is place in the hall
      */
     public void add(Place place) {
         addAccounts(place);
@@ -65,8 +79,8 @@ public class DataBase implements Store {
 
     /**.
      * Add writes to table hall
-     * @param place
-     * @param idAccount
+     * @param place is place in the hall
+     * @param idAccount is id account
      */
     public void addHall(Place place, int idAccount) {
         Connection connectionRollBack = null;
@@ -86,21 +100,21 @@ public class DataBase implements Store {
                 try {
                     connectionRollBack.rollback();
                 } catch (SQLException e1) {
-                    log.error(e1.getMessage(), e1);
+                    LOG.error(e1.getMessage(), e1);
                 }
             }
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
     }
 
     /**.
      * Method for adding writes to table accounts
-     * @param place
+     * @param place in the hall
      */
     public void addAccounts(Place place) {
         Connection connectionRollBack = null;
-        String queryAdd = String.format("INSERT INTO accounts(name, phone, idPlace) " +
-                "VALUES(?, ?, ?)");
+        String queryAdd = String.format("INSERT INTO accounts(name, phone, idPlace) "
+                + "VALUES(?, ?, ?)");
         try (Connection connection = SOURCE.getConnection();
              PreparedStatement stAdd = connection.prepareStatement(queryAdd)
         ) {
@@ -117,16 +131,16 @@ public class DataBase implements Store {
                 try {
                     connectionRollBack.rollback();
                 } catch (SQLException e1) {
-                    log.error(e1.getMessage(), e1);
+                    LOG.error(e1.getMessage(), e1);
                 }
             }
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
     }
 
     /**.
      * Method for getting id place from table hall
-     * @param place
+     * @param place in the hall
      * @return all places
      */
     public int getIDPlace(Place place) {
@@ -142,14 +156,14 @@ public class DataBase implements Store {
             }
             return id;
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return id;
     }
 
     /**.
      * Method getter id from accounts
-     * @param place
+     * @param place in the hall
      * @return id buyer
      */
     public int getIDAccaunt(Place place) {
@@ -165,7 +179,7 @@ public class DataBase implements Store {
             }
             return id;
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return id;
     }
@@ -196,7 +210,7 @@ public class DataBase implements Store {
             Collections.sort(listAllUser);
             return listAllUser;
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return listAllUser;
     }

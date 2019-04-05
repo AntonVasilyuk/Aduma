@@ -1,6 +1,7 @@
 package ru.job4j.figure;
 
-import ru.job4j.game.*;
+import ru.job4j.game.ImposibleMoveException;
+import ru.job4j.game.Cell;
 
 /**.
 * Chapter_002
@@ -32,8 +33,8 @@ public class King extends Figure {
 
 		Cell[] cell = new Cell[1];
 
-        int srcRow = this.cellPosition.getRow();
-        int srcCol = this.cellPosition.getCol();
+        int srcRow = this.getCell().getRow();
+        int srcCol = this.getCell().getCol();
         int disRow = dist.getRow();
         int disCol = dist.getCol();
 

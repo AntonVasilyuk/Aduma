@@ -10,6 +10,7 @@ package ru.job4j;
 */
 
 public class Triangle implements Shape {
+
 	/**.
 	* @height this shape
 	*/
@@ -24,7 +25,6 @@ public class Triangle implements Shape {
 
 	/**.
 	* Method for build triangle
-	* @param height triangle
 	* @return shape to paint
 	*/
 	public String pic() {

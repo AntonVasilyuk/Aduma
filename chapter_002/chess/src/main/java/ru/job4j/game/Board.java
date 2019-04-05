@@ -1,6 +1,11 @@
 package ru.job4j.game;
 
-import ru.job4j.figure.*;
+import ru.job4j.figure.Figure;
+import ru.job4j.figure.Queen;
+import ru.job4j.figure.King;
+import ru.job4j.figure.Knight;
+import ru.job4j.figure.Castl;
+import ru.job4j.figure.Bishop;
 
 /**.
 * Chapter_002
@@ -43,8 +48,11 @@ public class Board {
      * @param source start point
      * @param dist finish point
      * @return is it possible to move
+     * @throws ImposibleMoveException if immposible move
+     * @throws OccupedWayException position is occupied
+     * @throws FigureNotFoundException figure is not found
      */
-    public boolean move(Cell source, Cell dist) throws ImposibleMoveException, OccupedWayException, FigureNotFoundException, CloneNotSupportedException {
+    public boolean move(Cell source, Cell dist) throws ImposibleMoveException, OccupedWayException, FigureNotFoundException {
         int index = 10;
         boolean result = true;
 
@@ -82,8 +90,8 @@ public class Board {
 
         for (int x = 1; x < cell.length; x++) {
             for (int y = 0; y < figures.length; y++) {
-                if (cell[x].getRow() == figures[y].getCell().getRow() &&
-                        cell[x].getCol() == figures[y].getCell().getCol()) {
+                if (cell[x].getRow() == figures[y].getCell().getRow()
+                        && cell[x].getCol() == figures[y].getCell().getCol()) {
                     result = false;
                     throw new OccupedWayException("way is not empty");
                 }
@@ -99,6 +107,9 @@ public class Board {
      * Method for add and treament exception
      * @param source start point
      * @param dist finish point
+     * @throws ImposibleMoveException if immposible move
+     * @throws OccupedWayException position is occupied
+     * @throws FigureNotFoundException figure is not found
      */
     public void checkChoise(Cell source, Cell dist) throws ImposibleMoveException, OccupedWayException, FigureNotFoundException {
         try {
@@ -109,17 +120,28 @@ public class Board {
             System.out.println("figure don't move to this cell");
         } catch (OccupedWayException owe) {
             System.out.println("way is not empty");
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
         }
     }
+
+    /**.
+     * Getter for figures
+     * @return all figures
+     */
     public Figure[] getFigures() {
         return this.figures;
     }
 
+    /**.
+     * Method for cloning
+     * @param cell is cell for figure
+     * @param figure is figure for cloning
+     * @return cloning figure
+     */
     public Figure clone(Cell cell, Figure figure) {
         Figure newFigure = null;
-        if (figure instanceof Bishop) {newFigure = new Bishop(cell);}
+        if (figure instanceof Bishop) {
+            newFigure = new Bishop(cell);
+        }
         return newFigure;
     }
 }

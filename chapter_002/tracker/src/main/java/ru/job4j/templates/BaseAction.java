@@ -1,7 +1,8 @@
 package ru.job4j.templates;
 
-import ru.job4j.start.*;
-import ru.job4j.models.Item;
+import ru.job4j.start.UserAction;
+import ru.job4j.start.Input;
+import ru.job4j.start.Tracker;
 
 /**.
 * Chapter_002
@@ -28,6 +29,7 @@ public abstract class BaseAction implements UserAction {
 	/**.
 	* Constructor for class BaseAction
 	* @param name it's value for information about action
+	 * @param key it's key for action
 	*/
 	public BaseAction(int key, String name) {
 		this.keyAction = key;
@@ -44,14 +46,14 @@ public abstract class BaseAction implements UserAction {
 
 	/**.
 	* Abstract method for implemetion main action
-	* @input link on tool enter user
-	* @tracker link on object class Tracker 
-	*/ 
+	* @param input link on tool enter user
+	* @param tracker link on object class Tracker
+	*/
 	public abstract void execute(Input input, Tracker tracker);
 
 	/**.
 	* Method for get info about action
-	* @nameAction info about action
+	* @param nameAction info about action
 	* @return String
 	*/
 	public String info(String nameAction) {

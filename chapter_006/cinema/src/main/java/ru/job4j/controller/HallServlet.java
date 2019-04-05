@@ -2,8 +2,8 @@ package ru.job4j.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.apache.log4j.Logger;
 import ru.job4j.persistence.Place;
 import ru.job4j.service.Service;
 
@@ -15,9 +15,21 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Class servlet, to exchange data with database.
+ * @author Anton Vasilyuk (z241287@yandex.ru)
+ * @version 0.1$
+ * @since 0.1
+ * 02.03.2019
+ */
+
 public class HallServlet extends HttpServlet {
 
-    private static final Logger logg = LoggerFactory.getLogger(HallServlet.class);
+    /**.
+     * Logger
+     */
+    private static final Logger LOGG = Logger.getLogger(HallServlet.class.getName());
+
     /**.
      * Example for class Service
      */
@@ -27,8 +39,8 @@ public class HallServlet extends HttpServlet {
      * Realisetion method get
      * @param req is request
      * @param resp is response
-     * @throws ServletException
-     * @throws IOException
+     * @throws ServletException occurs when there is an error in the servlets
+     * @throws IOException occurs when there is an error in the exchange data to streams
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

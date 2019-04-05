@@ -3,9 +3,10 @@ package ru.job4j;
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import java.util.*;
-import java.lang.*;
-import java.io.*;
+import java.util.Scanner;
+import java.io.IOException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 
@@ -24,6 +25,7 @@ public class ShapeTest {
 	* method for write print
 	* @param fileName name file
 	* @return string from file
+	 * @throws IOException may be exception
 	*/
 	private static String readUsingScanner(String fileName) throws IOException {
         Scanner scanner = new Scanner(Paths.get(fileName), StandardCharsets.UTF_8.name());
@@ -57,32 +59,34 @@ public class ShapeTest {
 
 	/**.
 	* Test method draw for square
+	 * @throws IOException posible error write to file
 	*/
 	@Test
-	public void whenNeedPrintingSquareThenWePrintSquare() throws Exception {
+	public void whenNeedPrintingSquareThenWePrintSquare() throws IOException {
 		int height = 3;
 		Paint paint = new Paint();
 		Square square = new Square(height);
-		FileOutputStream f = new FileOutputStream("file.txt") ;
+		FileOutputStream f = new FileOutputStream("file.txt");
 		System.setOut(new PrintStream(f));
 		paint.draw(square);
 		String fact = readUsingScanner("file.txt");
-		String expect = "w w w \nw w w \nw w w \n\r\n";
+		String expect = "w w w \nw w w \nw w w \n\n";
 		assertThat(fact, is(expect));
 	}
 
 	/**.
 	* Test method draw for Triangle
+	 * @throws IOException posible error write to file
 	*/
 	@Test
-	public void whenNeedPrintingTriangleThenWePrintTriangle() throws Exception {
+	public void whenNeedPrintingTriangleThenWePrintTriangle() throws IOException {
 		int height = 3;
 		Paint paint = new Paint();
 		Triangle triangle = new Triangle(height);
-		FileOutputStream f = new FileOutputStream("file.txt") ;
+		FileOutputStream f = new FileOutputStream("file.txt");
 		System.setOut(new PrintStream(f));
 		paint.draw(triangle);
-		String expect = "w \nw w \nw w w \n\r\n";
+		String expect = "w \nw w \nw w w \n\n";
 		String fact = readUsingScanner("file.txt");
 		assertThat(fact, is(expect));
 	}

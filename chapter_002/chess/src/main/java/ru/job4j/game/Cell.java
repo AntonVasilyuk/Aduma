@@ -1,7 +1,5 @@
 package ru.job4j.game;
 
-import ru.job4j.figure.*;
-
 /**.
 * Chapter_002
 * Task 2.9.2

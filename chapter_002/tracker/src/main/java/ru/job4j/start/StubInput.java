@@ -1,13 +1,12 @@
 package ru.job4j.start;
 
-import ru.job4j.models.*;
-import java.util.*;
+import java.util.List;
 
 /**.
 * Chapter_002
 * Task 2.6.1
 * It's class need for imitation interaction for user
-* 
+*
 * @author Anton Vasilyuk
 * @version 1.0
 * @since 0.1
@@ -27,7 +26,7 @@ public class StubInput implements Input {
 
 	/**.
 	* Constructor
-	* @param answers array for data 
+	* @param answers array for data
 	*/
 	public StubInput(String[] answers) {
 		this.answers = answers;
@@ -35,17 +34,18 @@ public class StubInput implements Input {
 
 	/**.
 	* method for write answer in the array answers
-	* @param question
+	* @param question is question from user
 	* @return answer
 	*/
 	public String ask(String question) {
 		return answers[position++];
 	}
 
+
 	/**.
-	* method for output
-	* @param question
-	* @param ranges
+	* Method for output
+	* @param question is question from user
+	* @param ranges is ranges
 	* @return -1
 	*/
 	public int ask(String question, List<Integer> ranges) {

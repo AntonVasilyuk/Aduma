@@ -1,21 +1,27 @@
 package ru.job4j.persistence;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+
+import org.apache.log4j.Logger;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Created by administrator on 14.01.2018.
+ * Class for load setting for working this apps.
+ *
+ * @author Anton Vasilyuk (z241287@yandex.ru)
+ * @version 0.1$
+ * @since 0.1
+ * 02.03.2019
  */
 public class Settings {
 
     /**.
      * It's logger
      */
-    private final static Logger log = LoggerFactory.getLogger(Settings.class);
+    private static final Logger LOG = Logger.getLogger(Settings.class);
 
     /**.
      * Object for sigleton pattern
@@ -34,13 +40,13 @@ public class Settings {
         try {
             properties.load(new FileInputStream(getClass().getClassLoader().getResource("Storage.properties").getFile()));
         } catch (IOException e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
     }
 
     /**.
      * Instance for singleton pattern class the Setting
-     * @return
+     * @return return instance for this class
      */
     public static Settings getInstance() {
         return INSTANCE;

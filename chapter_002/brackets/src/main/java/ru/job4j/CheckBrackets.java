@@ -24,7 +24,6 @@ public class CheckBrackets {
 		char b = ')';
 
 		int aNum = 0;
-	
 		for (int index = 0; index < brackets.length; index++) {
 			if (brackets[index] == a) {
 				aNum++;
@@ -37,7 +36,9 @@ public class CheckBrackets {
 			break;
 			}
 		}
-		if (aNum != 0) {result = false;}
+		if (aNum != 0) {
+			result = false;
+		}
 		return result;
 	}
 }

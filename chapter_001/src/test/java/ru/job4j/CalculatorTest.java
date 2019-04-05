@@ -28,8 +28,6 @@ import static org.junit.Assert.assertThat;
 
 	/**.
 	* Тест Вычитание
-	* @param first
-	* @param second
 	*/
 	@Test
 	public void testWhenSubstructOneToOneThenZero() {
@@ -42,8 +40,6 @@ import static org.junit.Assert.assertThat;
 
 	/**.
 	* Тест Деление
-	* @param first
-	* @param second
 	*/
 	@Test
 	public void testWhenDifOneToOneThenOne() {
@@ -56,8 +52,6 @@ import static org.junit.Assert.assertThat;
 
 	/**.
 	* Тест Умножение
-	* @param first
-	* @param second
 	*/
 	@Test
 	public void testWhenMultipleOneToOneThenOne() {
