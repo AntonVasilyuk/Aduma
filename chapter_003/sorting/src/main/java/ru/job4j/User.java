@@ -1,6 +1,6 @@
 package ru.job4j;
 
-/**
+/**.
  * Chapter_003
  * Task 3.3.1
  * Sortint array users by name
@@ -10,7 +10,7 @@ package ru.job4j;
  * @since 0.1
  */
 
-public class User implements Comparable<User>{
+public class User implements Comparable<User> {
 
     /**.
      * @name user
@@ -24,8 +24,8 @@ public class User implements Comparable<User>{
 
     /**.
      * Constructor user
-     * @param name
-     * @param age
+     * @param name it's name to user
+     * @param age it's age to user
      */
     public User(String name, Integer age) {
         this.name = name;
@@ -40,12 +40,21 @@ public class User implements Comparable<User>{
         return name;
     }
 
+    /**.
+     * Getter for fiels age
+     * @return age
+     */
     public Integer getAge() {
         return age;
     }
 
+    /**.
+     * Comparing users
+     * @param o it's user for comparing
+     * @return result
+     */
     @Override
-    public int compareTo (User o) {
+    public int compareTo(User o) {
         return this.age.compareTo(o.getAge());
     }
 }

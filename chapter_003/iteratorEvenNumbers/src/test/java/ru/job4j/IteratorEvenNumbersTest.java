@@ -5,9 +5,9 @@ import org.junit.Test;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
-/**
+/**.
  * Task 4.1.2
  * Test create Iterator even numbers
  *
@@ -33,11 +33,16 @@ public class IteratorEvenNumbersTest {
 
         boolean fact = true;
         for (int i = 0; i < arrayResult.length; i++) {
-            if (arrayResult[i] != check[i]) {fact = false;}
+            if (arrayResult[i] != check[i]) {
+                fact = false;
+            }
         }
         assertThat(fact, is(true));
     }
 
+    /**.
+     * Test working hasNext method when there is next element
+     */
     @Test
     public void whenIterateOneTimeThenHasNextReturnTrue() {
         IteratorEvenNumbers iter = new IteratorEvenNumbers(new int[] {1, 2, 3, 4});
@@ -46,6 +51,9 @@ public class IteratorEvenNumbersTest {
         assertThat(result, is(true));
     }
 
+    /**.
+     * Test working hasNext method when there is not next element
+     */
     @Test
     public void whenIterateTwoTimeThenHasNextReturnFalse() {
         IteratorEvenNumbers iter = new IteratorEvenNumbers(new int[] {1, 2, 3, 4});
@@ -55,6 +63,9 @@ public class IteratorEvenNumbersTest {
         assertThat(result, is(false));
     }
 
+    /**.
+     * Test working method hasNext when parametr is null
+     */
     @Test
     public void whenArrayIsNullThenHasNextReturnNEE() {
         int[] value = null;

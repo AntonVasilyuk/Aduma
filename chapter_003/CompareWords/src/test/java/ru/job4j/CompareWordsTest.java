@@ -4,8 +4,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
+/**.
+ * Task 5.7.3.
+ * Test class CompareWords
+ *
+ * @author Anton Vasilyuk on 15.10.2017
+ * @version 1.0.
+ */
 public class CompareWordsTest {
 
     /**.
@@ -40,7 +47,7 @@ public class CompareWordsTest {
         wordTwo = "UYTREWQ";
 
         boolean result = link.compareWordsOne(wordOne, wordTwo);
-        assertThat(result, is(true)) ;
+        assertThat(result, is(true));
     }
 
     /**.
@@ -51,7 +58,7 @@ public class CompareWordsTest {
         String wordOne = "QWEARTYU";
         String twoWord = "UYTRBEWQ";
         boolean result = link.compareWordsOne(wordOne, twoWord);
-        assertThat(result, is(false)) ;
+        assertThat(result, is(false));
     }
 
     /**.
@@ -74,7 +81,7 @@ public class CompareWordsTest {
         String wordOne = String.copyValueOf(one);
         String twoWord = String.copyValueOf(two);
         boolean result = link.compareWordsOne(wordOne, twoWord);
-        assertThat(result, is(true)) ;
+        assertThat(result, is(true));
     }
 
     /**.
@@ -97,7 +104,7 @@ public class CompareWordsTest {
         String wordOne = String.copyValueOf(one);
         String twoWord = String.copyValueOf(two);
         boolean result = link.compareWordsTwo(wordOne, twoWord);
-        assertThat(result, is(true)) ;
+        assertThat(result, is(true));
     }
 
     /**.
@@ -120,7 +127,7 @@ public class CompareWordsTest {
         String wordOne = String.copyValueOf(one);
         String twoWord = String.copyValueOf(two);
         boolean result = link.compareWordsTwo(wordOne, twoWord);
-        assertThat(result, is(true)) ;
+        assertThat(result, is(true));
     }
 
     /**.
@@ -131,7 +138,7 @@ public class CompareWordsTest {
         String wordOne = "113";
         String twoWord = "133";
         boolean result = link.compareWordsOne(wordOne, twoWord);
-        assertThat(result, is(false)) ;
+        assertThat(result, is(false));
     }
 
     /**.
@@ -142,6 +149,6 @@ public class CompareWordsTest {
         String wordOne = "1131";
         String twoWord = "1331";
         boolean result = link.compareWordsTwo(wordOne, twoWord);
-        assertThat(result, is(false)) ;
+        assertThat(result, is(false));
     }
 }

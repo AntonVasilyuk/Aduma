@@ -5,12 +5,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-/**
+/**.
  * Task 5.6.1.
  * Create my Tree
  *
  * Created by Anton Vasilyuk on 24.06.2017.
  * @version 1.0
+ * @param <E> it's generic type must be extends comparable and implements class SimpleTree
  */
 public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
@@ -29,7 +30,11 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      */
     private Node<E> firstNode;
 
+    /**.
+     * @isBinary is checked is binary tree
+     */
     private boolean isBinary = true;
+
     /**.
      * Constructor for this class
      */
@@ -40,12 +45,30 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
     /**.
      * Class Node is container for elements and link to other elements
-     * @param <E>
+     * @param <E> it's generic type
      */
     class Node<E> {
-        List<Node<E>> childen;
-        E value;
-        Node<E> parentNode;
+
+        /**.
+         * @childen is list for nodes
+         */
+        private List<Node<E>> childen;
+
+        /**.
+         * @value is current element
+         */
+        private E value;
+
+        /**.
+         * @parentNode is parent for current node
+         */
+        private Node<E> parentNode;
+
+        /**.
+         * Constructor for node
+         * @param value is value
+         * @param node is node for value
+         */
         Node(E value, Node<E> node) {
             this.value = value;
             this.parentNode = node;
@@ -54,15 +77,19 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     /**.
-     *
+     * Method for adding element
      * @param parent parent.
      * @param child child.
-     * @return
+     * @return result
      */
     @Override
     public boolean add(E parent, E child) {
-        if (firstNode != null && parent == null) {throw new NullPointerException("Parent is null!");}
-        if (child == null) {throw new NullPointerException("Child is null");}
+        if (firstNode != null && parent == null) {
+            throw new NullPointerException("Parent is null!");
+        }
+        if (child == null) {
+            throw new NullPointerException("Child is null");
+        }
         if (firstNode == null) {
             Node<E> node = new Node<>(child, null);
             firstNode = node;
@@ -72,7 +99,9 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
             if (node != null) {
                 node.childen.add(new Node<E>(child, node));
                 return true;
-            } else {return false;}
+            } else {
+                return false;
+            }
         }
     }
 
@@ -81,8 +110,11 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      * @return boolean result
      */
     public boolean isBinary() {
-        if (firstNode != null) {return checkIsBinary(firstNode);}
-        else {throw new NoSuchElementException("This Tree is empty");}
+        if (firstNode != null) {
+            return checkIsBinary(firstNode);
+        } else {
+            throw new NoSuchElementException("This Tree is empty");
+        }
     }
 
     /**.
@@ -93,19 +125,28 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      */
     private Node<E> searchParent(Node<E> node, E parent) {
         Node<E> result = null;
-        if(node.value.equals(parent)) {
+        if (node.value.equals(parent)) {
             result = node;
         } else if (node.childen.size() > 0) {
             for (Node<E> tempNode : node.childen) {
                 result = searchParent(tempNode, parent);
             }
-        } else {result = null;}
+        } else {
+            result = null;
+        }
         return result;
     }
 
+    /**.
+     * Checking is binary
+     * @param node node for starting
+     * @return result
+     */
     private boolean checkIsBinary(Node<E> node) {
-        if(node.childen.size() > 2) {isBinary = false;}
-        if(node.childen.size() > 0) {
+        if (node.childen.size() > 2) {
+            isBinary = false;
+        }
+        if (node.childen.size() > 0) {
             for (Node<E> tempNode : node.childen) {
                 isBinary = checkIsBinary(tempNode);
             }
@@ -115,7 +156,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
     /**.
      * Recursive method for fill List
-     * @param node
+     * @param node is list nodes
      */
     private void fillList(Node<E> node) {
         if (node != null) {
@@ -127,7 +168,9 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
                     fillList(tempNode);
                 }
             }
-        } else {throw new NullPointerException("Node is null!");}
+        } else {
+            throw new NullPointerException("Node is null!");
+        }
     }
 
     /**.
@@ -140,8 +183,11 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
             @Override
             public boolean hasNext() {
-                if (cursorIter < elements.size()) {return true;}
-                else {return false;}
+                boolean result = false;
+                if (cursorIter < elements.size()) {
+                    result = true;
+                }
+                return result;
             }
 
             @Override

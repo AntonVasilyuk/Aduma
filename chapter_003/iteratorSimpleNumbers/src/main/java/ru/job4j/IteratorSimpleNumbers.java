@@ -1,7 +1,9 @@
 package ru.job4j;
 
-import java.util.*;
-/**
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+/**.
  * Task 4.1.3
  * Create iterator for simple numbers
  *
@@ -37,7 +39,7 @@ public class IteratorSimpleNumbers implements Iterator {
      */
     @Override
     public boolean hasNext() {
-
+        boolean result = true;
         if (this.values == null) {
             throw new NoSuchElementException("In this array not element");
         }
@@ -54,14 +56,13 @@ public class IteratorSimpleNumbers implements Iterator {
             }
         }
         if (checkNum == 0) {
-            return false;
+            result = false;
         }
 
-        if (this.values.length > index) {
-            return true;
-        } else {
-            return false;
+        if (this.values.length < index) {
+            result = false;
         }
+        return result;
     }
 
     /**.
@@ -80,7 +81,9 @@ public class IteratorSimpleNumbers implements Iterator {
                         num = 0;
                     }
                 }
-                if (num > 0) {break;}
+                if (num > 0) {
+                    break;
+                }
                 index++;
             } while (num > 0);
         } else {

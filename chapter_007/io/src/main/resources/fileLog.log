@@ -1,0 +1,24 @@
+2019-03-04 22:17:26 ERROR CheckArguments:53 - Uncorrect argumetns
+2019-03-04 22:18:21 ERROR CheckArguments:53 - Uncorrect argumetns
+2019-03-04 22:18:54 ERROR CheckArguments:53 - Uncorrect argumetns
+2019-03-04 22:20:09 ERROR CheckArguments:53 - Uncorrect argumetns
+2019-03-04 22:22:34 ERROR CheckArguments:53 - Uncorrect argumetns
+2019-03-04 22:25:39 ERROR CheckArguments:53 - Uncorrect argumetns
+2019-03-04 22:26:19 ERROR CheckArguments:53 - Uncorrect argumetns
+2019-03-27 10:20:25 ERROR Client:59 - Connection refused (Connection refused)
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.base/java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:399)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:242)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:224)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:403)
+	at java.base/java.net.Socket.connect(Socket.java:591)
+	at java.base/java.net.Socket.connect(Socket.java:540)
+	at java.base/java.net.Socket.<init>(Socket.java:436)
+	at java.base/java.net.Socket.<init>(Socket.java:246)
+	at ru.job4j.oracle.Client.main(Client.java:55)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.intellij.rt.execution.application.AppMainV2.main(AppMainV2.java:131)

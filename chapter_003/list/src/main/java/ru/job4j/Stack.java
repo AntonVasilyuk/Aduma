@@ -3,14 +3,15 @@ package ru.job4j;
 import java.util.EmptyStackException;
 import java.util.Iterator;
 
-/**
+/**.
  * Task 5.3.3.
  * Create my realisation for Queue
  *
  * Created by ANTON on 15.06.2017.
  * @version 1.0
+ * @param <E> generic type
  */
-public class Stack<E> implements SimpleContainers<E>{
+public class Stack<E> implements SimpleContainers<E> {
 
 
     /**.
@@ -80,7 +81,9 @@ public class Stack<E> implements SimpleContainers<E>{
      * @return element on the top stack
      */
     public E peek() {
-        if (headNode == null) {throw new EmptyStackException();}
+        if (headNode == null) {
+            throw new EmptyStackException();
+        }
         Node<E> result = null;
         for (int i = 0; i < size; i++) {
             result = (Node<E>) iterator().next();
@@ -93,7 +96,9 @@ public class Stack<E> implements SimpleContainers<E>{
      * @return element from top position
      */
     public E pop() {
-        if (headNode == null) {throw new EmptyStackException();}
+        if (headNode == null) {
+            throw new EmptyStackException();
+        }
         E result;
         result = topNode.getElement();
         topNode = previosElement;
@@ -132,13 +137,15 @@ public class Stack<E> implements SimpleContainers<E>{
         Iterator<E> it = (Iterator<E>) new Iterator<Object>() {
 
             private int cursorIter = 0;
-            Node<E> tempPrevios = null;
-            Node<E> tempNext = null;
-            Node<E> tempNow = null;
+            private Node<E> tempPrevios = null;
+            private Node<E> tempNext = null;
+            private Node<E> tempNow = null;
 
             @Override
             public boolean hasNext() {
-                if (headNode == null) {throw new NullPointerException("It is empty container");}
+                if (headNode == null) {
+                    throw new NullPointerException("It is empty container");
+                }
                 return tempNow.getNext() != null;
             }
 
@@ -153,7 +160,9 @@ public class Stack<E> implements SimpleContainers<E>{
                     if (hasNext()) {
                         tempNow = tempNow.getNext();
                         result = tempNow;
-                        if (tempNow.getNext() != null) {tempNext = tempNow.getNext();}
+                        if (tempNow.getNext() != null) {
+                            tempNext = tempNow.getNext();
+                        }
                         tempPrevios = tempNow.getPrevios();
                         cursorIter++;
                     }
@@ -168,7 +177,9 @@ public class Stack<E> implements SimpleContainers<E>{
      * Method for check size list
      * @return size this list
      */
-    public int getSize() {return this.size;}
+    public int getSize() {
+        return this.size;
+    }
 
     /**.
      * Class for create new container
@@ -197,7 +208,7 @@ public class Stack<E> implements SimpleContainers<E>{
          * @param previos link on previos node
          * @param next link on next node
          */
-        public Node(E value, Node<E> previos, Node<E> next) {
+        Node(E value, Node<E> previos, Node<E> next) {
             this.value = value;
             this.first = previos;
             this.last = next;
@@ -239,6 +250,8 @@ public class Stack<E> implements SimpleContainers<E>{
          * Method for get storage element
          * @return this element
          */
-        public E getElement() {return this.value;}
+        public E getElement() {
+            return this.value;
+        }
     }
 }

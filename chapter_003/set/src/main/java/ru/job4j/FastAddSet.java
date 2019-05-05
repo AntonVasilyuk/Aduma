@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
  *
  * Created by Anton Vasilyuk on 17.06.2017.
  * @version 1.0
+ * @param <E> it's generic type
  */
 
 public class FastAddSet<E> implements Iterable {
@@ -40,7 +41,7 @@ public class FastAddSet<E> implements Iterable {
 
     /**.
      * Constructor for SimpleSetArray
-     * @param aSize
+     * @param aSize size for array
      */
     public FastAddSet(int aSize) {
         this.size = aSize;
@@ -53,7 +54,9 @@ public class FastAddSet<E> implements Iterable {
      * @param value is element
      */
     public void addFirst(E value) {
-        if (value == null) {throw new NullPointerException("Element is null");}
+        if (value == null) {
+            throw new NullPointerException("Element is null");
+        }
         link.add(value);
         cursor = link.getSize();
     }
@@ -63,7 +66,9 @@ public class FastAddSet<E> implements Iterable {
      * @param value is element for adding
      */
     public void addSecond(E value) {
-        if (value == null) {throw new NullPointerException("Element is null");}
+        if (value == null) {
+            throw new NullPointerException("Element is null");
+        }
         if (this.cursor == 0) {
             this.container[cursor] = value;
             this.cursor++;
@@ -106,8 +111,11 @@ public class FastAddSet<E> implements Iterable {
 
             @Override
             public Object next() {
-                if (hasNext()) {return container[cursorIter++];}
-                else {throw new NoSuchElementException("Need add cell in this array");}
+                if (hasNext()) {
+                    return container[cursorIter++];
+                } else {
+                    throw new NoSuchElementException("Need add cell in this array");
+                }
             }
 
             @Override
@@ -141,25 +149,48 @@ public class FastAddSet<E> implements Iterable {
         }
 
         if (high == low + 1) {
-            if (array[low].equals(value) || array[high].equals(value)) {return -1;}
-            if (value.hashCode() < array[low].hashCode()) {return 0;}
-            else if (value.hashCode() < array[high].hashCode()) {return 1;}
-            else {return 2;}
+            if (array[low].equals(value) || array[high].equals(value)) {
+                return -1;
+            }
+            if (value.hashCode() < array[low].hashCode()) {
+                return 0;
+            } else if (value.hashCode() < array[high].hashCode()) {
+                return 1;
+            } else {
+                return 2;
+            }
         }
 
-        if (start > end || value == null || array == null) {return -1;}
+        if (start > end || value == null || array == null) {
+            return -1;
+        }
 
         if (value.hashCode() < array[mid].hashCode()) {
             if (((mid - 1) - low) == 1 || ((mid - 1) == low)) {
-                if (!array[mid - 1].equals(value) && !array[low].equals(value)) {return mid - 1;}}
-            return searchValue(value, array, low, mid - 1 );
+                if (!array[mid - 1].equals(value) && !array[low].equals(value)) {
+                    return mid - 1;
+                }
+            }
+            return searchValue(value, array, low, mid - 1);
         } else if (value.hashCode() > array[mid].hashCode()) {
             if ((high - (mid + 1)) == 1 || high == (mid + 1)) {
-                if (!array[mid + 1].equals(value) && !array[high].equals(value)) {return high;}}
+                if (!array[mid + 1].equals(value) && !array[high].equals(value)) {
+                    return high;
+                }
+            }
             return searchValue(value, array, mid + 1, high);
-        } else if (array[mid].equals(value)) {return -1;}
-        else {return result;}
+        } else if (array[mid].equals(value)) {
+            return -1;
+        } else {
+            return result;
+        }
     }
 
-    public int getSize() {return this.cursor;}
+    /**.
+     * Getter for size
+     * @return result
+     */
+    public int getSize() {
+        return this.cursor;
+    }
 }

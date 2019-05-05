@@ -6,12 +6,13 @@ import org.junit.Test;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by ANTON on 08.06.2017.
  */
-public class SimpleListTest<String> {
+public class SimpleListTest {
 
     /**.
      * Create link for object class SimpleList
@@ -26,14 +27,20 @@ public class SimpleListTest<String> {
         sLT = new SimpleList(3);
     }
 
+    /**.
+     * Test when need add new element to our storage
+     */
     @Test
     public void whenAddNewElementToArray() {
-        String obj = (String) "Test";
+        String obj = new String("Test");
         sLT.add(obj);
         String test = sLT.get(0);
         assertThat(test, is("Test"));
     }
 
+    /**.
+     * Test when need update element to our storage
+     */
     @Test
     public void whenUpdateElementArrayOnThisPosition() {
         String newObj = (String) "Test two";
@@ -42,6 +49,9 @@ public class SimpleListTest<String> {
         assertThat(test, is("Test two"));
     }
 
+    /**.
+     * Test when need deleting element from our storage
+     */
     @Test
     public void whenDeleteElementFromThisPosition() {
         String test = (String) "Test";
@@ -50,6 +60,9 @@ public class SimpleListTest<String> {
         assertNull(sLT.get(0));
     }
 
+    /**.
+     * Testing when need add null element
+     */
     @Test
     public void whenAddNullElement() {
         String test = null;
@@ -60,6 +73,9 @@ public class SimpleListTest<String> {
         }
     }
 
+    /**.
+     * Testing when need updating null element
+     */
     @Test
     public void whenUpdateElementNullElement() {
         String test = null;
@@ -70,6 +86,9 @@ public class SimpleListTest<String> {
         }
     }
 
+    /**.
+     * Test when need deleting a non-existent element
+     */
     @Test
     public void whenDeleteElementWhichIsNot() {
         try {
@@ -79,12 +98,15 @@ public class SimpleListTest<String> {
         }
     }
 
+    /**.
+     * Test when need add many elements
+     */
     @Test
     public void whenAddToManyItems() {
-        String one = (String) "Test";
-        String two = (String) "Test";
-        String tree = (String) "Test";
-        String four = (String) "Test";
+        String one = "Test";
+        String two = "Test";
+        String tree = "Test";
+        String four = "Test";
         sLT.add(one);
         sLT.add(two);
         sLT.add(tree);
@@ -94,5 +116,4 @@ public class SimpleListTest<String> {
             assertThat(aio.getMessage(), is("Too far"));
         }
     }
-
 }

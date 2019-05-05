@@ -2,8 +2,8 @@ package ru.job4j.layoutPresentation;
 
 import org.junit.Assert;
 import org.junit.Test;
-import ru.job4j.layoutPersistent.DBStore;
-import ru.job4j.layoutPersistent.User;
+import ru.job4j.persistent.DBStore;
+import ru.job4j.persistent.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

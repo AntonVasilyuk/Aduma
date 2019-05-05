@@ -1,6 +1,7 @@
 package ru.job4j;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
 
 /**.
  * Chapter_003
@@ -12,10 +13,11 @@ import java.util.*;
  * @since 0.1
  */
 public class UserConvert {
+
     /**.
      * Method for convert from List to HashMap
-     * @param list
-     * @return
+     * @param list list users
+     * @return result
      */
     public HashMap<Integer, User> process(List<User> list) {
         HashMap<Integer, User> hashMapUsers = new HashMap<>();

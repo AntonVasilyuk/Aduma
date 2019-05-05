@@ -32,7 +32,7 @@ public class Aquarium {
      */
     public Aquarium() {
         world = new ReentrantLock[SIZEBOARD][SIZEBOARD];
-        for(int i = 0; i < SIZEBOARD; i++) {
+        for (int i = 0; i < SIZEBOARD; i++) {
             for (int j = 0; j < SIZEBOARD; j++) {
                 world[i][j] = new ReentrantLock();
             }
@@ -41,6 +41,7 @@ public class Aquarium {
 
     /**.
      * Getter for our field
+     * @return array locks
      */
     public ReentrantLock[][] getWorld() {
         return this.world;

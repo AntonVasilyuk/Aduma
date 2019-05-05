@@ -4,9 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
-/**
+/**.
  * Task 5.4.3.
  * Test working my FastAddSet
  *
@@ -18,12 +18,12 @@ public class FastAddSetTest {
     /**.
      * Link for first set
      */
-    FastAddSet linkOne;
+    private FastAddSet linkOne;
 
     /**.
      * Link for second set
      */
-    FastAddSet linkTwo;
+    private FastAddSet linkTwo;
 
     /**.
      * Preparing for test
@@ -58,8 +58,9 @@ public class FastAddSetTest {
         System.out.println("New method adding " + linkTwo.getSize() + " element for the " + resultTwo + " milisec.");
 
         boolean result = false;
-        if (resultOne > resultTwo) {result = true;}
-
+        if (resultOne > resultTwo) {
+            result = true;
+        }
         assertThat(result, is(true));
     }
 

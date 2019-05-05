@@ -10,11 +10,29 @@ package ru.job4j;
 
 public class GameBomberman {
 
+    /**.
+     * @bomberman is main hero
+     */
     private final ActionPlayer bomberman;
+
+    /**.
+     * @monsters is array with monsters
+     */
     private final ActionMonster[] monsters;
 
+    /**.
+     * @player is player
+     */
     private final Player player;
+
+    /**.
+     * @endGame is link for end game
+     */
     private final EndGame endGame;
+
+    /**.
+     * @difficultyGame is difficulty this game
+     */
     private final int difficultyGame;
 
     /**.

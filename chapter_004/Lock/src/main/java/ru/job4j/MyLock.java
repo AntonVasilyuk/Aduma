@@ -4,7 +4,7 @@ package ru.job4j;
  * Task 7.4.3.
  * Create my realisation lock
  *
- * @autor Anton Vasilyuk on 13.08.2017
+ * @author Anton Vasilyuk on 13.08.2017
  * @version 1.0.
  */
 public class MyLock {

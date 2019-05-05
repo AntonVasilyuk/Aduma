@@ -3,7 +3,7 @@ package ru.job4j;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
+/**.
  * Task 4.1.2
  * Create Iterator even numbers
  *
@@ -42,22 +42,29 @@ public class IteratorEvenNumbers implements Iterator {
      */
     @Override
     public boolean hasNext() {
-
+        boolean result = true;
         if (this.values == null) {
             throw new NoSuchElementException("No element in this array.");
         }
         int checkNum = 0;
         for (int j = 0; j < this.values.length; j++) {
-            if ((this.values[j] % 2) == 0) {checkNum++;}
+            if ((this.values[j] % 2) == 0) {
+                checkNum++;
+            }
         }
-        if (checkNum == 0) {return false;}
-        if (returnCheckNum == checkNum) {return false;}
-        if (this.values.length > index) {
-            return true;
-        } else  {return false;}
+        if (checkNum == 0) {
+            result = false;
+        }
+        if (returnCheckNum == checkNum) {
+            result = false;
+        }
+        if (this.values.length < index) {
+            return false;
+        }
+        return result;
     }
 
-    /**
+    /**.
      * Realisation iterator for even number
      * @return object on this position
      */

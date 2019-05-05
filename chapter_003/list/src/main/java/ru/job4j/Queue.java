@@ -3,15 +3,15 @@ package ru.job4j;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
+/**.
  * Task 5.3.3.
  * Create my realisation for Queue
  *
  * Created by ANTON on 15.06.2017.
  * @version 1.0
+ * @param <E> generic parametr
  */
-public class Queue<E> implements SimpleContainers<E>{
-
+public class Queue<E> implements SimpleContainers<E> {
 
     /**.
      * @previosElement is previos element for this position
@@ -65,14 +65,16 @@ public class Queue<E> implements SimpleContainers<E>{
      * @return element
      */
     public E element() {
-        if (size == 0) {throw new NullPointerException("It is empty container");}
+        if (size == 0) {
+            throw new NullPointerException("It is empty container");
+        }
         return headNode.getElement();
     }
 
     /**.
      * Method for add element at the end of the queue
-     * @param value
-     * @return
+     * @param value is value for adding
+     * @return result operation
      */
     public boolean offer(E value) {
         int first = this.size;
@@ -92,7 +94,7 @@ public class Queue<E> implements SimpleContainers<E>{
 
     /**.
      * Method for return element from begining of the queue
-     * @return
+     * @return element
      */
     public E peek() {
         return headNode.getElement();
@@ -110,7 +112,9 @@ public class Queue<E> implements SimpleContainers<E>{
             headNode.setPrevios(null);
             this.size = size - 1;
             return result;
-        } else {result = null;}
+        } else {
+            result = null;
+        }
         return result;
     }
 
@@ -119,7 +123,9 @@ public class Queue<E> implements SimpleContainers<E>{
      * @return first element
      */
     public E remove() {
-        if (headNode == null) {throw new NoSuchElementException("The queue is empty");}
+        if (headNode == null) {
+            throw new NoSuchElementException("The queue is empty");
+        }
         E result = headNode.getElement();
         headNode = headNode.getNext();
         headNode.setPrevios(null);
@@ -136,13 +142,15 @@ public class Queue<E> implements SimpleContainers<E>{
         Iterator<E> it = (Iterator<E>) new Iterator<Object>() {
 
             private int cursorIter = 0;
-            Node<E> tempPrevios = null;
-            Node<E> tempNext = null;
-            Node<E> tempNow = null;
+            private Node<E> tempPrevios = null;
+            private Node<E> tempNext = null;
+            private Node<E> tempNow = null;
 
             @Override
             public boolean hasNext() {
-                if (headNode == null) {throw new NullPointerException("It is empty container");}
+                if (headNode == null) {
+                    throw new NullPointerException("It is empty container");
+                }
                 return tempNow.getNext() != null;
             }
 
@@ -157,7 +165,9 @@ public class Queue<E> implements SimpleContainers<E>{
                     if (hasNext()) {
                         tempNow = tempNow.getNext();
                         result = tempNow;
-                        if (tempNow.getNext() != null) {tempNext = tempNow.getNext();}
+                        if (tempNow.getNext() != null) {
+                            tempNext = tempNow.getNext();
+                        }
                         tempPrevios = tempNow.getPrevios();
                         cursorIter++;
                     }
@@ -172,7 +182,9 @@ public class Queue<E> implements SimpleContainers<E>{
      * Method for check size list
      * @return size this list
      */
-    public int getSize() {return this.size;}
+    public int getSize() {
+        return this.size;
+    }
 
     /**.
      * Class for create new container
@@ -201,7 +213,7 @@ public class Queue<E> implements SimpleContainers<E>{
          * @param previos link on previos node
          * @param next link on next node
          */
-        public Node(E value, Node<E> previos, Node<E> next) {
+        private Node(E value, Node<E> previos, Node<E> next) {
             this.value = value;
             this.first = previos;
             this.last = next;
@@ -243,6 +255,8 @@ public class Queue<E> implements SimpleContainers<E>{
          * Method for get storage element
          * @return this element
          */
-        public E getElement() {return this.value;}
+        public E getElement() {
+            return this.value;
+        }
     }
 }

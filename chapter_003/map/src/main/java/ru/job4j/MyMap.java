@@ -9,33 +9,34 @@ import java.util.NoSuchElementException;
  *
  * Created by ANTON VASILYUK on 21.06.2017.
  * @version 1.0
+ * @param <U> is generic key
+ * @param <E> is generic value
  */
-
-public class MyMap<U, E> implements Iterable<Entry>{
+public class MyMap<U, E> implements Iterable<Entry> {
 
     /**.
      * @size is size array for the map
      */
-    public int size;
+    private int size;
 
     /**.
      * @cursor is position cursor
      */
-    public int cursor = 0;
+    private int cursor = 0;
 
     /**.
      * @cursor for iterator
      */
-    public int cursorIter = 0;
+    private int cursorIter = 0;
 
     /**.
      * @map is container for items
      */
-    Entry[] map;
+    private Entry[] map;
 
     /**.
      * Constrictor for mymap
-     * @param size
+     * @param size is size the map
      */
     public MyMap(int size) {
         map = new Entry[size];
@@ -51,8 +52,12 @@ public class MyMap<U, E> implements Iterable<Entry>{
     public boolean insert(U key, E value) {
         boolean result = false;
 
-        if (key == null) {throw new NullPointerException("Key is null");}
-        if (value == null) {throw new NullPointerException("Element is null");}
+        if (key == null) {
+            throw new NullPointerException("Key is null");
+        }
+        if (value == null) {
+            throw new NullPointerException("Element is null");
+        }
         if (cursor == 0) {
             map[0] = new Entry(key, value);
             cursor++;
@@ -60,7 +65,7 @@ public class MyMap<U, E> implements Iterable<Entry>{
         } else {
             int position = searchInsert(key, map, 0, cursor - 1);
             if (position != -1) {
-                if(this.cursor < this.size / 100 * 75) {
+                if (this.cursor < this.size / 100 * 75) {
                     for (int i = this.cursor; i > position; i--) {
                         this.map[i] = this.map[i - 1];
                     }
@@ -94,9 +99,13 @@ public class MyMap<U, E> implements Iterable<Entry>{
      * @return element
      */
     public E get(U key) {
-        if (key == null) {throw  new NullPointerException("Key is null");}
+        if (key == null) {
+            throw  new NullPointerException("Key is null");
+        }
         int position = searchGetByKey(key, map, 0, cursor - 1);
-        if (position == -1) {throw new NoSuchElementException("The map does not contain this key");}
+        if (position == -1) {
+            throw new NoSuchElementException("The map does not contain this key");
+        }
         return (E) this.map[position].getObject();
     }
 
@@ -113,7 +122,9 @@ public class MyMap<U, E> implements Iterable<Entry>{
             }
             this.cursor--;
             return true;
-        } else {return false;}
+        } else {
+            return false;
+        }
     }
 
     /**.
@@ -125,6 +136,15 @@ public class MyMap<U, E> implements Iterable<Entry>{
             System.out.print(map[i].getObject() + " ,");
         }
     }
+
+    /**.
+     * Method for search insert element
+     * @param value it's value for search
+     * @param array it's array
+     * @param start it's start num
+     * @param end it's end num
+     * @return result
+     */
     public int searchInsert(U value, Entry[] array, int start, int end) {
         int result = -1;
         int low = start;
@@ -139,26 +159,51 @@ public class MyMap<U, E> implements Iterable<Entry>{
         }
 
         if (high == low + 1) {
-            if (array[low].getUser().equals(value) || array[high].getUser().equals(value)) {return -1;}
-            if (value.hashCode() < array[low].getUser().hashCode()) {return 0;}
-            else if (value.hashCode() < array[high].getUser().hashCode()) {return 1;}
-            else {return 2;}
+            if (array[low].getUser().equals(value) || array[high].getUser().equals(value)) {
+                return -1;
+            }
+            if (value.hashCode() < array[low].getUser().hashCode()) {
+                return 0;
+            } else if (value.hashCode() < array[high].getUser().hashCode()) {
+                return 1;
+            } else {
+                return 2;
+            }
         }
 
-        if (start > end || value == null || array == null) {return -1;}
+        if (start > end || value == null || array == null) {
+            return -1;
+        }
 
         if (value.hashCode() < array[mid].getUser().hashCode()) {
             if (((mid - 1) - low) == 1 || ((mid - 1) == low)) {
-                if (!array[mid - 1].getUser().equals(value) && !array[low].getUser().equals(value)) {return mid - 1;}}
-            return searchInsert(value, array, low, mid - 1 );
+                if (!array[mid - 1].getUser().equals(value) && !array[low].getUser().equals(value)) {
+                    return mid - 1;
+                }
+            }
+            return searchInsert(value, array, low, mid - 1);
         } else if (value.hashCode() > array[mid].getUser().hashCode()) {
             if ((high - (mid + 1)) == 1 || high == (mid + 1)) {
-                if (!array[mid + 1].getUser().equals(value) && !array[high].getUser().equals(value)) {return high;}}
+                if (!array[mid + 1].getUser().equals(value) && !array[high].getUser().equals(value)) {
+                    return high;
+                }
+            }
             return searchInsert(value, array, mid + 1, high);
-        } else if (array[mid].hashCode() ==value.hashCode()) {return -1;}
-        else {return result;}
+        } else if (array[mid].hashCode() == value.hashCode()) {
+            return -1;
+        } else {
+            return result;
+        }
     }
 
+    /**.
+     * Method for searching by key
+     * @param value it's value for searcing
+     * @param array it's array
+     * @param start it's start num
+     * @param end it's end num
+     * @return result
+     */
     public int searchGetByKey(U value, Entry[] array, int start, int end) {
         if (start > end || value == null || array == null) {
             return -1;
@@ -210,6 +255,7 @@ public class MyMap<U, E> implements Iterable<Entry>{
         }
     return result;
     }
+
     /**.
      * Realisation iterator
      * @return iterator
@@ -225,8 +271,11 @@ public class MyMap<U, E> implements Iterable<Entry>{
 
             @Override
             public Entry next() {
-                if (hasNext()) {return map[cursorIter++];}
-                else {throw new NoSuchElementException("Need add cell in this array");}
+                if (hasNext()) {
+                    return map[cursorIter++];
+                } else {
+                    throw new NoSuchElementException("Need add cell in this array");
+                }
             }
 
             @Override

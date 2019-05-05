@@ -1,8 +1,8 @@
 package ru.job4j;
 
-import java.util.*;
+import java.util.Iterator;
 
-/**
+/**.
  * Task 4.1.4
  * Create iterator for iterators
  *
@@ -13,6 +13,11 @@ import java.util.*;
 
 public interface IteratorInterface {
 
+    /**.
+     * Method for convertion interators
+     * @param it it's iterator
+     * @return result converting
+     */
     Iterator<Integer> convert(Iterator<Iterator<Integer>> it);
 
 }

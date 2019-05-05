@@ -3,9 +3,10 @@ package ru.job4j;
 import org.junit.Before;
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertNull;
 
-/**
+/**.
  * Task 5.2.2
  * Test method Role Store
  * @author  Anton Vasilyuk on 10.06.2017.
@@ -16,7 +17,7 @@ public class RoleStoreTest {
     /**.
      * Link for container model role
      */
-    RoleStore rolSrore;
+    private RoleStore rolSrore;
 
     /**.
      * Preparing for test

@@ -50,7 +50,8 @@ public class Order {
      * @return return remnamt volume
      */
     public int setDelVolume(int volume) {
-        return this.volume = this.volume - volume;
+        this.volume = this.volume - volume;
+        return this.volume;
     }
 
     /**.
@@ -65,5 +66,7 @@ public class Order {
      * Getter for volume
      * @return return volume
      */
-    public int getVolume() {return this.volume;}
+    public int getVolume() {
+        return this.volume;
+    }
 }

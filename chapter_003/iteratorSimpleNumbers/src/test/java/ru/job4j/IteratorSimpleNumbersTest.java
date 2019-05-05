@@ -5,9 +5,9 @@ import org.junit.Test;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
-/**
+/**.
  * Task 4.1.3
  * Create iterator for simple numbers
  *
@@ -31,11 +31,15 @@ public class IteratorSimpleNumbersTest {
 
         for (int i = 0; i < resultArray.length; i++) {
             resultArray[i] = (Integer) iter.next();
-            if(resultArray[i] != testArray[i]) {checkNum++;}
+            if (resultArray[i] != testArray[i]) {
+                checkNum++;
+            }
         }
         boolean fact = true;
         boolean expect = true;
-        if(checkNum != 0) {fact = false;}
+        if (checkNum != 0) {
+            fact = false;
+        }
         assertThat(fact, is(expect));
     }
 
@@ -93,7 +97,6 @@ public class IteratorSimpleNumbersTest {
     @Test
     public void whenElementRunOut() {
         IteratorSimpleNumbers it = new IteratorSimpleNumbers(new int[] {1, 2});
-        it.next();
         it.next();
         try {
             it.next();

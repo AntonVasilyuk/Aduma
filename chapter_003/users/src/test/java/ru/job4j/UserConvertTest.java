@@ -1,6 +1,9 @@
 package ru.job4j;
 
-import java.util.*;
+import java.util.List;
+import java.util.HashMap;
+import java.util.LinkedList;
+
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;

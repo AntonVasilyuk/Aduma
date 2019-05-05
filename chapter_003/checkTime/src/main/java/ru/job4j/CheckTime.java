@@ -1,6 +1,7 @@
 package ru.job4j;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**.
 * Chapter_003
@@ -16,7 +17,7 @@ public class CheckTime {
 
 	/**.
 	* Method for check time for operation add
-	* @param collection
+	* @param collection is collection for checking
 	* @param line is added word
 	* @param amount is number element
 	* @return time
@@ -35,6 +36,13 @@ public class CheckTime {
 		long secondTime = System.currentTimeMillis();
 		return secondTime - firstTime;
 	}
+
+	/**.
+	 * Method for check time for operation delete element
+	 * @param collection it's collection for checking
+	 * @param amount it's count operation
+	 * @return time
+	 */
 	public long delete(Collection<String> collection, int amount) {
 
 		Iterator<String> iter = collection.iterator();

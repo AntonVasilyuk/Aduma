@@ -1,11 +1,12 @@
 package ru.job4j;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-/**
+/**.
  * Testing Task 3.4.2
  * Create collection Map for bank
  *
@@ -27,7 +28,9 @@ public class BankReceptionTest {
         Map<User, List<Account>> checkSize = bank.getBankBase();
         boolean fact = false;
         boolean expect = true;
-        if (checkSize.size() != 0) {fact = true;}
+        if (checkSize.size() != 0) {
+            fact = true;
+        }
         assertThat(fact, is(expect));
     }
 
@@ -45,7 +48,9 @@ public class BankReceptionTest {
         int twoSize = checkSizeOne.size();
         boolean fact = false;
         boolean expect = true;
-        if (oneSize != 0 && twoSize == 0) {fact = true;}
+        if (oneSize != 0 && twoSize == 0) {
+            fact = true;
+        }
         assertThat(fact, is(expect));
     }
 
@@ -63,7 +68,9 @@ public class BankReceptionTest {
         int twoSize = bank.getUserAccounts(userOne).size();
         boolean fact = false;
         boolean expect = true;
-        if (oneSize != twoSize) {fact = true;}
+        if (oneSize != twoSize) {
+            fact = true;
+        }
         assertThat(fact, is(expect));
     }
 
@@ -83,7 +90,9 @@ public class BankReceptionTest {
         int thirdSize = bank.getUserAccounts(userOne).size();
         boolean fact = false;
         boolean expect = true;
-        if (oneSize != twoSize && oneSize == thirdSize) {fact = true;}
+        if (oneSize != twoSize && oneSize == thirdSize) {
+            fact = true;
+        }
         assertThat(fact, is(expect));
     }
 
@@ -115,9 +124,9 @@ public class BankReceptionTest {
 
         boolean fact = false;
         boolean expect = true;
-        if (resultUserOne == 50.0 && resultUserTwo == 250.0) {fact = true;}
+        if (resultUserOne == 50.0 && resultUserTwo == 250.0) {
+            fact = true;
+        }
         assertThat(fact, is(expect));
     }
-
-
 }

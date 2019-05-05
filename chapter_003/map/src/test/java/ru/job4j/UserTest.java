@@ -7,7 +7,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+
 
 /**
  * Task 5.5.1.
@@ -21,7 +22,7 @@ public class UserTest {
     /**.
      * @user is link of the user
      */
-    User user;
+    private User user;
 
     /**.
      * Is preparing for testing
@@ -77,7 +78,9 @@ public class UserTest {
         Calendar date = user.getBirthday();
         Calendar test = new GregorianCalendar(2014, 1, 24);
         boolean result = false;
-        if (date.equals(test)) {result = true;}
+        if (date.equals(test)) {
+            result = true;
+        }
         assertThat(result, is(true));
     }
 
@@ -86,11 +89,13 @@ public class UserTest {
      */
     @Test
     public void whenSetNewDateBirthdayThenGetReturnNewDateBirthday() {
-        Calendar newDate = new GregorianCalendar(1964, 1 , 3);
+        Calendar newDate = new GregorianCalendar(1964, 1, 3);
         user.setBirthday(newDate);
         Calendar test = user.getBirthday();
         boolean result = false;
-        if (newDate.equals(test)) {result = true;}
+        if (newDate.equals(test)) {
+            result = true;
+        }
         assertThat(result, is(true));
     }
 }

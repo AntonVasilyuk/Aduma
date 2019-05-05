@@ -7,7 +7,7 @@
 
     <servlet>
         <servlet-name>UsersServlet</servlet-name>
-        <servlet-class>ru.job4j.layoutPresentation.UsersServlet</servlet-class>
+        <servlet-class>ru.job4j.presentation.UsersServlet</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -22,7 +22,7 @@
 
     <servlet>
         <servlet-name>UserCreateServlet</servlet-name>
-        <servlet-class>ru.job4j.layoutPresentation.UserCreateServlet</servlet-class>
+        <servlet-class>ru.job4j.presentation.UserCreateServlet</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -37,7 +37,7 @@
 
     <servlet>
         <servlet-name>UserUpdateServlet</servlet-name>
-        <servlet-class>ru.job4j.layoutPresentation.UserUpdateServlet</servlet-class>
+        <servlet-class>ru.job4j.presentation.UserUpdateServlet</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -52,7 +52,7 @@
 
     <servlet>
         <servlet-name>UserDeleteServlet</servlet-name>
-        <servlet-class>ru.job4j.layoutPresentation.UserDeleteServlet</servlet-class>
+        <servlet-class>ru.job4j.presentation.UserDeleteServlet</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -67,7 +67,7 @@
 
     <servlet>
         <servlet-name>Signin</servlet-name>
-        <servlet-class>ru.job4j.layoutPresentation.SigninController</servlet-class>
+        <servlet-class>ru.job4j.presentation.SigninController</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -82,7 +82,7 @@
 
     <servlet>
         <servlet-name>Exit</servlet-name>
-        <servlet-class>ru.job4j.layoutPresentation.ExitServlet</servlet-class>
+        <servlet-class>ru.job4j.presentation.ExitServlet</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -106,7 +106,7 @@
     </filter-mapping>-->
     <servlet>
         <servlet-name>Json</servlet-name>
-        <servlet-class>ru.job4j.layoutPresentation.JsonController</servlet-class>
+        <servlet-class>ru.job4j.presentation.JsonController</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -116,7 +116,7 @@
 
     <servlet>
         <servlet-name>Country</servlet-name>
-        <servlet-class>ru.job4j.layoutPresentation.CountryServlet</servlet-class>
+        <servlet-class>ru.job4j.presentation.CountryServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Country</servlet-name>
@@ -125,7 +125,7 @@
 
     <servlet>
         <servlet-name>City</servlet-name>
-        <servlet-class>ru.job4j.layoutPresentation.CityServlet</servlet-class>
+        <servlet-class>ru.job4j.presentation.CityServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>City</servlet-name>

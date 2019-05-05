@@ -3,20 +3,21 @@ package ru.job4j;
 import org.junit.Before;
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertNull;
 
-/**
+/**.
  * Task 5.2.2
  * Test method UserStore
  * @author  Anton Vasilyuk on 10.06.2017.
  * @version 1.0
  */
-public class UserStoreTest{
+public class UserStoreTest {
 
     /**.
      * usStore is link to container users
      */
-    UserStore usStore;
+    private UserStore usStore;
 
     /**.
      * Preparing for test

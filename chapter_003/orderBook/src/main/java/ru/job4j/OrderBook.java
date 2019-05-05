@@ -1,6 +1,12 @@
 package ru.job4j;
 
-import java.util.*;
+import java.util.TreeMap;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Comparator;
 
 /**
  * Task 5.7.1.
@@ -38,22 +44,37 @@ public class OrderBook {
 
     /**.
      * @orderBooks, is links for all order books
-     * @orderBook, is links for order book
-     * @orderBookBid, is links for bid order
-     * @orderBookAsk is links for ask order
      */
     private Map<String, Map<String, Map<Double, Order>>> orderBooks;
+
+    /**.
+     * @orderBook, is links for order book
+     */
     private Map<String, Map<Double, Order>> orderBook;
+
+    /**.
+     * @orderBookBid, is links for bid order
+     */
     private TreeMap<Double, Order> orderBookBid;
+
+    /**.
+     * @orderBookAsk is links for ask order
+     */
     private TreeMap<Double, Order> orderBookAsk;
 
     /**.
      * @tempOrder is link on temp the order
-     * @tempOrderBook is link for the temp orderbook
-     * @tempMap is link on the temp map
      */
     private Order tempOrder;
+
+    /**.
+     * @tempOrderBook is link for the temp orderbook
+     */
     private Map<String, Map<Double, Order>> tempOrderBook;
+
+    /**.
+     * @tempMap is link on the temp map
+     */
     private Map<Double, Order> tempMap;
 
     /**.
@@ -73,16 +94,20 @@ public class OrderBook {
      */
     public boolean addOrder(String nameBook, String nameOrder, Double price, int volume) {
         if (nameOrder.equals(nameBid)) {
-            if (price < priceMarket) {return false;}
+            if (price < priceMarket) {
+                return false;
+            }
         }
         if (nameOrder.equals(nameAsk)) {
-            if (price > priceMarket) {return false;}
+            if (price > priceMarket) {
+                return false;
+            }
         }
 
-        if(orderBooks.containsKey(nameBook)) {
+        if (orderBooks.containsKey(nameBook)) {
             tempOrderBook = orderBooks.get(nameBook);
             tempMap = tempOrderBook.get(nameOrder);
-            if(tempMap.containsKey(price)) {
+            if (tempMap.containsKey(price)) {
                 tempMap.get(price).setAddVolume(volume);
             } else {
                 tempOrder = new Order(nameOrder, price, volume);
@@ -91,11 +116,19 @@ public class OrderBook {
         } else {
             createOrderBook(nameBook);
             tempOrder = new Order(nameOrder, price, volume);
-            if (nameOrder.equals(nameBid)) {orderBookBid.put(price, tempOrder);}
-            if (nameOrder.equals(nameAsk)) {orderBookAsk.put(price, tempOrder);}
+            if (nameOrder.equals(nameBid)) {
+                orderBookBid.put(price, tempOrder);
+            }
+            if (nameOrder.equals(nameAsk)) {
+                orderBookAsk.put(price, tempOrder);
+            }
         }
-        if (!orderBookBid.isEmpty()) {highPrise = orderBookBid.firstKey();}
-        if (!orderBookAsk.isEmpty()) {lowPrise = orderBookAsk.firstKey();}
+        if (!orderBookBid.isEmpty()) {
+            highPrise = orderBookBid.firstKey();
+        }
+        if (!orderBookAsk.isEmpty()) {
+            lowPrise = orderBookAsk.firstKey();
+        }
         return true;
     }
 
@@ -107,18 +140,32 @@ public class OrderBook {
      * @param volume is volume order
      * @return boolean
      */
-    public boolean deleteOrder (String nameBook, String nameOrder, Double price, int volume) {
-        if (!orderBooks.containsKey(nameBook)) {return false;}
+    public boolean deleteOrder(String nameBook, String nameOrder, Double price, int volume) {
+        if (!orderBooks.containsKey(nameBook)) {
+            return false;
+        }
         tempOrderBook = orderBooks.get(nameBook);
 
-        if (lowPrise != null) {if(price < lowPrise) {return false;}}
-        if (highPrise != null) {if(price > highPrise) {return false;}}
+        if (lowPrise != null) {
+            if (price < lowPrise) {
+                return false;
+            }
+        }
+        if (highPrise != null) {
+            if (price > highPrise) {
+                return false;
+            }
+        }
 
         tempMap = tempOrderBook.get(nameOrder);
-        if(!tempMap.containsKey(price)) {return false;}
+        if (!tempMap.containsKey(price)) {
+            return false;
+        }
 
         int result = tempMap.get(price).setDelVolume(volume);
-        if (result <= 0) {tempMap.remove(price);}
+        if (result <= 0) {
+            tempMap.remove(price);
+        }
         return true;
     }
 
@@ -127,7 +174,9 @@ public class OrderBook {
      * @param nameBook is name the orderbook
      */
     public void printOrder(String nameBook) {
-        if (!orderBooks.containsKey(nameBook)) {return;}
+        if (!orderBooks.containsKey(nameBook)) {
+            return;
+        }
         tempOrderBook = orderBooks.get(nameBook);
         if (tempOrderBook.get(nameBid).isEmpty() && tempOrderBook.get(nameAsk).isEmpty()) {
             System.out.printf("%s", "Order book is empty");
@@ -146,13 +195,19 @@ public class OrderBook {
         System.out.printf("%s%s%s%n", nameBid, "             ", nameAsk);
         System.out.printf("Volume@Price – Volume@Price%n");
 
-        while(itPriceBid.hasNext() || itPriceAsk.hasNext()) {
+        while (itPriceBid.hasNext() || itPriceAsk.hasNext()) {
             String left = null;
             String right = null;
-            if(itPriceBid.hasNext()) {left = itOrderBid.next().getVolume() + "@" + itPriceBid.next();}
-            else {left = "----------";}
-            if(itPriceAsk.hasNext()) {right = itOrderAsk.next().getVolume() + "@" + itPriceAsk.next();}
-            else {right = "----------";}
+            if (itPriceBid.hasNext()) {
+                left = itOrderBid.next().getVolume() + "@" + itPriceBid.next();
+            } else {
+                left = "----------";
+            }
+            if (itPriceAsk.hasNext()) {
+                right = itOrderAsk.next().getVolume() + "@" + itPriceAsk.next();
+            } else {
+                right = "----------";
+            }
             System.out.printf("%s  -  %s%n", left, right);
         }
     }

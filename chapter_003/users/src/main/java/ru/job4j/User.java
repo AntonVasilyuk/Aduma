@@ -39,9 +39,14 @@ public class User {
      * Getter for id
      * @return id
      */
-    public Integer getId(){
+    public Integer getId() {
         return this.id;
     }
+
+    /**.
+     * Getter for field name
+     * @return name
+     */
     public String getName() {
         return this.name;
     }

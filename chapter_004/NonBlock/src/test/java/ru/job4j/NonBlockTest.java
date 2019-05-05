@@ -4,7 +4,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertNull;
+
+/**.
+ * Task 7.5.1.
+ * Test working class NonBlock
+ *
+ * @author Anton Vasilyuk on 01.09.2017
+ * @version 1.0.
+ */
 
 public class NonBlockTest {
 
@@ -61,7 +70,7 @@ public class NonBlockTest {
      * @throws OptimisticException is Exception when to model have different version
      */
     @Test(expected = OptimisticException.class)
-    public void whenOtherVersionModels() throws OptimisticException{
+    public void whenOtherVersionModels() throws OptimisticException {
         Model modFirst = new Model("Fedor");
         Model modSecond = new Model("Adigun");
         modSecond.updateVersion();

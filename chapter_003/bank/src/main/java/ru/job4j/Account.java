@@ -1,6 +1,6 @@
 package ru.job4j;
 
-/**
+/**.
  * Testing Task 3.4.2
  * Create collection Map for bank
  *
@@ -32,7 +32,7 @@ public class Account {
 
     /**.
      * Transfer money to an account
-     * @param value
+     * @param value is value
      */
     public void setValue(double value) {
         this.value = value;
@@ -48,12 +48,16 @@ public class Account {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Account account = (Account) o;
-
-        if (Double.compare(account.value, value) != 0) return false;
+        if (Double.compare(account.value, value) != 0) {
+            return false;
+        }
         return recvisite != null ? recvisite.equals(account.recvisite) : account.recvisite == null;
     }
 

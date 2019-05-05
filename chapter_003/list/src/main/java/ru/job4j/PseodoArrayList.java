@@ -3,11 +3,12 @@ package ru.job4j;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
+/**.
  * Task 5.3.1
  * Create model for PseodoArrayList
  * @author  Anton Vasilyuk on 12.06.2017.
  * @version 1.0
+ * @param <E> generic param
  */
 public class PseodoArrayList<E> implements SimpleContainers<E> {
 
@@ -32,7 +33,7 @@ public class PseodoArrayList<E> implements SimpleContainers<E> {
 
     /**.
      * Constructor fot this class
-     * @param size
+     * @param size is size the array
      */
     public PseodoArrayList(int size) {
         this.container = new Object[size];
@@ -41,7 +42,7 @@ public class PseodoArrayList<E> implements SimpleContainers<E> {
 
     /**.
      * Method for add object to array
-     * @param value
+     * @param value is value for adding
      */
     public void add(E value) {
         if (cursor < size) {
@@ -60,19 +61,22 @@ public class PseodoArrayList<E> implements SimpleContainers<E> {
 
     /**.
      * Method for return object from index position
-     * @param index
-     * @return
+     * @param index it's index position element
+     * @return element
      */
     public E get(int index) {
         E result = null;
-        if (index < cursor) {result = (E) container[index];}
-        else {throw new IndexOutOfBoundsException("On this position no element");}
+        if (index < cursor) {
+            result = (E) container[index];
+        } else {
+            throw new IndexOutOfBoundsException("On this position no element");
+        }
         return result;
     }
 
     /**.
      * Realisation iterable
-     * @return
+     * @return iterator for array
      */
     @Override
     public Iterator<E> iterator() {
@@ -85,8 +89,11 @@ public class PseodoArrayList<E> implements SimpleContainers<E> {
 
             @Override
             public Object next() {
-                if (hasNext()) {return container[cursorIter++];}
-                else {throw new NoSuchElementException("Need add cell in this array");}
+                if (hasNext()) {
+                    return container[cursorIter++];
+                } else {
+                    throw new NoSuchElementException("Need add cell in this array");
+                }
             }
 
             @Override
@@ -100,12 +107,14 @@ public class PseodoArrayList<E> implements SimpleContainers<E> {
 
     /**.
      * Method for checking size container
-     * @return
+     * @return size the array
      */
     public int sizeObjects() {
         int numElement = 0;
         for (int i = 0; i < container.length; i++) {
-            if (container[i] != null) {numElement++;}
+            if (container[i] != null) {
+                numElement++;
+            }
         }
         return numElement;
     }

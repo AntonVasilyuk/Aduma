@@ -1,7 +1,11 @@
 package ru.job4j;
 
-import java.util.*;
-/**
+import java.util.List;
+import java.util.Map;
+import java.util.LinkedHashMap;
+import java.util.ArrayList;
+
+/**.
  * Testing Task 3.4.2
  * Create collection Map for bank
  *
@@ -11,28 +15,23 @@ import java.util.*;
  */
 public class BankReception {
 
-    /**
-     * .
-     * datebase bank
+    /**.
+     * Datebase bank
      */
     private Map<User, List<Account>> bank = new LinkedHashMap<>();
 
-    /**
-     * .
-     * Add user to datebase
-     *
-     * @param user
+    /**.
+     * Add user to datebase.
+     * @param user for adding.
      */
     public void addUser(User user) {
         List<Account> account = new ArrayList<>();
         this.bank.put(user, account);
     }
 
-    /**
-     * .
-     * Remove user from datebase
-     *
-     * @param user
+    /**.
+     * Remove user from datebase.
+     * @param user for deleting
      */
     public void deleteUser(User user) {
         if (bank.containsKey(user)) {
@@ -40,12 +39,10 @@ public class BankReception {
         }
     }
 
-    /**
-     * .
-     * Add account to bank account user
-     *
-     * @param user
-     * @param account
+    /**.
+     * Add account to bank account user.
+     * @param user for adding account
+     * @param account for adding account
      */
     public void addAccountToUser(User user, Account account) {
         if (bank.containsKey(user)) {
@@ -54,12 +51,10 @@ public class BankReception {
         }
     }
 
-    /**
-     * .
-     * Delete account from bank account user
-     *
-     * @param user
-     * @param account
+    /**.
+     * Delete account from bank account user.
+     * @param user for deleting
+     * @param account for deleting
      */
     public void deleteAccountFromUser(User user, Account account) {
         if (bank.containsKey(user)) {
@@ -72,8 +67,8 @@ public class BankReception {
 
     /**.
      * Getter for user account
-     * @param user
-     * @return
+     * @param user for getting account
+     * @return list with all accounts
      */
     public List<Account> getUserAccounts(User user) {
         return this.bank.get(user);
@@ -86,10 +81,9 @@ public class BankReception {
      * @param dstUser second user
      * @param dstAccount his account
      * @param amount of money
-     * @return may be
+     * @return result
      */
-    public boolean transferMoney (User srcUser, Account srcAccount, User dstUser, Account dstAccount, double amount) {
-
+    public boolean transferMoney(User srcUser, Account srcAccount, User dstUser, Account dstAccount, double amount) {
         boolean result;
         if (bank.containsKey(dstUser) && bank.containsKey(srcUser)) {
             List<Account> listOne = this.bank.get(srcUser);
@@ -111,10 +105,16 @@ public class BankReception {
             listOne.set(listOne.indexOf(srcAccount), accountOne);
             this.bank.put(srcUser, listOne);
             result = true;
-        } else {result = false;}
+        } else {
+            result = false;
+        }
         return result;
      }
 
+    /**.
+     * Getter for bank storage
+     * @return bank storage
+     */
      public Map<User, List<Account>> getBankBase() {
         return this.bank;
      }

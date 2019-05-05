@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * @author Anton Vasilyuk on 10.08.2017.
  * @version 1.0.
  */
-public class ThreadPool{
+public class ThreadPool {
 
     /**.
      * @workQueue is queue for new task
@@ -37,7 +37,7 @@ public class ThreadPool{
      * @throws InterruptedException is may be exception
      */
     public ThreadPool() throws InterruptedException {
-        for(int i = 0; i < MAXTHREAD; i++) {
+        for (int i = 0; i < MAXTHREAD; i++) {
             queueThreads[i] = new Thread(new TaskWorker());
             queueThreads[i].start();
         }
@@ -58,7 +58,7 @@ public class ThreadPool{
      * Method for end working
      */
     public void shutdown() {
-        while(!workQueue.isEmpty()) {
+        while (!workQueue.isEmpty()) {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -66,7 +66,7 @@ public class ThreadPool{
             }
         }
 
-        for(Thread thread : queueThreads) {
+        for (Thread thread : queueThreads) {
             thread.interrupt();
         }
     }
@@ -79,7 +79,7 @@ public class ThreadPool{
         @Override
         public void run() {
             Runnable thread;
-            while(!isInterrupted()) {
+            while (!isInterrupted()) {
                 synchronized (lock) {
                     while (workQueue.isEmpty()) {
                         try {

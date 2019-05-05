@@ -2,7 +2,7 @@ package ru.job4j;
 
 import net.jcip.annotations.ThreadSafe;
 
-/**
+/**.
  * Task 7.3.2.
  * Create User for User Storage
  *
@@ -12,8 +12,14 @@ import net.jcip.annotations.ThreadSafe;
 @ThreadSafe
 public class User {
 
+    /**.
+     * @id is id for user
+     */
     private int id;
 
+    /**.
+     * @amount is amount
+     */
     private int amount;
 
     /**.
@@ -30,23 +36,31 @@ public class User {
      * Getter for id of the user
      * @return id
      */
-    public int getId() {return this.id;}
+    public int getId() {
+        return this.id;
+    }
 
     /**.
      * Setter for id of the user
-     * @param id
+     * @param id is id for user
      */
-    public void setId(int id) {this.id = id;}
+    public void setId(int id) {
+        this.id = id;
+    }
 
     /**.
      * Getter for amount of the user
      * @return amount
      */
-    public int getAmount() {return  this.amount;}
+    public int getAmount() {
+        return  this.amount;
+    }
 
     /**.
      * Setter for amount of the user
-     * @param amount
+     * @param amount is amount
      */
-    public void setAmount(int amount) {this.amount = amount;}
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 }

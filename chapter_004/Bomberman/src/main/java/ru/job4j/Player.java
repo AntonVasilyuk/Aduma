@@ -51,7 +51,7 @@ public class Player implements Figure {
 
     /**.
      * Method for moving figure
-     * @return
+     * @return new location
      */
     public Location step() {
         return direction.choiseDirection(locationPlayer, max);

@@ -3,10 +3,18 @@ package ru.job4j;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+import java.util.Set;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.ArrayList;
 
-/**
+/**.
  * Task 7.3.4.
  * Create aplication for search file in the directory
  *
@@ -27,8 +35,19 @@ public class SearchFile {
      */
     private Set<String> passed;
 
+    /**.
+     * @root is root path
+     */
     private String root;
+
+    /**.
+     * @text is text for searching
+     */
     private String text;
+
+    /**.
+     * @exts is paths
+     */
     private List<String> exts;
 
     /**.
@@ -59,12 +78,20 @@ public class SearchFile {
         threadTwo.join();
     }
 
+    /**.
+     * Get result
+     * @return result
+     */
     public List<String> result() {
             System.out.println(files);
-
             return files;
     }
 
+    /**.
+     * Take searcher
+     * @param file file for checking
+     * @return thread worker
+     */
     private Thread searchThread(File file) {
         return new Thread() {
             @Override
@@ -79,10 +106,12 @@ public class SearchFile {
             }
         };
     }
+
     /**.
      * Recursive method for search and write files contains text
      * @param file is file for search
      * @throws InterruptedException may be exception
+     * @throws FileNotFoundException may be exception
      */
     private void recursiveSearchFile(File file) throws InterruptedException, FileNotFoundException {
         if (!passed.contains(file.getPath()) && !files.contains(file.getPath())) {
@@ -116,6 +145,7 @@ public class SearchFile {
     /**.
      * Method for searching and write files to result list
      * @param file is file for action
+     * @throws FileNotFoundException may be exception
      */
     private void searchAndWrite(File file) throws FileNotFoundException {
         StringBuilder sb = new StringBuilder();
@@ -135,8 +165,16 @@ public class SearchFile {
         }
         String name = file.getPath();
         int num = sb.indexOf(text);
-        if (num != -1) {files.add(name);}
+        if (num != -1) {
+            files.add(name);
+        }
     }
 
-    public List<String> getResult() {return this.files;}
+    /**.
+     * Getting result
+     * @return result
+     */
+    public List<String> getResult() {
+        return this.files;
+    }
 }

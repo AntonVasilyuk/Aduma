@@ -3,12 +3,10 @@ package ru.job4j;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.NoSuchElementException;
-
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
-/**
+/**.
  * Task 5.3.1
  * Test working pseodo List
  *
@@ -21,7 +19,7 @@ public class PseodoArrayListTest {
     /**.
      * @psy is link to container
      */
-    PseodoArrayList psy;
+    private PseodoArrayList psy;
 
     /**.
      * Preparing for test
@@ -41,7 +39,9 @@ public class PseodoArrayListTest {
         psy.add(objOne);
         int two = psy.sizeObjects();
         boolean fact = false;
-        if ((one + 1) == two) {fact = true;}
+        if ((one + 1) == two) {
+            fact = true;
+        }
         assertThat(fact, is(true));
     }
 
@@ -53,10 +53,15 @@ public class PseodoArrayListTest {
         Object obj = new Object();
         psy.add(obj);
         boolean fact = false;
-        if (obj.hashCode() == psy.get(0).hashCode()) {fact = true;}
+        if (obj.hashCode() == psy.get(0).hashCode()) {
+            fact = true;
+        }
         assertThat(fact, is(true));
     }
 
+    /**.
+     * Test working when more element
+     */
     @Test
     public void whenAmountNumberMoreSizeContainer() {
         Object one = new Object();
@@ -71,12 +76,15 @@ public class PseodoArrayListTest {
         assertThat(numElement, is(4));
     }
 
+    /**.
+     * Test working when index more size
+     */
     @Test
     public void whenIndexForMethodGetMoreSizeContainer() {
         try {
             psy.get(100);
-        } catch (NoSuchElementException nee) {
-            assertThat(nee.getMessage(), is("There is not such index"));
+        } catch (IndexOutOfBoundsException ioe) {
+            assertThat(ioe.getMessage(), is("On this position no element"));
         }
     }
 }

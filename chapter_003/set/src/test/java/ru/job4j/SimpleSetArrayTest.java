@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Task 5.4.1.
@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
 public class SimpleSetArrayTest {
 
     /**.
-     * Link for SimpleSetArray
+     * @set Link for SimpleSetArray
      */
-    SimpleSetArray set;
+    private SimpleSetArray set;
 
     /**.
      * Preparing for test
@@ -65,7 +65,7 @@ public class SimpleSetArrayTest {
         set.add(three);
         set.iterator().next();
         String test = (String) set.iterator().next();
-        assertThat(test, is ("Bingo"));
+        assertThat(test, is("Bingo"));
     }
 
     /**.

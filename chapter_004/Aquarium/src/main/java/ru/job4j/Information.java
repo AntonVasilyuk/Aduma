@@ -11,9 +11,12 @@ import java.util.Map;
  * @version 1.0.
  */
 
-public class Information implements Runnable{
+public class Information implements Runnable {
 
-    Map<Location, Fish> list;
+    /**.
+     * @list is list for fishes with location
+     */
+    private Map<Location, Fish> list;
 
     /**.
      * @date for print the current date
@@ -52,5 +55,7 @@ public class Information implements Runnable{
     /**.
      * Initialize the expiration of
      */
-    public void setEndGame() {this.endGame = true;}
+    public void setEndGame() {
+        this.endGame = true;
+    }
 }

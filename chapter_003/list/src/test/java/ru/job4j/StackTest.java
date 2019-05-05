@@ -6,9 +6,9 @@ import org.junit.Test;
 import java.util.EmptyStackException;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
-/**
+/**.
  * Task 5.3.3.
  * Create my realisation for Queue
  *
@@ -16,7 +16,11 @@ import static org.junit.Assert.*;
  * @version 1.0
  */
 public class StackTest {
-    Stack link;
+
+    /**.
+     * Link for instance
+     */
+    private Stack link;
 
     /**.
      * Preparing for test
@@ -58,7 +62,9 @@ public class StackTest {
         String test = (String) link.pop();
         int sizeStack = link.getSize();
         boolean result = false;
-        if (sizeStack == 1 && test.equals(second)) {result = true;}
+        if (sizeStack == 1 && test.equals(second)) {
+            result = true;
+        }
         assertThat(result, is(true));
     }
 

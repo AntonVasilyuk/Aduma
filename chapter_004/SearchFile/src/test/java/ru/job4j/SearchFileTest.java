@@ -1,13 +1,12 @@
 package ru.job4j;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.List;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 
-/**
+/**.
  * Task 7.3.4.
  * Test working class Search file
  * @author Anton Vasilyuk 30.07.2017.
@@ -27,6 +26,6 @@ public class SearchFileTest {
 
         SearchFile link = new SearchFile("src", "Test", exts);
         link.startApp();
-        link.result();
+        Assert.assertNotNull(link.result());
     }
 }

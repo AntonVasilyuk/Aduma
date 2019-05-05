@@ -11,10 +11,14 @@ import java.util.Iterator;
  *
  * @author Anton Vasilyuk on 30.07.2017.
  * @version 1.0.
+ * @param <E> is generic type
  */
 @ThreadSafe
-public class ProtectedLinkedList<E> implements Iterable<E>{
+public class ProtectedLinkedList<E> implements Iterable<E> {
 
+    /**.
+     * @lock object for locking
+     */
     private final Object lock = new Object();
 
     /**.
@@ -81,11 +85,30 @@ public class ProtectedLinkedList<E> implements Iterable<E>{
         synchronized (lock) {
             Iterator<E> it = (Iterator<E>) new Iterator<Object>() {
 
+                /**.
+                 * @cursorIter is cursor current position
+                 */
                 private int cursorIter = 0;
-                Node<E> tempPrevios = null;
-                Node<E> tempNext = null;
-                Node<E> tempNow = null;
 
+                /**.
+                 * @tempPrevios is link to previos position
+                 */
+                private Node<E> tempPrevios = null;
+
+                /**.
+                 * @tempNext is link to next position
+                 */
+                private Node<E> tempNext = null;
+
+                /**.
+                 * @tempNow is link to current position
+                 */
+                private Node<E> tempNow = null;
+
+                /**.
+                 * Checking next element
+                 * @return result
+                 */
                 @Override
                 public boolean hasNext() {
                     if (headNode == null) {
@@ -94,6 +117,10 @@ public class ProtectedLinkedList<E> implements Iterable<E>{
                     return tempNow.getNext() != null;
                 }
 
+                /**.
+                 * Next element
+                 * @return next element
+                 */
                 @Override
                 public Object next() {
                     Node<E> result = null;
@@ -156,7 +183,7 @@ public class ProtectedLinkedList<E> implements Iterable<E>{
          * @param previos link on previos node
          * @param next link on next node
          */
-        public Node(E value, Node<E> previos, Node<E> next) {
+        Node(E value, Node<E> previos, Node<E> next) {
             this.value = value;
             this.first = previos;
             this.last = next;
@@ -198,6 +225,8 @@ public class ProtectedLinkedList<E> implements Iterable<E>{
          * Method for get storage element
          * @return this element
          */
-        public E getElement() {return this.value;}
+        public E getElement() {
+            return this.value;
+        }
     }
 }

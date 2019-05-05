@@ -83,7 +83,7 @@ public class MyProducerCustomer {
      */
     public Thread producer() {
         return new Thread(() -> {
-            for(int i = 0; i < maxSize; i++) {
+            for (int i = 0; i < maxSize; i++) {
                 produce(listNames[i]);
             }
             this.thereMoreElements = false;
@@ -92,7 +92,7 @@ public class MyProducerCustomer {
 
     /**.
      * It's method for Producer
-     * @param text
+     * @param text is text for working
      */
     public void produce(String text) {
         synchronized (lock) {

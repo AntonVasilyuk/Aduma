@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Task 5.6.3.
@@ -20,13 +20,15 @@ public class BinaryTreeTest {
     /**.
      * @link is link to the BinaryTree
      */
-    BinaryTree link;
+    private BinaryTree link;
 
     /**.
      * Preparing for test Binary Tree
      */
     @Before
-    public void preparingForTest() {link = new BinaryTree();}
+    public void preparingForTest() {
+        link = new BinaryTree();
+    }
 
     /**.
      * Test method add
@@ -45,7 +47,7 @@ public class BinaryTreeTest {
     @Test
     public void whenAddNullElement() {
         String test = null;
-        try{
+        try {
             link.add(test);
         } catch (NullPointerException npe) {
             assertThat(npe.getMessage(), is("Value is null"));
@@ -69,9 +71,11 @@ public class BinaryTreeTest {
         String[] test = {one, two, three};
 
         boolean result = true;
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             array[i] = (String) link.iterator().next();
-            if(!array[i].equals(test[i])) {result = false;}
+            if (!array[i].equals(test[i])) {
+                result = false;
+            }
         }
 
         assertThat(result, is(true));

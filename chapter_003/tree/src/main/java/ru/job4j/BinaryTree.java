@@ -5,14 +5,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-/**
+/**.
  * Task 5.6.3.
  * Create my Binary Tree
  *
  * Created by Anton Vasilyuk on 30.06.2017.
  * @version 1.0
+ * @param <E> generic type implements comparable
  */
-public class BinaryTree<E extends Comparable<E>> implements Iterable<E>{
+public class BinaryTree<E extends Comparable<E>> implements Iterable<E> {
 
     /**.
      * @cursorIterator is position the iterator
@@ -32,7 +33,7 @@ public class BinaryTree<E extends Comparable<E>> implements Iterable<E>{
     /**.
      * @list is container for elements
      */
-    List<E> list;
+    private List<E> list;
 
     /**.
      * Constructor for class BinaryTree
@@ -43,14 +44,36 @@ public class BinaryTree<E extends Comparable<E>> implements Iterable<E>{
 
     /**.
      * Class Node is container for elements and link to other elements
-     * @param <E>
+     * @param <E> it's generic type
      */
     private class Node<E> {
-        Node<E> childenLeft;
-        Node<E> childenRight;
-        E value;
-        Node<E> parentNode;
-        Node(E value, Node<E> node) {
+
+        /**.
+         * @childenLefr is left child
+         */
+        private Node<E> childenLeft;
+
+        /**.
+         * @childenRight is right child
+         */
+        private Node<E> childenRight;
+
+        /**.
+         * @value is value for keeping
+         */
+        private E value;
+
+        /**.
+         * @parentNode is parent
+         */
+        private Node<E> parentNode;
+
+        /**.
+         * Constructor
+         * @param value is value for keeping
+         * @param node is node
+         */
+        private Node(E value, Node<E> node) {
             this.value = value;
             this.parentNode = node;
         }
@@ -61,7 +84,9 @@ public class BinaryTree<E extends Comparable<E>> implements Iterable<E>{
      * @param value is element
      */
     public void add(E value) {
-        if (value == null) {throw new NullPointerException("Value is null");}
+        if (value == null) {
+            throw new NullPointerException("Value is null");
+        }
         if (firstNode == null) {
             firstNode = new Node(value, null);
         } else {
@@ -75,22 +100,30 @@ public class BinaryTree<E extends Comparable<E>> implements Iterable<E>{
      * @param value is element
      */
     private void searchAndPaste(Node<E> node, E value) {
-        if(node.value.compareTo(value) == 1) {
-            if(node.childenLeft == null) {node.childenLeft = new Node(value, node);}
-            else {searchAndPaste(node.childenLeft, value);}
+        if (node.value.compareTo(value) == 1) {
+            if (node.childenLeft == null) {
+                node.childenLeft = new Node(value, node);
+            } else {
+                searchAndPaste(node.childenLeft, value);
+            }
         } else {
-            if(node.childenRight == null) {node.childenRight = new Node(value, node);}
-            else {searchAndPaste(node.childenRight, value);}
+            if (node.childenRight == null) {
+                node.childenRight = new Node(value, node);
+            } else {
+                searchAndPaste(node.childenRight, value);
+            }
         }
     }
 
     /**.
      * Method for fill and sorting the list
-     * @param node
+     * @param node storage nodes
      */
     public void fillListTwo(Node<E> node) {
 
-        if (firstNode.childenLeft == null && firstNode.childenRight == null) {list.add(node.value);}
+        if (firstNode.childenLeft == null && firstNode.childenRight == null) {
+            list.add(node.value);
+        }
         if (list.size() != 0) {
             if (list.contains(node.value)) {
                 if (node.parentNode != null) {
@@ -101,28 +134,34 @@ public class BinaryTree<E extends Comparable<E>> implements Iterable<E>{
             }
         }
 
-        if(node.childenLeft != null && !list.contains(node.childenLeft.value)) {
-            if(node.childenLeft.childenLeft == null && node.childenLeft.childenRight == null) {
+        if (node.childenLeft != null && !list.contains(node.childenLeft.value)) {
+            if (node.childenLeft.childenLeft == null && node.childenLeft.childenRight == null) {
                 list.add(node.childenLeft.value);
                 list.add(node.value);
-                if(node.childenRight != null) {
+                if (node.childenRight != null) {
                     if (node.childenRight.childenLeft != null || node.childenRight.childenRight != null) {
                         fillListTwo(node.childenRight);
                     } else {
                         list.add(node.childenRight.value);
                         if (node.parentNode != null) {
                             fillListTwo(node.parentNode);
-                        } else {return;}
+                        } else {
+                            return;
+                        }
                     }
                 }
-            } else {fillListTwo(node.childenLeft);}
+            } else {
+                fillListTwo(node.childenLeft);
+            }
         }
 
         if (node.childenRight != null && !list.contains(node.childenRight.value)) {
             if (node.childenRight.childenLeft == null && node.childenRight.childenRight == null) {
                 list.add(node.childenRight.value);
                 fillListTwo(node.parentNode);
-            } else {fillListTwo(node.childenRight);}
+            } else {
+                fillListTwo(node.childenRight);
+            }
         }
     }
 
@@ -141,9 +180,11 @@ public class BinaryTree<E extends Comparable<E>> implements Iterable<E>{
             @Override
             public E next() {
                 fillListTwo(firstNode);
-                if(hasNext()) {
+                if (hasNext()) {
                     return list.get(cursorIterator++);
-                } else {throw new NoSuchElementException("No more elements");}
+                } else {
+                    throw new NoSuchElementException("No more elements");
+                }
             }
         };
         return it;

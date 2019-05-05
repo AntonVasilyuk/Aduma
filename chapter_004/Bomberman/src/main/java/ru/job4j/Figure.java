@@ -14,5 +14,5 @@ public interface Figure {
      * This method moving figure
      * @return direction
      */
-    public Location step();
+    Location step();
 }

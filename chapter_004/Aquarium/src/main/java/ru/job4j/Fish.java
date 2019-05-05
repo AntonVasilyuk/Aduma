@@ -15,9 +15,24 @@ public class Fish {
      */
     private Direction direction;
 
+    /**.
+     * @numFish is fish number
+     */
     private final int numFish;
+
+    /**.
+     * @liveFish is long live the fish
+     */
     private final long liveFish;
+
+    /**.
+     * @location is location the fish
+     */
     private final Location location;
+
+    /**.
+     * @maleOrFemale is fish male
+     */
     private final String maleOrFemale;
 
     /**.
@@ -47,25 +62,33 @@ public class Fish {
      * Getter for number the fish
      * @return number the fish
      */
-    public int getNumFish() {return this.numFish;}
+    public int getNumFish() {
+        return this.numFish;
+    }
 
     /**.
      * Getter for long livi the fish
      * @return long live the fish
      */
-    public long getLiveFish() {return this.liveFish;}
+    public long getLiveFish() {
+        return this.liveFish;
+    }
 
     /**.
      * Getter for male the fish
      * @return male the fish
      */
-    public String getMale() {return this.maleOrFemale;}
+    public String getMale() {
+        return this.maleOrFemale;
+    }
 
     /**.
      * Getter for location the fish
      * @return return location the fish
      */
-    public Location getLocation() {return this.location;}
+    public Location getLocation() {
+        return this.location;
+    }
 
     /**.
      * Inicialisation new location the fish

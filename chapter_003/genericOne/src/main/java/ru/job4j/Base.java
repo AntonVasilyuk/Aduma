@@ -1,6 +1,6 @@
 package ru.job4j;
 
-/**
+/**.
  * Task 5.2.2
  * This is basis for outher models
  * @author  Anton Vasilyuk on 10.06.2017.
@@ -23,7 +23,7 @@ public abstract class  Base {
 
     /**.
      * Method show id for this model
-     * @return
+     * @return id
      */
     public String getId() {
         return this.id;

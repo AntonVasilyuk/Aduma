@@ -1,12 +1,16 @@
 package ru.job4j;
 
-import java.util.*;
+import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Iterator;
 
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-/**
+/**.
  * Testing Task 3.4.1
  * Create Directory oragnization
  *
@@ -44,7 +48,9 @@ public class DirectoryOrganizationTest {
 
         boolean expect = true;
         boolean fact = false;
-        if (list.containsAll(checkList)) {fact = true;}
+        if (list.containsAll(checkList)) {
+            fact = true;
+        }
         assertThat(fact, is(expect));
     }
 
@@ -67,17 +73,21 @@ public class DirectoryOrganizationTest {
         List<String> list = new LinkedList<>();
         list.addAll(asLists);
 
-        List<String> checkListOne = Arrays.asList("K1", "K1/SK1", "K1/SK1/SSK1", "K1/SK1/SSK2", "K1/SK2", "K2", "K2/SK1", "K2/SK1/SSK1","K2/SK1/SSK2");
+        List<String> checkListOne = Arrays.asList("K1", "K1/SK1", "K1/SK1/SSK1", "K1/SK1/SSK2",
+                "K1/SK2", "K2", "K2/SK1", "K2/SK1/SSK1", "K2/SK1/SSK2");
         DirectoryOrganization dir = new DirectoryOrganization();
         Iterator<String> checkIt = checkListOne.iterator();
         list = dir.sortOrganization(list);
         for (String s : list) {
-            if (s.equals(checkIt.next())) {
-            } else {num++;}
+            if (!s.equals(checkIt.next())) {
+                num++;
+            }
         }
         boolean expect = true;
         boolean fact = false;
-        if (num == 0) {fact = true;}
+        if (num == 0) {
+            fact = true;
+        }
 
         assertThat(fact, is(expect));
     }
@@ -98,19 +108,23 @@ public class DirectoryOrganizationTest {
         String six = "K2/SK1/SSK1";
         String seven = "K2/SK1/SSK2";
 
-        List<String> asLists= Arrays.asList(one, two, three, four, five, six, seven);
+        List<String> asLists = Arrays.asList(one, two, three, four, five, six, seven);
         list.addAll(asLists);
-        List<String> checkListOne = Arrays.asList("K2/SK1/SSK2", "K2/SK1/SSK1", "K2/SK1", "K2", "K1/SK2", "K1/SK1/SSK2", "K1/SK1/SSK1", "K1/SK1","K1");
+        List<String> checkListOne = Arrays.asList("K2/SK1/SSK2", "K2/SK1/SSK1", "K2/SK1", "K2",
+                "K1/SK2", "K1/SK1/SSK2", "K1/SK1/SSK1", "K1/SK1", "K1");
         Iterator<String> checkIt = checkListOne.iterator();
         DirectoryOrganization dir = new DirectoryOrganization();
         list = dir.reverseSortOrganization(list);
         for (String s : list) {
-            if (s.equals(checkIt.next())) {
-            } else {num++;}
+            if (!s.equals(checkIt.next())) {
+                num++;
+            }
         }
         boolean expect = true;
         boolean fact = false;
-        if (num == 0) {fact = true;}
+        if (num == 0) {
+            fact = true;
+        }
         assertThat(fact, is(expect));
     }
 }

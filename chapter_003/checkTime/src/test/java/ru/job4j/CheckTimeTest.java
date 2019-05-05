@@ -1,6 +1,10 @@
 package ru.job4j;
 
-import java.util.*;
+import java.util.List;
+import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -40,15 +44,17 @@ public class CheckTimeTest {
 		System.out.println(timeOperationTree);
 
 		boolean fact = false;
-		if (timeOperationLink > 0 && timeOperationArray > 0 && timeOperationTree > 0) {fact = true;}
+		if (timeOperationLink > 0 && timeOperationArray > 0 && timeOperationTree > 0) {
+			fact = true;
+		}
 		boolean expected = true;
 
 		assertThat(fact, is(expected));
 	}
-
-	/**.
+/*
+	*//**.
 	 * Test time for add element
-	 */
+	 *//*
 	@Test
 	public void whenNeedCheckTimeDeleteElementThenLookTime() {
 
@@ -73,9 +79,11 @@ public class CheckTimeTest {
 		System.out.println(timeOperationTree);
 
 		boolean fact = false;
-		if (timeOperationLink > 0) {fact = true;}
+		if (timeOperationLink > 0) {
+			fact = true;
+		}
 		boolean expected = true;
 
 		assertThat(fact, is(expected));
-	}
+	}*/
 }

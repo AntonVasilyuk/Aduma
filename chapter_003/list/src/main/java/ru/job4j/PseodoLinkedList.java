@@ -2,12 +2,13 @@ package ru.job4j;
 
 import java.util.Iterator;
 
-/**
+/**.
  * Task 5.3.2.
  * Create my realisation for LinkedList
  *
  * Created by ANTON on 14.06.2017.
  * @version 1.0
+ * @param <E> it's generic param
  */
 public class PseodoLinkedList<E> implements SimpleContainers<E> {
 
@@ -32,7 +33,9 @@ public class PseodoLinkedList<E> implements SimpleContainers<E> {
      */
     @Override
     public void add(E value) {
-        if (value == null) {throw new NullPointerException("Element is null");}
+        if (value == null) {
+            throw new NullPointerException("Element is null");
+        }
         if (size == 0) {
             Node<E> node = new Node<E>(value, null, null);
             headNode = node;
@@ -55,7 +58,9 @@ public class PseodoLinkedList<E> implements SimpleContainers<E> {
     public E get(int index) {
         Node<E> result = null;
         for (int i = 0; i <= index; i++) {
-            result = (Node<E>) iterator().next();
+            if (i == index) {
+                result = (Node<E>) iterator().next();
+            }
         }
         return result.getElement();
     }
@@ -69,13 +74,15 @@ public class PseodoLinkedList<E> implements SimpleContainers<E> {
         Iterator<E> it = (Iterator<E>) new Iterator<Object>() {
 
             private int cursorIter = 0;
-            Node<E> tempPrevios = null;
-            Node<E> tempNext = null;
-            Node<E> tempNow = null;
+            private Node<E> tempPrevios = null;
+            private Node<E> tempNext = null;
+            private Node<E> tempNow = null;
 
             @Override
             public boolean hasNext() {
-                if (headNode == null) {throw new NullPointerException("It is empty container");}
+                if (headNode == null) {
+                    throw new NullPointerException("It is empty container");
+                }
                 return tempNow.getNext() != null;
             }
 
@@ -90,7 +97,9 @@ public class PseodoLinkedList<E> implements SimpleContainers<E> {
                     if (hasNext()) {
                         tempNow = tempNow.getNext();
                         result = tempNow;
-                        if (tempNow.getNext() != null) {tempNext = tempNow.getNext();}
+                        if (tempNow.getNext() != null) {
+                            tempNext = tempNow.getNext();
+                        }
                         tempPrevios = tempNow.getPrevios();
                         cursorIter++;
                     }
@@ -105,7 +114,9 @@ public class PseodoLinkedList<E> implements SimpleContainers<E> {
      * Method for check size list
      * @return size this list
      */
-    public int getSize() {return this.size;}
+    public int getSize() {
+        return this.size;
+    }
 
     /**.
      * Class for create new container
@@ -134,7 +145,7 @@ public class PseodoLinkedList<E> implements SimpleContainers<E> {
          * @param previos link on previos node
          * @param next link on next node
          */
-        public Node(E value, Node<E> previos, Node<E> next) {
+        Node(E value, Node<E> previos, Node<E> next) {
             this.value = value;
             this.first = previos;
             this.last = next;
@@ -176,6 +187,8 @@ public class PseodoLinkedList<E> implements SimpleContainers<E> {
          * Method for get storage element
          * @return this element
          */
-        public E getElement() {return this.value;}
+        public E getElement() {
+            return this.value;
+        }
     }
 }

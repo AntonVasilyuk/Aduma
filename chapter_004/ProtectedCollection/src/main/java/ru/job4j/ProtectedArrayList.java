@@ -6,13 +6,15 @@ import net.jcip.annotations.ThreadSafe;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
+/**.
  * Task 7.3.3.
  * Modification ArrayList from task 5.3.1.
  *
  * @author Anton Vasilyuk on 30.07.2017.
  * @version 1.0.
+ * @param <E> is generic type
  */
+
 @ThreadSafe
 public class ProtectedArrayList<E> implements Iterable<E> {
 
@@ -31,6 +33,9 @@ public class ProtectedArrayList<E> implements Iterable<E> {
      */
     private int cursorIter = 0;
 
+    /**.
+     * @lock is object for lock
+     */
     private final Object lock = new Object();
 
     /**.
@@ -41,7 +46,7 @@ public class ProtectedArrayList<E> implements Iterable<E> {
 
     /**.
      * Constructor fot this class
-     * @param size
+     * @param size is size for collection
      */
     public ProtectedArrayList(int size) {
         this.container = new Object[size];
@@ -50,7 +55,7 @@ public class ProtectedArrayList<E> implements Iterable<E> {
 
     /**.
      * Method for add object to array
-     * @param value
+     * @param value is value for adding
      */
     public void add(E value) {
         synchronized (lock) {
@@ -71,8 +76,9 @@ public class ProtectedArrayList<E> implements Iterable<E> {
 
     /**.
      * Method for return object from index position
-     * @param index
-     * @return
+     * @param index is position
+     * @patam E is generic type
+     * @return element on position index
      */
     public E get(int index) {
         synchronized (lock) {
@@ -88,7 +94,7 @@ public class ProtectedArrayList<E> implements Iterable<E> {
 
     /**.
      * Realisation iterable
-     * @return
+     * @return iterator for this realisation
      */
     @Override
     public Iterator<E> iterator() {
@@ -121,7 +127,7 @@ public class ProtectedArrayList<E> implements Iterable<E> {
 
     /**.
      * Method for checking size container
-     * @return
+     * @return size
      */
     public int sizeObjects() {
         synchronized (lock) {

@@ -20,7 +20,7 @@ public class ThreadPoolTest {
     @Test
     public void whenNeedToPerformTaskConcurrency() throws Exception {
         ThreadPool link = new ThreadPool();
-        for(int i = 0; i < 77; i++) {
+        for (int i = 0; i < 77; i++) {
             link.add(new Work(i));
         }
         link.shutdown();

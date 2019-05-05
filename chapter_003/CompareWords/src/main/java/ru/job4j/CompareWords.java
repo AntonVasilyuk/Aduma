@@ -1,8 +1,9 @@
 package ru.job4j;
 
-import com.sun.org.apache.bcel.internal.classfile.SourceFile;
-
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.Iterator;
 
 /**.
  * Task 5.7.3.
@@ -59,7 +60,10 @@ public class CompareWords {
      */
     private Map<Character, Integer> twoColletcion;
 
-    Character temp;
+    /**.
+     * Instance Character
+     */
+    private Character temp;
 
     /**.
      * Constructor for this class
@@ -82,13 +86,15 @@ public class CompareWords {
         lengthTwo = two.length();
         boolean result = false;
 
-        if (lengthOne != lengthTwo) {return false;}
+        if (lengthOne != lengthTwo) {
+            return false;
+        }
         timeStart = System.currentTimeMillis();
         char[] oneArray = one.toCharArray();
         char[] twoArray = two.toCharArray();
-        for(int i = 0; i < lengthOne; i++) {
-            hashOne = hashOne + (int)oneArray[i];
-            hashTwo = hashTwo + (int)twoArray[i];
+        for (int i = 0; i < lengthOne; i++) {
+            hashOne = hashOne + (int) oneArray[i];
+            hashTwo = hashTwo + (int) twoArray[i];
         }
         if (hashOne == hashTwo) {
             result = true;
@@ -113,7 +119,7 @@ public class CompareWords {
         timeStart = System.currentTimeMillis();
         char[] oneArray = one.toCharArray();
         char[] twoArray = two.toCharArray();
-        for(int i = 0; i < lengthOne; i++) {
+        for (int i = 0; i < lengthOne; i++) {
             Character key = oneArray[i];
             oneColletcion.putIfAbsent(key, 1);
             oneColletcion.computeIfPresent(key, (k, v) -> {
@@ -121,7 +127,7 @@ public class CompareWords {
                 return v;
             });
         }
-        for(int i = 0; i < lengthTwo; i++) {
+        for (int i = 0; i < lengthTwo; i++) {
             Character key = twoArray[i];
             twoColletcion.putIfAbsent(key, 1);
             twoColletcion.computeIfPresent(key, (k, v) -> {
@@ -135,7 +141,9 @@ public class CompareWords {
         for (int i = 0; i < lengthOne; i++) {
             if (iter.hasNext()) {
                 temp = iter.next();
-                if (!oneColletcion.get(temp).equals(twoColletcion.get(temp))) {result = false;}
+                if (!oneColletcion.get(temp).equals(twoColletcion.get(temp))) {
+                    result = false;
+                }
             }
         }
         timeEnd = System.currentTimeMillis();

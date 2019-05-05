@@ -1,22 +1,24 @@
 package ru.job4j;
 
-/**
+/**.
  * Task 5.2.2
  * This is basis for outher containers
  * @author  Anton Vasilyuk on 10.06.2017.
  * @version 1.0
+ * @param <T> type extends Base
  */
+
 public class BaseStore<T extends Base> implements Store<T> {
 
     /**.
      * capacityArray is size container
      */
-    private static final int capacityArray = 10;
+    private static final int SIZE = 10;
 
     /**.
      * aList is object for class SimpleList
      */
-    SimpleList<T> sList = new SimpleList(capacityArray);
+    private SimpleList<T> sList = new SimpleList(SIZE);
 
     /**.
      * Method for add element to containers
@@ -58,13 +60,20 @@ public class BaseStore<T extends Base> implements Store<T> {
     public Base showByPosition(String id) {
         T vaue = null;
         int position = findPositionById(id);
-        if (position >= 0) {vaue = sList.get(position);}
+        if (position >= 0) {
+            vaue = sList.get(position);
+        }
         return vaue;
     }
 
+    /**.
+     * Find position by element
+     * @param t is element for find
+     * @return position
+     */
     public int findPositionByElement(T t) {
         int position = 99;
-        for (int i = 0; i < capacityArray; i++) {
+        for (int i = 0; i < SIZE; i++) {
             T value = sList.get(i);
             if (value != null) {
                 if (value.getId().equals(t.getId())) {
@@ -76,9 +85,14 @@ public class BaseStore<T extends Base> implements Store<T> {
         return position;
     }
 
+    /**.
+     * Find position by id
+     * @param id is id for find
+     * @return position
+     */
     public int findPositionById(String id) {
         int position = -1;
-        for (int i = 0; i < capacityArray; i++) {
+        for (int i = 0; i < SIZE; i++) {
             T value = sList.get(i);
             if (value != null) {
                 if (value.getId().equals(id)) {

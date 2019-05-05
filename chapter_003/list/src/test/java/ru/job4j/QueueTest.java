@@ -6,10 +6,10 @@ import org.junit.Test;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 
-/**
+/**.
  * Task 5.3.3.
  * Create my realisation for Queue
  *
@@ -21,7 +21,7 @@ public class QueueTest {
     /**.
      * @link is link for object Queue
      */
-    Queue link;
+    private Queue link;
 
     /**.
      * Preparing for test
@@ -80,7 +80,9 @@ public class QueueTest {
         int secondSize = link.getSize();
 
         boolean fact = false;
-        if (secondSize < firstSize && result.equals(first)) {fact = true;}
+        if (secondSize < firstSize && result.equals(first)) {
+            fact = true;
+        }
         assertThat(fact, is(true));
     }
 
@@ -99,7 +101,9 @@ public class QueueTest {
         int secondSize = link.getSize();
 
         boolean fact = false;
-        if (secondSize < firstSize && result.equals(first)) {fact = true;}
+        if (secondSize < firstSize && result.equals(first)) {
+            fact = true;
+        }
         assertThat(fact, is(true));
     }
 
@@ -124,7 +128,9 @@ public class QueueTest {
         link.offer("Test");
         int secongSize = link.getSize();
         boolean fact = false;
-        if (secongSize > firstSize) {fact = true;}
+        if (secongSize > firstSize) {
+            fact = true;
+        }
         assertThat(fact, is(true));
     }
 }

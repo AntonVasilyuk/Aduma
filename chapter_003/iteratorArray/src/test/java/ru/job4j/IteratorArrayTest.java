@@ -5,9 +5,9 @@ import org.junit.Test;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
-/**
+/**.
  * Task 4.1.1
  * Test working iterator array
  *
@@ -31,15 +31,22 @@ public class IteratorArrayTest {
             arrayResult[i] = (Integer) iter.next();
         }
         for (int i = 0; i < arrayResult.length; i++) {
-            if (arrayResult[i] != check[i]) {num++;}
+            if (arrayResult[i] != check[i]) {
+                num++;
+            }
         }
 
         boolean expect = true;
         boolean fact = false;
-        if (num == 0) {fact = true;}
+        if (num == 0) {
+            fact = true;
+        }
         assertThat(fact, is(expect));
     }
 
+    /**.
+     * Test working iterators
+     */
     @Test
     public void whenIterateTreeTimeArrayThenHasNextIsTrue() {
         IteratorArray iter = new IteratorArray(new int[][] {{1, 2}, {3, 4}});
@@ -50,6 +57,9 @@ public class IteratorArrayTest {
         assertThat(fact, is(true));
     }
 
+    /**.
+     * Test working iterators when elements is null
+     */
     @Test
     public void whenNotArrayThenErorNSEE() {
         int[][] value = null;

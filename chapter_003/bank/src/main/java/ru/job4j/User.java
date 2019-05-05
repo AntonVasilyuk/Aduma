@@ -1,6 +1,6 @@
 package ru.job4j;
 
-/**
+/**.
  * Testing Task 3.4.2
  * Create collection Map for bank
  *
@@ -21,8 +21,8 @@ public class User {
 
     /**.
      * Constructor for create user
-     * @param name
-     * @param passport
+     * @param name it's name for user
+     * @param passport it's passport for user
      */
     public User(String name, Integer passport) {
         this.name = name;
@@ -30,15 +30,15 @@ public class User {
     }
     /**.
      * equals users by name
-     * @param o
-     * @return
+     * @param o is object for checking
+     * @return result
      */
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         User user = (User) o;
-
         return this.name.equals(user.name);
     }
 

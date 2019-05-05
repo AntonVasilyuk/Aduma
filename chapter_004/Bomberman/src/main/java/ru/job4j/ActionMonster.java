@@ -14,10 +14,24 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class ActionMonster implements Runnable {
 
-
+    /**.
+     * @monster is monster
+     */
     private final Monster monster;
+
+    /**.
+     * @board is board
+     */
     private final Board board;
+
+    /**.
+     * @locationPlayer is location for player
+     */
     private final Location locationPlayer;
+
+    /**.
+     * @linkEndGame is end game
+     */
     private final EndGame linkEndGame;
 
     /**.
@@ -30,6 +44,7 @@ public class ActionMonster implements Runnable {
      * @param monster is link for this player
      * @param board is link for this board
      * @param location is location the player
+     * @param linkEndGame is end game
      */
     public ActionMonster(Monster monster, Board board, Location location, EndGame linkEndGame) {
         this.monster = monster;
@@ -58,19 +73,19 @@ public class ActionMonster implements Runnable {
                     linkEndGame.theEnd();
                 }
                 try {
-                    if(endGame && field[step.getX()][step.getY()].tryLock(5, SECONDS)) {
+                    if (endGame && field[step.getX()][step.getY()].tryLock(5, SECONDS)) {
                         flag = true;
                         flagSecond = true;
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    if(flagSecond) {
+                    if (flagSecond) {
                         oldPlace = monster.getPlace();
                         field[oldPlace.getX()][oldPlace.getY()].unlock();
                     }
                 }
-                if(flagSecond) {
+                if (flagSecond) {
                     monster.newPlace(step);
                     System.out.println(monster);
                 }

@@ -14,7 +14,14 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 public class ActionPlayer implements Runnable {
 
+    /**.
+     * @bomber is link to player
+     */
     private final Player bomber;
+
+    /**.
+     * @board is link to board
+     */
     private final Board board;
 
     /**.
@@ -46,19 +53,19 @@ public class ActionPlayer implements Runnable {
                 boolean flagSecond = false;
                 Location step = bomber.step();
                 try {
-                    if(field[step.getX()][step.getY()].tryLock(500, MILLISECONDS)) {
+                    if (field[step.getX()][step.getY()].tryLock(500, MILLISECONDS)) {
                         flag = true;
                         flagSecond = true;
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    if(flagSecond) {
+                    if (flagSecond) {
                         oldPlace = bomber.getPlace();
                         field[oldPlace.getX()][oldPlace.getY()].unlock();
                     }
                 }
-                if(flagSecond) {
+                if (flagSecond) {
                     bomber.newPlace(step);
                     System.out.println(bomber);
                 }

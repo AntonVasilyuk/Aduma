@@ -1,11 +1,14 @@
 package ru.job4j;
 
-import java.util.*;
+import java.util.List;
+import java.util.TreeSet;
+import java.util.Set;
+import java.util.ArrayList;
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-/**
+/**.
  * Chapter_003
  * Task 3.3.1
  * Test sorting array users by name
@@ -85,6 +88,5 @@ public class SortUserTest {
         }
         String expect = "Result sorting : 232055";
         assertThat(fact, is(expect));
-
     }
 }

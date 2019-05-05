@@ -27,7 +27,7 @@ public class AquariumMain {
     /**.
      * @mainLocation is object for choise of position for fish
      */
-    private final Location mainLocation = new Location(0,0);
+    private final Location mainLocation = new Location(0, 0);
 
     /**.
      * @numFish the number of fish in the aquarium
@@ -47,12 +47,12 @@ public class AquariumMain {
     /**.
      * @inf is print current information
      */
-    Information inf;
+    private Information inf;
 
     /**
      * @listFish is array for all thread the fish
      */
-    MovingFish[] listFish;
+    private MovingFish[] listFish;
 
     /**.
      * Constructor
@@ -75,7 +75,7 @@ public class AquariumMain {
      * Run the current programm
      */
     public void startLiveAquarium() {
-        for(int i = 0; i < listFish.length; i++) {
+        for (int i = 0; i < listFish.length; i++) {
             Thread thread = new Thread(listFish[i]);
             thread.start();
         }
@@ -87,7 +87,7 @@ public class AquariumMain {
      * End the current programm
      */
     public void setEndGame() {
-        for(int i = 0; i < listFish.length; i++) {
+        for (int i = 0; i < listFish.length; i++) {
             listFish[i].setEndGame();
         }
         inf.setEndGame();

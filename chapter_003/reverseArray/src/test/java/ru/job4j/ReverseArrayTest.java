@@ -1,6 +1,7 @@
 package ru.job4j;
 
-import java.util.*;
+import java.util.List;
+import java.util.LinkedList;
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -34,7 +35,9 @@ public class ReverseArrayTest {
         listSecond.add(8);
         listSecond.add(9);
         boolean fact = false;
-        if (list.containsAll(listSecond)) {fact = true;}
+        if (list.containsAll(listSecond)) {
+            fact = true;
+        }
         boolean expect = true;
         assertThat(fact, is(expect));
     }
@@ -58,7 +61,7 @@ public class ReverseArrayTest {
         boolean fact = true;
         boolean expect = true;
         for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j <array.length;j++) {
+            for (int j = 0; j < array.length; j++) {
                 if (array[i][j] != arraySecond[i][j]) {
                     fact = false;
                     break;
@@ -89,7 +92,9 @@ public class ReverseArrayTest {
         listInteger = reverseArray.convert(listArray);
         boolean fact = false;
         boolean expect = true;
-        if (listCheck.containsAll(listInteger)) {fact = true;}
+        if (listCheck.containsAll(listInteger)) {
+            fact = true;
+        }
         assertThat(fact, is(expect));
     }
 }

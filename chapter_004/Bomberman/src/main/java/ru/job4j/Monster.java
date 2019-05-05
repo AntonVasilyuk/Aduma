@@ -8,7 +8,7 @@ package ru.job4j;
  * @version 1.0.
  */
 
-public class Monster implements Figure{
+public class Monster implements Figure {
 
     /**.
      * @name is name this figure
@@ -78,8 +78,11 @@ public class Monster implements Figure{
 
     /**.
      * Method getter for name
+     * @return name
      */
-    public String getName() {return this.name;}
+    public String getName() {
+        return this.name;
+    }
 
     /**.
      * Method for description action the figure

@@ -39,29 +39,35 @@ public class Direction {
         Location locon = null;
         Random rd = new Random();
         int randomNumber = rd.nextInt(4);
-        if(randomNumber <= 1) {
-            if((x + step) <= max) {
+        if (randomNumber <= 1) {
+            if ((x + step) <= max) {
                 width = x + step;
                 height = y;
                 locon = new Location(width, height);
-            } else {randomNumber += 1;}
+            } else {
+                randomNumber += 1;
+            }
         }
-        if(randomNumber == 2) {
-            if((x - step) >= 0) {
+        if (randomNumber == 2) {
+            if ((x - step) >= 0) {
                 width = x - step;
                 height = y;
                 locon = new Location(width, height);
-            } else {randomNumber += 1;}
+            } else {
+                randomNumber += 1;
+            }
         }
-        if(randomNumber == 3) {
+        if (randomNumber == 3) {
             if ((y + step) <= max) {
                 width = x;
                 height = y + step;
                 locon = new Location(width, height);
-            } else {randomNumber += 1;}
+            } else {
+                randomNumber += 1;
+            }
         }
-        if(randomNumber == 4) {
-            if((y - step) >= 0) {
+        if (randomNumber == 4) {
+            if ((y - step) >= 0) {
                 width = x;
                 height = y - step;
                 locon = new Location(width, height);

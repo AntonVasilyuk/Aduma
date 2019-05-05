@@ -23,6 +23,7 @@ public class Count {
      * @param theNumberThreads is count threads
      * @param number is first number
      * @throws InterruptedException may be exception
+     * @return action
      */
     public int mainAction(int theNumberThreads, int number) throws InterruptedException {
         Action action = new Action(theNumberThreads, number);
@@ -57,9 +58,10 @@ public class Count {
         /**.
          * The method create more threads and increamet number in every thread
          * @throws InterruptedException is may be exception
+         * @return result operation
          */
         public int action() throws InterruptedException {
-            for(int i = 0; i < numThreads; i++) {
+            for (int i = 0; i < numThreads; i++) {
                 Thread thread = new MyThread(number);
                 thread.start();
                 thread.join();
@@ -116,11 +118,11 @@ public class Count {
         /**.
          * @num is link to the instances class number
          */
-        Number num;
+        private Number num;
 
         /**.
          * Constructor for this class
-         * @param num
+         * @param num is number operations
          */
         public MyThread(Number num) {
             this.num = num;

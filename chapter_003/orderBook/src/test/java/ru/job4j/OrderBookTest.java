@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Task 5.7.1.
@@ -66,10 +66,12 @@ public class OrderBookTest {
     public void whenNeedAddMoreElement() {
         double number = 100.21;
         long timeOne = System.currentTimeMillis();
-        for(int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 100000; i++) {
             link.addOrder("Book_One", "Bid", number, 1);
             number = number + 0.01;
-            if (number > 200.00) {number = 100.21;}
+            if (number > 200.00) {
+                number = 100.21;
+            }
         }
         long timeTwo = System.currentTimeMillis();
         System.out.printf("Time adding 100000 element = %d", (timeTwo - timeOne));

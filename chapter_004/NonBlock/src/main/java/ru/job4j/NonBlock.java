@@ -33,7 +33,7 @@ public class NonBlock<K, T extends Model> {
      * Method for delete model from our cache
      * @param key is key for delete the model
      */
-    public void delete (K key) {
+    public void delete(K key) {
         cache.computeIfPresent(key, (k, v) -> null);
     }
 
@@ -46,10 +46,10 @@ public class NonBlock<K, T extends Model> {
      */
     public T update(K key, T model) throws OptimisticException {
         return cache.computeIfPresent(key, (k, v) -> {
-                if (model.getVersion() == v.getVersion()){
+                if (model.getVersion() == v.getVersion()) {
                     model.updateVersion();
-                    return model;}
-                else {
+                    return model;
+                } else {
                     throw new OptimisticException("Anvalid version");
                 }
         });

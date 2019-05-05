@@ -13,7 +13,14 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Block {
 
+    /**.
+     * @count is count blocks
+     */
     private final int count;
+
+    /**.
+     * @field is field for games
+     */
     private final ReentrantLock[][] field;
 
     /**.

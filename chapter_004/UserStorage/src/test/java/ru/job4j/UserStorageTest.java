@@ -6,9 +6,9 @@ import org.junit.Test;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
-/**
+/**.
  * Task 7.3.2.
  * Test class UserStorage
  *
@@ -20,7 +20,7 @@ public class UserStorageTest {
     /**.
      * @link is link to the structure
      */
-    UserStorage link;
+    private UserStorage link;
 
     /**.
      * This method is preparing gor testing
@@ -72,10 +72,12 @@ public class UserStorageTest {
     public void whenNeedTransferMoneyFromFirstUserToSecondUser() {
         link.add(new User(1, 100));
         link.add(new User(2, 200));
-        link.transfer(1,2,50);
+        link.transfer(1, 2, 50);
         Map<Integer, User> map = link.getStorage();
         boolean result = false;
-        if(map.get(2).getAmount() == 250) {result = true;}
+        if (map.get(2).getAmount() == 250) {
+            result = true;
+        }
         assertThat(result, is(true));
     }
 

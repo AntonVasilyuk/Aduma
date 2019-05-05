@@ -3,7 +3,7 @@ package ru.job4j;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Task 7.1.1.
@@ -16,6 +16,7 @@ public class CountingSpacesTest {
 
     /**.
      * Test working method simulataneous search space and word in the text
+     * @throws InterruptedException may be exception
      */
     @Test
     public void whenIsTextThenSimultaneousSearchOfWordsAndSpaces() throws InterruptedException {

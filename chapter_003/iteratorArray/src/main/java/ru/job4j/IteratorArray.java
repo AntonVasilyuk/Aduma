@@ -1,7 +1,9 @@
 package ru.job4j;
 
-import java.util.*;
-/**
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+/**.
  * Task 4.1.1
  * Create Iterator array
  *
@@ -9,7 +11,6 @@ import java.util.*;
  * @version 1.0
  * @since 0.1
  */
-
 public class IteratorArray implements Iterator {
 
     /**.
@@ -29,7 +30,7 @@ public class IteratorArray implements Iterator {
 
     /**.
      * Constructor class Iterator array
-     * @param value
+     * @param value is array
      */
     public IteratorArray(int[][] value) {
         this.value = value;
@@ -41,10 +42,14 @@ public class IteratorArray implements Iterator {
      */
     @Override
     public boolean hasNext() {
-        if (this.value == null) {throw new NoSuchElementException("No numbers in iterators.");}
+        boolean result = false;
+        if (this.value == null) {
+            throw new NoSuchElementException("No numbers in iterators.");
+        }
         if (this.value[colon].length > index) {
-            return true;
-        } else  {return false;}
+            result = true;
+        }
+        return result;
     }
 
     /**.
@@ -53,14 +58,16 @@ public class IteratorArray implements Iterator {
      */
     @Override
     public Object next() {
-        if(hasNext()) {
+        if (hasNext()) {
             return this.value[colon][index++];
         } else {
             index = 0;
             colon++;
             if (hasNext()) {
                 return this.value[colon][index++];
-            } else {throw new ArrayIndexOutOfBoundsException("The number were over");}
+            } else {
+                throw new ArrayIndexOutOfBoundsException("The number were over");
+            }
         }
     }
 }

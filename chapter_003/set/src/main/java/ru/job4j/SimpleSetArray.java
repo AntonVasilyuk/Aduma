@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
  *
  * Created by ANTON on 16.06.2017.
  * @version 1.0
+ * @param <E> it's generic type
  */
 public class SimpleSetArray<E> implements Iterable {
 
@@ -34,7 +35,7 @@ public class SimpleSetArray<E> implements Iterable {
 
     /**.
      * Constructor for SimpleSetArray
-     * @param aSize
+     * @param aSize size for pseodo arraylist
      */
     public SimpleSetArray(int aSize) {
         this.size = aSize;
@@ -46,11 +47,15 @@ public class SimpleSetArray<E> implements Iterable {
      * @param value is element
      */
     public void add(E value) {
-        if (value == null) {throw new NullPointerException("Element is null");}
+        if (value == null) {
+            throw new NullPointerException("Element is null");
+        }
         boolean check = true;
         for (int i = 0; i < cursor; i++) {
             E temp = (E) link.get(i);
-            if (temp.equals(value)) {check = false;}
+            if (temp.equals(value)) {
+                check = false;
+            }
         }
         if (check) {
             link.add(value);
@@ -73,8 +78,11 @@ public class SimpleSetArray<E> implements Iterable {
 
             @Override
             public Object next() {
-                if (hasNext()) {return link.get(cursorIter++);}
-                else {throw new NoSuchElementException("Need add cell in this array");}
+                if (hasNext()) {
+                    return link.get(cursorIter++);
+                } else {
+                    throw new NoSuchElementException("Need add cell in this array");
+                }
             }
 
             @Override
@@ -86,5 +94,11 @@ public class SimpleSetArray<E> implements Iterable {
         return it;
     }
 
-    public int getSize() {return this.cursor;}
+    /**.
+     * Getter for size
+     * @return result
+     */
+    public int getSize() {
+        return this.cursor;
+    }
 }

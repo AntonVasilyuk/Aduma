@@ -2,12 +2,13 @@ package ru.job4j;
 
 import java.util.NoSuchElementException;
 
-/**
+/**.
  * Task 5.3.4.
  * Create check for cyclicity
  *
  * Created by ANTON VASILYUK on 16.06.2017.
  * @version 1.0
+ * @param <T> generic type
  */
 
 public class CycleList<T> {
@@ -37,7 +38,9 @@ public class CycleList<T> {
      * @param value is element for adding
      */
     public void add(T value) {
-        if (value == null) {throw new NullPointerException("Element is null");}
+        if (value == null) {
+            throw new NullPointerException("Element is null");
+        }
         if (hadNode == null) {
             Node<T> node = new Node(value, null, null);
             hadNode = node;
@@ -54,25 +57,31 @@ public class CycleList<T> {
 
     /**.
      * Method for checking on cyclicity
-     * @return
+     * @return is cycle
      */
-    public boolean hasCycle(){
+    public boolean hasCycle() {
         boolean result = true;
         Node<T> tempOne = hadNode;
         Node<T> tempTwo = hadNode;
-        if (size == 1) {throw new NoSuchElementException("Add more element!");}
+        if (size == 1) {
+            throw new NoSuchElementException("Add more element!");
+        }
         if (tempOne != null) {
             for (int i = 0; i < size * 3; i++) {
                 if (tempOne.getNext() != null && tempTwo.getNext() != null) {
                     tempOne = tempOne.getNext();
                     tempTwo = tempTwo.getNext().getNext();
-                    if(tempOne.getNext() == tempTwo.getNext() && tempOne.getPrevios() == tempTwo.getPrevios()) {
+                    if (tempOne.getNext() == tempTwo.getNext() && tempOne.getPrevios() == tempTwo.getPrevios()) {
                         result = true;
                     }
+                } else {
+                    result = false;
+                    break;
                 }
-                else {result = false; break;}
             }
-        } else {throw new NoSuchElementException("It list is empty");}
+        } else {
+            throw new NoSuchElementException("It list is empty");
+        }
         return result;
     }
 
@@ -111,7 +120,7 @@ public class CycleList<T> {
          * @param previos link on previos node
          * @param next link on next node
          */
-        public Node(T value, Node<T> previos, Node<T> next) {
+        Node(T value, Node<T> previos, Node<T> next) {
             this.value = value;
             this.first = previos;
             this.last = next;
@@ -153,7 +162,9 @@ public class CycleList<T> {
          * Method for get storage element
          * @return this element
          */
-        public T getElement() {return this.value;}
+        public T getElement() {
+            return this.value;
+        }
     }
 }
 

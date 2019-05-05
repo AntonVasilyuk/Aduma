@@ -13,7 +13,14 @@ import java.util.Random;
 
 public class Location {
 
+    /**.
+     * @xPosition is x coordinate
+     */
     private int xPosition;
+
+    /**.
+     * @yPosition is y coordinate
+     */
     private int yPosition;
 
     /**.
@@ -30,13 +37,17 @@ public class Location {
      * Getter for x Position
      * @return x
      */
-    public int getX() {return this.xPosition;}
+    public int getX() {
+        return this.xPosition;
+    }
 
     /**.
      * Getter for y Position
      * @return y
      */
-    public int getY() {return this.yPosition;}
+    public int getY() {
+        return this.yPosition;
+    }
 
     /**.
      * Method for change of location
@@ -60,7 +71,9 @@ public class Location {
         boolean flag = true;
         while (flag) {
             location = new Location(rd.nextInt(), rd.nextInt());
-            if(list.get(location) == null) {flag = false;}
+            if (list.get(location) == null) {
+                flag = false;
+            }
         }
         return location;
     }

@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-/**
+/**.
  * Task 7.1.1
  * Create aplication for counting spaces and word, use other threads
  *

@@ -8,8 +8,9 @@ import java.util.Iterator;
  *
  * Created by ANTON on 17.06.2017.
  * @version 1.0
+ * @param <E> generic type
  */
-public class SimpleSetLinked<E> implements Iterable<E>{
+public class SimpleSetLinked<E> implements Iterable<E> {
 
     /**.
      * @size is size list
@@ -21,21 +22,32 @@ public class SimpleSetLinked<E> implements Iterable<E>{
      */
     private int cursorIter = 0;
 
+    /**.
+     * @link it's link to pseodolinked list
+     */
     private PseodoLinkedList link;
 
+    /**.
+     * Constructor
+     */
     public SimpleSetLinked() {
         link = new PseodoLinkedList();
     }
+
     /**.
      * Method for add element to link
      * @param value is elemnt for adding
      */
     public void add(E value) {
-        if (value == null) {throw new NullPointerException("Element is null");}
+        if (value == null) {
+            throw new NullPointerException("Element is null");
+        }
         boolean check = true;
         for (int i = 0; i < size; i++) {
             E temp = (E) link.iterator().next();
-            if (temp.equals(value)) {check = false;}
+            if (temp.equals(value)) {
+                check = false;
+            }
         }
         if (check) {
             link.add(value);
@@ -53,7 +65,9 @@ public class SimpleSetLinked<E> implements Iterable<E>{
 
             @Override
             public boolean hasNext() {
-                if (size == 0) {throw new NullPointerException("It is empty container");}
+                if (size == 0) {
+                    throw new NullPointerException("It is empty container");
+                }
                 return cursorIter < size;
             }
 
@@ -63,7 +77,9 @@ public class SimpleSetLinked<E> implements Iterable<E>{
                 if (hasNext()) {
                     result = (E) link.iterator().next();
                     cursorIter++;
-                } else {throw new NullPointerException("No more element");}
+                } else {
+                    throw new NullPointerException("No more element");
+                }
                 return result;
             }
         };
@@ -97,7 +113,7 @@ public class SimpleSetLinked<E> implements Iterable<E>{
          * @param previos link on previos node
          * @param next link on next node
          */
-        public Node(E value, Node<E> previos, Node<E> next) {
+        private Node(E value, Node<E> previos, Node<E> next) {
             this.value = value;
             this.first = previos;
             this.last = next;
@@ -139,6 +155,8 @@ public class SimpleSetLinked<E> implements Iterable<E>{
          * Method for get storage element
          * @return this element
          */
-        public E getElement() {return this.value;}
+        public E getElement() {
+            return this.value;
+        }
     }
 }

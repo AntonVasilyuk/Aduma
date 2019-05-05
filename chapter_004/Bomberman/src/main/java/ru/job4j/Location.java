@@ -10,7 +10,14 @@ package ru.job4j;
 
 public class Location {
 
+    /**.
+     * @xPosition x coordinate
+     */
     private int xPosition;
+
+    /**.
+     * @yPosition y coordinate
+     */
     private int yPosition;
 
     /**.
@@ -27,13 +34,17 @@ public class Location {
      * Getter for x Position
      * @return x
      */
-    public int getX() {return this.xPosition;}
+    public int getX() {
+        return this.xPosition;
+    }
 
     /**.
      * Getter for y Position
      * @return y
      */
-    public int getY() {return this.yPosition;}
+    public int getY() {
+        return this.yPosition;
+    }
 
     /**.
      * Method for change of location

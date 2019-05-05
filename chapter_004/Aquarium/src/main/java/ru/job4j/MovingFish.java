@@ -14,10 +14,21 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
  * @version 1.0.
  */
 
-public class MovingFish implements Runnable{
+public class MovingFish implements Runnable {
 
+    /**.
+     * @fish is fish for moving
+     */
     private final Fish fish;
+
+    /**.
+     * @aquarium is aquarium for fishes
+     */
     private final Aquarium aquarium;
+
+    /**.
+     * @list is list fishes
+     */
     private final Map<Location, Fish> list;
 
     /**.
@@ -34,6 +45,7 @@ public class MovingFish implements Runnable{
      * Constructor for this class
      * @param fish is link for this fish
      * @param aquarium is link for this world for fishs
+     * @param list is list fises and location
      */
     public MovingFish(Fish fish, Aquarium aquarium, Map<Location, Fish> list) {
         this.fish = fish;
@@ -56,13 +68,13 @@ public class MovingFish implements Runnable{
                 boolean flagSecond = false;
                 Location step = fish.step();
                 try {
-                    if(world[step.getX()][step.getY()].tryLock(50, MILLISECONDS)) {
+                    if (world[step.getX()][step.getY()].tryLock(50, MILLISECONDS)) {
                         flag = true;
                         flagSecond = true;
                     } else {
                         Fish metFish;
                         metFish = list.get(step);
-                        if(fish.getMale().equals(metFish.getMale())) {
+                        if (fish.getMale().equals(metFish.getMale())) {
                             System.out.printf("Was found the fish %d and fish %d in %s!%n",
                                     this.fish.getNumFish(), metFish.getNumFish(), date.toString());
                         }
@@ -70,12 +82,12 @@ public class MovingFish implements Runnable{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    if(flagSecond) {
+                    if (flagSecond) {
                         oldPlace = fish.getLocation();
                         world[oldPlace.getX()][oldPlace.getY()].unlock();
                     }
                 }
-                if(flagSecond) {
+                if (flagSecond) {
                     fish.newPlace(step);
                     System.out.println(fish);
                 }

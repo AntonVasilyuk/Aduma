@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-/**
+/**.
  * Task 7.3.2.
  * Create User Storage
  *
@@ -47,7 +47,9 @@ public class UserStorage {
     public void update(Integer id, int amount) {
         synchronized (this) {
             if (storage.get(id) != null && amount != 0 && storage.containsKey(id)) {
-                if (!storage.containsKey(id)) {new NoSuchElementException("This id no registered");}
+                if (!storage.containsKey(id)) {
+                    new NoSuchElementException("This id no registered");
+                }
                 int newAmount = storage.get(id).getAmount() + amount;
                 User user = storage.get(id);
                 user.setAmount(newAmount);
@@ -106,6 +108,9 @@ public class UserStorage {
      * @return storage
      */
     public Map<Integer, User> getStorage() {
-        synchronized (this) {return this.storage;}}
+        synchronized (this) {
+            return this.storage;
+        }
+    }
 
 }

@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Task 5.6.1.
@@ -17,7 +17,7 @@ public class TreeTest {
     /**.
      * @link is link on the Tree
      */
-    Tree link;
+    private Tree link;
 
     /**.
      * Preparing for tests
@@ -48,7 +48,7 @@ public class TreeTest {
     @Test
     public void whenAddChildNullThenReturnException() {
         try {
-            link.add(null,null);
+            link.add(null, null);
         } catch (NullPointerException npe) {
             assertThat(npe.getMessage(), is("Child is null"));
         }

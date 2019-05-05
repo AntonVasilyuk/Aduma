@@ -37,7 +37,7 @@ public class Board {
      */
     public Board() {
         board = new ReentrantLock[SIZEBOARD][SIZEBOARD];
-        for(int i = 0; i < SIZEBOARD; i++) {
+        for (int i = 0; i < SIZEBOARD; i++) {
             for (int j = 0; j < SIZEBOARD; j++) {
                 board[i][j] = new ReentrantLock();
             }
@@ -47,6 +47,7 @@ public class Board {
 
     /**.
      * Getter for our field
+     * @return board
      */
     public ReentrantLock[][] getBoard() {
         return this.board;

@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Task 5.4.2.
@@ -18,13 +18,13 @@ public class SimpleSetLinkedTest {
     /**.
      * @set is reference to an SimpleSetLinked
      */
-    SimpleSetLinked set;
+    private SimpleSetLinked set;
 
     /**.
      * preparing for test
      */
     @Before
-    public void preparingForTest() {
+    private void preparingForTest() {
         set = new SimpleSetLinked();
     }
 
@@ -32,7 +32,7 @@ public class SimpleSetLinkedTest {
      * Test working method add
      */
     @Test
-    public void whenAddOneElement(){
+    private void whenAddOneElement() {
         String one = "Test";
         set.add(one);
         String test = (String) set.iterator().next();

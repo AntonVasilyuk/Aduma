@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Task 5.5.2. and Task 5.5.8.
@@ -18,8 +18,12 @@ public class MyMapTest {
     /**.
      * @map is link to the map
      */
-    MyMap map;
-    MyMap mapSecond;
+    private MyMap map;
+
+    /**.
+     * @mapSecond is link to the second map
+     */
+    private MyMap mapSecond;
 
     /**.
      * Is prepating for testing
@@ -55,7 +59,9 @@ public class MyMapTest {
         map.insert(user, testFirst);
         String testSecond = (String) map.get(user);
         boolean result = false;
-        if (testFirst.equals(testSecond)) {result = true;}
+        if (testFirst.equals(testSecond)) {
+            result = true;
+        }
         assertThat(result, is(true));
     }
 
@@ -149,7 +155,9 @@ public class MyMapTest {
         long resultTwo = timeSecond - timeFirst;
 
         boolean result = false;
-        if ((resultOne - resultTwo) < 1000) {result = true;}
+        if ((resultOne - resultTwo) < 1000) {
+            result = true;
+        }
         assertThat(result, is(true));
     }
 }

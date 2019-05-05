@@ -47,5 +47,7 @@ public class Model {
      * Getter for name of the model
      * @return name
      */
-    public String getName() {return this.name;}
+    public String getName() {
+        return this.name;
+    }
 }

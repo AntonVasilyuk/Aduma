@@ -1,15 +1,19 @@
 package ru.job4j;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
-/**
+/**.
  * Task 4.1.4
- * Test methods create iterator for iterators
+ * Test methos create iterator for iterators
  *
  * @author Anton Vasilyuk
  * @version 1.0
@@ -31,8 +35,8 @@ public class IteratorIteratorsTest {
         List<Integer> listOne = new ArrayList(Arrays.asList(1, 2, 3));
         List<Integer> listTwo = new ArrayList(Arrays.asList(4, 5, 6));
         List<Integer> listThird = new ArrayList(Arrays.asList(7, 8));
-        List<Iterator<Integer>> it = new ArrayList(Arrays.asList
-                ((listOne.iterator()), listTwo.iterator(), listThird.iterator()));
+        List<Iterator<Integer>> it = new ArrayList(Arrays.asList(
+                (listOne.iterator()), listTwo.iterator(), listThird.iterator()));
         IteratorIterators iterators = new IteratorIterators();
         this.convertIterator = iterators.convert(it.iterator());
     }

@@ -1,8 +1,9 @@
 package ru.job4j;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-/**
+/**.
  * Task 4.1.4
  * Create iterator for iterators
  *
@@ -43,8 +44,12 @@ public class IteratorIterators implements IteratorInterface, Iterator {
     @Override
     public boolean hasNext() {
         boolean result = false;
-        if(iter == null) {throw new NoSuchElementException("No element in this array.");}
-        if(subIter.hasNext() || iter.hasNext()) {result = true;}
+        if (iter == null) {
+            throw new NoSuchElementException("No element in this array.");
+        }
+        if (subIter.hasNext() || iter.hasNext()) {
+            result = true;
+        }
         return result;
     }
 
@@ -55,14 +60,12 @@ public class IteratorIterators implements IteratorInterface, Iterator {
     @Override
     public Integer next() {
         Integer result = 0;
-        if(subIter.hasNext()) {
+        if (subIter.hasNext()) {
             result = subIter.next();
-        }
-        else if (iter.hasNext()) {
+        } else if (iter.hasNext()) {
             subIter = iter.next();
             result = subIter.next();
-        }
-        else {
+        } else {
             new NoSuchElementException("No number!");
         }
         return result;
