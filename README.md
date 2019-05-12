@@ -15,6 +15,7 @@ Chapter_3 - Collections
 Chapter_4 - Multithreading
 
 Chapter_5 - SQL and JDBC
- 
+
+В курсе производилась работа с ветками git 
 Learning resource - http://job4j.ru/
 
