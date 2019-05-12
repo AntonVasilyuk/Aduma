@@ -16,7 +16,7 @@ Chapter_4 - Multithreading
 
 Chapter_5 - SQL and JDBC
 
-Объединение зафиксированных измененЕй
+Объединение зафиксированных измененей.
 
 Learning resource - http://job4j.ru/
 
