@@ -15,6 +15,8 @@ Chapter_3 - Collections
 Chapter_4 - Multithreading
 
 Chapter_5 - SQL and JDBC
- 
+
+Объединение зафиксированных измененЕй
+
 Learning resource - http://job4j.ru/
 
