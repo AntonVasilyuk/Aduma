@@ -1,8 +1,8 @@
 /**
- * chapter_008.
+ * Files for modules JDBC and XML.
  *
  * @author Anton Vasilyuk (wrajina99@gmail.com)
  * @version $Id$
  * @since 0.1
  */
-package ru.job4j.Tracker.JDBCStorage;
+package ru.job4j;

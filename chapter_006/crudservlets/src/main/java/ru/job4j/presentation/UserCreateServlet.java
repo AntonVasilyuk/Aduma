@@ -11,6 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**.
+ * Task 9.2.1.
+ * Class servlet for creating users
+ *
+ * @author Anton Vasilyuk
+ * @version 1.0.
+ */
 public class UserCreateServlet extends HttpServlet {
 
     /**.
@@ -21,7 +28,7 @@ public class UserCreateServlet extends HttpServlet {
     /**.
      * Logger for this class
      */
-    private final Logger logger = LoggerFactory.getLogger(UsersServlet.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UsersServlet.class);
 
     /**.
      * Method for getting info about client
@@ -31,7 +38,7 @@ public class UserCreateServlet extends HttpServlet {
      * @throws IOException it's too
      */
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         req.getRequestDispatcher("/WEB-INF/views/create.jsp").forward(req, resp);
     }
@@ -44,7 +51,7 @@ public class UserCreateServlet extends HttpServlet {
      * @throws IOException it's too
      */
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String password = req.getParameter("password");

@@ -2,32 +2,26 @@ package ru.job4j;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-import ru.job4j.Entry;
+
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.io.FileOutputStream;
 
@@ -43,13 +37,13 @@ public class XML {
     /**.
      * Is logger
      */
-    private final static Logger log = LoggerFactory.getLogger(XML.class);
+    private static final Logger LOG = LoggerFactory.getLogger(XML.class);
 
     /**.
      * Create XML with SAX
-     * @param list
-     * @throws FileNotFoundException
-     * @throws XMLStreamException
+     * @param list is list for action
+     * @throws FileNotFoundException may be exception
+     * @throws XMLStreamException may be exception
      */
     public void createXMLSAX(List<Integer> list) {
         Iterator<Integer> iter = list.iterator();
@@ -61,7 +55,7 @@ public class XML {
             writer = factory.createXMLStreamWriter(new FileOutputStream("11.xml"));
             writer.writeStartDocument();
             writer.writeStartElement(root);
-            while(iter.hasNext()) {
+            while (iter.hasNext()) {
                 writer.writeStartElement(child);
                 writer.writeStartElement("field");
                 writer.writeCharacters(String.valueOf(iter.next()));
@@ -74,9 +68,9 @@ public class XML {
             writer.flush();
             writer.close();
         } catch (XMLStreamException e) {
-            log.error(e.getMessage() ,e);
+            LOG.error(e.getMessage(), e);
         } catch (FileNotFoundException e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -86,11 +80,10 @@ public class XML {
      */
     public void createXMLJAXB(List<Integer> list) {
         List<Entry> array = new ArrayList<>();
-        for(int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             array.add(new Entry(list.get(i)));
         }
         Entries entries = new Entries(array);
-
 
         try {
             File file = new File("1.xml");
@@ -102,9 +95,8 @@ public class XML {
             jaxbMarshaller.marshal(entries, file);
 
         } catch (JAXBException e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
-
     }
 
     /**.
@@ -112,7 +104,7 @@ public class XML {
      * @return list
      * @throws JAXBException my be exception
      */
-    public List<String> XMLReaderWithJAXB() {
+    public List<String> xmlReaderWithJAXB() {
         File file = new File("1.xml");
         JAXBContext context = null;
         try {
@@ -129,7 +121,7 @@ public class XML {
             }
             return listNum;
         } catch (JAXBException e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return null;
     }
@@ -153,9 +145,9 @@ public class XML {
 
             transformer.transform(text, new StreamResult(result));
         } catch (TransformerConfigurationException e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         } catch (TransformerException e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -166,10 +158,10 @@ public class XML {
     public int summCount() {
         int summ = 0;
 
-        List<String> list = XMLReaderWithJAXB();
+        List<String> list = xmlReaderWithJAXB();
         Iterator<String> iter = list.iterator();
 
-        while(iter.hasNext()) {
+        while (iter.hasNext()) {
             String text = iter.next();
             summ = summ + Integer.parseInt(text);
         }
@@ -178,7 +170,7 @@ public class XML {
 
     /**.
      * For printing result
-     * @param summ
+     * @param summ is print summ
      */
     public void print(int summ) {
         System.out.printf("%d", summ);

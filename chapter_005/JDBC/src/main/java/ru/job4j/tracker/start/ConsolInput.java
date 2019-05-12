@@ -1,11 +1,11 @@
-package ru.job4j.Tracker.start;
+package ru.job4j.tracker.start;
 
 import java.util.List;
 import java.util.Scanner;
 
 /**
  * Task 8.4.2.
- * Update Tracker from part 2
+ * Update tracker from part 2
  *
  * @author Anton Vasilyuk
  * @version 1.0.

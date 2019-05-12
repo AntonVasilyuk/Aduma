@@ -1,14 +1,14 @@
-package ru.job4j.Tracker.templates;
+package ru.job4j.tracker.templates;
 
-import ru.job4j.Tracker.start.Input;
-import ru.job4j.Tracker.start.UserAction;
-import ru.job4j.Tracker.start.Tracker;
+import ru.job4j.tracker.start.Input;
+import ru.job4j.tracker.start.UserAction;
+import ru.job4j.tracker.start.Tracker;
 
 import java.sql.SQLException;
 
 /**
  * Task 8.4.2.
- * Update Tracker from part 2
+ * Update tracker from part 2
  *
  * @author Anton Vasilyuk
  * @version 1.0.
@@ -30,6 +30,7 @@ public abstract class BaseAction implements UserAction {
 
 	/**.
 	* Constructor for class BaseAction
+	 * @param key is key for action
 	* @param name it's value for information about action
 	*/
 	public BaseAction(int key, String name) {
@@ -47,14 +48,15 @@ public abstract class BaseAction implements UserAction {
 
 	/**.
 	* Abstract method for implemetion main action
-	* @input link on tool enter user
-	* @tracker link on object class Tracker 
-	*/ 
+	* @param input link on tool enter user
+	* @param tracker link on object class tracker
+	 * @throws SQLException is may be exception
+	*/
 	public abstract void execute(Input input, Tracker tracker) throws SQLException;
 
 	/**.
 	* Method for get info about action
-	* @nameAction info about action
+	* @param nameAction info about action
 	* @return String
 	*/
 	public String info(String nameAction) {

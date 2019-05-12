@@ -1,11 +1,11 @@
-package ru.job4j.Tracker.start;
+package ru.job4j.tracker.start;
 
 import java.sql.SQLException;
 import java.util.List;
 
-/**
+/**.
  * Task 8.4.2.
- * Update Tracker from part 2
+ * Update tracker from part 2
  *
  * @author Anton Vasilyuk
  * @version 1.0.
@@ -34,7 +34,8 @@ public class StartUI {
 		this.tracker = tracker;
 	}
 	/**.
-	* method for intaraction with apps tracker
+	* Method for intaraction with apps tracker
+	 * @throws SQLException may be exception
 	*/
 	public void init() throws SQLException {
 		MenuTracker menu = new MenuTracker(this.input, this.tracker);
@@ -45,7 +46,7 @@ public class StartUI {
 			// public int key() {
 				// return 3;
 			// }
-			// public void execute(Input input, Tracker tracker) {
+			// public void execute(Input input, tracker tracker) {
 			//	tam tam
 			// }
 			// public String info() {
@@ -58,13 +59,13 @@ public class StartUI {
 			menu.show();
 			int key = Integer.valueOf(input.ask("Select:", ranges));
 			menu.select(key);
-			
-		} while(!"y".equals(this.input.ask("Exit?(y):")));
+		} while (!"y".equals(this.input.ask("Exit?(y):")));
 	}
 
 	/**.
 	* It's main method
 	* @param args args
+	 * @throws SQLException may be exception
 	*/
 	public static void main(String[] args) throws SQLException {
 		Input input = new ValidateInput();

@@ -1,4 +1,4 @@
-package ru.job4j.layoutPresentation;
+package ru.job4j.presentation;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,14 +10,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.atLeast;
 
+/**.
+ * Task 9.2.1.
+ * Class servlet for working with country
+ *
+ * @author Anton Vasilyuk
+ * @version 1.0.
+ */
 public class CRUDServletTest {
 
     /**.
      * Test adding user to database
-     * @throws ServletException
-     * @throws IOException
+     * @throws ServletException may be exception
+     * @throws IOException may be exception
      */
     @Test
     public void createUser() throws ServletException, IOException {
@@ -46,8 +56,8 @@ public class CRUDServletTest {
 
     /**.
      * Test updating user to database
-     * @throws ServletException
-     * @throws IOException
+     * @throws ServletException may be exception
+     * @throws IOException may be exception
      */
     @Test
     public void updateTest() throws ServletException, IOException {
@@ -62,10 +72,10 @@ public class CRUDServletTest {
         when(request.getParameter("password")).thenReturn("newPassword");
         when(request.getParameter("email")).thenReturn("newTest@test.te");
         when(request.getParameter("role")).thenReturn("user");
-        userUpdate.doPost(request,response);
+        userUpdate.doPost(request, response);
         User user = db.findById(db.getId());
-        Assert.assertTrue(user.getLogin().equals("newTest") &
-                user.getPassword().equals("newPassword"));
+        Assert.assertTrue(user.getLogin().equals("newTest")
+                & user.getPassword().equals("newPassword"));
         verify(request, atLeast(1)).getParameter("id");
         verify(request, atLeast(1)).getParameter("name");
         verify(request, atLeast(1)).getParameter("login");
@@ -76,8 +86,8 @@ public class CRUDServletTest {
 
     /**.
      * Test deleting user to database
-     * @throws ServletException
-     * @throws IOException
+     * @throws ServletException may be exception
+     * @throws IOException may be exception
      */
     @Test
     public void deleteTest() throws ServletException, IOException {

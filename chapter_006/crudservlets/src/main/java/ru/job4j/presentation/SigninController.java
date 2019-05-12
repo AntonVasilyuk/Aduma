@@ -13,6 +13,14 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+/**.
+ * Task 9.2.1.
+ * Class servlet for sign
+ *
+ * @author Anton Vasilyuk
+ * @version 1.0.
+ */
+
 public class SigninController extends HttpServlet {
 
     /**.
@@ -28,7 +36,7 @@ public class SigninController extends HttpServlet {
     /**.
      * Logger for this class
      */
-    private final Logger logger = LoggerFactory.getLogger(SigninController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SigninController.class);
 
     /**.
      * Method for getting info about client

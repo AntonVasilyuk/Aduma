@@ -19,14 +19,14 @@ import java.util.List;
 public class ValidateService {
 
     /**.
-     * Is logger for this class
+     * Is LOGGER for this class
      */
-    private final Logger logger = LoggerFactory.getLogger(ValidateService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ValidateService.class);
 
     /**.
      * Instance for singleton ValidateService class
      */
-    private final static ValidateService link = new ValidateService();
+    private static final ValidateService LINK = new ValidateService();
 
     /**.
      * Link for instance Store interface
@@ -44,7 +44,7 @@ public class ValidateService {
      * @return instance
      */
     public static ValidateService getInstance() {
-        return link;
+        return LINK;
     }
 
     /**.
@@ -108,7 +108,7 @@ public class ValidateService {
 
     /**.
      * Method for checking role the user
-     * @param login
+     * @param login is login for checking
      * @return true if user is admin
      */
     public boolean isAdmin(String login) {
@@ -125,7 +125,7 @@ public class ValidateService {
 
     /**.
      * Getter for list of the cies for this country
-     * @param country
+     * @param country is counties for getter all cities
      * @return list of the cities
      */
     public List<String> getCity(String country) {

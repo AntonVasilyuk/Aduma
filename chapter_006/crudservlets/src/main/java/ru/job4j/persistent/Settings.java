@@ -14,7 +14,7 @@ public class Settings {
     /**.
      * It's logger
      */
-    private final static Logger log = Logger.getLogger(Settings.class.getName());
+    private static final Logger LOG = Logger.getLogger(Settings.class.getName());
 
     /**.
      * Object for sigleton pattern
@@ -33,13 +33,13 @@ public class Settings {
         try {
             properties.load(new FileInputStream(getClass().getClassLoader().getResource("Storage.properties").getFile()));
         } catch (IOException e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
     }
 
     /**.
      * Instance for singleton pattern class the Setting
-     * @return
+     * @return instance
      */
     public static Settings getInstance() {
         return INSTANCE;

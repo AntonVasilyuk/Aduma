@@ -8,10 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -28,7 +26,7 @@ public class ConnectionWeb {
     /**.
      * Logger for class ConnectionWeb
      */
-    private final static Logger log = LoggerFactory.getLogger(ConnectionWeb.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ConnectionWeb.class);
 
     /**.
      * Is main url page for parsing
@@ -94,7 +92,7 @@ public class ConnectionWeb {
      * Constructor for class ConnectionWeb
      */
     public ConnectionWeb() {
-        log.info("Initializing the constructor");
+        LOG.info("Initializing the constructor");
         Calendar date = Calendar.getInstance();
         year = date.get(Calendar.YEAR);
         Settings settings = Settings.getInstance();
@@ -106,7 +104,7 @@ public class ConnectionWeb {
      * Method for connection to website
      */
     public void getDataWebSite() {
-        log.info("Initialization parsing site from connetionWeb");
+        LOG.info("Initialization parsing site from connetionWeb");
         try {
             while (!endSearch) {
                 Elements headEl = checkPage();
@@ -135,7 +133,7 @@ public class ConnectionWeb {
             endSearch = false;
             checkFirst = true;
         } catch (IOException e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -145,7 +143,7 @@ public class ConnectionWeb {
      * @return new TimeStamp
      */
     public String getTimeAdding(String data) {
-        log.info("Convertion time for database");
+        LOG.info("Convertion time for database");
         Calendar calendar = Calendar.getInstance();
         if (data.contains("сегодня")) {
             calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(data.substring(9, 11)));
@@ -160,7 +158,7 @@ public class ConnectionWeb {
                 Date dateTemp = convert.parse(data);
                 calendar.setTime(dateTemp);
             } catch (ParseException e) {
-                log.error(e.getMessage(), e);
+                LOG.error(e.getMessage(), e);
             }
         }
 

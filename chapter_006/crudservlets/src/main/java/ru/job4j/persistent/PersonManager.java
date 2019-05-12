@@ -2,6 +2,13 @@ package ru.job4j.persistent;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**.
+ * Task 9.2.1.
+ * Person MANAGER
+ *
+ * @author Anton Vasilyuk
+ * @version 1.0.
+ */
 public class PersonManager {
 
     /**.
@@ -12,7 +19,7 @@ public class PersonManager {
     /**.
      * It's link for this class
      */
-    private static final PersonManager manager = new PersonManager();
+    private static final PersonManager MANAGER = new PersonManager();
 
     /**.
      * It's constructor for this class
@@ -22,15 +29,15 @@ public class PersonManager {
 
     /**.
      * It's method for getting link to example for this class
-     * @return
+     * @return instance
      */
     public static PersonManager getInstance() {
-        return manager;
+        return MANAGER;
     }
 
     /**.
      * Method for adding new person
-     * @param person
+     * @param person person for adding
      */
     public void add(Person person) {
         storage.add(person);

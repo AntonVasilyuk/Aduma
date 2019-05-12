@@ -97,7 +97,7 @@
 
  <!--   <filter>
         <filter-name>AuthFilter</filter-name>
-        <filter-class>ru.job4j.layoutPresentation.AuthFilter</filter-class>
+        <filter-class>ru.job4j.presentationilter</filter-class>
     </filter>
 
     <filter-mapping>

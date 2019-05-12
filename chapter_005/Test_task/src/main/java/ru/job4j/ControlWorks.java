@@ -12,19 +12,27 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**.
+ * Task 8.5.1.
+ * Controll works apps
+ *
+ * @author Anton Vasilyuk
+ * @version 1.0.
+ */
+
 public class ControlWorks {
 
     /**.
      * Logger for class ControlWorks
      */
-    private final static Logger log = LoggerFactory.getLogger(ControlWorks.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ControlWorks.class);
 
     /**.
      * Method main
-     * @param args
+     * @param args is argumetns
      */
     public static void main(String[] args) {
-        log.info("Programm start");
+        LOG.info("Programm start");
         int periodScanning = Integer.parseInt(Settings.getInstance().getValues("cron.time"));
         try {
             JobDetail job = JobBuilder.newJob(ParsingSite.class).withIdentity("parsingsite").build();
@@ -34,8 +42,8 @@ public class ControlWorks {
             Scheduler scheduler = schFactory.getScheduler();
             scheduler.start();
             scheduler.scheduleJob(job, trigger);
-        }catch (SchedulerException e) {
-            log.error(e.getMessage(), e);
+        } catch (SchedulerException e) {
+            LOG.error(e.getMessage(), e);
         }
     }
 }

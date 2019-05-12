@@ -1,10 +1,10 @@
-package ru.job4j.Tracker.start;
+package ru.job4j.tracker.start;
 
 import java.util.List;
 
-/**
+/**.
  * Task 8.4.2.
- * Update Tracker from part 2
+ * Update tracker from part 2
  *
  * @author Anton Vasilyuk
  * @version 1.0.
@@ -16,8 +16,8 @@ public class ValidateInput extends ConsolInput {
 
 	/**.
 	* method for checking answers user, and output error
-	* @param question
-	* @param ranges
+	* @param question is question
+	* @param ranges is ranges
 	* @return value
 	*/
 	public int ask(String question, List<Integer> ranges) {
@@ -27,12 +27,12 @@ public class ValidateInput extends ConsolInput {
 			try {
 				value = super.ask(question, ranges);
 				invalid = false;
-			} catch(MenuOutException moe) {
+			} catch (MenuOutException moe) {
 				System.out.println("Please select key from menu.");
-			} catch(NumberFormatException nfe) {
+			} catch (NumberFormatException nfe) {
 				System.out.println("Please enter validate data again.");
 			}
-		} while(invalid);
+		} while (invalid);
 		return value;
 	}
 }

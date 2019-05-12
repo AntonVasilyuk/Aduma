@@ -1,16 +1,16 @@
-package ru.job4j.Tracker.start;
+package ru.job4j.tracker.start;
 
-import ru.job4j.Tracker.JDBCStorage.JDBCStorage;
-import ru.job4j.Tracker.models.Item;
+import ru.job4j.tracker.storage.JDBCStorage;
+import ru.job4j.tracker.models.Item;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
+/**.
  * Task 8.4.2.
- * Update Tracker from part 2
+ * Update tracker from part 2
  *
  * @author Anton Vasilyuk
  * @version 1.0.
@@ -20,7 +20,11 @@ import java.util.Random;
 
 public class Tracker {
 
-	private final JDBCStorage storage = new JDBCStorage();
+	/**.
+	 * It's link to storage
+	 */
+	private final JDBCStorage jdbcStorage = new JDBCStorage();
+
 	/**.
 	* @items Array items
 	*/
@@ -35,18 +39,20 @@ public class Tracker {
 	* method for add items
 	* @param item item object
 	* @return result
+	 * @throws SQLException may be exception
 	*/
 	public Item add(Item item) throws SQLException {
-		storage.add(item);
+		jdbcStorage.add(item);
 		return item;
 	}
 
 	/**.
 	* method for update items
 	* @param item item for update
+	 * @throws SQLException may be exception
 	*/
 	public void update(Item item) throws SQLException {
-		items = storage.getAll();
+		items = jdbcStorage.getAll();
 		for (Item a : items) {
 			if (item != null && item.getId().equals(a.getId())) {
 				items.set(items.indexOf(a), item);
@@ -58,17 +64,19 @@ public class Tracker {
 	/**.
 	* method for delete items
 	* @param item item for delete
+	 * @throws SQLException may be exception
 	*/
 	public void delete(Item item) throws SQLException {
-		storage.delete(item.getId());
+		jdbcStorage.delete(item.getId());
 	}
 
 	/**.
 	* method for find all items
 	* @return result
+	 * @throws SQLException may be exception
 	*/
 	public List<Item> findAll() throws SQLException {
-		items = storage.getAll();
+		items = jdbcStorage.getAll();
 		return this.items;
 	}
 
@@ -76,6 +84,7 @@ public class Tracker {
 	* method for find items
 	* @param key name
 	* @return array with dublicate name
+	 * @throws SQLException may be exception
 	*/
 	public List<Item> findByName(String key) throws SQLException {
 		findAll();
@@ -92,6 +101,7 @@ public class Tracker {
 	* method for show all items
 	* @param id id for item
 	* @return item
+	 * @throws SQLException may be exception
 	*/
 	public Item findById(String id) throws SQLException {
 		findAll();

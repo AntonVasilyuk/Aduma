@@ -1,8 +1,8 @@
-package ru.job4j.Tracker.models;
+package ru.job4j.tracker.models;
 
 /**
  * Task 8.4.2.
- * Update Tracker from part 2
+ * Update tracker from part 2
  *
  * @author Anton Vasilyuk
  * @version 1.0.

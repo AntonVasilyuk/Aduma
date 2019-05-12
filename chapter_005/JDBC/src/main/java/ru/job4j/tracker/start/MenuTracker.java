@@ -1,7 +1,7 @@
-package ru.job4j.Tracker.start;
+package ru.job4j.tracker.start;
 
-import ru.job4j.Tracker.models.Item;
-import ru.job4j.Tracker.templates.BaseAction;
+import ru.job4j.tracker.models.Item;
+import ru.job4j.tracker.templates.BaseAction;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Task 8.4.2.
- * Update Tracker from part 2
+ * Update tracker from part 2
  *
  * @author Anton Vasilyuk
  * @version 1.0.
@@ -34,11 +34,15 @@ public class MenuTracker {
 	*/
 	private List<UserAction> actions = new ArrayList<>();
 
+	/**.
+	 * @nameAction is name for action
+	 */
 	private String nameAction;
+
 	/**.
 	* Constructor
-	* @param input
-	* @param tracker
+	* @param input is example for input
+	* @param tracker is example for tracker
 	*/
 	public MenuTracker(Input input, Tracker tracker) {
 		this.input = input;
@@ -46,7 +50,7 @@ public class MenuTracker {
 	}
 
 	/**.
-	* method for write in array action
+	* Method for write in array action
 	*/
 	public void fillActions() {
 		this.actions.add(this.new AddItem(0, "Add new item"));
@@ -57,16 +61,16 @@ public class MenuTracker {
 		this.actions.add(this.new FindByName(5, "Find item by name"));
 	}
 
-/* 	public void addActions(UserAction action) {
-		this.actions[position++] = action;
-	} */
 	/**.
 	* method for select action
 	* @param key number action
+	 * @throws SQLException is may be exception
 	*/
 	public void select(int key) throws SQLException {
-		for(UserAction u : actions) {
-			if (u.key() == key) {u.execute(this.input, this.tracker);}
+		for (UserAction u : actions) {
+			if (u.key() == key) {
+				u.execute(this.input, this.tracker);
+			}
 		}
 	}
 
@@ -75,14 +79,14 @@ public class MenuTracker {
 	*/
 	public void show() {
 		for (UserAction action : this.actions) {
-			if(action != null) {
-			System.out.println(action.info(nameAction));
+			if (action != null) {
+				System.out.println(action.info(nameAction));
 			}
 		}
 	}
 
 	/**.
-	* method for array corect number
+	* Method for array corect number
 	* @return array
 	*/
 	public List<Integer> getArrayNumber() {
@@ -92,14 +96,27 @@ public class MenuTracker {
 		}
 		return ranges;
 	}
+
 	/**.
 	* Class for action ADD
 	*/
 	private class AddItem extends BaseAction {
+
+		/**.
+		 * Is command for adding item
+		 * @param key is key the item
+		 * @param nameAction is name action
+		 */
 		private AddItem(int key, String nameAction) {
 			super(key, nameAction);
 		}
 
+		/**.
+		 * Is main action for this command
+		 * @param input is link to the input
+		 * @param tracker is link to the tracker
+		 * @throws SQLException is may be exception
+		 */
 		@Override
 		public void execute(Input input, Tracker tracker) throws SQLException {
 			Date date = new Date();
@@ -115,10 +132,21 @@ public class MenuTracker {
 	* Class for action FindAll
 	*/
 	private class FindAll extends BaseAction {
+		/**.
+		 * Method for find all
+		 * @param key is key for find
+		 * @param nameAction is name action
+		 */
 		private FindAll(int key, String nameAction) {
 			super(key, nameAction);
 		}
 
+		/**.
+		 * Main method for this command
+		 * @param input is link to the input
+		 * @param tracker is link to the tracker
+		 * @throws SQLException may be exception
+		 */
 		@Override
 		public void execute(Input input, Tracker tracker) throws SQLException {
 			List<Item> arrayElement = tracker.findAll();
@@ -133,10 +161,22 @@ public class MenuTracker {
 	* Class for action EDIT
 	*/
 	private class EditItem extends BaseAction {
+
+		/**.
+		 * Method for editing
+		 * @param key is key for edit
+		 * @param nameAction is name action
+		 */
 		private EditItem(int key, String nameAction) {
 			super(key, nameAction);
 		}
 
+		/**.
+		 * Main method for this command
+		 * @param input is link to the input
+		 * @param tracker is link to the tracker
+		 * @throws SQLException may be exception
+		 */
 		@Override
 		public void execute(Input input, Tracker tracker) throws SQLException {
 			Date date = new Date();
@@ -155,10 +195,21 @@ public class MenuTracker {
 	*/
 	private class DeleteItem extends BaseAction {
 
+		/**.
+		 * Method for deleting item
+		 * @param key is key for delete
+		 * @param nameAction is name action
+		 */
 		private DeleteItem(int key, String nameAction) {
 			super(key, nameAction);
 		}
 
+		/**.
+		 * Main method for this command
+		 * @param input is link to the input
+		 * @param tracker is link to the tracker
+		 * @throws SQLException may be exception
+		 */
 		@Override
 		public void execute(Input input, Tracker tracker) throws SQLException {
 			String id = input.ask("Enter the id for item:");
@@ -172,10 +223,21 @@ public class MenuTracker {
 	*/
 	private class FindById extends BaseAction {
 
+		/**.
+		 * Method for find item by id
+		 * @param key is key
+		 * @param nameAction is name action
+		 */
 		private FindById(int key, String nameAction) {
 			super(key, nameAction);
 		}
 
+		/**.
+		 * Main method for this command
+		 * @param input is link to the input
+		 * @param tracker is link to the tracker
+		 * @throws SQLException may be exception
+		 */
 		@Override
 		public void execute(Input input, Tracker tracker) throws SQLException {
 			String id = input.ask("Enter the id for item:");
@@ -190,10 +252,21 @@ public class MenuTracker {
 	*/
 	private class FindByName extends BaseAction {
 
+		/**.
+		 * Method for find by name
+		 * @param key is key action
+		 * @param nameAction is name action
+		 */
 		private FindByName(int key, String nameAction) {
 			super(key, nameAction);
 		}
 
+		/**.
+		 * Main method for this command
+		 * @param input is link to the input
+		 * @param tracker is link to the tracker
+		 * @throws SQLException may be exception
+		 */
 		@Override
 		public void execute(Input input, Tracker tracker) throws SQLException {
 			String name = input.ask("Enter the name for item:");

@@ -29,7 +29,7 @@ public class Concole {
 
     /**.
      * Method for ask count numbers
-     * @param question
+     * @param question is question
      * @return count number
      */
     public int ask(String question) {

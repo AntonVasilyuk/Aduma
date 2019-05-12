@@ -10,6 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**.
+ * Task 9.2.1.
+ * Class servlet for deleting
+ *
+ * @author Anton Vasilyuk
+ * @version 1.0.
+ */
+
 public class UserDeleteServlet extends HttpServlet {
 
     /**.
@@ -20,7 +28,7 @@ public class UserDeleteServlet extends HttpServlet {
     /**.
      * Logger for this class
      */
-    private final Logger logger = LoggerFactory.getLogger(UserDeleteServlet.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserDeleteServlet.class);
 
     /**.
      * Method for getting info about client
@@ -30,7 +38,7 @@ public class UserDeleteServlet extends HttpServlet {
      * @throws IOException it's too
      */
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         int id = Integer.parseInt(req.getParameter("id"));
         logic.delete(id);

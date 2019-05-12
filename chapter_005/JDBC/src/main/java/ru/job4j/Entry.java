@@ -10,11 +10,12 @@ public class Entry {
     /**.
      * Default Constructor
      */
-    public Entry() {}
+    public Entry() {
+    }
 
     /**.
      * Constructor
-     * @param i
+     * @param i is index
      */
     public Entry(int i) {
         this.field = i;
@@ -22,7 +23,7 @@ public class Entry {
 
     /**.
      * Getter for field
-     * @return
+     * @return field
      */
     @XmlElement
     public int getField() {
@@ -31,7 +32,7 @@ public class Entry {
 
     /**.
      * Setter for field
-     * @param field
+     * @param field is field
      */
     public void setField(int field) {
         this.field = field;

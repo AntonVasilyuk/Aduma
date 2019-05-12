@@ -12,6 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**.
+ * Task 9.2.1.
+ * Class servlet for working with users
+ *
+ * @author Anton Vasilyuk
+ * @version 1.0.
+ */
 public class UsersServlet extends HttpServlet {
 
     /**.
@@ -27,7 +34,7 @@ public class UsersServlet extends HttpServlet {
     /**.
      * Logger for this class
      */
-    private final Logger logger = LoggerFactory.getLogger(UsersServlet.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UsersServlet.class);
 
     /**.
      * Method for getting info about client

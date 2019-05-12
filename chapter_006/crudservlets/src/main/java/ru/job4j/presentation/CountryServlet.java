@@ -11,12 +11,19 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+/**.
+ * Task 9.2.1.
+ * Class servlet for working with country
+ *
+ * @author Anton Vasilyuk
+ * @version 1.0.
+ */
 public class CountryServlet extends HttpServlet {
 
     /**.
      * It's link to logic layout
      */
-    private static final ValidateService service = ValidateService.getInstance();
+    private static final ValidateService SERVICE = ValidateService.getInstance();
 
     /**.
      * It's getter for this servlet
@@ -31,7 +38,7 @@ public class CountryServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        list = service.getCountries();
+        list = SERVICE.getCountries();
         PrintWriter writer = resp.getWriter();
         writer.print(mapper.writeValueAsString(list));
         System.out.println(list.size());

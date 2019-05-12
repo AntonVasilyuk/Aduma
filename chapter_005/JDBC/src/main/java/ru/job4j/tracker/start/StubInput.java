@@ -1,10 +1,10 @@
-package ru.job4j.Tracker.start;
+package ru.job4j.tracker.start;
 
 import java.util.List;
 
-/**
+/**.
  * Task 8.4.2.
- * Update Tracker from part 2
+ * Update tracker from part 2
  *
  * @author Anton Vasilyuk
  * @version 1.0.
@@ -25,7 +25,7 @@ public class StubInput implements Input {
 
 	/**.
 	* Constructor
-	* @param answers array for data 
+	* @param answers array for data
 	*/
 	public StubInput(String[] answers) {
 		this.answers = answers;
@@ -33,7 +33,7 @@ public class StubInput implements Input {
 
 	/**.
 	* method for write answer in the array answers
-	* @param question
+	* @param question is question
 	* @return answer
 	*/
 	public String ask(String question) {
@@ -42,8 +42,8 @@ public class StubInput implements Input {
 
 	/**.
 	* method for output
-	* @param question
-	* @param ranges
+	* @param question is question
+	* @param ranges is ranges
 	* @return -1
 	*/
 	public int ask(String question, List<Integer> ranges) {

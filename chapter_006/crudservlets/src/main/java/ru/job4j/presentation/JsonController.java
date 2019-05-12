@@ -16,12 +16,19 @@ import java.io.PrintWriter;
 import java.util.concurrent.CopyOnWriteArrayList;
 import com.google.gson.Gson;
 
+/**.
+ * Task 9.2.1.
+ * Class servlet for json data
+ *
+ * @author Anton Vasilyuk
+ * @version 1.0.
+ */
 public class JsonController extends HttpServlet {
 
     /**.
      * Logger for this class
      */
-    private final Logger logg = LoggerFactory.getLogger(JsonController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JsonController.class);
 
     /**.
      * Is storage for persons

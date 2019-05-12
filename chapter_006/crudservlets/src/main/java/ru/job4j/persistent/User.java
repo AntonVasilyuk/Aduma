@@ -2,7 +2,6 @@ package ru.job4j.persistent;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**.
@@ -12,7 +11,6 @@ import java.util.GregorianCalendar;
  * @author Anton Vasilyuk
  * @version 1.0.
  */
-
 public class User {
 
     /**.
@@ -65,6 +63,7 @@ public class User {
      */
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
+    //CHECKSTYLE.OFF: IllegalCatch - Much more readable than catching 7 exceptions
     /**.
      * Construcor for class User
      * @param id it's id the user
@@ -72,23 +71,20 @@ public class User {
      * @param login it's login the user
      * @param password it's password the user
      * @param email it's email the user
-     * @param time it's time for creating date
      * @param role it's role for user
-     * @param country it's country for user
-     * @param city it's city user
+     * @param condition is condition of registration
      */
-    public User(int id, String name, String login, String password, String email, Long time,
-                String role, String country, String city) {
+    public User(int id, String name, String login, String password, String email, String role,
+                ConditionRegistration condition) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.password = password;
         this.email = email;
-        this.createDate = new GregorianCalendar();
-        createDate.setTime(new Date(time));
         this.role = role;
-        this.country = country;
-        this.city = city;
+        this.createDate = condition.date();
+        this.country = condition.county();
+        this.city = condition.city();
     }
 
     /**.
@@ -97,8 +93,9 @@ public class User {
      * @param login it's login the user
      * @param password it's password the user
      * @param email it's email the user
+     * @param role it's role the user
      * @param country it's country for user
-     * @patam city it's city user
+     * @param city it's city user
      */
     public User(String name, String login, String email, String password, String role, String country, String city) {
         id = -1;
@@ -119,11 +116,11 @@ public class User {
      * @return result checking
      */
     public boolean equals(String checkLogin, String checkEmail) {
+        boolean result = false;
         if (this.login.equals(checkLogin) || this.email.equals(checkEmail)) {
-            return true;
-        } else {
-            return false;
+            result = true;
         }
+        return result;
     }
 
     /**.
@@ -131,12 +128,12 @@ public class User {
      * @param user user for equality
      * @return result
      */
-    public boolean equals(User user) {
+    public boolean checkExist(User user) {
+        boolean result = false;
         if (this.login.equals(user.login) || this.email.equals(user.email)) {
-            return true;
-        } else {
-            return false;
+            result = true;
         }
+        return result;
     }
 
     /**.
@@ -145,8 +142,8 @@ public class User {
      */
     @Override
     public String toString() {
-        return "User " + "id-" + id + " name-" + name + " login-" + login + ", email-" + email +
-                 "role - " + role;
+        return "User " + "id-" + id + " name-" + name + " login-" + login + ", email-" + email
+                + "role - " + role;
     }
 
     /**.
@@ -207,7 +204,7 @@ public class User {
 
     /**.
      * Setter for country
-     * @param country
+     * @param country is country the user
      */
     public void setCountry(String country) {
         this.country = country;
@@ -223,9 +220,11 @@ public class User {
 
     /**.
      * Setter for city
-     * @param city
+     * @param city is city the user
      */
     public void setCity(String city) {
         this.city = city;
     }
+
+
 }

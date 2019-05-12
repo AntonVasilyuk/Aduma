@@ -4,28 +4,40 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.sql.ResultSet;
 
+/**.
+ * Task 9.2.1.
+ * Connection with database
+ *
+ * @author Anton Vasilyuk
+ * @version 1.0.
+ */
 public class DBStore implements Store {
 
     /**.
      * It's logger for this class
      */
-    private final static Logger log = LoggerFactory.getLogger(DBStore.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DBStore.class);
 
     /**.
      * It's pool for create connection
      */
-    private final BasicDataSource SOURCE = new BasicDataSource();
+    private final BasicDataSource source = new BasicDataSource();
 
     /**.
      * It's example pattern singleton
      */
-    private final static DBStore INSTANCE = new DBStore();
+    private static final DBStore INSTANCE = new DBStore();
 
     /**.
      * It's my setting
@@ -41,14 +53,14 @@ public class DBStore implements Store {
      * Constructor for this class
      */
     private DBStore() {
-        SOURCE.setDriverClassName(settings.getValues("jdbc.driver"));
-        SOURCE.setUrl(settings.getValues("jdbc.url"));
-        SOURCE.setUsername(settings.getValues("jdbc.username"));
-        SOURCE.setPassword(settings.getValues("jdbc.password"));
+        source.setDriverClassName(settings.getValues("jdbc.driver"));
+        source.setUrl(settings.getValues("jdbc.url"));
+        source.setUsername(settings.getValues("jdbc.username"));
+        source.setPassword(settings.getValues("jdbc.password"));
 
-        SOURCE.setMinIdle(5);
-        SOURCE.setMaxIdle(10);
-        SOURCE.setMaxOpenPreparedStatements(100);
+        source.setMinIdle(5);
+        source.setMaxIdle(10);
+        source.setMaxOpenPreparedStatements(100);
         createTable();
     }
 
@@ -69,7 +81,7 @@ public class DBStore implements Store {
         Connection connectionRollBack = null;
         String query = String.format("INSERT INTO users(name, login, password, email, time, role, country, city) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
         Calendar date = Calendar.getInstance();
-        try (Connection connection = SOURCE.getConnection();
+        try (Connection connection = source.getConnection();
              PreparedStatement st = connection.prepareStatement(query)
         ) {
             connection.setAutoCommit(false);
@@ -90,10 +102,10 @@ public class DBStore implements Store {
                 try {
                     connectionRollBack.rollback();
                 } catch (SQLException e1) {
-                    log.error(e1.getMessage(), e1);
+                    LOG.error(e1.getMessage(), e1);
                 }
             }
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -105,7 +117,7 @@ public class DBStore implements Store {
     public void update(User user) {
         Connection connectionRollBack = null;
         String query = String.format("UPDATE users SET name=?, login=?, password=?, email=?, role=?, country=?, city=? WHERE id=?;");
-        try (Connection connection = SOURCE.getConnection();
+        try (Connection connection = source.getConnection();
              PreparedStatement st = connection.prepareStatement(query);
         ) {
             connection.setAutoCommit(false);
@@ -126,10 +138,10 @@ public class DBStore implements Store {
                 try {
                     connectionRollBack.rollback();
                 } catch (SQLException e1) {
-                    log.error(e1.getMessage(), e1);
+                    LOG.error(e1.getMessage(), e1);
                 }
             }
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -141,7 +153,7 @@ public class DBStore implements Store {
     public void delete(int id) {
         Connection connectionRollback = null;
         String query = String.format("DELETE FROM users where id=?;");
-        try (Connection connection = SOURCE.getConnection();
+        try (Connection connection = source.getConnection();
              PreparedStatement st = connection.prepareStatement(query);
         ) {
             connection.setAutoCommit(false);
@@ -155,7 +167,7 @@ public class DBStore implements Store {
                 try {
                     connectionRollback.rollback();
                 } catch (SQLException e1) {
-                    log.error(e1.getMessage(), e1);
+                    LOG.error(e1.getMessage(), e1);
                 }
             }
         }
@@ -169,7 +181,7 @@ public class DBStore implements Store {
     public List<User> findByAll() {
         List<User> listAllUser = new ArrayList<>();
         String query = String.format("SELECT * FROM users;");
-        try (Connection connection = SOURCE.getConnection();
+        try (Connection connection = source.getConnection();
              Statement st = connection.createStatement()
         ) {
             ResultSet rs = st.executeQuery(query);
@@ -187,12 +199,14 @@ public class DBStore implements Store {
                 if (date != null) {
                     time = date.getTime();
                 }
-                User user = new User(idUser, name, login, password, email, time, role, country, city);
+                User user = new User(idUser, name, login, password, email, role, new ConditionRegistration(
+                        time, country, city
+                ));
                 listAllUser.add(user);
             }
             return listAllUser;
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return listAllUser;
     }
@@ -205,7 +219,7 @@ public class DBStore implements Store {
     public int getId() {
         int id = 0;
         String query = String.format("SELECT max(id) FROM users;");
-        try (Connection connection = SOURCE.getConnection();
+        try (Connection connection = source.getConnection();
              Statement st = connection.createStatement()
         ) {
             ResultSet rs = st.executeQuery(query);
@@ -214,7 +228,7 @@ public class DBStore implements Store {
             }
             return id;
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return id;
     }
@@ -226,7 +240,7 @@ public class DBStore implements Store {
      */
     public boolean existID(int id) {
         String query = String.format("SELECT * FROM users WHERE id='%d';", id);
-        try (Connection connection = SOURCE.getConnection();
+        try (Connection connection = source.getConnection();
              Statement st = connection.createStatement()
         ) {
             ResultSet rs = st.executeQuery(query);
@@ -234,7 +248,7 @@ public class DBStore implements Store {
                 return true;
             }
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return false;
     }
@@ -257,7 +271,7 @@ public class DBStore implements Store {
     public User findById(int id) {
         User user = null;
         String query = String.format("SELECT * FROM users WHERE id=%d;", id);
-        try (Connection connection = SOURCE.getConnection();
+        try (Connection connection = source.getConnection();
              Statement st = connection.createStatement()
         ) {
             ResultSet rs = st.executeQuery(query);
@@ -271,11 +285,13 @@ public class DBStore implements Store {
                 String role = rs.getString("role");
                 String country = rs.getString("country");
                 String city = rs.getString("city");
-                user = new User(idUser, name, login, password, email, date, role, country, city);
+                user = new User(idUser, name, login, password, email, role, new ConditionRegistration(
+                        date, country, city
+                ));
                 return user;
             }
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return user;
     }
@@ -287,29 +303,29 @@ public class DBStore implements Store {
     public List<String> getCountries() {
         List<String> countries = new ArrayList<>();
         String query = "SELECT country FROM location GROUP BY country";
-        try (Connection connection = SOURCE.getConnection();
-        Statement statement = connection.createStatement()) {
+        try (Connection connection = source.getConnection();
+             Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 countries.add(rs.getString("country"));
             }
             return countries;
         } catch (SQLException e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return countries;
     }
 
     /**.
      * Getter for cities
-     * @param country
+     * @param country is country for getter
      * @return cities
      */
     public List<String> getCity(String country) {
         List<String> city = new ArrayList<>();
         String query = "SELECT city FROM location WHERE country='" + country + "';";
         System.out.println(query);
-        try (Connection connection = SOURCE.getConnection();
+        try (Connection connection = source.getConnection();
              Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
@@ -317,7 +333,7 @@ public class DBStore implements Store {
             }
             return city;
         } catch (SQLException e) {
-           log.error(e.getMessage(), e);
+           LOG.error(e.getMessage(), e);
         }
         return city;
     }
@@ -331,7 +347,7 @@ public class DBStore implements Store {
     public boolean isCredentional(User user) {
         String queryLogin = String.format("SELECT * FROM users WHERE login='%s';", user.getLogin());
         String queryEmail = String.format("SELECT * FROM users WHERE email='%s';", user.getEmail());
-        try (Connection connection = SOURCE.getConnection();
+        try (Connection connection = source.getConnection();
              Statement st = connection.createStatement()
         ) {
             ResultSet rsOne = st.executeQuery(queryLogin);
@@ -345,7 +361,7 @@ public class DBStore implements Store {
                 return false;
             }
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return true;
     }
@@ -358,7 +374,7 @@ public class DBStore implements Store {
     @Override
     public boolean needUpdate(User user) {
         String query = String.format("SELECT * FROM users WHERE id=%d;", user.getId());
-        try (Connection connection = SOURCE.getConnection();
+        try (Connection connection = source.getConnection();
              Statement st = connection.createStatement()
         ) {
             ResultSet rs = st.executeQuery(query);
@@ -370,14 +386,15 @@ public class DBStore implements Store {
                 String role = rs.getString("role");
                 String country = rs.getString("country");
                 String city = rs.getString("city");
-                if (!name.equals(user.getName()) || !login.equals(user.getLogin()) || !password.equals(user.getPassword()) ||
-                        !email.equals(user.getEmail()) || !role.equals(user.getRole()) || !country.equals(user.getCountry()) ||
-                        !city.equals(user.getCity())) {
+                if (!name.equals(user.getName()) || !login.equals(user.getLogin())
+                        || !password.equals(user.getPassword()) || !email.equals(user.getEmail())
+                        || !role.equals(user.getRole()) || !country.equals(user.getCountry())
+                        || !city.equals(user.getCity())) {
                     return true;
                 }
             }
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return false;
     }
@@ -385,30 +402,31 @@ public class DBStore implements Store {
      * Creating tables if not exist
      */
     public void createTable() {
-        String queryCreate = "CREATE TABLE IF NOT EXISTS public.users (id SERIAL PRIMARY KEY, name varchar(50)," +
-                "login varchar(50), password varchar(50), email varchar(50), time TIMESTAMP, role varchar(50)," +
-                "country varchar(50), city varchar(50));";
-        try (Connection connection = SOURCE.getConnection();
+        String queryCreate = "CREATE TABLE IF NOT EXISTS public.users (id SERIAL PRIMARY KEY, name varchar(50),"
+                + "login varchar(50), password varchar(50), email varchar(50), time TIMESTAMP, role varchar(50),"
+                + "country varchar(50), city varchar(50));";
+        try (Connection connection = source.getConnection();
              PreparedStatement statement = connection.prepareStatement(queryCreate);
         ) {
             connection.setAutoCommit(false);
             statement.execute();
             connection.commit();
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
     }
 
     /**.
      * Cheking role for this user
-     * @param login
-     * @param password
+     * @param login is login for checking
+     * @param password is password for checking
      * @return true if user is admin
      */
     @Override
     public boolean isExisting(String login, String password) {
+        boolean result = false;
         String query = String.format("SELECT * FROM users WHERE login='%s';", login);
-        try (Connection connection = SOURCE.getConnection();
+        try (Connection connection = source.getConnection();
              Statement st = connection.createStatement()
         ) {
             ResultSet rs = st.executeQuery(query);
@@ -416,39 +434,36 @@ public class DBStore implements Store {
                 String pass = rs.getString("password");
                 System.out.println(pass);
                 if (pass.equals(password)) {
-                    return true;
-                } else {
-                    return false;
+                    result = true;
                 }
             }
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
-        return false;
+        return result;
     }
 
     /**.
      * Cheking role for this user
-     * @param login
+     * @param login is login for checking
      * @return true if user is admin
      */
     @Override
     public boolean isAdmin(String login) {
+        boolean result = false;
         String query = String.format("SELECT * FROM users WHERE login='%s';", login);
-        try (Connection connection = SOURCE.getConnection();
+        try (Connection connection = source.getConnection();
              Statement st = connection.createStatement()
         ) {
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 if (rs.getString("role").equals("admin")) {
-                    return true;
-                } else {
-                    return false;
+                    result = true;
                 }
             }
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
-        return false;
+        return result;
     }
 }

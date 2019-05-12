@@ -47,7 +47,7 @@ public abstract class BaseAction implements UserAction {
 	/**.
 	* Abstract method for implemetion main action
 	* @param input link on tool enter user
-	* @param tracker link on object class Tracker
+	* @param tracker link on object class tracker
 	*/
 	public abstract void execute(Input input, Tracker tracker);
 

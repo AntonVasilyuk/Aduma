@@ -6,6 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**.
+ * Task 9.2.1.
+ * Class servlet for existing
+ *
+ * @author Anton Vasilyuk
+ * @version 1.0.
+ */
+
 public class ExitServlet extends HttpServlet {
 
     /**.

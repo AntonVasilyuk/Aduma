@@ -1,9 +1,6 @@
 package ru.job4j;
 
-import ru.job4j.Entry;
-
 import java.util.List;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -38,7 +35,8 @@ public class Entries {
     /**.
      * Default Constructor
      */
-    public Entries() {}
+    public Entries() {
+    }
 
     /**.
      * Constructor

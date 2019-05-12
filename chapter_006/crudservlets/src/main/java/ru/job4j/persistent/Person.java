@@ -4,6 +4,13 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.io.Serializable;
 
+/**.
+ * Task 9.2.1.
+ * Model for info about person
+ *
+ * @author Anton Vasilyuk
+ * @version 1.0.
+ */
 public class Person implements Serializable {
 
     /**.
@@ -28,10 +35,10 @@ public class Person implements Serializable {
 
     /**.
      * It's constructor for this class
-     * @param name
-     * @param family
-     * @param sex
-     * @param description
+     * @param name is name the person
+     * @param family is family the person
+     * @param sex is sex the person
+     * @param description is description the person
      */
     @JsonPropertyOrder({"name", "family", "sex", "description"})
     public Person(String name, String family, String sex, String description) {
@@ -46,7 +53,7 @@ public class Person implements Serializable {
      * @param p it's other person
      * @return result boolean
      */
-    public boolean equals(Person p) {
+    public boolean checkPersons(Person p) {
         boolean result = false;
         if (this.name.equals(p.getName()) && this.family.equals(p.getFamily())) {
             result = true;
@@ -56,7 +63,7 @@ public class Person implements Serializable {
 
     /**.
      * It's person for print
-     * @return
+     * @return String reslisation for instace this class
      */
     @Override
     public String toString() {
@@ -73,7 +80,7 @@ public class Person implements Serializable {
 
     /**.
      * It's setter for name
-     * @param name
+     * @param name is name for setter
      */
     public void setName(String name) {
         this.name = name;
@@ -89,7 +96,7 @@ public class Person implements Serializable {
 
     /**.
      * It's setter for family
-     * @param family
+     * @param family is family for setter
      */
     public void setFamily(String family) {
         this.family = family;
@@ -105,7 +112,7 @@ public class Person implements Serializable {
 
     /**.
      * It's setter for sex
-     * @param sex
+     * @param sex is sex for setter
      */
     public void setSex(String sex) {
         this.sex = sex;
@@ -121,7 +128,7 @@ public class Person implements Serializable {
 
     /**.
      * it's setter for description
-     * @param description
+     * @param description is description for setter
      */
     public void setDescription(String description) {
         this.description = description;
