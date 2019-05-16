@@ -16,7 +16,6 @@ Chapter_4 - Multithreading
 
 Chapter_5 - SQL and JDBC
 
-Объединение зафиксированных измененей.
-
+В курсе производилась работа с ветками git 
 Learning resource - http://job4j.ru/
 
