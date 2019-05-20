@@ -30,6 +30,7 @@
 		<module>tree</module>
 		<module>orderBook</module>
 		<module>CompareWords</module>
-	</modules>
+        <module>lambda</module>
+    </modules>
 
 </project>
