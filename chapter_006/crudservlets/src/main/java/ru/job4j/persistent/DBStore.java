@@ -1,8 +1,7 @@
 package ru.job4j.persistent;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ public class DBStore implements Store {
     /**.
      * It's logger for this class
      */
-    private static final Logger LOG = LoggerFactory.getLogger(DBStore.class);
+    private static final Logger LOG = Logger.getLogger(DBStore.class);
 
     /**.
      * It's pool for create connection
@@ -90,7 +89,7 @@ public class DBStore implements Store {
             st.setString(1, user.getName());
             st.setString(2, user.getLogin());
             st.setString(3, user.getPassword());
-            st.setString(4, user.getPassword());
+            st.setString(4, user.getEmail());
             st.setTimestamp(5, new Timestamp(date.getTimeInMillis()));
             st.setString(6, user.getRole());
             st.setString(7, user.getCountry());
@@ -226,6 +225,7 @@ public class DBStore implements Store {
             while (rs.next()) {
                 id = rs.getInt("max");
             }
+            System.out.println(id);
             return id;
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);

@@ -28,7 +28,7 @@ public class CheckByteArray {
      * @return true if it's even number
      */
     public boolean isNumber(InputStream in) {
-        String check = "[-+]?\\\\d+";
+        String check = "[-+]?\\d+";
         boolean result = false;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
             String line = br.readLine();

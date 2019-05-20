@@ -112,7 +112,6 @@ public class ChatLogicTest {
         logic.startChat();
         String[] textAll = out.toString().split(ln);
         boolean result = !textAll[3].equals(textAll[4]);
-
         assertTrue(result);
         rollBackSystemStream();
     }

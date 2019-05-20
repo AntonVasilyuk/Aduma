@@ -27,7 +27,8 @@ public class CheckByteArrayTest {
     @Test
     public void whenEnteringNumberIsEven() {
         ByteArrayInputStream is = new ByteArrayInputStream("12".getBytes());
-        assertTrue(checkByteArray.isNumber(is));
+        boolean result = checkByteArray.isNumber(is);
+        assertTrue(result);
     }
 
     /**.

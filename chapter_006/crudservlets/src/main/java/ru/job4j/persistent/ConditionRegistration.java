@@ -1,5 +1,7 @@
 package ru.job4j.persistent;
 
+import org.apache.log4j.Logger;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -12,6 +14,11 @@ import java.util.GregorianCalendar;
  * @version 1.0.
  */
 public class ConditionRegistration {
+
+    /**.
+     * It's logger for this class
+     */
+    private static final Logger LOG = Logger.getLogger(ConditionRegistration.class);
 
     /**.
      * @time is time creating user

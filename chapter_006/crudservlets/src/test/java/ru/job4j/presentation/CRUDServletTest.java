@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
@@ -45,7 +46,7 @@ public class CRUDServletTest {
         DBStore db = DBStore.getInstance();
         User user = db.findById(db.getId());
 
-        Assert.assertEquals(user.getLogin(), "test");
+        Assert.assertThat(user.getLogin(), is("test"));
 
         verify(request, atLeast(1)).getParameter("name");
         verify(request, atLeast(1)).getParameter("login");

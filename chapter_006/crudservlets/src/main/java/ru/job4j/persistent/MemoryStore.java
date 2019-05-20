@@ -1,7 +1,7 @@
 package ru.job4j.persistent;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.apache.log4j.Logger;
 
 import java.util.Calendar;
 import java.util.List;
@@ -18,9 +18,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class MemoryStore implements Store {
 
     /**.
-     * It's logger for this class
+     * It's LOG for this class
      */
-    private final Logger logger = LoggerFactory.getLogger(MemoryStore.class);
+    private static final Logger LOG = Logger.getLogger(MemoryStore.class);
 
     /**.
      * Is id for users
@@ -59,8 +59,8 @@ public class MemoryStore implements Store {
     @Override
     public void add(User user) {
         long time = Calendar.getInstance().getTimeInMillis();
-        storage.add(new User(id++, user.getName(), user.getLogin(), user.getPassword(), user.getPassword(), time,
-                user.getRole(), user.getCountry(), user.getCity()));
+        storage.add(new User(id++, user.getName(), user.getLogin(), user.getPassword(), user.getEmail(), user.getRole(),
+                new ConditionRegistration(time, user.getCountry(), user.getCity())));
     }
 
     /**.
@@ -135,9 +135,9 @@ public class MemoryStore implements Store {
     }
 
     /**.
-     *
-     * @param user
-     * @return
+     * Check is credetional
+     * @param user user for checker
+     * @return result
      */
     @Override
     public boolean isCredentional(User user) {
@@ -145,10 +145,10 @@ public class MemoryStore implements Store {
     }
 
     /**.
-     *
-     * @param login
-     * @param password
-     * @return
+     * Check is existing
+     * @param login is login for checking
+     * @param password is password for checking
+     * @return result checking
      */
     @Override
     public boolean isExisting(String login, String password) {
@@ -157,9 +157,9 @@ public class MemoryStore implements Store {
     }
 
     /**.
-     *
-     * @param login
-     * @return
+     * Checking is admin
+     * @param login is login for checking
+     * @return result checking
      */
     @Override
     public boolean isAdmin(String login) {
@@ -167,12 +167,22 @@ public class MemoryStore implements Store {
         return false;
     }
 
+    /**.
+     * Check is exist id
+     * @param id is id for checking
+     * @return result checking
+     */
     @Override
     public boolean existID(int id) {
         //TODO
         return false;
     }
 
+    /**.
+     * Checking need update
+     * @param user user for checking
+     * @return result checking
+     */
     @Override
     public boolean needUpdate(User user) {
         //TODO
