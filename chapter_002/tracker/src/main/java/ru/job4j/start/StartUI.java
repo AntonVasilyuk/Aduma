@@ -1,6 +1,7 @@
 package ru.job4j.start;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 /**.
 * Chapter_002
@@ -24,19 +25,26 @@ public class StartUI {
 	private Tracker tracker;
 
 	/**.
+	 * @output is link to consumer interface
+	 */
+	private Consumer<String> output;
+
+	/**.
 	* It's constructor for this class
 	* @param input input parametr object
 	* @param tracker parametr object
+	 * @param output is example realisation consumer interface
 	*/
-	public StartUI(Input input, Tracker tracker) {
+	public StartUI(Input input, Tracker tracker, Consumer<String> output) {
 		this.input = input;
 		this.tracker = tracker;
+		this.output = output;
 	}
 	/**.
 	* method for intaraction with apps tracker
 	*/
 	public void init() {
-		MenuTracker menu = new MenuTracker(this.input, this.tracker);
+		MenuTracker menu = new MenuTracker(this.input, this.tracker, System.out::print);
 
 		menu.fillActions();
 		List<Integer> ranges = menu.getArrayNumber();
@@ -55,6 +63,6 @@ public class StartUI {
 	public static void main(String[] args) {
 		Input input = new ValidateInput();
 		Tracker tracker = new Tracker();
-		new StartUI(input, tracker).init();
+		new StartUI(input, tracker, System.out::print).init();
 	}
 }

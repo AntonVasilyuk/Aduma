@@ -6,6 +6,7 @@ import ru.job4j.templates.BaseAction;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.function.Consumer;
 
 /**.
 * Chapter_002
@@ -40,13 +41,20 @@ public class MenuTracker {
 	private String nameAction;
 
 	/**.
+	 * @output is link to consumer interface
+	 */
+	private Consumer<String> output;
+
+	/**.
 	* Constructor.
 	* @param input instance for input.
 	* @param tracker instance for tracker.
+	 * @param output is example realisation consumer interface
 	*/
-	public MenuTracker(Input input, Tracker tracker) {
+	public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
 		this.input = input;
 		this.tracker = tracker;
+		this.output = output;
 	}
 
 	/**.
@@ -61,9 +69,6 @@ public class MenuTracker {
 		this.actions.add(this.new FindByName(5, "Find item by name"));
 	}
 
-/* 	public void addActions(UserAction action) {
-		this.actions[position++] = action;
-	} */
 	/**.
 	* method for select action
 	* @param key number action
@@ -82,7 +87,7 @@ public class MenuTracker {
 	public void show() {
 		for (UserAction action : this.actions) {
 			if (action != null) {
-			System.out.println(action.info(nameAction));
+			output.accept(action.info(nameAction));
 			}
 		}
 	}
@@ -124,7 +129,7 @@ public class MenuTracker {
 			String desc = input.ask("Enter the desc for item:");
 			Item item = new Item(name, desc, date.getTime());
 			tracker.add(item);
-			System.out.println("Thanks you! Your wish fulfilled");
+			output.accept("Thanks you! Your wish fulfilled");
 		}
 	}
 
@@ -153,7 +158,7 @@ public class MenuTracker {
 			for (Item element : arrayElement) {
 				System.out.println(element.getName() + ", " + element.getDesc());
 			}
-			System.out.println("Thanks you! Your wish fulfilled");
+			output.accept("Thanks you! Your wish fulfilled");
 		}
 	}
 
@@ -185,7 +190,7 @@ public class MenuTracker {
 			Item item = new Item(name, desc, date.getTime());
 			item.setId(id);
 			tracker.update(item);
-			System.out.println("Thanks you! Your wish fulfilled");
+			output.accept("Thanks you! Your wish fulfilled");
 		}
 	}
 
@@ -212,7 +217,7 @@ public class MenuTracker {
 		public void execute(Input input, Tracker tracker) {
 			String id = input.ask("Enter the id for item:");
 			tracker.delete(tracker.findById(id));
-			System.out.println("Thanks you! Your wish fulfilled");
+			output.accept("Thanks you! Your wish fulfilled");
 		}
 	}
 
@@ -239,8 +244,8 @@ public class MenuTracker {
 		public void execute(Input input, Tracker tracker) {
 			String id = input.ask("Enter the id for item:");
 			Item item = tracker.findById(id);
-			System.out.println(item.getName() + ", " + item.getDesc());
-			System.out.println("Thanks you! Your wish fulfilled");
+			output.accept(item.getName() + ", " + item.getDesc());
+			output.accept("Thanks you! Your wish fulfilled");
 		}
 	}
 
@@ -268,9 +273,9 @@ public class MenuTracker {
 			String name = input.ask("Enter the name for item:");
 			List<Item> arrayElement = tracker.findByName(name);
 			for (Item element : arrayElement) {
-				System.out.println(element.getName() + ", " + element.getDesc());
+				output.accept(element.getName() + ", " + element.getDesc());
 			}
-			System.out.println("Thanks you! Your wish fulfilled");
+			output.accept("Thanks you! Your wish fulfilled");
 		}
 	}
 }

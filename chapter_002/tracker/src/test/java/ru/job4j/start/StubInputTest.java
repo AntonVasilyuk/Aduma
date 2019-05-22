@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Scanner;
 import java.util.Date;
 
@@ -14,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
+import java.util.function.Consumer;
 
 import ru.job4j.models.Item;
 
@@ -27,6 +29,31 @@ import ru.job4j.models.Item;
 */
 
 public class StubInputTest {
+
+	/**.
+	 * @out it's array byte for send text
+	 */
+	private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+	/**.
+	 * @output it's interface consumer
+	 */
+	private final Consumer<String> output = new Consumer<String>() {
+
+		/**.
+		 * @stdout it's example printstream
+		 */
+		private final PrintStream stdout = new PrintStream(out);
+
+		/**.
+		 * Realisation main method this interface
+		 * @param s is text for output
+		 */
+		@Override
+		public void accept(String s) {
+			stdout.println(s);
+		}
+	};
 
 	/**.
 	* @date date for getTime
@@ -53,8 +80,7 @@ public class StubInputTest {
 	public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
 		Tracker tracker = new Tracker();
 		Input input = new StubInput(new String[] {"0", "Testing name", "desc", "y"});
-		new StartUI(input, tracker).init();
-		System.out.print(tracker.findAll().get(0).getName());
+		new StartUI(input, tracker, output).init();
 		assertThat(tracker.findAll().get(0).getName(), is("Testing name"));
 	}
 
@@ -67,7 +93,7 @@ public class StubInputTest {
 		Item item = new Item("Ivan", "desc", date.getTime());
 		tracker.add(item);
 		Input input = new StubInput(new String[] {"1", "y"});
-		new StartUI(input, tracker).init();
+		new StartUI(input, tracker, output).init();
 		assertThat(tracker.findAll().get(0).getName(), is("Ivan"));
 	}
 
@@ -81,7 +107,7 @@ public class StubInputTest {
 		tracker.add(item);
 		item.setId("1");
 		Input input = new StubInput(new String[] {"2", "1", "Egor", "desc", "y"});
-		new StartUI(input, tracker).init();
+		new StartUI(input, tracker, output).init();
 		assertThat(tracker.findAll().get(0).getName(), is("Egor"));
 	}
 
@@ -95,7 +121,7 @@ public class StubInputTest {
 		tracker.add(item);
 		String itemId = item.getId();
 		Input input = new StubInput(new String[] {"3", itemId, "y"});
-		new StartUI(input, tracker).init();
+		new StartUI(input, tracker, output).init();
 		assertThat(tracker.findAll().size(), is(0));
 	}
 
@@ -111,7 +137,7 @@ public class StubInputTest {
 		Input input = new StubInput(new String[] {"4", item.getId(), "y"});
 		FileOutputStream f = new FileOutputStream("file.txt");
 		System.setOut(new PrintStream(f));
-		new StartUI(input, tracker).init();
+		new StartUI(input, tracker, output).init();
 		String fact = readUsingScanner("file.txt");
 		assertTrue(fact.contains("bingo"));
 	}
@@ -125,7 +151,7 @@ public class StubInputTest {
 		Item item = new Item("Zoiberg", "Bingo", date.getTime());
 		tracker.add(item);
 		Input input = new StubInput(new String[] {"5", "Zoiberg", "y"});
-		new StartUI(input, tracker).init();
+		new StartUI(input, tracker, output).init();
 		assertThat(tracker.findAll().get(0).getDesc(), is("Bingo"));
 	}
 
@@ -137,6 +163,6 @@ public class StubInputTest {
 	public void whenEnterNumberInlegalThenCallMOE() throws MenuOutException {
 		Tracker tracker = new Tracker();
 		Input input = new StubInput(new String[] {"10", "y"});
-		new StartUI(input, tracker).init();
+		new StartUI(input, tracker, output).init();
 	}
 }
