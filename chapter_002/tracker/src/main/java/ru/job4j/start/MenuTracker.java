@@ -21,6 +21,10 @@ import java.util.function.Consumer;
 public class MenuTracker {
 
 	/**.
+	 * @ln next line
+	 */
+	private final String ln = "\n";
+	/**.
 	* @input value for parametr
 	*/
 	private Input input;
@@ -156,7 +160,7 @@ public class MenuTracker {
 		public void execute(Input input, Tracker tracker) {
 			List<Item> arrayElement = tracker.findAll();
 			for (Item element : arrayElement) {
-				System.out.println(element.getName() + ", " + element.getDesc());
+				output.accept(element.getName() + ", " + element.getDesc() + ln);
 			}
 			output.accept("Thanks you! Your wish fulfilled");
 		}
