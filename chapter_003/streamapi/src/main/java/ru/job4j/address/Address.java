@@ -1,5 +1,7 @@
 package ru.job4j.address;
 
+import java.util.Objects;
+
 /**.
  * Chapter_003
  * Task_110062
@@ -75,5 +77,37 @@ public class Address {
      */
     public int getApartment() {
         return apartment;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return home == address.home &&
+                apartment == address.apartment &&
+                Objects.equals(city, address.city) &&
+                Objects.equals(street, address.street);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        int count = 31;
+        result = count * result + city.hashCode();
+        result = count * result + street.hashCode();
+        result = count * result + home;
+        result = count * result + apartment;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", home=" + home +
+                ", apartment=" + apartment +
+                '}';
     }
 }
