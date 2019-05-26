@@ -6,6 +6,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.is;
+
 /**.
  * Chapter_003
  * Test working class School,
@@ -37,5 +39,20 @@ public class SchoolTest {
             result = true;
         }
         Assert.assertTrue(result);
+    }
+
+    /**.
+     * Test working method selection students by score
+     */
+    @Test
+    public void whenFiveStudentsThenGetThreeStudensWithScoreBetterBound() {
+        List<Student> students = new ArrayList<>();
+        students.add(new Student(50, "Veselov"));
+        students.add(new Student(55, "Solvov"));
+        students.add(new Student(60, "Usov"));
+        students.add(new Student(65, "Lovchiq"));
+        students.add(new Student(70, "Volkov"));
+        List<Student> result = new School().levelOf(students, 57);
+        Assert.assertThat(result.size(), is(3));
     }
 }

@@ -10,7 +10,7 @@ import java.util.Objects;
  * @version 1.0
  * @since 0.1
  */
-public class Student {
+public class Student implements Comparable<Student> {
 
     /**.
      * @score it's score this student
@@ -64,5 +64,10 @@ public class Student {
         result = result * con + score;
         result = result * con + family.hashCode();
         return result;
+    }
+
+    @Override
+    public int compareTo(Student o) {
+        return Integer.compare(this.score, o.getScore());
     }
 }
