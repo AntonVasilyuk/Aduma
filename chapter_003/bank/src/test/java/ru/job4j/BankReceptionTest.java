@@ -18,12 +18,32 @@ import static org.junit.Assert.assertThat;
 public class BankReceptionTest {
 
     /**.
+     * @nameOne is name for the one user
+     */
+    private String nameOne = "Egor Safilow";
+
+    /**.
+     * @passportOne is passport for the one user
+     */
+    private int passportOne = 876145963;
+
+    /**.
+     * @nameTwo is name for the two user
+     */
+    private String nameTwo = "Igor Volochko";
+
+    /**.
+     * @passportTwo is passport for the two user
+     */
+    private int passportTwo = 876145961;
+
+    /**.
      * Test adding user to bank datebase
      */
     @Test
     public void whenNeedCheckAddUserToDateBaseBankThenCheckIt() {
         BankReception bank = new BankReception();
-        User userOne = new User("Egor Safilow", 876145963);
+        User userOne = new User(nameOne, passportOne);
         bank.addUser(userOne);
         Map<User, List<Account>> checkSize = bank.getBankBase();
         boolean fact = false;
@@ -40,11 +60,11 @@ public class BankReceptionTest {
     @Test
     public void whenNeedCheckDelUserToDateBaseBankThenCheckIt() {
         BankReception bank = new BankReception();
-        User userOne = new User("Egor Safilow", 876145963);
+        User userOne = new User(nameOne, passportOne);
         bank.addUser(userOne);
         Map<User, List<Account>> checkSizeOne = bank.getBankBase();
         int oneSize = checkSizeOne.size();
-        bank.deleteUser(userOne);
+        bank.deleteUser(passportOne);
         int twoSize = checkSizeOne.size();
         boolean fact = false;
         boolean expect = true;
@@ -60,12 +80,12 @@ public class BankReceptionTest {
     @Test
     public void whenNeedAddAccountForUserToDateBaseBankThenCheckIt() {
         BankReception bank = new BankReception();
-        User userOne = new User("Egor Safilow", 876145963);
+        User userOne = new User(nameOne, passportOne);
         bank.addUser(userOne);
-        int oneSize = bank.getUserAccounts(userOne).size();
+        int oneSize = bank.getUserAccounts(passportOne).size();
         Account account = new Account(100.0, 100200);
-        bank.addAccountToUser(userOne, account);
-        int twoSize = bank.getUserAccounts(userOne).size();
+        bank.addAccountToUser(passportOne, account);
+        int twoSize = bank.getUserAccounts(passportOne).size();
         boolean fact = false;
         boolean expect = true;
         if (oneSize != twoSize) {
@@ -80,14 +100,14 @@ public class BankReceptionTest {
     @Test
     public void whenNeedDelAccountForUserToDateBaseBankThenCheckIt() {
         BankReception bank = new BankReception();
-        User userOne = new User("Egor Safilow", 876145963);
+        User userOne = new User(nameOne, passportOne);
         bank.addUser(userOne);
-        int oneSize = bank.getUserAccounts(userOne).size();
+        int oneSize = bank.getUserAccounts(passportOne).size();
         Account account = new Account(100.0, 100200);
-        bank.addAccountToUser(userOne, account);
-        int twoSize = bank.getUserAccounts(userOne).size();
-        bank.deleteAccountFromUser(userOne, account);
-        int thirdSize = bank.getUserAccounts(userOne).size();
+        bank.addAccountToUser(passportOne, account);
+        int twoSize = bank.getUserAccounts(passportOne).size();
+        bank.deleteAccountFromUser(passportOne, account);
+        int thirdSize = bank.getUserAccounts(passportOne).size();
         boolean fact = false;
         boolean expect = true;
         if (oneSize != twoSize && oneSize == thirdSize) {
@@ -102,26 +122,19 @@ public class BankReceptionTest {
     @Test
     public void whenNeedTransferValueThenCheckIt() {
         BankReception bank = new BankReception();
-
-        User userOne = new User("Egor Safilow", 876145963);
-        User userTwo = new User("Igor Volochko", 876145961);
-
+        User userOne = new User(nameOne, passportOne);
+        User userTwo = new User(nameTwo, passportTwo);
         bank.addUser(userOne);
         bank.addUser(userTwo);
-
         Account accountOne = new Account(100.0, 100200);
         Account accountTwo = new Account(200.0, 100201);
-
-        bank.addAccountToUser(userOne, accountOne);
-        bank.addAccountToUser(userTwo, accountTwo);
-
-        bank.transferMoney(userOne, accountOne, userTwo, accountTwo, 50.0);
-
+        bank.addAccountToUser(passportOne, accountOne);
+        bank.addAccountToUser(passportTwo, accountTwo);
+        bank.transferMoney(passportOne, accountOne, passportTwo, accountTwo, 50.0);
         int indexAccountOne = bank.getBankBase().get(userOne).indexOf(accountOne);
         int indexAccountTwo = bank.getBankBase().get(userTwo).indexOf(accountTwo);
         double resultUserOne = bank.getBankBase().get(userOne).get(indexAccountOne).getValue();
         double resultUserTwo = bank.getBankBase().get(userTwo).get(indexAccountTwo).getValue();
-
         boolean fact = false;
         boolean expect = true;
         if (resultUserOne == 50.0 && resultUserTwo == 250.0) {
