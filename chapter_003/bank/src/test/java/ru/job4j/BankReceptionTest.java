@@ -17,12 +17,24 @@ import static org.junit.Assert.assertThat;
 
 public class BankReceptionTest {
 
+    /**.
+     * @nameOne is name for the one user
+     */
     private String nameOne = "Egor Safilow";
 
+    /**.
+     * @passportOne is passport for the one user
+     */
     private int passportOne = 876145963;
 
+    /**.
+     * @nameTwo is name for the two user
+     */
     private String nameTwo = "Igor Volochko";
 
+    /**.
+     * @passportTwo is passport for the two user
+     */
     private int passportTwo = 876145961;
 
     /**.
@@ -112,23 +124,17 @@ public class BankReceptionTest {
         BankReception bank = new BankReception();
         User userOne = new User(nameOne, passportOne);
         User userTwo = new User(nameTwo, passportTwo);
-
         bank.addUser(userOne);
         bank.addUser(userTwo);
-
         Account accountOne = new Account(100.0, 100200);
         Account accountTwo = new Account(200.0, 100201);
-
         bank.addAccountToUser(passportOne, accountOne);
         bank.addAccountToUser(passportTwo, accountTwo);
-
         bank.transferMoney(passportOne, accountOne, passportTwo, accountTwo, 50.0);
-
         int indexAccountOne = bank.getBankBase().get(userOne).indexOf(accountOne);
         int indexAccountTwo = bank.getBankBase().get(userTwo).indexOf(accountTwo);
         double resultUserOne = bank.getBankBase().get(userOne).get(indexAccountOne).getValue();
         double resultUserTwo = bank.getBankBase().get(userTwo).get(indexAccountTwo).getValue();
-
         boolean fact = false;
         boolean expect = true;
         if (resultUserOne == 50.0 && resultUserTwo == 250.0) {
