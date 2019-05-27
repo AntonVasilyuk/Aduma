@@ -24,16 +24,7 @@ public class ReverseArrayTest {
         ReverseArray reverseArray = new ReverseArray();
         int[][] array = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         List<Integer> list = reverseArray.toList(array);
-        List<Integer> listSecond = new LinkedList<>();
-        listSecond.add(1);
-        listSecond.add(2);
-        listSecond.add(3);
-        listSecond.add(4);
-        listSecond.add(5);
-        listSecond.add(6);
-        listSecond.add(7);
-        listSecond.add(8);
-        listSecond.add(9);
+        List<Integer> listSecond = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
         boolean fact = false;
         if (list.containsAll(listSecond)) {
             fact = true;
@@ -48,14 +39,7 @@ public class ReverseArrayTest {
     @Test
     public void whenNeedTransformCollectionToArrayThenDoIt() {
         ReverseArray reverseArray = new ReverseArray();
-        List<Integer> list = new LinkedList<>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        list.add(4);
-        list.add(5);
-        list.add(6);
-        list.add(7);
+        List<Integer> list = List.of(1, 2, 3, 4, 5, 6, 7);
         int[][] array = reverseArray.toArray(list, 3);
         int[][] arraySecond = {{1, 2, 3}, {4, 5, 6}, {7, 0, 0}};
         boolean fact = true;
@@ -78,12 +62,7 @@ public class ReverseArrayTest {
     public void whenNeedCreateListFromSeveralArrayThenCheckIt() {
         ReverseArray reverseArray = new ReverseArray();
         List<Integer> listInteger = new LinkedList<>();
-        List<Integer> listCheck = new LinkedList<>();
-        listCheck.add(1);
-        listCheck.add(2);
-        listCheck.add(3);
-        listCheck.add(7);
-        listCheck.add(9);
+        List<Integer> listCheck = List.of(1, 2, 3, 7, 9);
         List<int[]> listArray = new LinkedList<>();
         int[] one = {1, 2, 3};
         int[] second = {7, 9};

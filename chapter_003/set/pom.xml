@@ -3,6 +3,14 @@
 	<groupId>ru.job4j.chapter_003</groupId>
 	<artifactId>set</artifactId>
 	<version>2.0</version>
+    <dependencies>
+        <dependency>
+            <groupId>ru.job4j.chapter_003</groupId>
+            <artifactId>list</artifactId>
+            <version>2.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
     <packaging>jar</packaging>
 	<name>set</name>

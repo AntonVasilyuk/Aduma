@@ -25,14 +25,11 @@ public class SortUserTest {
     @Test
     public void whenAddArrayThenGetSortingArray() {
         SortUser sortUser = new SortUser();
-        List<User> list = new ArrayList<>();
         Set<User> sortingList = new TreeSet<>();
         User one = new User("Ivan", 23);
         User two = new User("Boris", 20);
         User three = new User("Vladimir", 55);
-        list.add(one);
-        list.add(two);
-        list.add(three);
+        List<User> list = List.of(one, two, three);
         sortingList = sortUser.sort(list);
         String fact = "Result sorting : ";
         for (User user : sortingList) {
@@ -62,7 +59,7 @@ public class SortUserTest {
         for (User user : sortingList) {
             fact += user.getAge();
         }
-        String expect = "Result sorting : 552320";
+        String expect = "Result sorting : 552023";
         assertThat(fact, is(expect));
 
     }

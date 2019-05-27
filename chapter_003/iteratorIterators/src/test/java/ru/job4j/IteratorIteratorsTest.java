@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,10 +31,10 @@ public class IteratorIteratorsTest {
      */
     @Before
     public void preparingForTesting() {
-        List<Integer> listOne = new ArrayList(Arrays.asList(1, 2, 3));
-        List<Integer> listTwo = new ArrayList(Arrays.asList(4, 5, 6));
-        List<Integer> listThird = new ArrayList(Arrays.asList(7, 8));
-        List<Iterator<Integer>> it = new ArrayList(Arrays.asList(
+        List<Integer> listOne = new ArrayList(List.of(1, 2, 3));
+        List<Integer> listTwo = new ArrayList(List.of(4, 5, 6));
+        List<Integer> listThird = new ArrayList(List.of(7, 8));
+        List<Iterator<Integer>> it = new ArrayList(List.of(
                 (listOne.iterator()), listTwo.iterator(), listThird.iterator()));
         IteratorIterators iterators = new IteratorIterators();
         this.convertIterator = iterators.convert(it.iterator());

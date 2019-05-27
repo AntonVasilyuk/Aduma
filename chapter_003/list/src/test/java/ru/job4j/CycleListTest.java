@@ -31,10 +31,8 @@ public class CycleListTest {
         list.add(two);
         list.add(tree);
         list.add(four);
-
         list.makeCycle();
         boolean result = list.hasCycle();
-
         assertThat(result, is(true));
     }
 

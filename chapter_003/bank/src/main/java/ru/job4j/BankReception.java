@@ -1,6 +1,11 @@
 package ru.job4j;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.Optional;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 /**.
@@ -30,6 +35,7 @@ public class BankReception {
     /**.
      * Getter for user by passport
      * @param passport is passport for searching user
+     * @return user by passport
      */
     public User getUser(int passport) {
         Optional<User> user = bank.keySet().stream().filter(x -> x.getPassport() == passport).findFirst();
@@ -103,17 +109,6 @@ public class BankReception {
         }
         return result;
      }
-
-    public boolean transferMoneyStreamApi(User srcUser, Account srcAccount, User dstUser, Account dstAccount, double amount) {
-        boolean result;
-        if (bank.containsKey(dstUser) && bank.containsKey(srcUser)) {
-
-            result = true;
-        } else {
-            result = false;
-        }
-        return result;
-    }
 
     /**.
      * Getter for bank storage

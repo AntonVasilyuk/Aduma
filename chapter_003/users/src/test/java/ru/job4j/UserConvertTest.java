@@ -2,7 +2,6 @@ package ru.job4j;
 
 import java.util.List;
 import java.util.HashMap;
-import java.util.LinkedList;
 
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;
@@ -26,13 +25,8 @@ public class UserConvertTest {
     public void whenIsListUsersThenConvertIsToMap() {
         UserConvert userconv = new UserConvert();
         HashMap<Integer, User> hashMapUsers = new HashMap<>();
-        List<User> list = new LinkedList<>();
-        User userOne = new User(1, "Boris", "Moscow");
-        User userTwo = new User(2, "Ivan", "Novosibirsk");
-        User userThird = new User(3, "Gregory", "Dacota");
-        list.add(userOne);
-        list.add(userTwo);
-        list.add(userThird);
+        List<User> list = List.of(
+            new User(1, "Boris", "Moscow"), new User(2, "Ivan", "Novosibirsk"), new User(3, "Gregory", "Dacota"));
         hashMapUsers = userconv.process(list);
         boolean fact = false;
         boolean expect = true;

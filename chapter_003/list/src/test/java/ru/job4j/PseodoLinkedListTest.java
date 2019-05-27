@@ -50,17 +50,6 @@ public class PseodoLinkedListTest {
         assertThat(link.getSize(), is(1));
     }
 
-//    /**.
-//     * Test working method get
-//     */
-//    @Test
-//    public void whenGetElementThenReturnBingo() {
-//        String testWord = "Bingo";
-//        link.add(testWord);
-//        String test = String.valueOf(link.get(0));
-//        assertThat(test, is("Bingo"));
-//    }
-
     /**.
      * Test add more element to list
      */

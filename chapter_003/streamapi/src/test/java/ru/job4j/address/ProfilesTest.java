@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
@@ -30,12 +29,12 @@ public class ProfilesTest {
      */
     @Before
     public void loadList() {
-        listProfile = new ArrayList<>();
-        listProfile.add(new Profile(new Address("London", "Haski", 3, 15)));
-        listProfile.add(new Profile(new Address("Ambrasador", "Turor", 4, 15)));
-        listProfile.add(new Profile(new Address("Kiev", "Wiskas", 5, 15)));
-        listProfile.add(new Profile(new Address("London", "Haski", 3, 15)));
-        listProfile.add(new Profile(new Address("Rostov", "Haski", 3, 15)));
+        listProfile = List.of(
+            new Profile(new Address("London", "Haski", 3, 15))
+            ,new Profile(new Address("Ambrasador", "Turor", 4, 15))
+            ,new Profile(new Address("Kiev", "Wiskas", 5, 15))
+            ,new Profile(new Address("London", "Haski", 3, 15))
+            ,new Profile(new Address("Rostov", "Haski", 3, 15)));
     }
 
     /**.

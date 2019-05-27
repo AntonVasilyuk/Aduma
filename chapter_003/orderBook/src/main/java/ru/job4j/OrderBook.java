@@ -229,9 +229,7 @@ public class OrderBook {
                 return Double.compare(o2, o1);
             }
         });
-        orderBook = new HashMap<>();
-        orderBook.put(nameBid, orderBookBid);
-        orderBook.put(nameAsk, orderBookAsk);
+        orderBook = Map.of(nameBid, orderBookBid, nameAsk, orderBookAsk);
         orderBooks.put(nameBook, orderBook);
     }
 }

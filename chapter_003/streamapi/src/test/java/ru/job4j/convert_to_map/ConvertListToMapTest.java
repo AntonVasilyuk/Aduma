@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.job4j.school.Student;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,11 +32,11 @@ public class ConvertListToMapTest {
      */
     @Before
     public void loadStudents() {
-        list = new ArrayList<>();
-        list.add(new Student(5, "Semenov"));
-        list.add(new Student(10, "Zaharov"));
-        list.add(new Student(15, "Razanov"));
-        list.add(new Student(15, "Razanov"));
+        list = List.of(
+            new Student(5, "Semenov")
+            ,new Student(10, "Zaharov")
+            ,new Student(15, "Razanov")
+            ,new Student(15, "Razanov"));
     }
 
     /**.
