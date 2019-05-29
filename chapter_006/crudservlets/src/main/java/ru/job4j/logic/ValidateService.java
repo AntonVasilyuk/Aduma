@@ -1,7 +1,6 @@
 package ru.job4j.logic;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import ru.job4j.persistent.DBStore;
 import ru.job4j.persistent.Store;
 import ru.job4j.persistent.User;
@@ -21,7 +20,7 @@ public class ValidateService {
     /**.
      * Is LOGGER for this class
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ValidateService.class);
+    private static final Logger LOGGER = Logger.getLogger(ValidateService.class);
 
     /**.
      * Instance for singleton ValidateService class

@@ -35,7 +35,7 @@ public class SchoolTest {
         List<Student> classB = school.collect(list, x -> x.getScore() >= 50 && x.getScore() < 70);
         List<Student> classC = school.collect(list, x -> x.getScore() >= 70 && x.getScore() <= 100);
         boolean result = false;
-        if(classA.size() == 3 && classB.size() == 3 && classC.size() == 3) {
+        if (classA.size() == 3 && classB.size() == 3 && classC.size() == 3) {
             result = true;
         }
         Assert.assertTrue(result);
@@ -47,11 +47,11 @@ public class SchoolTest {
     @Test
     public void whenFiveStudentsThenGetThreeStudensWithScoreBetterBound() {
         List<Student> students = List.of(
-            new Student(50, "Veselov")
-            ,new Student(55, "Solvov")
-            ,new Student(60, "Usov")
-            ,new Student(65, "Lovchiq")
-            ,new Student(70, "Volkov"));
+            new Student(50, "Veselov"),
+                new Student(55, "Solvov"),
+                new Student(60, "Usov"),
+                new Student(65, "Lovchiq"),
+                new Student(70, "Volkov"));
         List<Student> result = new School().levelOf(students, 57);
         Assert.assertThat(result.size(), is(3));
     }

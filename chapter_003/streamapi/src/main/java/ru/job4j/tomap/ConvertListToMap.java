@@ -1,4 +1,4 @@
-package ru.job4j.convert_to_map;
+package ru.job4j.tomap;
 
 import ru.job4j.school.Student;
 

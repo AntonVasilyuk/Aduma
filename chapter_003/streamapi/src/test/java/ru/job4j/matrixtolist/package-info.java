@@ -6,4 +6,4 @@
  * @version $Id$
  * @since 0.1
  */
-package ru.job4j.convert_matrix_to_list;
+package ru.job4j.matrixtolist;

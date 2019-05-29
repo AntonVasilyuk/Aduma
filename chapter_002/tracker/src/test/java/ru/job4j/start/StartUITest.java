@@ -3,7 +3,13 @@ package ru.job4j.start;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.StringReader;
 import java.util.List;
 import java.util.stream.Collectors;
 

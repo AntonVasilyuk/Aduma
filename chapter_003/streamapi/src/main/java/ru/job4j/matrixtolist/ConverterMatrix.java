@@ -1,4 +1,4 @@
-package ru.job4j.convert_matrix_to_list;
+package ru.job4j.matrixtolist;
 
 import java.util.List;
 import java.util.stream.Collectors;

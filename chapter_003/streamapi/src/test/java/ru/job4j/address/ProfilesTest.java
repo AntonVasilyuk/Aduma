@@ -30,11 +30,11 @@ public class ProfilesTest {
     @Before
     public void loadList() {
         listProfile = List.of(
-            new Profile(new Address("London", "Haski", 3, 15))
-            ,new Profile(new Address("Ambrasador", "Turor", 4, 15))
-            ,new Profile(new Address("Kiev", "Wiskas", 5, 15))
-            ,new Profile(new Address("London", "Haski", 3, 15))
-            ,new Profile(new Address("Rostov", "Haski", 3, 15)));
+            new Profile(new Address("London", "Haski", 3, 15)),
+                new Profile(new Address("Ambrasador", "Turor", 4, 15)),
+                new Profile(new Address("Kiev", "Wiskas", 5, 15)),
+                new Profile(new Address("London", "Haski", 3, 15)),
+                new Profile(new Address("Rostov", "Haski", 3, 15)));
     }
 
     /**.

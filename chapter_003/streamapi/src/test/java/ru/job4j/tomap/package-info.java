@@ -1,9 +1,9 @@
 /**.
  * Chapter_003.
- * App for converting multi-level array to list
+ * Test working app convert map to list
  *
  * @author Anton Vasilyuk (wrajina99@gmail.com)
  * @version $Id$
  * @since 0.1
  */
-package ru.job4j.convert_matrix_to_list;
+package ru.job4j.tomap;

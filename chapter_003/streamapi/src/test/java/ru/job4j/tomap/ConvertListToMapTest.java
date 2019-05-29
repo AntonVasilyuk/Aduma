@@ -1,4 +1,4 @@
-package ru.job4j.convert_to_map;
+package ru.job4j.tomap;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -33,10 +33,10 @@ public class ConvertListToMapTest {
     @Before
     public void loadStudents() {
         list = List.of(
-            new Student(5, "Semenov")
-            ,new Student(10, "Zaharov")
-            ,new Student(15, "Razanov")
-            ,new Student(15, "Razanov"));
+            new Student(5, "Semenov"),
+                new Student(10, "Zaharov"),
+                new Student(15, "Razanov"),
+                new Student(15, "Razanov"));
     }
 
     /**.
