@@ -1,4 +1,4 @@
-/**
+/**.
  * Check time on action collection.
  *
  * @author Anton Vasilyuk (wrajina99@gmail.com)

@@ -14,7 +14,7 @@
 
 	<modules>
 		<module>checkTime</module>
-		<module>reverseArray</module>
+		<!--<module>reverseArray</module>-->
 		<module>users</module>
 		<module>sorting</module>
 		<module>bank</module>

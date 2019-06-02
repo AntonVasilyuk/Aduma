@@ -13,14 +13,17 @@ public class Profession {
 	* @name worker
 	*/
 	private String name;
+
 	/**.
 	* @higherEducation worker
 	*/
 	private boolean higherEducation = false;
+
 	/**.
 	* @experience worker
 	*/
 	private double experience;
+
 	/**.
 	* @payment worker
 	*/
@@ -65,6 +68,7 @@ public class Profession {
 	public String getName() {
 		return name;
 	}
+
 	/**.
 	* Getter for take higherEducation
 	* @return higherEducation
@@ -79,6 +83,7 @@ public class Profession {
 	public double experience() {
 		return experience;
 	}
+
 	/**.
 	* Getter for take payment
 	* @return payment
@@ -86,6 +91,7 @@ public class Profession {
 	public int getPayment() {
 		return payment;
 	}
+
 	/**.
 	* Method for description qualification worker
 	* @return result

@@ -1,7 +1,8 @@
-# git_test
-Java A to Z, or from null skill to the middle!
+[![codecov](https://codecov.io/gh/AntonVasilyuk/Aduma/branch/master/graph/badge.svg)](https://codecov.io/gh/AntonVasilyuk/Aduma)
+[![Build Status](https://travis-ci.org/AntonVasilyuk/Aduma.svg?branch=master)](https://travis-ci.org/AntonVasilyuk/Aduma)
+# git_test 
 
-Примерная дата окончания курса 31.01.2017.
+Java A to Z, or from null skill to the middle!
 
 Пройденный материал:
 

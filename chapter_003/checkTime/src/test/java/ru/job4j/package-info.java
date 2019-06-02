@@ -1,7 +1,5 @@
-/**
- * Chapter_003.
- * Extra task
- * Check validate brackets
+/**.
+ * Check time on action collection.
  *
  * @author Anton Vasilyuk (wrajina99@gmail.com)
  * @version $Id$

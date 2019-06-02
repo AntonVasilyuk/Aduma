@@ -1,5 +1,5 @@
 /**
- * Check time on action collection.
+ * Test working class ReverseArray
  *
  * @author Anton Vasilyuk (wrajina99@gmail.com)
  * @version $Id$
