@@ -1,7 +1,6 @@
 package ru.job4j.presentation;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import ru.job4j.logic.ValidateService;
 import ru.job4j.persistent.ConditionRegistration;
 import ru.job4j.persistent.User;
@@ -30,7 +29,7 @@ public class UserUpdateServlet extends HttpServlet {
     /**.
      * Logger for this class
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserUpdateServlet.class);
+    private static final Logger LOG = Logger.getLogger(UserUpdateServlet.class);
 
     /**.
      * Method for getting info about client
@@ -64,7 +63,7 @@ public class UserUpdateServlet extends HttpServlet {
      */
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String id = req.getParameter("id");
+        String id = req.getParameter("id").replaceAll("\\s+", "");
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
@@ -72,12 +71,13 @@ public class UserUpdateServlet extends HttpServlet {
         String role = req.getParameter("role");
         String country = req.getParameter("country");
         String city = req.getParameter("city");
-        if (!id.equals("")) {
-            logic.update(new User(Integer.parseInt(id), name, login, password, email, role, new ConditionRegistration(
-                    new GregorianCalendar().getTimeInMillis(), country, city)));
-        } else {
-            LOGGER.info("Not correct id for updating.");
-        }
+        LOG.info(String.format("id - %s, name - %s, login - %s, password - %s, email - %s",
+                id, name, login, password, email));
+        LOG.info(String.format("user %s get parametrs, start creating", login));
+        User user = new User(Integer.parseInt(id), name, login, password, email, role, new ConditionRegistration(
+                new GregorianCalendar().getTimeInMillis(), country, city));
+        LOG.info(String.format(user.toString()));
+        logic.update(user);
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

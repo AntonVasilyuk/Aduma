@@ -108,7 +108,9 @@
                                 <td><c:out value="${user.city}"></c:out></td>
                                 <c:if test="${sessionScope.get('role') == 'admin'}">
                                     <td>
-                                        <a href="${pageContext.servletContext.contextPath}/update?id=${user.id}&name=${user.name}&login=${user.login}&password=${user.password}&email=${user.email}">edit</a>
+                                        <a href="${pageContext.servletContext.contextPath}/update?id=${user.id}
+                                        &name=${user.name}&login=${user.login}&password=${user.password}
+                                        &email=${user.email}">edit</a>
                                     </td>
                                     <td>
                                         <a href="${pageContext.servletContext.contextPath}/delete?id=${user.id}">del</a>

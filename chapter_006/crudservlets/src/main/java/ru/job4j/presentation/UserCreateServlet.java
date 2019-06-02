@@ -1,7 +1,6 @@
 package ru.job4j.presentation;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import ru.job4j.logic.ValidateService;
 import ru.job4j.persistent.User;
 
@@ -28,7 +27,7 @@ public class UserCreateServlet extends HttpServlet {
     /**.
      * Logger for this class
      */
-    private static final Logger LOG = LoggerFactory.getLogger(UsersServlet.class);
+    private static final Logger LOG = Logger.getLogger(UsersServlet.class);
 
     /**.
      * Method for getting info about client
@@ -52,6 +51,7 @@ public class UserCreateServlet extends HttpServlet {
      */
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        LOG.info("working servlet create user");
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
@@ -61,6 +61,7 @@ public class UserCreateServlet extends HttpServlet {
         String city = req.getParameter("city");
         User newUser = new User(name, login, password, email, role, country, city);
         logic.add(newUser);
+        LOG.info(newUser.toString());
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
 
     }

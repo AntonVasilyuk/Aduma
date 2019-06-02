@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**.
  * Task 9.2.1.
@@ -20,6 +21,11 @@ import java.util.List;
  */
 
 public class CityServlet extends HttpServlet {
+
+    /**.
+     * @LOG is logger
+     */
+    private static final Logger LOG = Logger.getLogger(CityServlet.class.getName());
 
     /**.
      * It's link to logic layot
@@ -40,10 +46,8 @@ public class CityServlet extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         String country = req.getParameter("country");
-        System.out.println(country);
         list = SERVICE.getCity(country);
         PrintWriter writer = resp.getWriter();
         writer.print(mapper.writeValueAsString(list));
-        System.out.println(list.size());
     }
 }

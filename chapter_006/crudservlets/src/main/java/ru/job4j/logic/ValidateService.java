@@ -20,7 +20,7 @@ public class ValidateService {
     /**.
      * Is LOGGER for this class
      */
-    private static final Logger LOGGER = Logger.getLogger(ValidateService.class);
+    private static final Logger LOG = Logger.getLogger(ValidateService.class);
 
     /**.
      * Instance for singleton ValidateService class
@@ -52,10 +52,11 @@ public class ValidateService {
      * @return result operation
      */
     public boolean add(User user) {
-        if (!isCredentional(user)) {
+        if (isCredentional(user)) {
             store.add(user);
             return true;
         }
+        LOG.info(String.format("user %s_%s_%s isExist", user.getName(), user.getLogin(), user.getEmail()));
         return false;
     }
 
@@ -99,10 +100,7 @@ public class ValidateService {
      * @return result
      */
     public boolean isCredentional(User user) {
-        if (store.isCredentional(user)) {
-            return true;
-        }
-        return false;
+        return store.isCredentional(user);
     }
 
     /**.

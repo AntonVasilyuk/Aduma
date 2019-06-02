@@ -41,6 +41,5 @@ public class CountryServlet extends HttpServlet {
         list = SERVICE.getCountries();
         PrintWriter writer = resp.getWriter();
         writer.print(mapper.writeValueAsString(list));
-        System.out.println(list.size());
     }
 }

@@ -1,7 +1,7 @@
 package ru.job4j.presentation;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.apache.log4j.Logger;
 import ru.job4j.logic.ValidateService;
 import ru.job4j.persistent.User;
 
@@ -36,7 +36,7 @@ public class SigninController extends HttpServlet {
     /**.
      * Logger for this class
      */
-    private static final Logger LOG = LoggerFactory.getLogger(SigninController.class);
+    private static final Logger LOG = Logger.getLogger(SigninController.class);
 
     /**.
      * Method for getting info about client
@@ -61,18 +61,14 @@ public class SigninController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        System.out.println(login + password);
         if (logic.isExisting(login, password)) {
-            System.out.println("user is valid");
             HttpSession session = req.getSession();
             session.setAttribute("login", login);
             if (logic.isAdmin(login)) {
                 session.setAttribute("role", "admin");
-                System.out.println("user is admin");
             }
             resp.sendRedirect(String.format("%s/", req.getContextPath()));
         } else {
-            System.out.println("user is no valid");
             req.setAttribute("error", "Credentional is invalid");
             doGet(req, resp);
         }

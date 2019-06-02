@@ -1,0 +1,114 @@
+2019-06-02 10:36:16 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 10:36:16 INFO  DBStore:79 - start adding new user to database: User id--1 name-test login-test email-test role-user
+2019-06-02 10:36:16 INFO  DBStore:97 - User test added to database time:java.util.GregorianCalendar[time=1559453776043,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id="Asia/Yekaterinburg",offset=18000000,dstSavings=0,useDaylight=false,transitions=68,lastRule=null],firstDayOfWeek=2,minimalDaysInFirstWeek=4,ERA=1,YEAR=2019,MONTH=5,WEEK_OF_YEAR=22,WEEK_OF_MONTH=0,DAY_OF_MONTH=2,DAY_OF_YEAR=153,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=0,HOUR=10,HOUR_OF_DAY=10,MINUTE=36,SECOND=16,MILLISECOND=43,ZONE_OFFSET=18000000,DST_OFFSET=0]
+2019-06-02 10:36:16 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 10:36:16 INFO  DBStore:287 - idUser-8, name-test, login-test, password-test@test.te, email-test, role-user, date-1559453776043, country-null, city-null
+2019-06-02 10:36:16 INFO  UserUpdateServlet:74 - id - 8, name - newTest, login - newTest, password - newPassword, email - newTest@test.te
+2019-06-02 10:36:16 INFO  UserUpdateServlet:76 - user newTest get parametrs, start creating
+2019-06-02 10:36:16 INFO  UserUpdateServlet:79 - User id-8 name-newTest login-newTest email-newTest@test.te role-user
+2019-06-02 10:36:16 INFO  DBStore:287 - idUser-8, name-newTest, login-newTest, password-newPassword, email-newTest@test.te, role-user, date-1559453776043, country-null, city-null
+2019-06-02 10:36:16 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 10:36:16 INFO  DBStore:79 - start adding new user to database: User id--1 name-test login-test email-test role-user
+2019-06-02 10:36:16 INFO  DBStore:97 - User test added to database time:java.util.GregorianCalendar[time=1559453776208,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id="Asia/Yekaterinburg",offset=18000000,dstSavings=0,useDaylight=false,transitions=68,lastRule=null],firstDayOfWeek=2,minimalDaysInFirstWeek=4,ERA=1,YEAR=2019,MONTH=5,WEEK_OF_YEAR=22,WEEK_OF_MONTH=0,DAY_OF_MONTH=2,DAY_OF_YEAR=153,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=0,HOUR=10,HOUR_OF_DAY=10,MINUTE=36,SECOND=16,MILLISECOND=208,ZONE_OFFSET=18000000,DST_OFFSET=0]
+2019-06-02 10:36:16 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 10:36:16 INFO  DBStore:287 - idUser-9, name-test, login-test, password-test@test.te, email-test, role-user, date-1559453776208, country-null, city-null
+2019-06-02 10:36:16 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 10:36:16 INFO  DBStore:355 - Login exist
+2019-06-02 10:36:16 INFO  ValidateService:59 - user test_test_test isExist
+2019-06-02 10:36:16 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 10:36:16 INFO  DBStore:287 - idUser-9, name-test, login-test, password-test@test.te, email-test, role-user, date-1559453776208, country-null, city-null
+2019-06-02 10:42:35 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 10:42:35 INFO  DBStore:79 - start adding new user to database: User id--1 name-test login-test email-test role-user
+2019-06-02 10:42:35 INFO  DBStore:97 - User test added to database time:java.util.GregorianCalendar[time=1559454155544,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id="Asia/Yekaterinburg",offset=18000000,dstSavings=0,useDaylight=false,transitions=68,lastRule=null],firstDayOfWeek=2,minimalDaysInFirstWeek=4,ERA=1,YEAR=2019,MONTH=5,WEEK_OF_YEAR=22,WEEK_OF_MONTH=0,DAY_OF_MONTH=2,DAY_OF_YEAR=153,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=0,HOUR=10,HOUR_OF_DAY=10,MINUTE=42,SECOND=35,MILLISECOND=544,ZONE_OFFSET=18000000,DST_OFFSET=0]
+2019-06-02 10:42:35 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 10:42:35 INFO  DBStore:287 - idUser-10, name-test, login-test, password-test@test.te, email-test, role-user, date-1559454155544, country-null, city-null
+2019-06-02 10:42:35 INFO  UserUpdateServlet:74 - id - 10, name - newTest, login - newTest, password - newPassword, email - newTest@test.te
+2019-06-02 10:42:35 INFO  UserUpdateServlet:76 - user newTest get parametrs, start creating
+2019-06-02 10:42:35 INFO  UserUpdateServlet:79 - User id-10 name-newTest login-newTest email-newTest@test.te role-user
+2019-06-02 10:42:35 INFO  DBStore:287 - idUser-10, name-newTest, login-newTest, password-newPassword, email-newTest@test.te, role-user, date-1559454155544, country-null, city-null
+2019-06-02 10:42:35 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 10:42:35 INFO  DBStore:79 - start adding new user to database: User id--1 name-test login-test email-test role-user
+2019-06-02 10:42:35 INFO  DBStore:97 - User test added to database time:java.util.GregorianCalendar[time=1559454155605,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id="Asia/Yekaterinburg",offset=18000000,dstSavings=0,useDaylight=false,transitions=68,lastRule=null],firstDayOfWeek=2,minimalDaysInFirstWeek=4,ERA=1,YEAR=2019,MONTH=5,WEEK_OF_YEAR=22,WEEK_OF_MONTH=0,DAY_OF_MONTH=2,DAY_OF_YEAR=153,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=0,HOUR=10,HOUR_OF_DAY=10,MINUTE=42,SECOND=35,MILLISECOND=605,ZONE_OFFSET=18000000,DST_OFFSET=0]
+2019-06-02 10:42:35 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 10:42:35 INFO  DBStore:287 - idUser-11, name-test, login-test, password-test@test.te, email-test, role-user, date-1559454155605, country-null, city-null
+2019-06-02 10:42:35 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 10:42:35 INFO  DBStore:355 - Login exist
+2019-06-02 10:42:35 INFO  ValidateService:59 - user test_test_test isExist
+2019-06-02 10:42:35 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 10:42:35 INFO  DBStore:287 - idUser-11, name-test, login-test, password-test@test.te, email-test, role-user, date-1559454155605, country-null, city-null
+2019-06-02 10:46:22 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 10:46:22 INFO  DBStore:79 - start adding new user to database: User id--1 name-test login-test email-test role-user
+2019-06-02 10:46:22 INFO  DBStore:97 - User test added to database time:java.util.GregorianCalendar[time=1559454382730,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id="Asia/Yekaterinburg",offset=18000000,dstSavings=0,useDaylight=false,transitions=68,lastRule=null],firstDayOfWeek=2,minimalDaysInFirstWeek=4,ERA=1,YEAR=2019,MONTH=5,WEEK_OF_YEAR=22,WEEK_OF_MONTH=0,DAY_OF_MONTH=2,DAY_OF_YEAR=153,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=0,HOUR=10,HOUR_OF_DAY=10,MINUTE=46,SECOND=22,MILLISECOND=730,ZONE_OFFSET=18000000,DST_OFFSET=0]
+2019-06-02 10:46:22 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 10:46:22 INFO  DBStore:287 - idUser-12, name-test, login-test, password-test@test.te, email-test, role-user, date-1559454382730, country-null, city-null
+2019-06-02 10:46:22 INFO  UserUpdateServlet:74 - id - 12, name - newTest, login - newTest, password - newPassword, email - newTest@test.te
+2019-06-02 10:46:22 INFO  UserUpdateServlet:76 - user newTest get parametrs, start creating
+2019-06-02 10:46:22 INFO  UserUpdateServlet:79 - User id-12 name-newTest login-newTest email-newTest@test.te role-user
+2019-06-02 10:46:22 INFO  DBStore:287 - idUser-12, name-newTest, login-newTest, password-newPassword, email-newTest@test.te, role-user, date-1559454382730, country-null, city-null
+2019-06-02 10:46:22 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 10:46:22 INFO  DBStore:79 - start adding new user to database: User id--1 name-test login-test email-test role-user
+2019-06-02 10:46:22 INFO  DBStore:97 - User test added to database time:java.util.GregorianCalendar[time=1559454382791,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id="Asia/Yekaterinburg",offset=18000000,dstSavings=0,useDaylight=false,transitions=68,lastRule=null],firstDayOfWeek=2,minimalDaysInFirstWeek=4,ERA=1,YEAR=2019,MONTH=5,WEEK_OF_YEAR=22,WEEK_OF_MONTH=0,DAY_OF_MONTH=2,DAY_OF_YEAR=153,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=0,HOUR=10,HOUR_OF_DAY=10,MINUTE=46,SECOND=22,MILLISECOND=791,ZONE_OFFSET=18000000,DST_OFFSET=0]
+2019-06-02 10:46:22 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 10:46:22 INFO  DBStore:287 - idUser-13, name-test, login-test, password-test@test.te, email-test, role-user, date-1559454382791, country-null, city-null
+2019-06-02 10:46:22 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 10:46:22 INFO  DBStore:355 - Login exist
+2019-06-02 10:46:22 INFO  ValidateService:59 - user test_test_test isExist
+2019-06-02 10:46:22 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 10:46:22 INFO  DBStore:287 - idUser-13, name-test, login-test, password-test@test.te, email-test, role-user, date-1559454382791, country-null, city-null
+2019-06-02 10:51:44 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 10:51:44 INFO  DBStore:79 - start adding new user to database: User id--1 name-test login-test email-test role-user
+2019-06-02 10:51:44 INFO  DBStore:97 - User test added to database time:java.util.GregorianCalendar[time=1559454704909,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id="Asia/Yekaterinburg",offset=18000000,dstSavings=0,useDaylight=false,transitions=68,lastRule=null],firstDayOfWeek=2,minimalDaysInFirstWeek=4,ERA=1,YEAR=2019,MONTH=5,WEEK_OF_YEAR=22,WEEK_OF_MONTH=0,DAY_OF_MONTH=2,DAY_OF_YEAR=153,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=0,HOUR=10,HOUR_OF_DAY=10,MINUTE=51,SECOND=44,MILLISECOND=909,ZONE_OFFSET=18000000,DST_OFFSET=0]
+2019-06-02 10:51:44 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 10:51:44 INFO  DBStore:287 - idUser-14, name-test, login-test, password-test@test.te, email-test, role-user, date-1559454704909, country-null, city-null
+2019-06-02 10:51:44 INFO  UserUpdateServlet:74 - id - 14, name - newTest, login - newTest, password - newPassword, email - newTest@test.te
+2019-06-02 10:51:44 INFO  UserUpdateServlet:76 - user newTest get parametrs, start creating
+2019-06-02 10:51:44 INFO  UserUpdateServlet:79 - User id-14 name-newTest login-newTest email-newTest@test.te role-user
+2019-06-02 10:51:44 INFO  DBStore:287 - idUser-14, name-newTest, login-newTest, password-newPassword, email-newTest@test.te, role-user, date-1559454704909, country-null, city-null
+2019-06-02 10:51:44 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 10:51:44 INFO  DBStore:79 - start adding new user to database: User id--1 name-test login-test email-test role-user
+2019-06-02 10:51:44 INFO  DBStore:97 - User test added to database time:java.util.GregorianCalendar[time=1559454704971,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id="Asia/Yekaterinburg",offset=18000000,dstSavings=0,useDaylight=false,transitions=68,lastRule=null],firstDayOfWeek=2,minimalDaysInFirstWeek=4,ERA=1,YEAR=2019,MONTH=5,WEEK_OF_YEAR=22,WEEK_OF_MONTH=0,DAY_OF_MONTH=2,DAY_OF_YEAR=153,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=0,HOUR=10,HOUR_OF_DAY=10,MINUTE=51,SECOND=44,MILLISECOND=971,ZONE_OFFSET=18000000,DST_OFFSET=0]
+2019-06-02 10:51:44 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 10:51:44 INFO  DBStore:287 - idUser-15, name-test, login-test, password-test@test.te, email-test, role-user, date-1559454704971, country-null, city-null
+2019-06-02 10:51:44 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 10:51:44 INFO  DBStore:355 - Login exist
+2019-06-02 10:51:44 INFO  ValidateService:59 - user test_test_test isExist
+2019-06-02 10:51:44 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 10:51:44 INFO  DBStore:287 - idUser-15, name-test, login-test, password-test@test.te, email-test, role-user, date-1559454704971, country-null, city-null
+2019-06-02 18:41:04 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 18:41:04 INFO  DBStore:79 - start adding new user to database: User id--1 name-test login-test email-test role-user
+2019-06-02 18:41:04 INFO  DBStore:97 - User test added to database time:java.util.GregorianCalendar[time=1559482864949,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id="Asia/Yekaterinburg",offset=18000000,dstSavings=0,useDaylight=false,transitions=68,lastRule=null],firstDayOfWeek=2,minimalDaysInFirstWeek=4,ERA=1,YEAR=2019,MONTH=5,WEEK_OF_YEAR=22,WEEK_OF_MONTH=0,DAY_OF_MONTH=2,DAY_OF_YEAR=153,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=1,HOUR=6,HOUR_OF_DAY=18,MINUTE=41,SECOND=4,MILLISECOND=949,ZONE_OFFSET=18000000,DST_OFFSET=0]
+2019-06-02 18:41:04 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 18:41:04 INFO  DBStore:287 - idUser-16, name-test, login-test, password-test@test.te, email-test, role-user, date-1559482864949, country-null, city-null
+2019-06-02 18:41:04 INFO  UserUpdateServlet:74 - id - 16, name - newTest, login - newTest, password - newPassword, email - newTest@test.te
+2019-06-02 18:41:04 INFO  UserUpdateServlet:76 - user newTest get parametrs, start creating
+2019-06-02 18:41:05 INFO  UserUpdateServlet:79 - User id-16 name-newTest login-newTest email-newTest@test.te role-user
+2019-06-02 18:41:05 INFO  DBStore:287 - idUser-16, name-newTest, login-newTest, password-newPassword, email-newTest@test.te, role-user, date-1559482864949, country-null, city-null
+2019-06-02 18:41:05 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 18:41:05 INFO  DBStore:79 - start adding new user to database: User id--1 name-test login-test email-test role-user
+2019-06-02 18:41:05 INFO  DBStore:97 - User test added to database time:java.util.GregorianCalendar[time=1559482865011,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id="Asia/Yekaterinburg",offset=18000000,dstSavings=0,useDaylight=false,transitions=68,lastRule=null],firstDayOfWeek=2,minimalDaysInFirstWeek=4,ERA=1,YEAR=2019,MONTH=5,WEEK_OF_YEAR=22,WEEK_OF_MONTH=0,DAY_OF_MONTH=2,DAY_OF_YEAR=153,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=1,HOUR=6,HOUR_OF_DAY=18,MINUTE=41,SECOND=5,MILLISECOND=11,ZONE_OFFSET=18000000,DST_OFFSET=0]
+2019-06-02 18:41:05 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 18:41:05 INFO  DBStore:287 - idUser-17, name-test, login-test, password-test@test.te, email-test, role-user, date-1559482865011, country-null, city-null
+2019-06-02 18:41:05 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 18:41:05 INFO  DBStore:355 - Login exist
+2019-06-02 18:41:05 INFO  ValidateService:59 - user test_test_test isExist
+2019-06-02 18:41:05 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 18:41:05 INFO  DBStore:287 - idUser-17, name-test, login-test, password-test@test.te, email-test, role-user, date-1559482865011, country-null, city-null
+2019-06-02 18:42:29 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 18:42:29 INFO  DBStore:79 - start adding new user to database: User id--1 name-test login-test email-test role-user
+2019-06-02 18:42:29 INFO  DBStore:97 - User test added to database time:java.util.GregorianCalendar[time=1559482949823,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id="Asia/Yekaterinburg",offset=18000000,dstSavings=0,useDaylight=false,transitions=68,lastRule=null],firstDayOfWeek=2,minimalDaysInFirstWeek=4,ERA=1,YEAR=2019,MONTH=5,WEEK_OF_YEAR=22,WEEK_OF_MONTH=0,DAY_OF_MONTH=2,DAY_OF_YEAR=153,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=1,HOUR=6,HOUR_OF_DAY=18,MINUTE=42,SECOND=29,MILLISECOND=823,ZONE_OFFSET=18000000,DST_OFFSET=0]
+2019-06-02 18:42:29 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 18:42:29 INFO  DBStore:287 - idUser-18, name-test, login-test, password-test@test.te, email-test, role-user, date-1559482949823, country-null, city-null
+2019-06-02 18:42:29 INFO  UserUpdateServlet:74 - id - 18, name - newTest, login - newTest, password - newPassword, email - newTest@test.te
+2019-06-02 18:42:29 INFO  UserUpdateServlet:76 - user newTest get parametrs, start creating
+2019-06-02 18:42:29 INFO  UserUpdateServlet:79 - User id-18 name-newTest login-newTest email-newTest@test.te role-user
+2019-06-02 18:42:29 INFO  DBStore:287 - idUser-18, name-newTest, login-newTest, password-newPassword, email-newTest@test.te, role-user, date-1559482949823, country-null, city-null
+2019-06-02 18:42:29 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 18:42:29 INFO  DBStore:79 - start adding new user to database: User id--1 name-test login-test email-test role-user
+2019-06-02 18:42:29 INFO  DBStore:97 - User test added to database time:java.util.GregorianCalendar[time=1559482949882,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id="Asia/Yekaterinburg",offset=18000000,dstSavings=0,useDaylight=false,transitions=68,lastRule=null],firstDayOfWeek=2,minimalDaysInFirstWeek=4,ERA=1,YEAR=2019,MONTH=5,WEEK_OF_YEAR=22,WEEK_OF_MONTH=0,DAY_OF_MONTH=2,DAY_OF_YEAR=153,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=1,HOUR=6,HOUR_OF_DAY=18,MINUTE=42,SECOND=29,MILLISECOND=882,ZONE_OFFSET=18000000,DST_OFFSET=0]
+2019-06-02 18:42:29 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 18:42:29 INFO  DBStore:287 - idUser-19, name-test, login-test, password-test@test.te, email-test, role-user, date-1559482949882, country-null, city-null
+2019-06-02 18:42:29 INFO  UsersServlet:54 - working servlet create user
+2019-06-02 18:42:29 INFO  DBStore:355 - Login exist
+2019-06-02 18:42:29 INFO  ValidateService:59 - user test_test_test isExist
+2019-06-02 18:42:29 INFO  UsersServlet:64 - User id--1 name-test login-test email-test role-user
+2019-06-02 18:42:29 INFO  DBStore:287 - idUser-19, name-test, login-test, password-test@test.te, email-test, role-user, date-1559482949882, country-null, city-null

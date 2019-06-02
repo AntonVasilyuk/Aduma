@@ -142,8 +142,8 @@ public class User {
      */
     @Override
     public String toString() {
-        return "User " + "id-" + id + " name-" + name + " login-" + login + ", email-" + email
-                + "role - " + role;
+        return "User " + "id-" + id + " name-" + name + " login-" + login + " email-" + email
+                + " role-" + role;
     }
 
     /**.
@@ -226,5 +226,11 @@ public class User {
         this.city = city;
     }
 
-
+    /**.
+     * Getter for date created
+     * @return date created
+     */
+    public Calendar createdDate() {
+        return createDate;
+    }
 }

@@ -3,16 +3,15 @@ package ru.job4j.persistent;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.log4j.Logger;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**.
  * Task 9.2.1.
@@ -77,9 +76,9 @@ public class DBStore implements Store {
      */
     @Override
     public void add(User user) {
+        LOG.info(String.format("start adding new user to database: %s", user.toString()));
         Connection connectionRollBack = null;
         String query = String.format("INSERT INTO users(name, login, password, email, time, role, country, city) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-        Calendar date = Calendar.getInstance();
         try (Connection connection = source.getConnection();
              PreparedStatement st = connection.prepareStatement(query)
         ) {
@@ -90,11 +89,12 @@ public class DBStore implements Store {
             st.setString(2, user.getLogin());
             st.setString(3, user.getPassword());
             st.setString(4, user.getEmail());
-            st.setTimestamp(5, new Timestamp(date.getTimeInMillis()));
+            st.setTimestamp(5, new Timestamp(user.createdDate().getTimeInMillis()));
             st.setString(6, user.getRole());
             st.setString(7, user.getCountry());
             st.setString(8, user.getCity());
             st.execute();
+            LOG.info(String.format("User %s added to database time:%s", user.getName(), user.createdDate().toString()));
             connection.commit();
         } catch (Exception e) {
             if (connectionRollBack != null) {
@@ -225,7 +225,6 @@ public class DBStore implements Store {
             while (rs.next()) {
                 id = rs.getInt("max");
             }
-            System.out.println(id);
             return id;
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
@@ -264,7 +263,7 @@ public class DBStore implements Store {
 
     /**.
      * Method for searching user by id
-     * @param id
+     * @param id is id for searching
      * @return user or null
      */
     @Override
@@ -281,10 +280,12 @@ public class DBStore implements Store {
                 String login = rs.getString("login");
                 String password = rs.getString("password");
                 String email = rs.getString("email");
-                long date = rs.getTimestamp("date").getTime();
+                long date = rs.getTimestamp("time").getTime();
                 String role = rs.getString("role");
                 String country = rs.getString("country");
                 String city = rs.getString("city");
+                LOG.info(String.format("idUser-%d, name-%s, login-%s, password-%s, email-%s, role-%s, date-%d, country-%s, city-%s",
+                        id, name, login, password, email, role, date, country, city));
                 user = new User(idUser, name, login, password, email, role, new ConditionRegistration(
                         date, country, city
                 ));
@@ -324,7 +325,6 @@ public class DBStore implements Store {
     public List<String> getCity(String country) {
         List<String> city = new ArrayList<>();
         String query = "SELECT city FROM location WHERE country='" + country + "';";
-        System.out.println(query);
         try (Connection connection = source.getConnection();
              Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery(query);
@@ -352,12 +352,12 @@ public class DBStore implements Store {
         ) {
             ResultSet rsOne = st.executeQuery(queryLogin);
             while (rsOne.next()) {
-                System.out.println("Login exist");
+                LOG.info("Login exist");
                 return false;
             }
             ResultSet rsTwo = st.executeQuery(queryEmail);
             while (rsTwo.next()) {
-                System.out.println("email is exist");
+                LOG.info("email is exist");
                 return false;
             }
         } catch (Exception e) {
@@ -382,14 +382,7 @@ public class DBStore implements Store {
                 String name = rs.getString("name");
                 String login = rs.getString("login");
                 String password = rs.getString("password");
-                String email = rs.getString("email");
-                String role = rs.getString("role");
-                String country = rs.getString("country");
-                String city = rs.getString("city");
-                if (!name.equals(user.getName()) || !login.equals(user.getLogin())
-                        || !password.equals(user.getPassword()) || !email.equals(user.getEmail())
-                        || !role.equals(user.getRole()) || !country.equals(user.getCountry())
-                        || !city.equals(user.getCity())) {
+                if (name != null || login != null || password != null) {
                     return true;
                 }
             }
@@ -432,7 +425,6 @@ public class DBStore implements Store {
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 String pass = rs.getString("password");
-                System.out.println(pass);
                 if (pass.equals(password)) {
                     result = true;
                 }

@@ -26,9 +26,9 @@ import java.util.List;
 public class HallServlet extends HttpServlet {
 
     /**.
-     * Logger
+     * @LOG Logger
      */
-    private static final Logger LOGG = Logger.getLogger(HallServlet.class.getName());
+    private static final Logger LOG = Logger.getLogger(HallServlet.class.getName());
 
     /**.
      * Example for class Service

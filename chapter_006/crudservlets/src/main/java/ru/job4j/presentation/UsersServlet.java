@@ -1,7 +1,7 @@
 package ru.job4j.presentation;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.apache.log4j.Logger;
 import ru.job4j.logic.ValidateService;
 import ru.job4j.persistent.User;
 
@@ -34,7 +34,7 @@ public class UsersServlet extends HttpServlet {
     /**.
      * Logger for this class
      */
-    private static final Logger LOG = LoggerFactory.getLogger(UsersServlet.class);
+    private static final Logger LOG = Logger.getLogger(UsersServlet.class);
 
     /**.
      * Method for getting info about client

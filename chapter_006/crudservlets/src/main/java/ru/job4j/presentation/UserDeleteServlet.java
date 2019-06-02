@@ -1,7 +1,6 @@
 package ru.job4j.presentation;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import ru.job4j.logic.ValidateService;
 
 import javax.servlet.ServletException;
@@ -28,7 +27,7 @@ public class UserDeleteServlet extends HttpServlet {
     /**.
      * Logger for this class
      */
-    private static final Logger LOG = LoggerFactory.getLogger(UserDeleteServlet.class);
+    private static final Logger LOG = Logger.getLogger(UserDeleteServlet.class);
 
     /**.
      * Method for getting info about client

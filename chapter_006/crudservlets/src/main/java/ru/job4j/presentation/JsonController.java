@@ -1,8 +1,8 @@
 package ru.job4j.presentation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.apache.log4j.Logger;
 import ru.job4j.persistent.Person;
 import ru.job4j.persistent.PersonManager;
 
@@ -28,7 +28,7 @@ public class JsonController extends HttpServlet {
     /**.
      * Logger for this class
      */
-    private static final Logger LOG = LoggerFactory.getLogger(JsonController.class);
+    private static final Logger LOG = Logger.getLogger(JsonController.class);
 
     /**.
      * Is storage for persons
