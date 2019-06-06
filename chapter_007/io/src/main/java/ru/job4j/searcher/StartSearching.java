@@ -19,34 +19,34 @@ import java.util.function.Predicate;
 public class StartSearching {
 
     /**.
-     * @params is params for working
+     * @params is PARAMS for working
      */
-    private static final Map<String, String> params = new HashMap<>();
+    private static final Map<String, String> PARAMS = new HashMap<>();
 
     /**.
      * Is main method this apps
-     * @param args is array params
-     * @throws ParamsException exception if not set params
+     * @param args is array PARAMS
+     * @throws ParamsException exception if not set PARAMS
      */
     public static void main(String[] args) throws ParamsException {
         for (int i = 0; i < args.length; i += 2) {
-            params.put(args[i], args[i + 1]);
+            PARAMS.put(args[i], args[i + 1]);
         }
-        if (!params.containsKey("-d") || !params.containsKey("-o")) {
+        if (!PARAMS.containsKey("-d") || !PARAMS.containsKey("-o")) {
             throw new ParamsException("Do not set the parameters to source or output");
         }
         Predicate<File> predicate;
-        if (params.containsKey("-m")) {
-            predicate = new FilterMask(params.get("-m"));
-        } else if (params.containsKey("-f")) {
-            predicate = new FilterAbsolute(params.get("-f"));
-        } else if (params.containsKey("-r")) {
-            predicate = new FilterRegex(params.get("-r"));
+        if (PARAMS.containsKey("-m")) {
+            predicate = new FilterMask(PARAMS.get("-m"));
+        } else if (PARAMS.containsKey("-f")) {
+            predicate = new FilterAbsolute(PARAMS.get("-f"));
+        } else if (PARAMS.containsKey("-r")) {
+            predicate = new FilterRegex(PARAMS.get("-r"));
         } else {
             throw new ParamsException("Do not set the parameters to checking...");
         }
         Searcher searcher = new Searcher();
-        List<File> searchedFiles = searcher.files(params.get("-d"), predicate);
-        new Writer(params.get("-o")).write(searchedFiles);
+        List<File> searchedFiles = searcher.files(PARAMS.get("-d"), predicate);
+        new Writer(PARAMS.get("-o")).write(searchedFiles);
     }
 }
