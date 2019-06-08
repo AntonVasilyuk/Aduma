@@ -33,6 +33,6 @@ public class FilterRegex implements Predicate<File> {
      */
     @Override
     public boolean test(File file) {
-        return file.getName().matches(regex);
+        return file.getName().substring(0, file.getName().indexOf(".")).matches(regex);
     }
 }

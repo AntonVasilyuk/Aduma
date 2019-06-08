@@ -45,7 +45,7 @@ public class Writer {
      */
     public void write(List<File> list) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
-            list.stream().forEach(s -> writer.write(s.getName()));
+            list.stream().forEach(s -> writer.write(s.getName() + "\n"));
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);
         }

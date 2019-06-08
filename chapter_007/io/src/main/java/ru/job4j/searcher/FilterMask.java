@@ -33,6 +33,6 @@ public class FilterMask implements Predicate<File> {
      */
     @Override
     public boolean test(File file) {
-        return (file.getName().indexOf(mask) > 0);
+        return (file.getName().indexOf(mask) >= 0);
     }
 }

@@ -1,6 +1,7 @@
 package ru.job4j.searcher;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -14,7 +15,6 @@ import java.util.function.Predicate;
  * @version 1.0
  * @since 0.1
  */
-
 public class Searcher {
 
     /**.
@@ -60,7 +60,7 @@ public class Searcher {
      * It's method for adding inner folder to queue for checking
      * @param sourse is sourse
      */
-    public void toQueue(File sourse) {
+    private void toQueue(File sourse) {
         for (File file : sourse.listFiles()) {
             folders.add(file);
         }

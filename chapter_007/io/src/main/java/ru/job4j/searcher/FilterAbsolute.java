@@ -33,6 +33,7 @@ public class FilterAbsolute implements Predicate<File> {
      */
     @Override
     public boolean test(File file) {
-        return file.getName().equals(absoluteName);
+        String name = file.getName();
+        return name.substring(0, name.indexOf('.')).equals(absoluteName);
     }
 }
