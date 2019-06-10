@@ -2,8 +2,10 @@ package ru.job4j.start;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import ru.job4j.models.Item;
+import ru.job4j.tracker.ITracker;
 
 /**.
 * Chapter_002
@@ -14,7 +16,8 @@ import ru.job4j.models.Item;
 * @since 0.1
 */
 
-public class Tracker {
+public class Tracker implements ITracker {
+
 	/**.
 	* @items Array items
 	*/
@@ -23,7 +26,7 @@ public class Tracker {
 	/**.
 	* @RN git id
 	*/
-	private static final Random RN = new Random();
+	private static final AtomicInteger RN = new AtomicInteger(0);
 
 	/**.
 	* method for add items
@@ -31,7 +34,7 @@ public class Tracker {
 	* @return result
 	*/
 	public Item add(Item item) {
-		item.setId(String.valueOf(RN.nextInt()));
+		item.setId(String.valueOf(RN.getAndIncrement()));
 		this.items.add(item);
 		return item;
 	}
@@ -93,6 +96,30 @@ public class Tracker {
 				break;
 			}
 		}
-	return result;
+		return result;
 	}
+
+	/**.
+	 * Method for replace item to items
+	 * @param id is id for replace
+	 * @param item is item for replace
+	 */
+	@Override
+	public void replace(String id, Item item) {
+		Item old = this.findById(id);
+		int position = items.indexOf(old);
+		items.set(position, item);
+	}
+
+	/**.
+	 * Deleting item from items
+	 * @param id is id for deleting
+	 */
+	@Override
+	public void delete(String id) {
+		Item old = this.findById(id);
+		int position = items.indexOf(old);
+		items.remove(position);
+	}
+
 }

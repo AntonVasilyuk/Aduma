@@ -2,7 +2,7 @@ package ru.job4j.templates;
 
 import ru.job4j.start.UserAction;
 import ru.job4j.start.Input;
-import ru.job4j.start.Tracker;
+import ru.job4j.tracker.ITracker;
 
 /**.
 * Chapter_002
@@ -49,7 +49,7 @@ public abstract class BaseAction implements UserAction {
 	* @param input link on tool enter user
 	* @param tracker link on object class tracker
 	*/
-	public abstract void execute(Input input, Tracker tracker);
+	public abstract void execute(Input input, ITracker tracker);
 
 	/**.
 	* Method for get info about action

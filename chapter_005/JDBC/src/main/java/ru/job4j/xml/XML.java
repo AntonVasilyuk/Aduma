@@ -1,8 +1,8 @@
-package ru.job4j;
+package ru.job4j.xml;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -37,7 +37,7 @@ public class XML {
     /**.
      * Is logger
      */
-    private static final Logger LOG = LoggerFactory.getLogger(XML.class);
+    private static final Logger LOG = LogManager.getLogger(XML.class);
 
     /**.
      * Create XML with SAX

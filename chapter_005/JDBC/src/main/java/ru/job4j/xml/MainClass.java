@@ -1,4 +1,4 @@
-package ru.job4j;
+package ru.job4j.xml;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

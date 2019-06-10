@@ -2,6 +2,7 @@ package ru.job4j.start;
 
 import ru.job4j.models.Item;
 import ru.job4j.templates.BaseAction;
+import ru.job4j.tracker.ITracker;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class MenuTracker {
 	/**.
 	* @tracker value for parametr
 	*/
-	private Tracker tracker;
+	private ITracker tracker;
 
 	/**.
 	* @actions Array for actions
@@ -55,7 +56,7 @@ public class MenuTracker {
 	* @param tracker instance for tracker.
 	 * @param output is example realisation consumer interface
 	*/
-	public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
+	public MenuTracker(Input input, ITracker tracker, Consumer<String> output) {
 		this.input = input;
 		this.tracker = tracker;
 		this.output = output;
@@ -127,7 +128,7 @@ public class MenuTracker {
 		 * @param tracker instance for tracker
 		 */
 		@Override
-		public void execute(Input input, Tracker tracker) {
+		public void execute(Input input, ITracker tracker) {
 			Date date = new Date();
 			String name = input.ask("Enter the name for item:");
 			String desc = input.ask("Enter the desc for item:");
@@ -157,7 +158,7 @@ public class MenuTracker {
 		 * @param tracker instance for tracker
 		 */
 		@Override
-		public void execute(Input input, Tracker tracker) {
+		public void execute(Input input, ITracker tracker) {
 			List<Item> arrayElement = tracker.findAll();
 			for (Item element : arrayElement) {
 				output.accept(element.getName() + ", " + element.getDesc() + ln);
@@ -186,14 +187,14 @@ public class MenuTracker {
 		 * @param tracker instance for tracker
 		 */
 		@Override
-		public void execute(Input input, Tracker tracker) {
+		public void execute(Input input, ITracker tracker) {
 			Date date = new Date();
 			String id = input.ask("Enter the id for item:");
 			String name = input.ask("Enter the name for item:");
 			String desc = input.ask("Enter the desk for item:");
 			Item item = new Item(name, desc, date.getTime());
 			item.setId(id);
-			tracker.update(item);
+			tracker.replace(id, item);
 			output.accept("Thanks you! Your wish fulfilled");
 		}
 	}
@@ -218,9 +219,9 @@ public class MenuTracker {
 		 * @param tracker instance for tracker
 		 */
 		@Override
-		public void execute(Input input, Tracker tracker) {
+		public void execute(Input input, ITracker tracker) {
 			String id = input.ask("Enter the id for item:");
-			tracker.delete(tracker.findById(id));
+			tracker.delete(id);
 			output.accept("Thanks you! Your wish fulfilled");
 		}
 	}
@@ -245,7 +246,7 @@ public class MenuTracker {
 		 * @param tracker instance for tracker
 		 */
 		@Override
-		public void execute(Input input, Tracker tracker) {
+		public void execute(Input input, ITracker tracker) {
 			String id = input.ask("Enter the id for item:");
 			Item item = tracker.findById(id);
 			output.accept(item.getName() + ", " + item.getDesc());
@@ -273,7 +274,7 @@ public class MenuTracker {
 		 * @param tracker instance for tracker
 		 */
 		@Override
-		public void execute(Input input, Tracker tracker) {
+		public void execute(Input input, ITracker tracker) {
 			String name = input.ask("Enter the name for item:");
 			List<Item> arrayElement = tracker.findByName(name);
 			for (Item element : arrayElement) {

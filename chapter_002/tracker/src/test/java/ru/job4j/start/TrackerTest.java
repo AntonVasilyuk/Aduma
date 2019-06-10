@@ -25,7 +25,8 @@ public class TrackerTest {
 		Tracker tracker = new Tracker();
 		Item item1 = new Item("Ivan", "Cheerful man", 1988);
 		Item itemFact;
-		itemFact = tracker.add(item1);
+		tracker.add(item1);
+		itemFact = tracker.findByName("Ivan").get(0);
 		boolean expect = true;
 		boolean fact = false;
 		if (itemFact.getId() != null) {

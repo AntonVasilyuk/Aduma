@@ -1,5 +1,7 @@
 package ru.job4j.start;
 
+import ru.job4j.tracker.ITracker;
+
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -22,7 +24,7 @@ public class StartUI {
 	/**.
 	* @tracker tracker its object for interaction
 	*/
-	private Tracker tracker;
+	private ITracker tracker;
 
 	/**.
 	 * @output is link to consumer interface

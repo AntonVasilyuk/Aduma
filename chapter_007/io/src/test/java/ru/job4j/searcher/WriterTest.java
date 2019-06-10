@@ -24,6 +24,7 @@ public class WriterTest {
 
     /**.
      * Test method write when writed three file and then read third record.
+     * @throws IOException is may be exception in test.
      */
     @Test
     public void whenWriteThreeFileThenReadThreeFile() throws IOException {

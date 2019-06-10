@@ -1,7 +1,7 @@
-package ru.job4j;
+package ru.job4j.xml;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.apache.log4j.Logger;
 
 /**.
  * Task 8.4.1.
@@ -16,13 +16,11 @@ public class SQLStorage {
     /**.
      * Create logger.
      */
-    private static final Logger LOG = LoggerFactory.getLogger(SQLStorage.class);
+    private static final Logger LOG = Logger.getLogger(SQLStorage.class);
 
     /**.
      * Point for enter in this app
      * @param args its default argument
-     * @throws SQLException my be exception
-     * @throws TransformerException my be exception
      */
     public static void main(String[] args) {
 
